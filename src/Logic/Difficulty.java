@@ -56,6 +56,10 @@ public class Difficulty {
         return numBallsInCombination;
     }
 
+    public void ModifyNumBallsInCombination(int n) { //@ author: pol.gil
+        this.numBallsInCombination = n;
+    }
+
     public boolean isCanRepeat() {
         return canRepeat;
     }
