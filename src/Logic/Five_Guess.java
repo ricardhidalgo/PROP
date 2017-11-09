@@ -66,45 +66,37 @@ public class Five_Guess {
 
     public String Pegs(String Solution, String Guess) {
         String Auxpegs = "";
-        String Aux = "";
+        int index = 0;
+        boolean used[] = new boolean[n];
+        boolean end = false;
+        int j;
+        int aux = 0;
+        /*
+            ESTE BUCLE VA A RECORRER LA RESPUESTA Y LA OPCION POSIBLE
+            Y VA A DEVOLVER 0 SI NO COINCIDE NINGUN NUMERO, 1 SI COINCIDE
+            ALGUN COLOR O 2 SI COINCIDE COLOR Y POSICION.
+        */
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                /*
-                    ESTE BUCLE VA A RECORRER LA RESPUESTA Y LA OPCION POSIBLE
-                    Y VA A DEVOLVER 0 SI NO COINCIDE NINGUN NUMERO, 1 SI COINCIDE
-                    ALGUN COLOR O 2 SI COINCIDE COLOR Y POSICION.
-                */
+            if (!end) j = ; // CONTROLAR LAS HORAS QUE SE HACEN
+            else j = aux;
+            end = false;
+            while (j < n && !end) {
+                if (Solution.charAt(i) == Guess.charAt(j)) {
+                    if (i == j) {
+                        end = true;
+                        Auxpegs += "2";
+                        aux++;
+                    }
+                    else if (used[i]) {
+                        Auxpegs += "1";
+                    }
+                    ++index;
+                }
+                j++;
             }
         }
+
+        for (int i = index; i < n; i++) Auxpegs += "0";
+        return Auxpegs;
     }
-
-    public boolean Used(String str1, char ch1) {
-        for (int i = 0; i < n; ++i) {
-            /*
-                VA A EVITAR QUE SE CUENTE DOS VECES EL MISMO COLOR CUANDO SOLO
-                HAYA UN EJEMPLAR DE ESE COLOR EN LA RESPUESTA
-             */
-        }
-    }
-
-/*
-    public void no_named(String Solution) {
-        for (int i = 0; i < Comb.size(); i++) {
-            // LA FUNCION GET VALOR ME DARA EL VALOR DEL STRING DE SU COMBINACION
-            if (!AreEqual(Comb.get(i).GetValor(), Solution)) Comb.remove(i);
-        }
-    }
-
-    public boolean AreEqual(String Combination, String Solution) {
-        boolean fin = false;
-        for (int i = 0; i < n && !fin; i++) {
-            for (int j = 0; j < n && !fin; j++) {
-                fin = (Combination.getBytes(i) == Solution.getBytes(j));
-            }
-        }
-        return fin;
-    }
-*/
-
-
 }
