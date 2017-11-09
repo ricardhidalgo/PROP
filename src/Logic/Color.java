@@ -1,7 +1,6 @@
 package Logic;
 
 /**
- *
  * @author ricard.hidalgo
  */
 
