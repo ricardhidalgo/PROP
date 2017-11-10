@@ -1,5 +1,6 @@
 package Logic;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,39 +12,23 @@ import java.util.Set;
 public class Combination {
 
     //private Integer id;
-    private ArrayList<Ball> comb;
-    private Difficulty difficulty;
+    private ArrayList<Integer> comb;
 
-    public Combination(Difficulty difficulty) {
-        this.difficulty = difficulty;
+    public Combination() {
     }
 
     public Combination(Combination combination) {
         this.comb = combination.comb;
-        this.difficulty = combination.difficulty;
     }
 
-    public ArrayList<Ball> getComb() {
+    public ArrayList<Integer> getComb() {
         return comb;
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
 
-    public void setCombination(ArrayList<Ball> combination, Difficulty dif) /* throws */ {
-        //try{
+    public void setCombination(ArrayList<Integer> combination) {
 
-        if (combination.size() == dif.getNumBallsInCombination() || hasRepeat(combination) != dif.isCanRepeat()) {
-            System.out.printf("Dificulty not matching combination"); //Aqui va una excepcio
-        } else {
-
-            this.difficulty = dif;
-            this.comb.addAll(combination);
-        }
-
-
-        //}
+        this.comb = combination;
 
     }
 
@@ -53,12 +38,9 @@ public class Combination {
         boolean correct = true;
 
 
-        if (!this.difficulty.equals(combination.difficulty)) {
-            System.out.printf("Dificulties not matching");
-        }
 
         for (int i = 0; i < this.comb.size(); ++i) {
-            if (this.comb.get(i).equals(combination.comb.get(i))) {
+            if (this.comb.equals(combination.comb.get(i))) {
                 tips.add(2);
             } else {
                 tips.add(0);
@@ -76,8 +58,8 @@ public class Combination {
         }
     }
 
-    private boolean hasRepeat(ArrayList<Ball> combination) {
-        Set<Ball> hcomb = new HashSet<Ball>(combination);
+    private boolean hasRepeat(ArrayList<Integer> combination) {
+        Set<Integer> hcomb = new HashSet<Integer>(combination);
         return combination.size() > hcomb.size();
     }
 }
