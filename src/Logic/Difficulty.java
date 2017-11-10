@@ -55,7 +55,7 @@ public class Difficulty {
         return numBallsInCombination;
     }
 
-    public void ModifyNumBallsInCombination(int n) { //@ author: pol.gil
+    public void ModifyNumBallsInCombination(int n) {
         this.numBallsInCombination = n;
     }
 
