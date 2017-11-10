@@ -1,15 +1,14 @@
 package Logic;
 
 /**
- *
  * @author ricard.hidalgo
  */
 
 public class Difficulty {
 
-    private Integer numBallsInCombination;
+    private int numBallsInCombination;
     private boolean canRepeat;
-    private Integer dificultyCode;
+    private int dificultyCode;
     private boolean hasTips;
 
 
@@ -43,7 +42,7 @@ public class Difficulty {
 
     }
 
-    public void setCustom(Integer numBalls, boolean canRep, boolean tips) {
+    public void setCustom(int numBalls, boolean canRep, boolean tips) {
         this.numBallsInCombination = numBalls;
         this.canRepeat = canRep;
         this.dificultyCode = 4;
@@ -56,11 +55,15 @@ public class Difficulty {
         return numBallsInCombination;
     }
 
+    public void ModifyNumBallsInCombination(int n) {
+        this.numBallsInCombination = n;
+    }
+
     public boolean isCanRepeat() {
         return canRepeat;
     }
 
-    public Integer getDificultyCode() {
+    public int getDificultyCode() {
         return dificultyCode;
     }
 
