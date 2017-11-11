@@ -37,11 +37,7 @@ public class Population {
 
     }
 
-   /* public Individual selectIndividual(FitnessCalculus FC, int index){
-
-    }*/
-
-    private Individual startTournament(int numTournaments,FitnessCalculus FC){
+    public Individual startTournament(int numTournaments,FitnessCalculus FC){
         double max = 0.0;
         Individual ind = new Individual();
         for(int i=0; i<numTournaments; i++){
@@ -68,7 +64,7 @@ public class Population {
                 ind3.copy(ind1);
                 ind3.recombinateIndividual(ind2,recombinationUmbral);
                 ind3.mutateIndividual(mutationRatio);
-                populationMembers[i] = ind3;
+                p.setIndividual(i,ind3);
             }
         }
         return p;
