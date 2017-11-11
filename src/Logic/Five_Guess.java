@@ -33,9 +33,21 @@ public class Five_Guess {
         Answer.getDifficulty().ModifyNumBallsInCombination(n);
         generate(0, "");
         Guess = generateInitialGuess();
+
+
+
+
         // NECESITO FUNCION EN COMBINACION QUE ME AÑADA EL VALOR EN STRING DE ESA COMBINACION
         Answer.setValor(Guess);
-        AuxC = new ArrayList<Combination> (Comb);
+        String pegs = makeplay(Guess);
+        // int npi = colores bien en posicion incorrecta, npc colores y posicion correcta
+        int npi = 2;
+        int npc = 2;
+
+
+
+
+        decreaseAuxC(AuxC, npi, npc);
     }
 
 
@@ -64,39 +76,53 @@ public class Five_Guess {
         }
     }
 
-    public String Pegs(String Solution, String Guess) {
-        String Auxpegs = "";
-        int index = 0;
-        boolean used[] = new boolean[n];
-        boolean end = false;
-        int j;
-        int aux = 0;
-        /*
-            ESTE BUCLE VA A RECORRER LA RESPUESTA Y LA OPCION POSIBLE
-            Y VA A DEVOLVER 0 SI NO COINCIDE NINGUN NUMERO, 1 SI COINCIDE
-            ALGUN COLOR O 2 SI COINCIDE COLOR Y POSICION.
-        */
-        for (int i = 0; i < n; i++) {
-            if (!end) j = ; // CONTROLAR LAS HORAS QUE SE HACEN
-            else j = aux;
-            end = false;
-            while (j < n && !end) {
-                if (Solution.charAt(i) == Guess.charAt(j)) {
-                    if (i == j) {
-                        end = true;
-                        Auxpegs += "2";
-                        aux++;
-                    }
-                    else if (used[i]) {
-                        Auxpegs += "1";
-                    }
-                    ++index;
+    public void createScoreList() {
+        ArrayList<String> bestGuesses = new ArrayList<String>();
+        int maxMinimum = 0;
+        for (String guess : combList) {
+            for (String solution : combList) {
+                int minimum = calculateScore(solution);
+                if (minimum > maxMinimum) {
+                    maxMinimum = minimum;
+                    bestGuesses.clear();
+                    bestGuesses.add(guess);
                 }
-                j++;
+                if (minimum == maxMinimum) {
+                    bestGuesses.add(guess);
+                }
+
+            }
+
+        }
+        for (String guess : bestGuesses) {
+            if (possibleCombList.contains(guess)) {
+                code = guess;
+            }
+            else {
+                code = bestGuesses.get(0);
             }
         }
-
-        for (int i = index; i < n; i++) Auxpegs += "0";
-        return Auxpegs;
+        System.out.println(bestGuesses.size());
     }
+
+    public int calculateScore(String solution) {
+        ArrayList<Integer> minimum = new ArrayList<Integer>();
+        for (Outcome outcome : possibleOutcomes) {
+            int min = 0;
+            for (String combination : combList) {
+                if (!checkIfPossible(solution, combination, outcome)) {
+                    min++;
+                }
+            }
+            minimum.add(min);
+        }
+
+        return  Collections.min(minimum);
+    }
+
+
+
+
+// IMPLEMENTAR LA RESPUESTA EN LA FUNCION gettry() (la respuesta es una combinacion)
+
 }
