@@ -1,38 +1,61 @@
 package Logic.Genetic;
-import java.util.ArrayList;
+
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Individual {
     private int defaultGenNum = 15;
-    private ArrayList<Byte> genes;
+    private byte genes[];
     private double fitness = 0.0;
 
     public Individual(){
-
+        genes = new byte[defaultGenNum];
     }
 
-    public int numGenes(){ return genes.size(); }
+    public void copy(Individual ind){
+        for(int i=0; i<ind.numGenes(); i++)  genes[i] = ind.getGen(i);
+    }
 
-    public byte getGen(int pos){ return genes.get(pos); }
+    public int numGenes(){ return genes.length; }
 
-    public void setGen(int pos, byte gen){ genes.add(pos,gen); }
+    public byte getGen(int pos){ return genes[pos]; }
+
+    public void setGen(int pos, byte gen){ genes[pos] = gen; }
 
     public void initializeIndividual(){
-                                                                //MOOOORE SHIT!
+        for(int i=0; i<genes.length; i++){
+            genes[i]= (byte)ThreadLocalRandom.current().nextInt(-128, 127+1);
+
+        }
+
     }
 
     public String toString(){
-        return new String();                                    //SHIT AGAIN!
+        String s = new String();
+        for (byte c: genes) s += (char)c;
+        return s;
+
     }
 
     public double fitnessIndividual(FitnessCalculus FC){
-        return FC.fitnessIndividual(this);                                           //DO SHIT!
+        fitness = FC.fitnessIndividual(this);
+        return fitness;
+
     }
 
     Individual recombinateIndividual(Individual ind, double recombinationUmbral){
-        return ind;                                             //DO MORE SHIT!
+        Individual indu = new Individual();
+        indu.copy(this);
+        for(int i=0; i<genes.length; i++)
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= recombinationUmbral) indu.setGen(i,ind.getGen(i));
+        return indu;
+
     }
 
     void mutateIndividual(double mutationRatio){
-                                                                //AND MORE SHIT MOTHAFUCKA!
+        for(int i=0; i<genes.length; i++)
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(-128,127+1);
     }
+
+
 
 }
