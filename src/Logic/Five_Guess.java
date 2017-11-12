@@ -14,41 +14,29 @@ public class Five_Guess {
 
 
 
-    public ArrayList<Combination> Comb = new ArrayList<Combination>();
-    public ArrayList<Combination> AuxC;
-    public Combination Answer;
+    private ArrayList<String> possibleComb = new ArrayList<String>();
+    private ArrayList<String> ListComb = new ArrayList<String>();
+    private ArrayList<Combination> Answer = new ArrayList<Combination>;
+
+    private String combination = "";
+    private String code = "";
+    private int totalGuesses = 0;
+    private String Guess;
+    boolean inicio;
+
     public int nc; //# colors
     public static int n; //# balls
-    public Difficulty diff;
-    public String Guess;
-    public Boolean Finished;
 
 
     public Five_Guess(int nc, int n) {
         this.nc = nc;
         this.n = n;
-        Finished = false;
-        diff = new Difficulty();
-        Answer = new Combination(diff);
-        Answer.getDifficulty().ModifyNumBallsInCombination(n);
-        generate(0, "");
-        Guess = generateInitialGuess();
-
-
-
-
-        // NECESITO FUNCION EN COMBINACION QUE ME AÑADA EL VALOR EN STRING DE ESA COMBINACION
-        Answer.setValor(Guess);
-        String pegs = makeplay(Guess);
-        // int npi = colores bien en posicion incorrecta, npc colores y posicion correcta
-        int npi = 2;
-        int npc = 2;
-
-
-
-
-        decreaseAuxC(AuxC, npi, npc);
+        generate();
+        code = generateInitialGuess();
+        StringtoCombination(code);
+        getplay();
     }
+
 
 
     public String generateInitialGuess() {
@@ -61,22 +49,32 @@ public class Five_Guess {
         return c;
     }
 
-    public void generate(int aux, String c) {
-        if (aux == n) {
-            diff = new Difficulty();
-            Answer = new Combination(diff);
-            Answer.getDifficulty().ModifyNumBallsInCombination(aux);
-            //ME FALTA PONER UNA FUNCION QUE SEA EL VALOR DE LA COMBINATION ANSWER
-            Comb.add(Answer);
+    public void generate() {
+        if (combination.length() == n) {
+            possibleComb.add(combination);
+            ListComb.add(combination);
         }
+
         else {
             for (int i = 0; i < nc; i++) {
-                generate(aux+1, c+i);
+                String oldcomb = combination;
+                combination += i;
+                generate();
+                combination = oldcomb;
             }
         }
     }
 
-    public void createScoreList() {
+    public boolean checkIfPossible(String answer, String randomGuess, Outcome outcome) {  // Checks if the outcome of a randomly given combination, with previously guessed code as the answer, is the same as the the outcome that the user just returned.
+        if ((calculatePins(randomGuess, answer).equals(outcome))) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public void createScoreList() { // Creates a list of all best guesses.
         ArrayList<String> bestGuesses = new ArrayList<String>();
         int maxMinimum = 0;
         for (String guess : combList) {
@@ -106,18 +104,20 @@ public class Five_Guess {
     }
 
     public int calculateScore(String solution) {
-        ArrayList<Integer> minimum = new ArrayList<Integer>();
+        int minimum = Integer.MAX_VALUE;
+        int min;
         for (Outcome outcome : possibleOutcomes) {
-            int min = 0;
+            min = 0;
             for (String combination : combList) {
                 if (!checkIfPossible(solution, combination, outcome)) {
                     min++;
                 }
             }
-            minimum.add(min);
+            if(minimum > min) {
+                minimum = min;
+            }
         }
-
-        return  Collections.min(minimum);
+        return min;
     }
 
 
