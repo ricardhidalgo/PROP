@@ -2,6 +2,12 @@ package Logic;
 
 import java.util.ArrayList;
 
+/**
+ * Estructura de datos de una partida acabada. Subclase de Game.
+ *
+ * @author ricard.hidalgo
+ */
+
 public class FinishedGame extends Game {
 
     private int puntuation;

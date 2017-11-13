@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Estructura de datos de una jugada.
+ *
  * @author ricard.hidalgo
  */
 
