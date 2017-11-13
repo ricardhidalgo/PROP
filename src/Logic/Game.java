@@ -37,7 +37,7 @@ public class Game {
     }
 
     public void setSecretCode(Combination comb) {
-        if (comb.getComb().size() != difficulty.getNumBallsInCombination() || comb.hasRepeat() != difficulty.isCanRepeat()) {
+        if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
             System.out.printf("Wrong parameters");
         } else {
             this.secretCode = comb;
@@ -46,7 +46,7 @@ public class Game {
 
     public Play makePlay(Combination comb) {
         Play np = new Play();
-        if (comb.getComb().size() != difficulty.getNumBallsInCombination() || comb.hasRepeat() != difficulty.isCanRepeat()) {
+        if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
             System.out.printf("Wrong parameters");
         } else {
             np.processPlay(comb, secretCode);

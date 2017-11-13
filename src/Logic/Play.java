@@ -26,6 +26,10 @@ public class Play {
         return combination;
     }
 
+    public int getNumCorrectPositions() {
+        return numCorrectPositions;
+    }
+
     public int getNumCorrectColors() {
         return numCorrectColors;
     }
@@ -40,9 +44,9 @@ public class Play {
 
         numCorrectColors = 0;
         numCorrectPositions = 0;
-        for(int i = 0; i<correctColors.size(); ++i) {
-            if(correctColors.get(i) == 1) ++numCorrectColors;
-            else if(correctColors.get(i) == 2) ++numCorrectPositions;
+        for (int i = 0; i < correctColors.size(); ++i) {
+            if (correctColors.get(i) == 1) ++numCorrectColors;
+            else if (correctColors.get(i) == 2) ++numCorrectPositions;
         }
 
     }
