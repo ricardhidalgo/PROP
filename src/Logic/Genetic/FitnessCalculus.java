@@ -1,7 +1,16 @@
 package Logic.Genetic;
 public class FitnessCalculus {
-    private Solution solutions[] = new Solution[20];
+    private Solution solutions[];
     private int lastIndex = 0;
+
+    public FitnessCalculus(int solNum){
+        solutions = new Solution[solNum];
+        for(int i=0; i<solutions.length; i++){
+            Individual ind = new Individual();
+            Solution s = new Solution(0.0, ind);
+            solutions[i] = s;
+        }
+    }
 
     public void randomSolution(){
         Individual ind = new Individual();

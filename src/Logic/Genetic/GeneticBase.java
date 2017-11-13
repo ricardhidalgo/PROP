@@ -16,7 +16,6 @@ public class GeneticBase {
         for(int i=0; i<maxGenerations; i++){
             Population p2 = p.evolvePopulation(FC, elitism, numTournaments, recombinationUmbral, mutationRatio);
             p = p2;
-           // if(p2.bestIndividual(FC).fitnessIndividual(FC)==FC.maxFitness()) break;
         }
         System.out.println(p.bestIndividual(FC).fitnessIndividual(FC));
     }
