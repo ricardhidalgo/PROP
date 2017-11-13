@@ -58,8 +58,11 @@ public class Combination {
         }
     }
 
-    private boolean hasRepeat(ArrayList<Integer> combination) {
-        Set<Integer> hcomb = new HashSet<Integer>(combination);
-        return combination.size() > hcomb.size();
+    public boolean hasRepeat() {
+        Set<Integer> hcomb = new HashSet<Integer>(this.comb);
+        return comb.size() > hcomb.size();
     }
+
+    //private String combinationToString(){}
+
 }

@@ -2,6 +2,11 @@ package Logic;
 
 import java.util.ArrayList;
 
+
+/**
+ * @author ricard.hidalgo
+ */
+
 public class Play {
 
     private ArrayList<Integer> correctColors;
