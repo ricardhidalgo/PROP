@@ -1,4 +1,4 @@
-package Genetic;
+package Logic.Genetic;
 
 public class Pair{
     public int x = 0;

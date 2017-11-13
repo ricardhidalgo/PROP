@@ -1,6 +1,5 @@
 package Logic;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +19,7 @@ public class Combination {
      * Constructora vacia
      */
     public Combination() {
-        this.comb = new ArrayList<>();
+        this.comb = new ArrayList<Integer>();
     }
 
     /**
@@ -61,7 +60,7 @@ public class Combination {
      */
     public ArrayList<Integer> compareCombinations(Combination combination) {
 
-        ArrayList<Integer> tips = new ArrayList<>();
+        ArrayList<Integer> tips = new ArrayList>();
         boolean correct = true;
 
         for (int i = 0; i < this.comb.size(); ++i) {

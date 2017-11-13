@@ -1,9 +1,9 @@
-package Genetic;
-import java.util.Vector;
+package Logic.Genetic;
+import java.util.ArrayList;
 import java.lang.Math;
 
 public class FitnessCalculus {
-    private Vector<Solution> solutions = new Vector<Solution>();
+    private ArrayList<Solution> solutions = new ArrayList<Solution>();
     private int lastIndex = 0;
     private int turn = 0;
 

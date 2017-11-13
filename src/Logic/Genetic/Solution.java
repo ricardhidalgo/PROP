@@ -1,4 +1,4 @@
-package Genetic;
+package Logic.Genetic;
 
 public class Solution {
     private Pair puntuation = new Pair(0,0);

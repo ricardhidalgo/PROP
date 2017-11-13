@@ -1,7 +1,6 @@
-package Genetic;
+package Logic.Genetic;
 
 import java.util.concurrent.ThreadLocalRandom;
-import java.lang.Math;
 public class Population {
     private Individual populationMembers[];
 
