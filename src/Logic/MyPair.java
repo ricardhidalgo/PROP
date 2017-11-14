@@ -31,5 +31,4 @@ public class MyPair {
     public int getvalue() {
         return value;
     }
-
 }
