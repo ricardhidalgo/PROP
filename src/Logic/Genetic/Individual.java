@@ -3,7 +3,7 @@ package Logic.Genetic;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Individual {
-    private int defaultGenNum = 15;
+    private int defaultGenNum = 4;
     private byte genes[];
     private double fitness = 0.0;
 
@@ -23,7 +23,7 @@ public class Individual {
 
     public void initializeIndividual(){
         for(int i=0; i<genes.length; i++){
-            genes[i]= (byte)ThreadLocalRandom.current().nextInt(-128, 127+1);
+            genes[i]= (byte)ThreadLocalRandom.current().nextInt(50, 58);
 
         }
 
@@ -53,7 +53,37 @@ public class Individual {
 
     void mutateIndividual(double mutationRatio){
         for(int i=0; i<genes.length; i++)
-            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(-128,127+1);
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(50,58);
+
+    }
+
+    void permutateIndividual(double permutationRatio){
+        for(int i=0; i<genes.length; i++) {
+            if (ThreadLocalRandom.current().nextDouble(0, 1.0) <= permutationRatio){
+                byte s = genes[i];
+                int a = i;
+                while(i==a) a = ThreadLocalRandom.current().nextInt(0, genes.length);
+                genes[i] = genes[a];
+                genes[a] = s;
+            }
+        }
+    }
+
+    /*void invertIndividual(double inversionRatio){
+        int i0 = ThreadLocalRandom.current().nextInt(0,numGenes());
+        int i1 = ThreadLocalRandom.current().nextInt(0,numGenes());
+
+    }*/
+
+    @Override
+    public boolean equals(Object ob) {
+        Individual that = (Individual) ob;
+        return this.genes.equals(that.genes);
+    }
+
+    @Override
+    public int hashCode() {
+        return genes.toString().hashCode();
     }
 
 

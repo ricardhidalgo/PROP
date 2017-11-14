@@ -1,10 +1,10 @@
 package Logic.Genetic;
 
 public class Solution {
-    private double puntuation = 0.0;
+    private Pair puntuation = new Pair(0,0);
     private Individual ind;
 
-    public Solution(double punt, Individual individual){
+    public Solution(Pair punt, Individual individual){
         ind = individual;
         puntuation = punt;
 
@@ -12,6 +12,6 @@ public class Solution {
 
     public Individual getIndividual(){return ind;}
 
-    public double getPuntuation(){return puntuation;}
+    public Pair getPuntuation(){return puntuation;}
 
 }

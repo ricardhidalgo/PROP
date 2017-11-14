@@ -1,7 +1,6 @@
 package Logic.Genetic;
 
 import java.util.concurrent.ThreadLocalRandom;
-
 public class Population {
     private Individual populationMembers[];
 
@@ -25,10 +24,10 @@ public class Population {
     public void setIndividual(int index, Individual ind){ populationMembers[index] = ind; }
 
     public Individual bestIndividual(FitnessCalculus FC){
-        double max = 0.0;
+        double max = 1000000000;
         Individual ind = new Individual();
         for(Individual i : populationMembers){
-            if(i.fitnessIndividual(FC) > max){
+            if(i.fitnessIndividual(FC) < max){
                 max = i.fitnessIndividual(FC);
                 ind = i;
             }
@@ -50,7 +49,7 @@ public class Population {
         return ind;
     }
 
-    public Population evolvePopulation(FitnessCalculus FC, boolean elitist, int numTournaments, double recombinationUmbral, double mutationRatio){
+    public Population evolvePopulation(FitnessCalculus FC, boolean elitist, int numTournaments, double recombinationUmbral, double mutationRatio, double permutationRatio, double inversionRatio){
         //SUSCEPTIBLE BUGS
         Population p = new Population(populationMembers.length,elitist);
         p.copy(this);
@@ -64,6 +63,8 @@ public class Population {
                 ind3.copy(ind1);
                 ind3.recombinateIndividual(ind2,recombinationUmbral);
                 ind3.mutateIndividual(mutationRatio);
+                ind3.permutateIndividual(mutationRatio);
+               // ind3.invertIndividual(mutationRatio);
                 p.setIndividual(i,ind3);
             }
         }
