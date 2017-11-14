@@ -1,4 +1,4 @@
-package Genetic;
+package Logic.Genetic;
 
 import java.util.concurrent.ThreadLocalRandom;
 
