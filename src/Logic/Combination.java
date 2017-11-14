@@ -12,14 +12,14 @@ import java.util.Set;
 
 public class Combination {
 
-    //private Integer id;
-    private ArrayList<Integer> comb;
+    //private Byte id;
+    private ArrayList<Byte> comb;
 
     /**
      * Constructora vacia
      */
     public Combination() {
-        this.comb = new ArrayList<Integer>();
+        this.comb = new ArrayList<Byte>();
     }
 
     /**
@@ -27,16 +27,16 @@ public class Combination {
      *
      * @param comb La combinación con la que se quiere inicializar el objeto
      */
-    public Combination(ArrayList<Integer> comb) {
+    public Combination(ArrayList<Byte> comb) {
         this.comb = comb;
     }
 
     /**
      * Retorna la combinación
      *
-     * @return Combinación de colores en forma de ArrayList de Integers.
+     * @return Combinación de colores en forma de ArrayList de Bytes.
      */
-    public ArrayList<Integer> getComb() {
+    public ArrayList<Byte> getComb() {
         return this.comb;
     }
 
@@ -46,7 +46,7 @@ public class Combination {
      *
      * @param combination Nueva combinación
      */
-    public void setCombination(ArrayList<Integer> combination) {
+    public void setCombination(ArrayList<Byte> combination) {
 
         this.comb = combination;
 
@@ -56,18 +56,18 @@ public class Combination {
      * Compara la combinación própia con la combinación pasada por parámetro.
      *
      * @param combination Combinación a comparar
-     * @return Un ArrayList de Integers. Para cada posición, 0 representa que es un color incorrecto. 1 que es un color correcto, pero en una posición incorrecta. 2 que es un color correcto en una posición correcta
+     * @return Un ArrayList de Bytes. Para cada posición, 0 representa que es un color incorrecto. 1 que es un color correcto, pero en una posición incorrecta. 2 que es un color correcto en una posición correcta
      */
-    public ArrayList<Integer> compareCombinations(Combination combination) {
+    public ArrayList<Byte> compareCombinations(Combination combination) {
 
-        ArrayList<Integer> tips = new ArrayList>();
+        ArrayList<Byte> tips = new ArrayList<Byte>();
         boolean correct = true;
 
         for (int i = 0; i < this.comb.size(); ++i) {
             if (this.comb.get(i).equals(combination.comb.get(i))) {
-                tips.add(2);
+                tips.add((byte)2);
             } else {
-                tips.add(0);
+                tips.add((byte)0);
                 correct = false;
             }
         }
@@ -79,7 +79,7 @@ public class Combination {
                 if (tips.get(i) == 0) {
                     for (int j = i + 1; j < tips.size(); ++j) {
                         if (this.comb.get(i).equals(combination.comb.get(j)) && tips.get(j) != 2) {
-                            tips.set(i, 1);
+                            tips.set(i, (byte)1);
                             j = tips.size();
                         }
                     }
@@ -95,7 +95,7 @@ public class Combination {
      * @return True si tiene dos valores repetidos en la combinación. False en caso contrario.
      */
     public boolean hasRepeat() {
-        Set<Integer> hcomb = new HashSet<Integer>(this.comb);
+        Set<Byte> hcomb = new HashSet<Byte>(this.comb);
         return comb.size() > hcomb.size();
     }
 
