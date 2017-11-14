@@ -56,9 +56,39 @@ public class Play {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*public void setNumCorrectPositions(int numCorrectPositions) {
         this.numCorrectPositions = numCorrectPositions;
     }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Comb pasa a ser la combinación de la jugada. Se compara comb con secret y se modifican los parámetros correctColors,
