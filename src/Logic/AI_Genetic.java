@@ -5,6 +5,12 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * @author ricard.hidalgo
+ * @author albert.ortiz
+ */
+
+
 public class AI_Genetic extends AI {
 
 

@@ -1,17 +1,25 @@
 package Logic.Genetic;
 
+/**
+ * @author albert.ortiz
+ */
+
 public class Solution {
-    private Pair puntuation = new Pair(0,0);
+    private Pair puntuation = new Pair(0, 0);
     private Individual ind;
 
-    public Solution(Pair punt, Individual individual){
+    public Solution(Pair punt, Individual individual) {
         ind = individual;
         puntuation = punt;
 
     }
 
-    public Individual getIndividual(){return ind;}
+    public Individual getIndividual() {
+        return ind;
+    }
 
-    public Pair getPuntuation(){return puntuation;}
+    public Pair getPuntuation() {
+        return puntuation;
+    }
 
 }

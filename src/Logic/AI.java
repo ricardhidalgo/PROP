@@ -1,7 +1,11 @@
 package Logic;
 
-public class AI {
+/**
+ * @author ricard.hidalgo
+ * @author albert.ortiz
+ */
 
+public class AI {
 
 
     public Combination generateSecret(Difficulty dif){

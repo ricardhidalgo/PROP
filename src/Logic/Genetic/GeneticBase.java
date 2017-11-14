@@ -5,6 +5,10 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+/**
+ * @author albert.ortiz
+ */
+
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall AI's performance.
     private int maxGenerations = 100;
