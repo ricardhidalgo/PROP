@@ -3,7 +3,7 @@ package Logic.Genetic;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall AI's performance.
@@ -15,13 +15,21 @@ public class GeneticBase {
     private double mutationRatio = 0.015;
     private double permutationRatio = 0.03;
     private double inversionRatio = 0.02;
-    private byte sol[] = new byte[4];
     private int maxSolutions = 60;
+    private int turn = 1;
     private FitnessCalculus FC;
-    private Vector<Individual> set;
 
-    public GeneticBase(){
+    public GeneticBase(int maxGenerations, int nIndividualsPopulation, double recombinationUmbral,
+                       double mutationRatio, double permutationRatio, double inversionRatio, int maxSolutions){
+
         FC = new FitnessCalculus();
+        this.maxGenerations = maxGenerations;
+        this.nIndividualsPopulation = nIndividualsPopulation;
+        this.recombinationUmbral = recombinationUmbral;
+        this.mutationRatio = mutationRatio;
+        this.permutationRatio = permutationRatio;
+        this.inversionRatio = inversionRatio;
+        this.maxGenerations = maxSolutions;
     }
 
     Individual getGuess(Set<Individual> s, FitnessCalculus fc){
@@ -39,28 +47,30 @@ public class GeneticBase {
         return ind;
     }
 
-    void addSolution(int x, int y, byte comb[]){
-
+    public void addSolution(int x, int y, ArrayList<Byte> comb){
+        Individual ind = new Individual();
+        //Reconvertir a bytes
+        for(int i=0; i<comb.size(); i++) ind.setGen(i,comb.get(i));
+        Solution s = new Solution(x, y, ind);
+        FC.addSolution(s);
     }
 
-    void play(){
-        Set<Individual> set = new HashSet<Individual>();
+    public String play(){
+        Set<Individual> set = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism);
-        int counter=0;
+        int counter = 0;
         while(counter<maxGenerations && set.size()<maxSolutions){
             Population p2 = p.evolvePopulation(FC, elitism, numTournaments, recombinationUmbral, mutationRatio, permutationRatio, inversionRatio);
             p = p2;
-            if(counter>maxGenerations/2) set.add(p2.bestIndividual(FC));
+           // if(counter>maxGenerations/2) set.add(p2.bestIndividual(FC));
+            set.add(p2.bestIndividual(FC)); //Canviar a la linea comentada si falla.
             counter++;
         }
         Individual bestInd = new Individual();
         bestInd = getGuess(set,FC);
-        Pair pair = checkSol(bestInd);
-        punt = pair.x;
-        Solution s = new Solution(pair, bestInd);
-        FC.addSolution(s);
-        turn++;
         FC.setTurn(turn);
+        turn++;
+        return bestInd.toString();
     }
 
 }
