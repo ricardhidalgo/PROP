@@ -1,8 +1,6 @@
 package Logic;
 
 import java.util.*;
-import Logic.User;
-import Logic.MyPair;
 
 /**
  * @author pol.gil

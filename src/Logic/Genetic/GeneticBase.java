@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 
 public class GeneticBase {
-    //Tweaking this parameters we can affect the overall AI's performance.
+    //Tweaking this parameters we can affect the overall ai's performance.
     private int maxGenerations = 100;
     private int nIndividualsPopulation =150;
     private boolean elitism = true;  //never change this

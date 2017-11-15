@@ -77,8 +77,8 @@ public class Combination {
         } else {
             for (int i = 0; i < tips.size(); ++i) {
                 if (tips.get(i) == 0) {
-                    for (int j = i + 1; j < tips.size(); ++j) {
-                        if (this.comb.get(i).equals(combination.comb.get(j)) && tips.get(j) != 2) {
+                    for (int j = 0; j < tips.size(); ++j) {
+                        if (this.comb.get(i).equals(combination.comb.get(j)) && tips.get(j) == 0) {
                             tips.set(i, (byte)1);
                             j = tips.size();
                         }

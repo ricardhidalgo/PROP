@@ -17,6 +17,10 @@ public class FinishedGame extends Game {
         this.puntuation = puntuation;
     }
 
+    public FinishedGame(int puntuation) {
+        this.puntuation = puntuation;
+    }
+
     public int getPuntuation() {
         return puntuation;
     }
