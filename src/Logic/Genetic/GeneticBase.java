@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.ArrayList;
+/**
+ * @author albert.ortiz
+ */
 
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall ai's performance.

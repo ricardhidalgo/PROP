@@ -1,4 +1,7 @@
 package Logic.Genetic;
+/**
+ * @author albert.ortiz
+ */
 
 import java.util.concurrent.ThreadLocalRandom;
 public class Population {

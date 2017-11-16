@@ -1,6 +1,9 @@
 package Logic.Genetic;
 
 import java.util.concurrent.ThreadLocalRandom;
+/**
+ * @author albert.ortiz
+ */
 
 public class Individual {
     private int defaultGenNum = 4;
