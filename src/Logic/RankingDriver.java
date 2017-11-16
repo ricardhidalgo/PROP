@@ -9,7 +9,7 @@ public class RankingDriver {
         String input = scanner.next();
 
         while (!input.equals("EXIT")) {
-            System.out.println()
+            System.out.println();
         }
     }
 }
