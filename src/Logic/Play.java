@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Play {
 
-    private ArrayList<Integer> correctColors;
+    private ArrayList<Byte> correctColors;
     private Combination combination;
     private int numCorrectColors;
     private int numCorrectPositions;
@@ -20,14 +20,14 @@ public class Play {
      * Constructora vacia
      */
     public Play() {
-        correctColors = new ArrayList<Integer>();
+        correctColors = new ArrayList<Byte>();
     }
 
     /**
      * Retorna el análisis de la combinación de la jugada al compararla con la combinación secreta de la partida.
      * @return Retorna, para cada posición de la combinación, 2 si ésta es igual que la combinación secreta, 1 si és un color de la combinación secreta pero en una posición incorrecta, o 0 ningun de las anteriores.
      */
-    public ArrayList<Integer> getCorrectColors() {
+    public ArrayList<Byte> getCorrectColors() {
         return correctColors;
     }
 
@@ -54,39 +54,6 @@ public class Play {
     public int getNumCorrectColors() {
         return numCorrectColors;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*public void setNumCorrectPositions(int numCorrectPositions) {
-        this.numCorrectPositions = numCorrectPositions;
-    }*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
