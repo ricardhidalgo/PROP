@@ -1,5 +1,9 @@
 package Logic.Genetic;
 
+/**
+ * @author albert.ortiz
+ */
+
 public class Solution {
     private int x;
     private int y;

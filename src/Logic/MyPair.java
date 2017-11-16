@@ -11,6 +11,14 @@ public class MyPair {
     private String key;
     private int value;
 
+
+    /**
+     * Constructora vacía.
+     */
+    public MyPair() {
+
+    }
+
     /**
      * Constructora con key y value preestablecidos.
      * @param key será el nickname de la dupla.

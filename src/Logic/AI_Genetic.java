@@ -20,6 +20,7 @@ public class AI_Genetic implements AI{
     public AI_Genetic(Difficulty difficulty){
         //Podem modificar els parametres del genetic en funcio de la dificultat.(Bastant recomanable per millorar eficiencia)
         genBase = new GeneticBase(100,150,0.5,0.015,0.03,0.02,60);
+        //ALBERT
         this.dif = difficulty;
     }
 
@@ -62,6 +63,7 @@ public class AI_Genetic implements AI{
             case 3: comb.setCombination(sol4);
             default: comb.setCombination(sol1);
         }
+            //ALBERT
         return comb;
     }
 
@@ -75,6 +77,7 @@ public class AI_Genetic implements AI{
         for(int i=0; i<s.length(); i++) {
             arrI.add((byte)a[i]);
         }
+            //ALBERT
         return new Combination(arrI);
     }
 }
