@@ -2,6 +2,10 @@ package Logic.Genetic;
 import java.util.ArrayList;
 import java.lang.Math;
 
+/**
+ * @author albert.ortiz
+ */
+
 public class FitnessCalculus {
     private ArrayList<Solution> solutions = new ArrayList<Solution>();
     private int lastIndex = 0;
