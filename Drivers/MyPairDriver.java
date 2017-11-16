@@ -1,4 +1,5 @@
-package Logic;
+
+package MyPair;
 
 import java.util.Scanner;
 
