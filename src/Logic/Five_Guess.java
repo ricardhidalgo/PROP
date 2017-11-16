@@ -12,7 +12,7 @@ public class Five_Guess {
 
     private ArrayList<String> possibleComb = new ArrayList<String>();
     private ArrayList<String> ListComb = new ArrayList<String>();
-    private ArrayList<Combination> Answer = new ArrayList<Combination>;
+    private ArrayList<Combination> Answer = new ArrayList<Combination>();
 
     private String combination = "";
     private String code = "";

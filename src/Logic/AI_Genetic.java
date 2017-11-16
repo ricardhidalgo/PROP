@@ -10,16 +10,21 @@ import java.util.*;
  */
 
 
-public class AI_Genetic implements AI {
+public class AI_Genetic implements AI{
+
+
     private GeneticBase genBase;
     private Difficulty dif = new Difficulty();
-    public AI_Genetic(){
+
+
+    public AI_Genetic(Difficulty difficulty){
         //Podem modificar els parametres del genetic en funcio de la dificultat.(Bastant recomanable per millorar eficiencia)
         genBase = new GeneticBase(100,150,0.5,0.015,0.03,0.02,60);
         //ALBERT
+        this.dif = difficulty;
     }
 
-    public Combination generateSecret(Difficulty dif){
+    public Combination generateSecret(){
         /**
          * Genera una combinacion aleatoria.
          * @param dif nivel de dificultad.
