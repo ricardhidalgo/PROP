@@ -32,6 +32,7 @@ public class MyPairDriver {
                     System.out.println("OK");
                     break;
             }
+            input = scanner.next();
         }
     }
 }
