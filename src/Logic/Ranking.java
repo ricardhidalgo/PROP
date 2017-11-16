@@ -51,6 +51,9 @@ public class Ranking {
         }
     }
 
+    /**
+     * Escribe en un documento .txt el ranking de puntuaciones.
+     */
     public void escribir_pantalla() {
 
         try {
