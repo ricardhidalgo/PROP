@@ -8,15 +8,25 @@ import java.util.*;
 
 public class Ranking {
 
+
     private String nickname;
     private int score;
-    private ArrayList<MyPair> ranking;
+    private ArrayList<MyPair> ranking = new ArrayList<MyPair>();
 
+    /**
+     * Constructora vacía.
+     * @param nick el nick que querremos poner en el ranking.
+     * @param score la puntuación que corresponde a la partida de dicho nick.
+     */
     public Ranking (String nick, int score) {
         this.nickname = nick;
         this.score = score;
     }
 
+    /**
+     * Inserta una combinación nick-score en el caso que el score de esta partida sea mayor a alguno
+     * de los puestos anteriormente.
+     */
     public void InsertRanking () {
         MyPair ID = new MyPair(nickname, score);
         boolean found = false;
