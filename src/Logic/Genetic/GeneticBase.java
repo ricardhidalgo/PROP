@@ -5,10 +5,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.ArrayList;
 
-/**
- * @author albert.ortiz
- */
-
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall AI's performance.
     private int maxGenerations = 100;
@@ -72,9 +68,11 @@ public class GeneticBase {
         }
         Individual bestInd = new Individual();
         bestInd = getGuess(set,FC);
-        FC.setTurn(turn);
+        FC.incrementTurn();
         turn++;
-        return bestInd.toString();
+        String s = "";
+        for(int i=0; i<bestInd.numGenes(); i++) s += bestInd.getGen(i);
+        return s;t
     }
 
 }

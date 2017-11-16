@@ -10,7 +10,7 @@ import java.util.*;
  */
 
 
-public class AI_Genetic extends AI {
+public class AI_Genetic implements AI {
     private GeneticBase genBase;
     private Difficulty dif = new Difficulty();
     public AI_Genetic(){
@@ -20,6 +20,11 @@ public class AI_Genetic extends AI {
     }
 
     public Combination generateSecret(Difficulty dif){
+        /**
+         * Genera una combinacion aleatoria.
+         * @param dif nivel de dificultad.
+         * @return devuelve Combinacion aleatoria.
+         */
         Random random = new Random();
 
         if(dif.isCanRepeat()) {
@@ -46,6 +51,10 @@ public class AI_Genetic extends AI {
     }
 
     public Combination generateFirstCombination() {
+        /**
+         * Genera una combinacion inicial preestablecida.
+         * @return devuelve la combinacion inicial.
+         */
         int i = dif.getDificultyCode();
         ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1, (byte)2, (byte)2)));
         ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
@@ -53,9 +62,9 @@ public class AI_Genetic extends AI {
         ArrayList<Byte> sol4 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
         Combination comb = new Combination();
         switch(i) {
-            case 1: comb.setCombination(sol2);
-            case 2: comb.setCombination(sol3);
-            case 3: comb.setCombination(sol4);
+            case 1: comb.setCombination(sol2);break;
+            case 2: comb.setCombination(sol3);break;
+            case 3: comb.setCombination(sol4);break;
             default: comb.setCombination(sol1);
         }
             //ALBERT
@@ -63,6 +72,11 @@ public class AI_Genetic extends AI {
     }
 
     public Combination generateNextCombination(Play result){
+        /**
+         * Genera una combinacion basada en las respuestas anteriores y sus respectivos resultados.
+         * @param result resultado de la respuesta anterior.
+         * @return devuelve la combinacion a jugar.
+         */
         int x = result.getNumCorrectPositions();
         int y = result.getNumCorrectColors();
         giveResult(x,y,result.getCombination());

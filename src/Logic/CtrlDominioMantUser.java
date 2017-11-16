@@ -1,7 +1,5 @@
 package Logic;
-import Logic.User;
-import Data.CtrlDataUser;
-import java.util.ArrayList;
+/*
 public class CtrlDominioMantUser {
 
     private CtrlDataUser data = new CtrlDataUser();
@@ -27,3 +25,4 @@ public class CtrlDominioMantUser {
         return au;
     }
 }
+*/

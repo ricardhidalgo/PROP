@@ -1,14 +1,10 @@
 package Logic;
 
-import java.util.*;
-import Logic.Combination;
-import Logic.Difficulty;
-
 /**
  * @author pol.gil
  */
 
-
+/*
 public class Five_Guess {
 
 
@@ -121,8 +117,8 @@ public class Five_Guess {
     }
 
 
-
+*/
 
 // IMPLEMENTAR LA RESPUESTA EN LA FUNCION gettry() (la respuesta es una combinacion)
 
-}
+//}
