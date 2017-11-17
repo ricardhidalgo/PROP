@@ -1,5 +1,12 @@
-package Logic.Genetic;
+package Drivers;
+import Logic.Genetic.FitnessCalculus;
+import Logic.Genetic.Individual;
+import Logic.Genetic.Solution;
+
 import java.util.Scanner;
+/**
+ * @author albert.ortiz
+ */
 
 public class DriverFitnessCalculus {
 
@@ -65,7 +72,7 @@ public class DriverFitnessCalculus {
         }
     }
 
-    public void printIndividual(Individual ind){
+    private void printIndividual(Individual ind){
         for(int i=0; i<ind.numGenes(); i++) System.out.print(ind.getGen(i));
         System.out.print("\n");
     }
@@ -122,7 +129,7 @@ public class DriverFitnessCalculus {
                     DFC.testFitnessIndividual();
                 default: System.err.println("Wrong option code. ");
             }
-
+            System.out.println();
 
         }
     }

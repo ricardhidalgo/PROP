@@ -14,6 +14,7 @@ public class GeneticBase {
     private int nIndividualsPopulation =150;
     private boolean elitism = true;  //never change this
     private int numTournaments = 5;
+    private int defaultGenNum = 4;
     private double recombinationUmbral = 0.5;
     private double mutationRatio = 0.015;
     private double permutationRatio = 0.03;
