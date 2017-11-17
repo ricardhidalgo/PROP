@@ -55,10 +55,6 @@ public class AI_Genetic implements AI{
             //RICARD
     }
 
-    private void giveResult(int x, int y, Combination c){
-        genBase.addSolution(x,y,c.getComb());
-    }
-
     public Combination generateFirstCombination() {
         /**
          * Genera una combinacion inicial preestablecida.
@@ -66,14 +62,14 @@ public class AI_Genetic implements AI{
          */
         int i = dif.getDificultyCode();
         ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1, (byte)2, (byte)2)));
-        ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
-        ArrayList<Byte> sol3 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));
-        ArrayList<Byte> sol4 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
+      //  ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
+        ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));
+        ArrayList<Byte> sol3 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
         Combination comb = new Combination();
         switch(i) {
-            case 1: comb.setCombination(sol2);break;
-            case 2: comb.setCombination(sol3);break;
-            case 3: comb.setCombination(sol4);break;
+            case 1: comb.setCombination(sol1);break;
+            case 2: comb.setCombination(sol2);break;
+            case 3: comb.setCombination(sol3);break;
             default: comb.setCombination(sol1);
         }
             //ALBERT
@@ -88,14 +84,10 @@ public class AI_Genetic implements AI{
          */
         int x = result.getNumCorrectPositions();
         int y = result.getNumCorrectColors();
-        giveResult(x,y,result.getCombination());
-        String s =  genBase.play();
-        char[]a = s.toCharArray();
-        ArrayList<Byte> arrI = new ArrayList<Byte>();
-        for(int i=0; i<s.length(); i++) {
-            arrI.add((byte)a[i]);
-        }
-            //ALBERT
-        return new Combination(arrI);
+        genBase.addSolution(x, y, result.getCombination().getComb());
+        Combination c =  genBase.play();
+        System.out.println("La combinacion es: " + c.getComb());
+        return c;
+        //ALBERT
     }
 }

@@ -80,18 +80,21 @@ public class IATest {
 
             } else {
                 System.out.println("Eres el CodeMaster. Genera una combinación y la IA intentará adivinarla: ");
-                System.out.printf("Inserta una combinación. Recuerda, las combinaciones son de %d, y %b se puede repetir: \n",game.getDifficulty().getNumBallsInCombination(), game.getDifficulty().isCanRepeat() ? "si" : "no");
+                System.out.printf("Inserta una combinación. Recuerda, las combinaciones son de %d, y %b se puede repetir: \n", game.getDifficulty().getNumBallsInCombination(), game.getDifficulty().isCanRepeat() ? "si" : "no");
                 ab = new ArrayList<>();
                 System.out.println("Escriba la combinación de bytes: ");
                 for(int i = 0; i<game.getDifficulty().getNumBallsInCombination(); ++i) {
                     ab.add(sc.nextByte());
                 }
+                System.out.println("\nLa combinacion secreta es: "+ab+"\n");
                 py = new Combination(ab);
                 game.setSecretCode(py);
                 int iteracion = 1;
 
                 System.out.printf("Ronda: %d: \n", iteracion);
-                Play play = game.makePlay(game.getAi().generateFirstCombination());
+                Combination c = game.getAi().generateFirstCombination();
+                System.out.println("Primera combinacion de la IA: "+ c.getComb());
+                Play play = game.makePlay(c);
                 if(play.getNumCorrectPositions() == game.getDifficulty().getNumBallsInCombination()){
                     System.out.println("¡La IA ha adivinado la combinación!");
                     gameRunning = false;
@@ -109,7 +112,9 @@ public class IATest {
 
                 while (gameRunning){
                     System.out.printf("Ronda: %d: \n", iteracion);
-                    play = game.makePlay(game.getAi().generateNextCombination(play));
+                    Combination comb = game.getAi().generateNextCombination(play);
+                    System.out.println("Combinacion de la IA: "+ comb.getComb());
+                    play = game.makePlay(comb);
                     if(play.getNumCorrectPositions() == game.getDifficulty().getNumBallsInCombination()){
                         System.out.println("¡La IA ha adivinado la combinación!");
                         gameRunning = false;
