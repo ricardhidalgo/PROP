@@ -112,7 +112,9 @@ public class IATest {
 
                 while (gameRunning){
                     System.out.printf("Ronda: %d: \n", iteracion);
-                    play = game.makePlay(game.getAi().generateNextCombination(play));
+                    Combination comb = game.getAi().generateNextCombination(play);
+                    System.out.println("Combinacion de la IA: "+ comb.getComb());
+                    play = game.makePlay(comb);
                     if(play.getNumCorrectPositions() == game.getDifficulty().getNumBallsInCombination()){
                         System.out.println("¡La IA ha adivinado la combinación!");
                         gameRunning = false;

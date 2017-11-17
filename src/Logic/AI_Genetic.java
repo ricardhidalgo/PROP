@@ -55,10 +55,6 @@ public class AI_Genetic implements AI{
             //RICARD
     }
 
-    private void giveResult(int x, int y, Combination c){
-        genBase.addSolution(x,y,c.getComb());
-    }
-
     public Combination generateFirstCombination() {
         /**
          * Genera una combinacion inicial preestablecida.
@@ -88,14 +84,10 @@ public class AI_Genetic implements AI{
          */
         int x = result.getNumCorrectPositions();
         int y = result.getNumCorrectColors();
-        giveResult(x,y,result.getCombination());
-        String s =  genBase.play();
-        char[]a = s.toCharArray();
-        ArrayList<Byte> arrI = new ArrayList<Byte>();
-        for(int i=0; i<s.length(); i++) {
-            arrI.add((byte)a[i]);
-        }
-            //ALBERT
-        return new Combination(arrI);
+        genBase.addSolution(x, y, result.getCombination().getComb());
+        Combination c =  genBase.play();
+        System.out.println("La combinacion es: " + c.getComb());
+        return c;
+        //ALBERT
     }
 }

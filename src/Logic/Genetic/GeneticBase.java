@@ -1,5 +1,7 @@
 package Logic.Genetic;
 
+import Logic.Combination;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -58,7 +60,7 @@ public class GeneticBase {
     }
 
 
-    public String play(){
+    public Combination play(){
         Set<Individual> set = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism);
         int counter = 0;
@@ -74,8 +76,11 @@ public class GeneticBase {
         FC.incrementTurn();
         turn++;
         String s = "";
-        for(int i=0; i<bestInd.numGenes(); i++) s += bestInd.getGen(i);
-        return s;
+        ArrayList<Byte> arrB = new ArrayList<Byte>();
+        for(int i=0; i<bestInd.numGenes(); i++) arrB.add(bestInd.getGen(i));
+        Combination c = new Combination();
+        c.setCombination(arrB);
+        return c;
     }
 
 }
