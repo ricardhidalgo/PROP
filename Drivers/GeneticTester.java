@@ -34,20 +34,21 @@ public class GeneticTester {
         Scanner scan = new Scanner(System.in);
         GeneticTester gt = new GeneticTester();
         while(true){
-            System.out.println("Introdueix la combinació secreta: ");
+            System.out.println("Insert the secret combination (numbers 0-7): ");
             Difficulty dif = new Difficulty();
             dif.setEasy(false);
             Combination secret = gt.readCombination(dif.getNumBallsInCombination());
             AI_Genetic gb = new AI_Genetic(dif);
             Play play = new Play();
             Combination c = gb.generateFirstCombination();
-            System.out.println("AI GENERATED: " + c);
+            int guessCounter = 0;
             while(play.getNumCorrectPositions() != dif.getNumBallsInCombination()) {
                 play.processPlay(c, secret);
-                System.out.println("AI GENERATED: " + c);
+                System.out.println("AI GENERATED: " + c.getComb());
                 c= gb.generateNextCombination(play);
+                guessCounter ++;
             }
-            System.out.println("AI WON THE GAME!");
+            System.out.println("AI WON THE GAME IN "+guessCounter+" GUESSES!");
         }
 
     }

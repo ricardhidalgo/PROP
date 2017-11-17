@@ -86,7 +86,6 @@ public class AI_Genetic implements AI{
         int y = result.getNumCorrectColors();
         genBase.addSolution(x, y, result.getCombination().getComb());
         Combination c =  genBase.play();
-        System.out.println("La combinacion es: " + c.getComb());
         return c;
         //ALBERT
     }
