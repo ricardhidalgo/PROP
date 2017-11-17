@@ -24,6 +24,8 @@ public class Population {
 
     public Individual getIndividual(int index){ return populationMembers[index]; }
 
+    public
+
     public void setIndividual(int index, Individual ind){ populationMembers[index] = ind; }
 
     public Individual bestIndividual(FitnessCalculus FC){
