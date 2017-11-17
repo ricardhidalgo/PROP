@@ -21,4 +21,10 @@ public class Solution {
 
     public int getWhite(){return y;}
 
+    @Override
+    public int hashCode() {
+        int out = 0;
+        for(int i=0; i<ind.numGenes(); i++) out += ind.getGen(i)*i;
+        return out;
+    }
 }

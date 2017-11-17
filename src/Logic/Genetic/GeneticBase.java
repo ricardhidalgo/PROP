@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall ai's performance.
-    private int maxGenerations = 100;
-    private int nIndividualsPopulation =150;
+    private int maxGenerations = 200;
+    private int nIndividualsPopulation =300;
     private boolean elitism = true;  //never change this
     private int numTournaments = 5;
     private double recombinationUmbral = 0.5;
-    private double mutationRatio = 0.015;
+    private double mutationRatio = 0.03;
     private double permutationRatio = 0.03;
     private double inversionRatio = 0.02;
-    private int maxSolutions = 60;
+    private int maxSolutions = 120;
     private int turn = 1;
     private FitnessCalculus FC;
 
@@ -64,15 +64,20 @@ public class GeneticBase {
         Set<Individual> set = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism);
         int counter = 0;
+        Individual bestInd = new Individual();
+        boolean found = false;
         while(counter<maxGenerations && set.size()<maxSolutions){
             Population p2 = p.evolvePopulation(FC, elitism, numTournaments, recombinationUmbral, mutationRatio, permutationRatio, inversionRatio);
             p = p2;
            // if(counter>maxGenerations/2) set.add(p2.bestIndividual(FC));
             set.add(p2.bestIndividual(FC)); //Canviar a la linea comentada si falla.
+            if(p2.bestIndividual(FC).fitnessIndividual(FC) == 0){
+                bestInd = p2.bestIndividual(FC);
+                found = true;
+            }
             counter++;
         }
-        Individual bestInd = new Individual();
-        bestInd = getGuess(set,FC);
+        if(!found) bestInd = getGuess(set, FC);
         FC.incrementTurn();
         turn++;
         String s = "";
