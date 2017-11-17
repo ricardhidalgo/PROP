@@ -1,36 +1,32 @@
-package Logic;
 
 import java.util.*;
+import Logic.Ranking;
 
 public class RankingDriver {
     public static void main(String[] args) {
-        System.out.println("Indica función a comprobar en la clase Ranking");
+        System.out.println("Indica función a comprobar en la clase Ranking (escribe 'end' para acabar");
+        System.out.println("1. Insertar nick-score partida");
+        System.out.println("2. Escribir y sobreescribir en un .txt");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
-        MyPair p2 = new MyPair("p", 0);
-        while (!input.equals("EXIT")) {
-            System.out.println("Función: " + input);
+        Ranking persona;
+        while (!input.equals("end")) {
             switch (input) {
 
-                case "getkey":
-                    System.out.println("El nickname es: " + p2.getkey());
+                case "1":
+                    System.out.println("Indica nick jugadr y puntuacion");
+                    persona = new Ranking(scanner.next(), scanner.nextInt());
+                    persona.InsertRanking();
+                    for (int i = 0; i < persona.getsize(); i++) {
+                        System.out.println("La dupla " + i + " es " + persona.getranking().get(i).getkey() + " --- " + persona.getranking().get(i).getvalue());
+                    }
                     break;
+/*
+                case "2":
 
-                case "getvalue":
                     System.out.println("El score es: " + p2.getvalue());
-                    break;
+                    break;*/
 
-                case "Modifykey":
-                    System.out.println("Indroduce nuevo nickname");
-                    p2.Modifykey(scanner.next());
-                    System.out.println("OK");
-                    break;
-
-                case "Modifyvalue":
-                    System.out.println("Indroduce nuevo score");
-                    p2.Modifyvalue(scanner.nextInt());
-                    System.out.println("OK");
-                    break;
             }
             input = scanner.next();
         }

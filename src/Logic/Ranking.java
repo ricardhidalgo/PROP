@@ -17,14 +17,40 @@ public class Ranking {
     private int score;
     private ArrayList<MyPair> ranking = new ArrayList<MyPair>();
 
+
     /**
      * Constructora vacía.
+     */
+    public Ranking() {
+
+    }
+
+    /**
+     * Constructora preestablecida.
      * @param nick el nick que querremos poner en el ranking.
      * @param score la puntuación que corresponde a la partida de dicho nick.
      */
     public Ranking (String nick, int score) {
         this.nickname = nick;
         this.score = score;
+        MyPair person = new MyPair(nick, score);
+        ranking.add(person);
+    }
+
+    /**
+     * Retorna el tamañano del arraylist ranking.
+     * @return retorna el total de duplas nick-score que hay inscritas.
+     */
+    public int getsize() {
+        return ranking.size();
+    }
+
+    /**
+     * Retorna el array con el ranking.
+     * @return retorna el ranking.
+     */
+    public ArrayList<MyPair> getranking() {
+        return ranking;
     }
 
     /**
@@ -34,21 +60,31 @@ public class Ranking {
     public void InsertRanking () {
         MyPair ID = new MyPair(nickname, score);
         boolean found = false;
+
+        System.out.println("shajhdkjasHDKJahdkjASH");
         if (ranking.size() == 0) ranking.add(ID);
-        else {
-            for (int i = 0; i < ranking.size() && !found; i++) {
-                if (ranking.get(i).getvalue() > ID.getvalue()) {
-                    MyPair aux = new MyPair("",0);
-                    for (int j = i; j < ranking.size(); j++) {
-                        aux = ranking.get(j);
-                        ranking.get(j).Modifykey(ID.getkey());
-                        ranking.get(j).Modifyvalue(ID.getvalue());
-                    }
-                    if (ranking.size() < 11) ranking.add(aux);
-                    found = true;
-                }
-            }
-        }
+         if (ranking.size() >= 2) {
+
+             System.out.println("chivato 1");
+             for (int i = 0; i < ranking.size() && !found; i++) {
+                 System.out.println("chivato 2");
+                 if (ranking.get(i).getvalue() > ID.getvalue()) {
+                     System.out.println("chivato 3");
+                     MyPair aux = new MyPair();
+                     for (int j = i; j < ranking.size(); j++) {
+                         System.out.println("shajhdkjasHDKJahdkjASH");
+                         aux.Modifykey(ranking.get(j).getkey());
+                         aux.Modifyvalue(ranking.get(j).getvalue());
+                         ranking.get(j).Modifykey(ID.getkey());
+                         ranking.get(j).Modifyvalue(ID.getvalue());
+                         ID.Modifykey(aux.getkey());
+                         ID.Modifyvalue(aux.getvalue());
+                     }
+                     if (ranking.size() < 11) ranking.add(ID);
+                     found = true;
+                 }
+             }
+         }
     }
 
     /**

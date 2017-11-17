@@ -4,15 +4,15 @@ import Logic.MyPair;
 
 public class MyPairDriver {
     public static void main(String[] args) {
-        System.out.println("Indica función a comprobar en la clase Ranking (escribe 'end' para acabar");
-        System.out.println("1. Comprobar el nick");
-        System.out.println("2. Comrpobar el score");
-        System.out.println("3. Modificar el nick");
-        System.out.println("4. Modificar el score");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.next();
-        MyPair p2 = new MyPair("p", 0);
-        while (!input.equals("end")) {
+        System.out.println("Indica función a comprobar en la clase Pair (escribe 'end' para acabar");
+            System.out.println("1. Comprobar el nick");
+            System.out.println("2. Comprobar el score");
+            System.out.println("3. Modificar el nick");
+            System.out.println("4. Modificar el score");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.next();
+            MyPair p2 = new MyPair("p", 0);
+            while (!input.equals("end")) {
             switch (input) {
 
                 case "1":
