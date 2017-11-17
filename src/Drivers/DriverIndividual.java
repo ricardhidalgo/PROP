@@ -28,7 +28,18 @@ public class DriverIndividual {
     }
 
     public void testGetGen(){
-
+        Individual ind = readIndividual();
+        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println("Insert the index of the gen you want to check. -1 to exit");
+            int x = scan.nextInt();
+            if(x<0) break;
+            if(x>=ind.numGenes()){
+                System.err.println("Error: you inserted an index higher than the individual's size!");
+                continue;
+            }
+            System.out.println("The individual's gen " + x +" is: "+ind.getGen(x));
+        }
     }
 
     public void testSetGen(){
@@ -104,13 +115,20 @@ public class DriverIndividual {
                     DFC.testConstructor();
                     break;
                 case 2:
-                    System.out.println("Usage: Copies the introduced individual into an empty one. Introduce four digits separated by a space each one.");
+                    System.out.println("Usage: Copies the introduced individual into an empty one. Introduce four digits separated by a space each one in order to generate the individual.");
                     DFC.testCopy();
                     break;
                 case 3:
-                    System.out.println("Usage: Outputs the individual's size.");
+                    System.out.println("Usage: Outputs the size of the individuals.");
                     DFC.testNumGenes();
                     break;
+                case 4:
+                    System.out.println("Usage: Outputs the desired gen of the individual. Introduce four digits separated by a space each one in order to generate the individual. " +
+                            "Then insert the index of the gen you want to get");
+                    DFC.testGetGen();
+                    break;
+                case 5:
+                    System.out.println("Usage: Inserts the specified gen in the desired location of the individual.");
                 default: System.err.println("Wrong option code. ");
             }
             System.out.println();
