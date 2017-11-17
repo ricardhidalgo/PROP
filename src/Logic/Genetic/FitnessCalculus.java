@@ -1,7 +1,6 @@
 package Logic.Genetic;
 import java.util.ArrayList;
 import java.lang.Math;
-
 /**
  * @author albert.ortiz
  */
@@ -11,7 +10,9 @@ public class FitnessCalculus {
     private int lastIndex = 0;
     private int turn = 0;
 
-  public void setTurn(int i){ this.turn = i; }
+  public void incrementTurn(){ this.turn++; }
+
+    public int getTurn(){ return turn; }
 
     public double fitnessIndividual(Individual ind){
        /* System.out.println("SOLUTIONS");

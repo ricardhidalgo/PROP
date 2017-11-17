@@ -1,5 +1,4 @@
 package Logic.Genetic;
-
 /**
  * @author albert.ortiz
  */
