@@ -31,24 +31,28 @@ public class AI_Genetic implements AI{
          * @return devuelve Combinacion aleatoria.
          */
         Random random = new Random();
+        Combination combination = new Combination();
 
         if(dif.isCanRepeat()) {
-            ArrayList<Integer> comb = new ArrayList<>();
+            ArrayList<Byte> comb = new ArrayList<>();
             for (int i = 0; i < dif.getNumBallsInCombination(); ++i) {
-                comb.add(random.nextInt(8));
+                comb.add((byte)random.nextInt(8));
             }
+            combination.setCombination(comb);
 
         } else {
 
-            Set<Integer> hcomb = new HashSet<>();
+            Set<Byte> hcomb = new HashSet<>();
             while(hcomb.size() < dif.getNumBallsInCombination()) {
-                hcomb.add(random.nextInt(8));
+                hcomb.add((byte)random.nextInt(8));
             }
+            ArrayList<Byte> comb2 = new ArrayList<Byte>(hcomb);
+            combination.setCombination(comb2);
+
 
         }
-
+        return combination;
             //RICARD
-        return new Combination();
     }
 
     private void giveResult(int x, int y, Combination c){

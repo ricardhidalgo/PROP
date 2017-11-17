@@ -28,7 +28,8 @@ public class DriverGame {
                 System.out.println("8. Get codigo secreto");
                 System.out.println("9. Get listado de jugadas");
                 System.out.println("10. Get configuracion de dificultad");
-                System.out.println("11. Salir");
+                System.out.println("11. Get IA jugando a la partida");
+                System.out.println("12. Salir");
                 int op = sc.nextInt();
                 int i = 0, size = 0, size2 = 0;
                 User user;
@@ -43,9 +44,9 @@ public class DriverGame {
                         game = new Game();
                         break;
                     case 2:
-                        System.out.println("Tipe User username and password: ");
+                        System.out.println("Pon un username y un password para generar al jugador de la partida: ");
                         user = new User(sc.next(), sc.next());
-                        System.out.println("Select difficulty (1 for easy, 2 for medium, 3 for hard: ");
+                        System.out.println("Selecciona dificultad (1 para facil, 2 para normal, 3 para dificil: ");
                         op = sc.nextInt();
                         switch (op){
                             case 1:
@@ -68,7 +69,7 @@ public class DriverGame {
                         game = new Game(user, ai, sc.nextBoolean(), difficulty);
                         break;
                     case 3:
-                        System.out.println("Pon un username i un password para generar al jugador de la partida: ");
+                        System.out.println("Pon un username y un password para generar al jugador de la partida: ");
                         user = new User(sc.next(), sc.next());
                         System.out.println("Selecciona dificultad (1 para facil, 2 para normal, 3 para dificil: ");
                         op = sc.nextInt();
@@ -162,9 +163,12 @@ public class DriverGame {
                         break;
 
                     case 11:
-                        System.out.println("Salir");
+                        System.out.println(game.getAi());
                         return;
 
+                    case 12:
+                        System.out.println("Salir");
+                        return;
 
                     default:
                         System.out.println("Operación incorrecta");
