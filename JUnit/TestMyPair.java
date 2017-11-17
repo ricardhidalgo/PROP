@@ -12,7 +12,7 @@ public class TestMyPair {
     public void getkey() {
         MyPair persona = new MyPair("Pol", 21);
         String nickname = persona.getkey();
-        assertEquals ("Pol", nickname, 0);
+        assertEquals ("Pol", nickname);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class TestMyPair {
     public void Modifykey() {
         MyPair persona = new MyPair("Pol", 20);
         persona.Modifykey("Paula");
-        assertEquals("Paula", persona.getkey(), 0);
+        assertEquals("Paula", persona.getkey());
     }
 
     @Test

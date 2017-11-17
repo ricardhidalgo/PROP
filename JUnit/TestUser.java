@@ -12,14 +12,14 @@ public class TestUser {
     public void getNickname() {
         User usuario = new User("Pol", "1234");
         String nombre = usuario.getNickname();
-        assertEquals("Pol", nombre, 0);
+        assertEquals("Pol", nombre);
     }
 
     @Test
     public void validateUser() {
         User usuario = new User("Pol", "1234");
-        boolean valido = usuario.validateUser();
-        assertEquals(true, valido, 0);
+        boolean valido = usuario.validateUser("1234");
+        assertTrue(valido);
 
     }
 }

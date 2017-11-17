@@ -14,7 +14,8 @@ public class TestFinishedGame {
         Combination comb = new Combination();
         ArrayList<Play> plays = new ArrayList<Play>();
         Difficulty diff = new Difficulty();
-        FinishedGame endgame = new FinishedGame(user, true, comb, plays, diff, 5);
+        AI_Genetic ia = new AI_Genetic(diff);
+        FinishedGame endgame = new FinishedGame(user, ia,true, comb, plays, diff, 5);
         int rta = endgame.getPuntuation();
         assertEquals(5, rta, 0);
     }
@@ -25,7 +26,8 @@ public class TestFinishedGame {
         Combination comb = new Combination();
         ArrayList<Play> plays = new ArrayList<Play>();
         Difficulty diff = new Difficulty();
-        FinishedGame endgame = new FinishedGame(user, true, comb, plays, diff, 18);
+        AI_Genetic ia = new AI_Genetic(diff);
+        FinishedGame endgame = new FinishedGame(user, ia,true, comb, plays, diff, 18);
         endgame.setPuntuation(5);
         assertEquals(5, endgame.getPuntuation(), 0);
     }

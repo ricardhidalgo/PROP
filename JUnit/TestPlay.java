@@ -18,7 +18,7 @@ public class TestPlay {
         Play jugada = new Play();
         jugada.modifyComb(comb2);
         Combination comb = jugada.getCombination();
-        assertEquals(combi, comb, 0);
+        assertSame(comb2, comb);
     }
 
     @Test
@@ -35,6 +35,20 @@ public class TestPlay {
         jugada.modifyColor(2);
         int correctc = jugada.getNumCorrectColors();
         assertEquals(2, correctc, 0);
+    }
+
+    @Test
+    public void processPlay() {
+        Play jugada = new Play();
+        ArrayList<Byte> combi = new ArrayList<Byte>();
+        combi.add((byte)2);
+        Combination comb = new Combination(combi);
+        ArrayList<Byte> combi2 = new ArrayList<Byte>();
+        combi2.add((byte)2);
+        Combination rta = new Combination(combi);
+        jugada.processPlay(comb, rta);
+        assertEquals(0, jugada.getNumCorrectPositions(), 0);
+
     }
 
 }
