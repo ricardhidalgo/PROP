@@ -15,7 +15,7 @@ public class Ranking extends MyPair{
 
     private String nickname;
     private int score;
-    private ArrayList<MyPair> ranking = new ArrayList<MyPair>();
+    private ArrayList<MyPair> ranking;
 
 
     /**
@@ -33,8 +33,6 @@ public class Ranking extends MyPair{
     public Ranking (String nick, int score) {
         this.nickname = nick;
         this.score = score;
-        MyPair person = new MyPair(nick, score);
-        ranking.add(person);
     }
 
     /**
@@ -68,6 +66,8 @@ public class Ranking extends MyPair{
     public void modifyscore(int score) {
         this.score = score;
     }
+
+    public void modifyranking(ArrayList<MyPair> rank) { this.ranking = rank; }
 
 
     /**

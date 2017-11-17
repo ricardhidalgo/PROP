@@ -12,11 +12,26 @@ public class Difficulty {
     private boolean hasTips;
 
     /**
-     * Constructora vacía que da valores preestablecidos.
+     * Constructora vacía.
      */
     public Difficulty() {
         this.dificultyCode = 0;
     }
+
+    /**
+     * Constructora con valores preestablecidos
+     * @param numBalls numero de bolas
+     * @param repeat si hay repetidas
+     * @param code codigo de dificultad
+     * @param tips si hay pistas
+     */
+    public Difficulty(int numBalls, boolean repeat, int code, boolean tips) {
+        this.numBallsInCombination = numBalls;
+        this.canRepeat = repeat;
+        this.dificultyCode = code;
+        this.hasTips = tips;
+    }
+
 
     /**
      * Dificultad fácil.
@@ -75,14 +90,6 @@ public class Difficulty {
      */
     public Integer getNumBallsInCombination() {
         return numBallsInCombination;
-    }
-
-    /**
-     * Modifica el número total de bolas que se usarán en la combinación.
-     * @param n nuevo número total de bolas de la cobinación.
-     */
-    public void ModifyNumBallsInCombination(int n) {
-        this.numBallsInCombination = n;
     }
 
     /**

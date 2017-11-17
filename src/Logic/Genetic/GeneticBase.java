@@ -1,5 +1,7 @@
 package Logic.Genetic;
 
+import Logic.Combination;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -14,7 +16,6 @@ public class GeneticBase {
     private int nIndividualsPopulation =150;
     private boolean elitism = true;  //never change this
     private int numTournaments = 5;
-    private int defaultGenNum = 4;
     private double recombinationUmbral = 0.5;
     private double mutationRatio = 0.015;
     private double permutationRatio = 0.03;
@@ -53,14 +54,13 @@ public class GeneticBase {
 
     public void addSolution(int x, int y, ArrayList<Byte> comb){
         Individual ind = new Individual();
-        //Reconvertir a bytes
         for(int i=0; i<comb.size(); i++) ind.setGen(i,comb.get(i));
         Solution s = new Solution(x, y, ind);
         FC.addSolution(s);
     }
 
 
-    public String play(){
+    public Combination play(){
         Set<Individual> set = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism);
         int counter = 0;
@@ -76,8 +76,11 @@ public class GeneticBase {
         FC.incrementTurn();
         turn++;
         String s = "";
-        for(int i=0; i<bestInd.numGenes(); i++) s += bestInd.getGen(i);
-        return s;
+        ArrayList<Byte> arrB = new ArrayList<Byte>();
+        for(int i=0; i<bestInd.numGenes(); i++) arrB.add(bestInd.getGen(i));
+        Combination c = new Combination();
+        c.setCombination(arrB);
+        return c;
     }
 
 }
