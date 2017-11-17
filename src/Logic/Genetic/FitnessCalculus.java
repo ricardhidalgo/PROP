@@ -35,7 +35,7 @@ public class FitnessCalculus {
                     }
                 }
             }
-            fitness += 2*Math.abs(black-solutions.get(k).getBlack()) + Math.abs(white-solutions.get(k).getWhite());
+            fitness += Math.abs(black-solutions.get(k).getBlack()) + Math.abs(white-solutions.get(k).getWhite());
         }
         return fitness+2*ind.numGenes()*(turn);
 

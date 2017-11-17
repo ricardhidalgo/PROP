@@ -15,22 +15,26 @@ public class Game {
     private Combination secretCode;
     private ArrayList<Play> plays;
     private Difficulty difficulty;
+    private AI ai;
 
     /**
      * Constructora vacía.
      */
     public Game(){
 
+
     }
 
     /**
      * Constructora con valores predefinidos.
      * @param user usuario de la partida.
+     * @param ai IA de la partida.
      * @param isUserBreaker indica si el usuario es CB o CM.
      * @param difficulty indica el nível de dificultad.
      */
-    public Game(User user, boolean isUserBreaker, Difficulty difficulty) {
+    public Game(User user, AI ai, boolean isUserBreaker, Difficulty difficulty) {
         this.user = user;
+        this.ai = ai;
         this.isUserBreaker = isUserBreaker;
         this.difficulty = difficulty;
         this.plays = new ArrayList<>();
@@ -39,12 +43,13 @@ public class Game {
     /**
      * Constructora con valores predefinidos.
      * @param user usuario de la partida.
+     * @param ai IA de la partida.
      * @param isUserBreaker indica si el usuario es CB o CM.
      * @param secretCode combinación correcta (respuesta).
      * @param plays cantidad de rondas jugadas.
      * @param difficulty nível de dificultad.
      */
-    public Game(User user, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty) {
+    public Game(User user, AI ai, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty) {
         this.user = user;
         this.isUserBreaker = isUserBreaker;
         this.secretCode = secretCode;
@@ -54,11 +59,11 @@ public class Game {
 
     /**
      * Indica cual es la combinación correcta o respuesta
-     * @param comb combinación correcta.
+     * @param comb Combinación correcta.
      */
     public void setSecretCode(Combination comb) {
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.out.printf("Wrong parameters");
+            System.out.printf("Wrong parameters 1");
         } else {
             this.secretCode = comb;
         }
@@ -72,7 +77,7 @@ public class Game {
     public Play makePlay(Combination comb) {
         Play np = new Play();
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.out.printf("Wrong parameters");
+            System.out.printf("Wrong parameters 2");
         } else {
             np.processPlay(comb, secretCode);
             plays.add(np);
@@ -118,5 +123,13 @@ public class Game {
      */
     public Difficulty getDifficulty() {
         return difficulty;
+    }
+
+    /**
+     * Retorna la IA que esta jugando a la partida
+     * @return Referencia a la IA
+     */
+    public AI getAi() {
+        return ai;
     }
 }

@@ -1,7 +1,10 @@
 import Logic.Difficulty;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * @author ricard.hidalgo
+ */
 
 public class DriverDifficulty {
 
@@ -9,7 +12,7 @@ public class DriverDifficulty {
         Difficulty diff = new Difficulty();
         Scanner sc = new Scanner(System.in);
         try {
-            System.out.println("Estas provando la clase Difficulty");
+            System.out.println("Esta provando la clase Difficulty");
             while (true) {
                 System.out.println();
                 System.out.println("Indique qué desea hacer:");
@@ -24,8 +27,6 @@ public class DriverDifficulty {
                 System.out.println("9. Get si se han activado los tips");
                 System.out.println("10. Salir");
                 int op = sc.nextInt();
-                int size = 0;
-                ArrayList<Byte> ab = new ArrayList<>();
                 switch (op) {
                     case 1:
                         diff = new Difficulty();

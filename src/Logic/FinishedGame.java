@@ -21,8 +21,8 @@ public class FinishedGame extends Game {
      * @param difficulty nível de dificultad.
      * @param puntuation puntuación final.
      */
-    public FinishedGame(User user, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty, int puntuation) {
-        super(user, isUserBreaker, secretCode, plays, difficulty);
+    public FinishedGame(User user, AI ai, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty, int puntuation) {
+        super(user, ai, isUserBreaker, secretCode, plays, difficulty);
         this.puntuation = puntuation;
     }
 
