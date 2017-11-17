@@ -46,6 +46,8 @@ public class DriverGeneticBase {
 
     public void testPlay(){
         Scanner scan = new Scanner(System.in);
+        GeneticBase gb = new GeneticBase(4,3,0.4,0.4,0.4,0.4,4);
+        gb.play();
     }
 
     public void showOptions(){
