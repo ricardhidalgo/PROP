@@ -94,17 +94,37 @@ public class DriverPopulation {
         Scanner scan = new Scanner(System.in);
         Population pop = new Population(scan.nextInt(), true);
         printPopulation(pop);
-        FitnessCalculus fc = new FitnessCalculus();
-        //System.out.println("The best member of this population is: " + pop.bestIndividual(fc));
+        System.out.println("The best member of this population is: ");
+        printIndividual(pop.bestIndividual(fc));
 
     }
 
     public void testStartTournament(){
-
+        Scanner scan = new Scanner(System.in);
+        Population pop = new Population(scan.nextInt(), true);
+        printPopulation(pop);
+        while(true){
+            System.out.println("Insert the number of tournaments. -1 to exit");
+            int x = scan.nextInt();
+            if(x<0) break;
+            printIndividual(pop.startTournament(x,fc));
+        }
     }
 
     public void testEvolvePopulation(){
-
+        Scanner scan = new Scanner(System.in);
+        Population pop = new Population(scan.nextInt(), true);
+        printPopulation(pop);
+        while(true){
+            System.out.println("Elitism? 1 Yes 0 No -1 Exit");
+            boolean elitism = false;
+            int x = scan.nextInt();
+            if(x<0) break;
+            else if(x==1) elitism = true;
+            Population p2 = pop.evolvePopulation(fc, elitism, 5, 0.5, 0.015, 0.03, 0.02);
+            pop = p2;
+            printPopulation(pop);
+        }
     }
 
     public void showOptions(){
@@ -116,6 +136,7 @@ public class DriverPopulation {
         System.out.println("5: Test SetIndividual");
         System.out.println("6: Test BestIndividual");
         System.out.println("7: Test StartTournament");
+        System.out.println("8: Test EvolvePopulation");
         System.out.println("0: Exit ");
     }
     public static void main (String [] args){
@@ -145,6 +166,26 @@ public class DriverPopulation {
                 case 3:
                     System.out.println("Usage: Displays the number of individuals that a population holds. Write the population's size.");
                     DFC.testNumIndividuals();
+                    break;
+                case 4:
+                    System.out.println("Usage: Lets you select an individual from the population. Insert the size of the population.");
+                    DFC.testGetIndividual();
+                    break;
+                case 5:
+                    System.out.println("Usage: Lets you set an individual from the population.");
+                    DFC.testSetIndividual();
+                    break;
+                case 6:
+                    System.out.println("Usage: Gets the best individual from the population. Insert the size of the population.");
+                    DFC.testBestIndividual();
+                    break;
+                case 7:
+                    System.out.println("Usage: Makes a tournament and returns the best individual. Insert the size of the population.");
+                    DFC.testStartTournament();
+                    break;
+                case 8:
+                    System.out.println("Usage: Evolves the population. Insert the size of the population.");
+                    DFC.testEvolvePopulation();
                     break;
                 default: System.err.println("Wrong option code. ");
             }

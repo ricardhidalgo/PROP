@@ -67,6 +67,7 @@ public class Population {
             ind3.mutateIndividual(mutationRatio);
             ind3.permutateIndividual(permutationRatio);
             if(ThreadLocalRandom.current().nextDouble(0,1.0) < inversionRatio) ind3.invertIndividual();
+            for(int j=0; j<p.numIndividuals(); j++) if(p.getIndividual(j).equals(ind3)) ind3.initializeIndividual();
             p.setIndividual(i, ind3);
         }
         return p;
