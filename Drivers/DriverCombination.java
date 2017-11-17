@@ -10,7 +10,7 @@ public class DriverCombination {
         Combination comb = new Combination();
         Scanner sc = new Scanner(System.in);
         try {
-            System.out.println("Estas provando la clase Combination");
+            System.out.println("Esta provando la clase Combination");
             while (true) {
                 System.out.println();
                 System.out.println("Indique qué desea hacer:");
