@@ -65,13 +65,13 @@ public class AI_Genetic implements AI{
          * @return devuelve la combinacion inicial.
          */
         int i = dif.getDificultyCode();
-        ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1, (byte)2, (byte)2)));
+        ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)0, (byte)1, (byte)2, (byte)3)));
         ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
-        ArrayList<Byte> sol3 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));
-        ArrayList<Byte> sol4 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
+        ArrayList<Byte> sol3 = new ArrayList<Byte>((Arrays.asList((byte)0, (byte)1,(byte) 2,(byte) 3,(byte) 4,(byte) 5)));
+        ArrayList<Byte> sol4 = new ArrayList<Byte>(Arrays.asList((byte)0,(byte) 1, (byte)2,(byte) 3, (byte)4,(byte) 5,(byte) 6,(byte) 7));
         Combination comb = new Combination();
         switch(i) {
-            case 1: comb.setCombination(sol2);break;
+            case 1: comb.setCombination(sol1);break;
             case 2: comb.setCombination(sol3);break;
             case 3: comb.setCombination(sol4);break;
             default: comb.setCombination(sol1);

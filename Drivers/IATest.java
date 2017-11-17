@@ -82,7 +82,7 @@ public class IATest {
                 System.out.println("Eres el CodeMaster. Genera una combinación y la IA intentará adivinarla: ");
                 System.out.printf("Inserta una combinación. Recuerda, las combinaciones son de %d, y %b se puede repetir: \n",game.getDifficulty().getNumBallsInCombination(), game.getDifficulty().isCanRepeat() ? "si" : "no");
                 ab = new ArrayList<>();
-                System.out.println("Escriba la combinación de bytes: ");
+                System.out.println("Escribe la combinación de bytes: ");
                 for(int i = 0; i<game.getDifficulty().getNumBallsInCombination(); ++i) {
                     ab.add(sc.nextByte());
                 }
@@ -90,7 +90,7 @@ public class IATest {
                 game.setSecretCode(py);
                 int iteracion = 1;
 
-                System.out.printf("Ronda: %d: \n", iteracion);
+                System.out.printf("Ronda %d: \n", iteracion);
                 Play play = game.makePlay(game.getAi().generateFirstCombination());
                 if(play.getNumCorrectPositions() == game.getDifficulty().getNumBallsInCombination()){
                     System.out.println("¡La IA ha adivinado la combinación!");
@@ -98,6 +98,8 @@ public class IATest {
                 } else {
                     ++iteracion;
                 }
+                System.out.println("Combinación introducia por la IA: ");
+                System.out.println(play.getCombination().getComb());
                 System.out.println("Colores correctos en posiciones correctas: ");
                 System.out.println(play.getNumCorrectPositions());
                 System.out.println("Colores correctos en posiciones incorrectas: ");
