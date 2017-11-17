@@ -75,11 +75,13 @@ public class Combination {
         if (correct) {
             return tips;
         } else {
+            ArrayList<Byte> tips2 = new ArrayList<>(tips);
             for (int i = 0; i < tips.size(); ++i) {
                 if (tips.get(i) == 0) {
                     for (int j = 0; j < tips.size(); ++j) {
-                        if (this.comb.get(i).equals(combination.comb.get(j)) && tips.get(j) == 0) {
-                            tips.set(i, (byte)1);
+                        if (this.comb.get(i).equals(combination.comb.get(j)) && tips2.get(i) == 0) {
+                            tips.set(j, (byte)1);
+                            tips2.set(i, (byte)1);
                             j = tips.size();
                         }
                     }
@@ -98,7 +100,5 @@ public class Combination {
         Set<Byte> hcomb = new HashSet<Byte>(this.comb);
         return comb.size() > hcomb.size();
     }
-
-    //private String combinationToString(){}
 
 }

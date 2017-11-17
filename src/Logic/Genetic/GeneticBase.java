@@ -75,7 +75,7 @@ public class GeneticBase {
         turn++;
         String s = "";
         for(int i=0; i<bestInd.numGenes(); i++) s += bestInd.getGen(i);
-        return s;t
+        return s;
     }
 
 }
