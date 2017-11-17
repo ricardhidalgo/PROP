@@ -7,6 +7,10 @@ import Logic.Play;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author albert.ortiz
+ */
+
 public class GeneticTester {
 
     private Combination readCombination(int a){
