@@ -25,10 +25,8 @@ public class Individual {
     public void setGen(int pos, byte gen){ genes[pos] = gen; }
 
     public void initializeIndividual(){
-        for(int i=0; i<genes.length; i++){
-            genes[i]= (byte)ThreadLocalRandom.current().nextInt(50, 58);
-
-        }
+        for(int i=0; i<genes.length; i++)
+            genes[i]= (byte)ThreadLocalRandom.current().nextInt(0, 8);
 
     }
 
@@ -38,18 +36,18 @@ public class Individual {
 
     }
 
-    Individual recombinateIndividual(Individual ind, double recombinationUmbral){
+    public Individual recombinateIndividual(Individual ind, double recombinationUmbral){
         Individual indu = new Individual();
         indu.copy(this);
         for(int i=0; i<genes.length; i++)
-            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= recombinationUmbral) indu.setGen(i,ind.getGen(i));
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) > recombinationUmbral) indu.setGen(i,ind.getGen(i));
         return indu;
 
     }
 
     public void mutateIndividual(double mutationRatio){
         for(int i=0; i<genes.length; i++)
-            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(50,58);
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(0,8);
 
     }
 

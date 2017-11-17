@@ -3,6 +3,7 @@ package Drivers;
  * @author albert.ortiz
  */
 
+import Logic.Genetic.FitnessCalculus;
 import Logic.Genetic.Individual;
 
 import java.util.Scanner;
@@ -43,19 +44,74 @@ public class DriverIndividual {
     }
 
     public void testSetGen(){
-
+        Individual ind = readIndividual();
+        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println("Insert the index and the value. The value must be a digit between 0 and 7. -1 to exit");
+            int x = scan.nextInt();
+            byte y = scan.nextByte();
+            if(x<0) break;
+            if(x>=ind.numGenes()){
+                System.err.println("Error: you inserted an index higher than the individual's size!");
+                continue;
+            }
+            if(y>7 || y<0){
+                System.err.println("Error: you inserted an invalid value!");
+                continue;
+            }
+            ind.setGen(x,y);
+            System.out.println("The individual state after the insertion is: ");
+            printIndividual(ind);
+        }
     }
 
     public void testInitializeIndividual(){
-
+        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println("Insert any number to generate a new individual. -1 to exit");
+            int x = scan.nextInt();
+            if(x<0) break;
+            Individual ind = new Individual();
+            ind.initializeIndividual();
+            printIndividual(ind);
+            System.out.println("The output should be a 4-digit random number.");
+        }
     }
 
     public void testFitnessIndividual(){
-
+        Scanner scan = new Scanner(System.in);
+        FitnessCalculus fc = new FitnessCalculus();
+        while(true){
+            System.out.println("Insert the individual you want to test. -1 To exit.");
+            Individual ind = new Individual();
+            byte a = scan.nextByte();
+            if(a<0) break;
+            else ind.setGen(0, a);
+            for(int j=1; j<ind.numGenes(); j++) ind.setGen(j, scan.nextByte());
+            System.out.println("Individual is: ");
+            printIndividual(ind);
+            System.out.println("And it's fitness is: " + fc.fitnessIndividual(ind));
+        }
     }
 
     public void testRecombinateIndividual(){
-
+        Scanner scan = new Scanner(System.in);
+        FitnessCalculus fc = new FitnessCalculus();
+        while(true){
+            System.out.println("Insert the individuals. -1 To exit.");
+            Individual ind = new Individual();
+            byte a = scan.nextByte();
+            if(a<0) break;
+            else ind.setGen(0, a);
+            for(int j=1; j<ind.numGenes(); j++) ind.setGen(j, scan.nextByte());
+            Individual ind2 = new Individual();
+            for(int j=0; j<ind.numGenes(); j++) ind2.setGen(j, scan.nextByte());
+            System.out.println("Insert the recombination umbral:");
+            double umb = scan.nextDouble();
+            Individual ind3 = ind.recombinateIndividual(ind2, umb);
+            System.out.println("Individual 1 and 2 after recombinating each one leads to:");
+            printIndividual(ind3);
+        }
     }
 
     public void testMutateIndividual(){
@@ -115,7 +171,7 @@ public class DriverIndividual {
                     DFC.testConstructor();
                     break;
                 case 2:
-                    System.out.println("Usage: Copies the introduced individual into an empty one. Introduce four digits separated by a space each one in order to generate the individual.");
+                    System.out.println("Usage: Copies the introduced individual into an empty one. Introduce four digits each one separated by a space in order to generate the individual.");
                     DFC.testCopy();
                     break;
                 case 3:
@@ -123,12 +179,28 @@ public class DriverIndividual {
                     DFC.testNumGenes();
                     break;
                 case 4:
-                    System.out.println("Usage: Outputs the desired gen of the individual. Introduce four digits separated by a space each one in order to generate the individual. " +
+                    System.out.println("Usage: Outputs the desired gen of the individual. Introduce four digits each one separated by a space in order to generate the individual. " +
                             "Then insert the index of the gen you want to get");
                     DFC.testGetGen();
                     break;
                 case 5:
-                    System.out.println("Usage: Inserts the specified gen in the desired location of the individual.");
+                    System.out.println("Usage: Inserts the specified gen in the desired location of the individual."+
+                            "Introduce four digits each one separated by a space in order to generate the individual. " + "Then insert the index where you want to put the gen followed by its value.");
+                    DFC.testSetGen();
+                    break;
+                case 6:
+                    System.out.println("Usage: Generates a random individual.");
+                    DFC.testInitializeIndividual();
+                    break;
+                case 7:
+                    System.out.println("Usage: Outputs the individual's fitness."+
+                            "Introduce four digits each one separated by a space in order to generate the individual. The FitnessCalculusDriver checks that the value is correct.");
+                    DFC.testFitnessIndividual();
+                    break;
+                case 8:
+                    System.out.println("Usage: recombinates two given individuals by the specified umbral and outputs the result. Introduce four digits each one separated by a space in order to generate each individual."
+                    +"Then, specify the umbral. ");
+                    DFC.testRecombinateIndividual();
                 default: System.err.println("Wrong option code. ");
             }
             System.out.println();
