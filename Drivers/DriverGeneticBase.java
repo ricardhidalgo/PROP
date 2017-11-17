@@ -29,7 +29,7 @@ public class DriverGeneticBase {
 
     public void testConstructor(){
         Scanner scan = new Scanner(System.in);
-        GeneticBase gb = new GeneticBase(scan.nextInt(), scan.nextInt(), scan.nextDouble(), scan.nextDouble(), scan.nextDouble(), scan.nextDouble(), scan.nextInt());
+        GeneticBase gb = new GeneticBase(scan.nextInt(), scan.nextInt(), scan.nextDouble(), scan.nextDouble(), scan.nextDouble(), scan.nextDouble(), scan.nextInt(),scan.nextBoolean());
         System.out.println("Genetic base generated without problems!");
     }
 
@@ -39,14 +39,14 @@ public class DriverGeneticBase {
         int y = scan.nextInt();
         ArrayList<Byte> arr = new ArrayList<Byte>();
         for(int i=0; i<4; i++) arr.add(scan.nextByte());
-        GeneticBase gb = new GeneticBase(4,3,0.4,0.4,0.4,0.4,4);
+        GeneticBase gb = new GeneticBase(4,3,0.4,0.4,0.4,0.4,4,true);
         gb.addSolution(x,y,arr);
         System.out.println("Inserted successfully");
     }
 
     public void testPlay(){
         Scanner scan = new Scanner(System.in);
-        GeneticBase gb = new GeneticBase(4,3,0.4,0.4,0.4,0.4,4);
+        GeneticBase gb = new GeneticBase(4,3,0.4,0.4,0.4,0.4,4,true);
         gb.play();
     }
 

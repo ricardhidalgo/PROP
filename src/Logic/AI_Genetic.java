@@ -1,6 +1,7 @@
 package Logic;
 
 import Logic.Genetic.GeneticBase;
+import Logic.Genetic.Individual;
 
 import java.util.*;
 
@@ -19,7 +20,8 @@ public class AI_Genetic implements AI{
 
     public AI_Genetic(Difficulty difficulty){
         //Podem modificar els parametres del genetic en funcio de la dificultat.(Bastant recomanable per millorar eficiencia)
-        genBase = new GeneticBase(100,150,0.5,0.015,0.03,0.02,60);
+        genBase = new GeneticBase(100,150,0.5,0.015,0.03,0.02,60, difficulty.isCanRepeat());
+        Individual.setDefaultGenNum(difficulty.getNumBallsInCombination());
         //ALBERT
         this.dif = difficulty;
     }
