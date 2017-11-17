@@ -58,6 +58,7 @@ public class GeneticBase {
         FC.addSolution(s);
     }
 
+
     public String play(){
         Set<Individual> set = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism);

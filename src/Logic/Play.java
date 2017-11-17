@@ -64,8 +64,8 @@ public class Play {
      * @param secret Combinación secreta con la que se compara la combinación de la jugada.
      */
     public void processPlay(Combination comb, Combination secret) {
-        this.combination = comb;
-        correctColors = secret.compareCombinations(combination);
+        this.combination = comb;/*
+        correctColors = secret.compareCombinations(combination);*/
 
         numCorrectColors = 0;
         numCorrectPositions = 0;
