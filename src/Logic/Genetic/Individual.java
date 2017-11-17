@@ -40,20 +40,20 @@ public class Individual {
         Individual indu = new Individual();
         indu.copy(this);
         for(int i=0; i<genes.length; i++)
-            if(ThreadLocalRandom.current().nextDouble(0,1.0) > recombinationUmbral) indu.setGen(i,ind.getGen(i));
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) < recombinationUmbral) indu.setGen(i,ind.getGen(i));
         return indu;
 
     }
 
     public void mutateIndividual(double mutationRatio){
         for(int i=0; i<genes.length; i++)
-            if(ThreadLocalRandom.current().nextDouble(0,1.0) <= mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(0,8);
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) < mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(0,8);
 
     }
 
     public void permutateIndividual(double permutationRatio){
         for(int i=0; i<genes.length; i++) {
-            if (ThreadLocalRandom.current().nextDouble(0, 1.0) <= permutationRatio){
+            if (ThreadLocalRandom.current().nextDouble(0, 1.0) < permutationRatio){
                 byte s = genes[i];
                 int a = i;
                 while(i==a) a = ThreadLocalRandom.current().nextInt(0, genes.length);

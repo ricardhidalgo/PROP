@@ -96,7 +96,6 @@ public class DriverIndividual {
 
     public void testRecombinateIndividual(){
         Scanner scan = new Scanner(System.in);
-        FitnessCalculus fc = new FitnessCalculus();
         while(true){
             System.out.println("Insert the individuals. -1 To exit.");
             Individual ind = new Individual();
@@ -115,15 +114,50 @@ public class DriverIndividual {
     }
 
     public void testMutateIndividual(){
-
+        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println("Insert the individual. -1 To exit.");
+            Individual ind = new Individual();
+            byte a = scan.nextByte();
+            if(a<0) break;
+            else ind.setGen(0, a);
+            for(int j=1; j<ind.numGenes(); j++) ind.setGen(j, scan.nextByte());
+            System.out.println("Insert the mutation ratio.");
+            ind.mutateIndividual(scan.nextDouble());
+            System.out.println("Individual after mutation:");
+            printIndividual(ind);
+        }
     }
 
     public void testPermutateIndividual(){
-
+        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println("Insert the individual. -1 To exit.");
+            Individual ind = new Individual();
+            byte a = scan.nextByte();
+            if(a<0) break;
+            else ind.setGen(0, a);
+            for(int j=1; j<ind.numGenes(); j++) ind.setGen(j, scan.nextByte());
+            System.out.println("Insert the permutation ratio.");
+            ind.permutateIndividual(scan.nextDouble());
+            System.out.println("Individual after permutation:");
+            printIndividual(ind);
+        }
     }
 
     public void testInvertIndividual(){
-
+        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println("Insert the individual. -1 To exit.");
+            Individual ind = new Individual();
+            byte a = scan.nextByte();
+            if(a<0) break;
+            else ind.setGen(0, a);
+            for(int j=1; j<ind.numGenes(); j++) ind.setGen(j, scan.nextByte());
+            ind.invertIndividual();
+            System.out.println("Individual after being inverted:");
+            printIndividual(ind);
+        }
     }
 
     private Individual readIndividual(){
@@ -201,6 +235,19 @@ public class DriverIndividual {
                     System.out.println("Usage: recombinates two given individuals by the specified umbral and outputs the result. Introduce four digits each one separated by a space in order to generate each individual."
                     +"Then, specify the umbral. ");
                     DFC.testRecombinateIndividual();
+                    break;
+                case 9:
+                    System.out.println("Usage: mutates an individual accordingly to the specified ratio." + "Introduce four digits each one separated by a space in order to generate the individual.");
+                    DFC.testMutateIndividual();
+                    break;
+                case 10:
+                    System.out.println("Usage: permutates an individual accordingly to the specified ratio." + "Introduce four digits each one separated by a space in order to generate the individual.");
+                    DFC.testPermutateIndividual();
+                    break;
+                case 11:
+                    System.out.println("Usage: inverts a random range of the individual's DNA");
+                    DFC.testInvertIndividual();
+                    break;
                 default: System.err.println("Wrong option code. ");
             }
             System.out.println();
@@ -209,4 +256,3 @@ public class DriverIndividual {
         }
     }
 }
-
