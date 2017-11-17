@@ -94,7 +94,7 @@ public class IATest {
                 System.out.printf("Ronda: %d: \n", iteracion);
                 Combination c = game.getAi().generateFirstCombination();
                 System.out.println("Primera combinacion de la IA: "+ c.getComb());
-                Play play = game.makePlay(c); //AQUI SALTA EXCEPCION
+                Play play = game.makePlay(c);
                 if(play.getNumCorrectPositions() == game.getDifficulty().getNumBallsInCombination()){
                     System.out.println("¡La IA ha adivinado la combinación!");
                     gameRunning = false;

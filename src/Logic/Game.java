@@ -63,7 +63,7 @@ public class Game {
      */
     public void setSecretCode(Combination comb) {
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.out.printf("Wrong parameters 1");
+            System.err.println("Wrong parameters 1");
         } else {
             this.secretCode = comb;
         }
