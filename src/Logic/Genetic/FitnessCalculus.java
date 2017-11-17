@@ -1,12 +1,13 @@
 package Logic.Genetic;
-import java.util.ArrayList;
-import java.lang.Math;
+
+import java.util.HashSet;
+
 /**
  * @author albert.ortiz
  */
 
 public class FitnessCalculus {
-    private ArrayList<Solution> solutions = new ArrayList<Solution>();
+    private HashSet<Solution> solutions = new HashSet<>();
     private int lastIndex = 0;
     private int turn = 0;
 
@@ -15,35 +16,30 @@ public class FitnessCalculus {
     public int getTurn(){ return turn; }
 
     public double fitnessIndividual(Individual ind){
-       /* System.out.println("SOLUTIONS");
-        for(int i=0; i<solutions.size(); i++){
-            System.out.println(solutions.get(i).getIndividual().toString());
-        }
-        System.out.println("END SOLUTIONS");*/
         double fitness = 0.0;
-        for(int k=0; k<solutions.size(); k++) {
+        for(Solution s : solutions) {
             int black = 0;
             int white = 0;
             for (int i = 0; i < ind.numGenes(); i++) {
-                if (ind.getGen(i) == solutions.get(k).getIndividual().getGen(i)) ++black;
+                if (ind.getGen(i) == s.getIndividual().getGen(i)) ++black;
                 else {
-                    for (int j = 0; j < solutions.get(k).getIndividual().numGenes(); j++) {
-                        if (ind.getGen(i) == solutions.get(k).getIndividual().getGen(j)) {
+                    for (int j = 0; j < ind.numGenes(); j++) {
+                        if (ind.getGen(i) == s.getIndividual().getGen(j)) {
                             ++white;
                             break;
                         }
                     }
                 }
             }
-            fitness += Math.abs(black-solutions.get(k).getBlack()) + Math.abs(white-solutions.get(k).getWhite());
+            fitness += Math.abs(black-s.getBlack()) + Math.abs(white-s.getWhite());
         }
-        return fitness+2*ind.numGenes()*(turn);
+        return fitness;//+2*ind.numGenes()*(turn);
 
     }
-
+/*
     public Solution getSolution(int index){
         return solutions.get(index);
-    }
+    }*/
 
     public void addSolution(Solution s){
         solutions.add(s);

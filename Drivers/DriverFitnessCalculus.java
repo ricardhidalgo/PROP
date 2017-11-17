@@ -47,7 +47,7 @@ public class DriverFitnessCalculus {
 
     }
 
-    public void testGetSolution(int solutionN){
+    /*public void testGetSolution(int solutionN){
         FitnessCalculus fc = new FitnessCalculus();
         Scanner scan = new Scanner(System.in);
         for(int i=0; i<solutionN; i++){
@@ -70,7 +70,7 @@ public class DriverFitnessCalculus {
             printIndividual(fc.getSolution(i).getIndividual());
             System.out.println("And it's score: " + fc.getSolution(i).getBlack() + " "+ fc.getSolution(i).getWhite());
         }
-    }
+    }*/
 
     private void printIndividual(Individual ind){
         for(int i=0; i<ind.numGenes(); i++) System.out.print(ind.getGen(i));
@@ -122,7 +122,7 @@ public class DriverFitnessCalculus {
                     break;
                 case 3:
                     System.out.println("Usage: Insert the number of solutions to add and its number of white/black balls. The number of a solution must consist of 4 numbers from 0 to 9 separed by a space.");
-                    DFC.testGetSolution(scan.nextInt());
+                   // DFC.testGetSolution(scan.nextInt());
                     break;
                 case 4:
                     System.out.println("Usage: Checks fitness function. Insert the number of solutions to add and its number of white/black balls. The number of a solution must consist of 4 numbers from 0 to 9 separed by a space. Then insert the individuals you want to check.");

@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 public class Individual {
-    private int defaultGenNum = 4;
+    private static int defaultGenNum = 4;
     private byte genes[];
     private double fitness = 0.0;
 
@@ -14,6 +14,9 @@ public class Individual {
         genes = new byte[defaultGenNum];
     }
 
+    public static void setDefaultGenNum(int value){
+        defaultGenNum = value;
+    }
     public void copy(Individual ind){
         for(int i=0; i<ind.numGenes(); i++)  genes[i] = ind.getGen(i);
     }

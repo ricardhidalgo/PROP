@@ -3,6 +3,10 @@ import Logic.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 
 public class IATest {
 
@@ -82,7 +86,7 @@ public class IATest {
                 System.out.println("Eres el CodeMaster. Genera una combinación y la IA intentará adivinarla: ");
                 System.out.printf("Inserta una combinación. Recuerda, las combinaciones son de %d, y %b se puede repetir: \n", game.getDifficulty().getNumBallsInCombination(), game.getDifficulty().isCanRepeat() ? "si" : "no");
                 ab = new ArrayList<>();
-                System.out.println("Escriba la combinación de bytes: ");
+                System.out.println("Escribe la combinación de bytes: ");
                 for(int i = 0; i<game.getDifficulty().getNumBallsInCombination(); ++i) {
                     ab.add(sc.nextByte());
                 }

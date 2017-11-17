@@ -1,6 +1,7 @@
 package Logic;
 
 import Logic.Genetic.GeneticBase;
+import Logic.Genetic.Individual;
 
 import java.util.*;
 
@@ -19,7 +20,8 @@ public class AI_Genetic implements AI{
 
     public AI_Genetic(Difficulty difficulty){
         //Podem modificar els parametres del genetic en funcio de la dificultat.(Bastant recomanable per millorar eficiencia)
-        genBase = new GeneticBase(100,150,0.5,0.015,0.03,0.02,60);
+        genBase = new GeneticBase(100,150,0.5,0.015,0.03,0.02,60, difficulty.isCanRepeat());
+        Individual.setDefaultGenNum(difficulty.getNumBallsInCombination());
         //ALBERT
         this.dif = difficulty;
     }
@@ -61,7 +63,7 @@ public class AI_Genetic implements AI{
          * @return devuelve la combinacion inicial.
          */
         int i = dif.getDificultyCode();
-        ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1, (byte)2, (byte)2)));
+        ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)5, (byte)1, (byte)2, (byte)3)));
       //  ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
         ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));
         ArrayList<Byte> sol3 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
@@ -86,7 +88,6 @@ public class AI_Genetic implements AI{
         int y = result.getNumCorrectColors();
         genBase.addSolution(x, y, result.getCombination().getComb());
         Combination c =  genBase.play();
-        System.out.println("La combinacion es: " + c.getComb());
         return c;
         //ALBERT
     }
