@@ -66,7 +66,8 @@ public class Population {
             Individual ind3 = ind1.recombinateIndividual(ind2, recombinationUmbral);
             ind3.mutateIndividual(mutationRatio);
             ind3.permutateIndividual(permutationRatio);
-            if()ind3.invertIndividual();
+            if(ThreadLocalRandom.current().nextDouble(0,1.0) < inversionRatio) ind3.invertIndividual();
+            p.setIndividual(i, ind3);
         }
         return p;
     }
