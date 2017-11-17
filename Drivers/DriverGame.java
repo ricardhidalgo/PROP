@@ -3,6 +3,10 @@ import Logic.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class DriverGame {
 
 

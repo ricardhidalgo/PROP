@@ -4,6 +4,10 @@ import Logic.Play;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 
 public class DriverPlay {
 

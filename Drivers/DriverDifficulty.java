@@ -2,6 +2,10 @@ import Logic.Difficulty;
 
 import java.util.Scanner;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class DriverDifficulty {
 
     public static void main(String[] args) {
