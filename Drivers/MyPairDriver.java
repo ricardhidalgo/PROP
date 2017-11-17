@@ -5,28 +5,31 @@ import Logic.MyPair;
 public class MyPairDriver {
     public static void main(String[] args) {
         System.out.println("Indica función a comprobar en la clase Ranking");
+        System.out.println("1. Comprobar el nick");
+        System.out.println("2. Comrpobar el score");
+        System.out.println("3. Modificar el nick");
+        System.out.println("4. Modificar el score");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
         MyPair p2 = new MyPair("p", 0);
         while (!input.equals("EXIT")) {
-            System.out.println("Función: " + input);
             switch (input) {
 
-                case "getkey":
+                case "1":
                     System.out.println("El nickname es: " + p2.getkey());
                     break;
 
-                case "getvalue":
+                case "2":
                     System.out.println("El score es: " + p2.getvalue());
                     break;
 
-                case "Modifykey":
+                case "3":
                     System.out.println("Indroduce nuevo nickname");
                     p2.Modifykey(scanner.next());
                     System.out.println("OK");
                     break;
 
-                case "Modifyvalue":
+                case "4":
                     System.out.println("Indroduce nuevo score");
                     p2.Modifyvalue(scanner.nextInt());
                     System.out.println("OK");

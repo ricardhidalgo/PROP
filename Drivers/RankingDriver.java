@@ -7,19 +7,6 @@ public class RankingDriver {
         System.out.println("Indica función a comprobar en la clase Ranking");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
-
-        while (!input.equals("EXIT")) {
-            System.out.println();
-        }
-    }
-}
-
-
-public class MyPairDriver {
-    public static void main(String[] args) {
-        System.out.println("Indica función a comprobar en la clase Ranking");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.next();
         MyPair p2 = new MyPair("p", 0);
         while (!input.equals("EXIT")) {
             System.out.println("Función: " + input);
@@ -49,4 +36,3 @@ public class MyPairDriver {
         }
     }
 }
-

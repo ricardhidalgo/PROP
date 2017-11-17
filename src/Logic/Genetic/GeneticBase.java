@@ -58,6 +58,7 @@ public class GeneticBase {
         FC.addSolution(s);
     }
 
+
     public String play(){
         Set<Individual> set = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism);
@@ -75,7 +76,7 @@ public class GeneticBase {
         turn++;
         String s = "";
         for(int i=0; i<bestInd.numGenes(); i++) s += bestInd.getGen(i);
-        return s;t
+        return s;
     }
 
 }
