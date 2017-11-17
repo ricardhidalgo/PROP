@@ -32,6 +32,12 @@ public class Play {
     }
 
     /**
+     * modifica el atributo combination por el nuevo comb
+     * @param comb nueva combinación
+     */
+    public void modifyComb(Combination comb) { this.combination = comb; }
+
+    /**
      * Retorna la combinación de la jugada
      * @return Combinación de la jugada
      */
@@ -40,12 +46,24 @@ public class Play {
     }
 
     /**
+     * modifica el atributo numCorrectPositions por el nuevo position.
+     * @param position numero de posiciones correctas.
+     */
+    public void modifyPosition(int position) { this.numCorrectPositions = position; }
+
+    /**
      * Retorna el número de colores en posiciones correctas
      * @return Número de posiciones correctas
      */
     public int getNumCorrectPositions() {
         return numCorrectPositions;
     }
+
+    /**
+     * modifica el número de colores corectos.
+     * @param color numero de colores correctos.
+     */
+    public void modifyColor(int color) { this.numCorrectColors = color; }
 
     /**
      * Retorna el número de colores correctos pero en posiciones incorrectas

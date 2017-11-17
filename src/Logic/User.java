@@ -9,6 +9,13 @@ public class User {
     private String nickname;
 
     /**
+     * Constructora vacía.
+     */
+    public User() {
+
+    }
+
+    /**
      * Constructora con un nick y pw preestablecidos.
      * @param nick nombre del usuario.
      * @param pwd contraseña dek mismo.
