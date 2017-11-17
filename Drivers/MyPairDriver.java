@@ -9,10 +9,11 @@ public class MyPairDriver {
             System.out.println("2. Comprobar el score");
             System.out.println("3. Modificar el nick");
             System.out.println("4. Modificar el score");
+            System.out.println("5. Finalizar comprobación");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.next();
             MyPair p2 = new MyPair("p", 0);
-            while (!input.equals("end")) {
+            while (!input.equals("5")) {
             switch (input) {
 
                 case "1":
