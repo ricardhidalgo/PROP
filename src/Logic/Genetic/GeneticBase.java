@@ -94,8 +94,8 @@ public class GeneticBase {
             }
             counter++;
         }
-        if(!found && repeated) bestInd = getGuess(set, FC);
-        else if(!found) bestInd = getGuessNoRepeated(set);
+        if(!found) bestInd = getGuess(set, FC);
+        if(!repeated) bestInd = getGuessNoRepeated(set);
         FC.incrementTurn();
         turn++;
         String s = "";

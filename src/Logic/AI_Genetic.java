@@ -63,7 +63,7 @@ public class AI_Genetic implements AI{
          * @return devuelve la combinacion inicial.
          */
         int i = dif.getDificultyCode();
-        ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)0, (byte)1, (byte)2, (byte)3)));
+        ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)5, (byte)1, (byte)2, (byte)3)));
       //  ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
         ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));
         ArrayList<Byte> sol3 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
