@@ -38,6 +38,16 @@ public class TestRanking {
     }
 
     @Test
+    public void modifyranking() {
+        Ranking aux = new Ranking("Pol", 20);
+        ArrayList<MyPair> rank = new ArrayList<MyPair>();
+        MyPair person = new MyPair("Pol", 20);
+        rank.add(person);
+        aux.modifyranking(rank);
+        assertEquals(rank, aux.getranking());
+    }
+
+    @Test
     public void getsize() {
         Ranking aux = new Ranking("Pol", 21);
         int size = aux.getsize();
@@ -46,12 +56,13 @@ public class TestRanking {
 
     @Test
     public void getranking() {
-        Ranking aux = new Ranking("Pol", 21);
-        MyPair aux2 = new MyPair("Pol", 21);
-        ArrayList<MyPair> auxi = new ArrayList<MyPair>();
-        auxi.add(aux2);
+        Ranking aux = new Ranking("Pol", 20);
+        ArrayList<MyPair> rank = new ArrayList<MyPair>();
+        MyPair person = new MyPair("Pol", 20);
+        rank.add(person);
+        aux.modifyranking(rank);
         ArrayList<MyPair> rta = aux.getranking();
-        assertEquals(auxi, rta);
+        assertEquals(rank, rta);
     }
 
     @Test
