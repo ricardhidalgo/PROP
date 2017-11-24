@@ -96,16 +96,7 @@ public class Ranking extends MyPair{
     public void InsertRanking () {
         MyPair ID = new MyPair(nickname, score);
         boolean found = false;
-        boolean inicio = false;
-        /*
-        if (ranking.size() == 1) {
-            if (!inicio) {
-                ranking.get(0).Modifykey(nickname);
-                ranking.get(0).Modifyvalue(score);
-                inicio = true;
-            }
-            else ranking.add(ID);
-        }*/
+
         if (ranking.size() >= 1) {
              for (int i = 0; i < ranking.size() && !found; i++) {
                  if (ranking.get(i).getvalue() > ID.getvalue()) {

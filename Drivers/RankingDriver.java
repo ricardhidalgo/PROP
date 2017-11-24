@@ -18,9 +18,7 @@ public class RankingDriver {
                     System.out.println("Indica nick jugador y puntuacion");
                     persona.modifynick(scanner.next());
                     persona.modifyscore(scanner.nextInt());
-                    System.out.println("CHIVATO 1 --> nombre: "+ persona.getnick() + " valor: " + persona.getscore() + " ranking: " + persona.getranking());
                     persona.InsertRanking();
-                    System.out.println("CHIVATO 2 --> Llegas");
                     for (int i = 0; i < persona.getsize(); i++) {
                         int j = i+1;
                         System.out.println("La dupla " + j + " es " + persona.getranking().get(i).getkey() + " --- " + persona.getranking().get(i).getvalue() + ".");
