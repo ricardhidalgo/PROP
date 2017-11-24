@@ -15,14 +15,15 @@ public class Ranking extends MyPair{
 
     private String nickname;
     private int score;
-    private ArrayList<MyPair> ranking;
+    private ArrayList<MyPair> ranking = new ArrayList<MyPair>();
 
 
     /**
      * Constructora vacía.
      */
     public Ranking() {
-
+        MyPair ID = new MyPair("PRUEBA", 9999999);
+        this.ranking.add(ID);
     }
 
     /**
@@ -33,6 +34,8 @@ public class Ranking extends MyPair{
     public Ranking (String nick, int score) {
         this.nickname = nick;
         this.score = score;
+        MyPair ID = new MyPair("PRUEBA", 9999999);
+        this.ranking.add(ID);
     }
 
     /**
@@ -93,10 +96,17 @@ public class Ranking extends MyPair{
     public void InsertRanking () {
         MyPair ID = new MyPair(nickname, score);
         boolean found = false;
-
-        if (ranking.size() == 0) ranking.add(ID);
-         if (ranking.size() >= 2) {
-
+        boolean inicio = false;
+        /*
+        if (ranking.size() == 1) {
+            if (!inicio) {
+                ranking.get(0).Modifykey(nickname);
+                ranking.get(0).Modifyvalue(score);
+                inicio = true;
+            }
+            else ranking.add(ID);
+        }*/
+        if (ranking.size() >= 1) {
              for (int i = 0; i < ranking.size() && !found; i++) {
                  if (ranking.get(i).getvalue() > ID.getvalue()) {
                      MyPair aux = new MyPair();
@@ -108,11 +118,12 @@ public class Ranking extends MyPair{
                          ID.Modifykey(aux.getkey());
                          ID.Modifyvalue(aux.getvalue());
                      }
-                     if (ranking.size() < 11) ranking.add(ID);
+
+                     if (ranking.size() < 10) ranking.add(ID);
                      found = true;
                  }
              }
-         }
+        }
     }
 
     /**
