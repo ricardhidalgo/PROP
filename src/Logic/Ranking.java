@@ -1,10 +1,7 @@
 package Logic;
 
+import java.io.*;
 import java.util.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * @author pol.gil
@@ -109,8 +106,8 @@ public class Ranking extends MyPair{
                          ID.Modifykey(aux.getkey());
                          ID.Modifyvalue(aux.getvalue());
                      }
+                     if (ID.getvalue() < 9999999 && ranking.size() < 10) ranking.add(ID);
 
-                     if (ranking.size() < 10) ranking.add(ID);
                      found = true;
                  }
              }
@@ -123,16 +120,20 @@ public class Ranking extends MyPair{
     public void escribirtxt() {
 
         try {
+
             File archivo = new File("ranking.txt");
-            BufferedWriter bw;
             if (!archivo.exists()) {
                 if (!archivo.createNewFile()) {
                     System.out.println("Error");
                 }
             }
+            archivo.delete();
+            archivo = new File("ranking.txt");
+
+            BufferedWriter bw;
             bw = new BufferedWriter(new FileWriter(archivo, true));
             for (int i = 0; i < ranking.size(); i++) {
-                bw.write(ranking.get(i).getkey() + " - " + ranking.get(i).getvalue());
+                bw.write(ranking.get(i).getkey() + " - " + ranking.get(i).getvalue() + "\n");
             }
             bw.close();
         }
