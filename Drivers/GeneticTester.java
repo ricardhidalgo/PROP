@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 
 public class GeneticTester {
-
     private Combination readCombination(int a){
         Scanner scan = new Scanner(System.in);
         ArrayList<Byte> ind = new ArrayList<Byte>();
@@ -49,7 +48,7 @@ public class GeneticTester {
             while(play.getNumCorrectPositions() != dif.getNumBallsInCombination()) {
                 play.processPlay(c, secret);
                 System.out.println("AI GENERATED: " + c.getComb());
-                c= gb.generateNextCombination(play);
+                c = gb.generateNextCombination(play);
                 guessCounter ++;
             }
             System.out.println("AI WON THE GAME IN "+guessCounter+" GUESSES!");

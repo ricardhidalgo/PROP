@@ -7,15 +7,14 @@ import java.util.Scanner;
 /**
  * @author albert.ortiz
  */
-
+/*
 public class DriverFitnessCalculus {
 
     public void testGetTurn(int param){
         System.out.println("Testing Get/Set turn:");
-        FitnessCalculus fc = new FitnessCalculus();
+        FitnessCalculus fc = new FitnessCalculus(0.5);
         for(int i=0; i<param; i++){
             System.out.println("Turn is: " + fc.getTurn());
-            fc.incrementTurn();
         }
         System.out.println("Turn should be "+param + " and it's " + fc.getTurn()+"\n");
 
@@ -71,7 +70,7 @@ public class DriverFitnessCalculus {
             System.out.println("And it's score: " + fc.getSolution(i).getBlack() + " "+ fc.getSolution(i).getWhite());
         }
     }*/
-
+/*
     private void printIndividual(Individual ind){
         for(int i=0; i<ind.numGenes(); i++) System.out.print(ind.getGen(i));
         System.out.print("\n");
@@ -133,4 +132,4 @@ public class DriverFitnessCalculus {
 
         }
     }
-}
+}*/

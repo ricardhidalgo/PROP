@@ -1,22 +1,26 @@
 package Logic.Genetic;
 
-import java.util.HashSet;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * @author albert.ortiz
  */
 
 public class FitnessCalculus {
-    private HashSet<Solution> solutions = new HashSet<>();
-    private int lastIndex = 0;
-    private int turn = 0;
+    private ArrayList<Solution> solutions = new ArrayList<Solution>();
+    double b = 2.0;
+    double a = 1.0;
+    private int turn = 1;
 
-  public void incrementTurn(){ this.turn++; }
-
-    public int getTurn(){ return turn; }
+    public FitnessCalculus(double a, double b){
+        this.b = b;
+        this.a = a;
+    }
 
     public double fitnessIndividual(Individual ind){
-        double fitness = 0.0;
+        double blackSum = 0.0;
+        double whiteSum = 0.0;
         for(Solution s : solutions) {
             int black = 0;
             int white = 0;
@@ -31,22 +35,26 @@ public class FitnessCalculus {
                     }
                 }
             }
-            fitness += Math.abs(black-s.getBlack()) + Math.abs(white-s.getWhite());
+            blackSum += Math.abs(black-s.getBlack());
+            whiteSum += Math.abs(white-s.getWhite());
         }
-        return fitness;//+2*ind.numGenes()*(turn);
+        return a*blackSum + whiteSum +(turn-1)*b;
 
     }
-/*
+
     public Solution getSolution(int index){
         return solutions.get(index);
-    }*/
+    }
 
     public void addSolution(Solution s){
         solutions.add(s);
+        ++turn;
     }
 
     public int getSolutionSize(){
         return solutions.size();
     }
+
+    public int getTurn(){ return turn; }
 
 }

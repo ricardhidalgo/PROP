@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author albert.ortiz
  */
@@ -21,14 +22,20 @@ public class GeneticBase {
     private double permutationRatio = 0.03;
     private boolean repeated = true;
     private double inversionRatio = 0.02;
-    private int maxSolutions = 120;
+    private int maxSize = 100;
     private int turn = 1;
+    //Fitness function parameters "a" is the blackpin weight
+    private double a = 1.0;
+    private double b = 1.0;
     private FitnessCalculus FC;
 
-    public GeneticBase(int maxGenerations, int nIndividualsPopulation, double recombinationUmbral,
-                       double mutationRatio, double permutationRatio, double inversionRatio, int maxSolutions, boolean rep){
+    public GeneticBase(int maxGenerations,         int nIndividualsPopulation,
+                       double recombinationUmbral, double mutationRatio,
+                       double permutationRatio,    double inversionRatio,
+                       int maxSolutions,           boolean rep){
+
         this.repeated = rep;
-        FC = new FitnessCalculus();
+        FC = new FitnessCalculus(a,b);
         this.maxGenerations = maxGenerations;
         this.nIndividualsPopulation = nIndividualsPopulation;
         this.recombinationUmbral = recombinationUmbral;
@@ -38,72 +45,51 @@ public class GeneticBase {
         this.maxGenerations = maxSolutions;
     }
 
-    private boolean repeated(Individual ind){
-        for(int i=0; i<ind.numGenes(); i++)
-            for(int j=i+1; j<ind.numGenes(); j++)
-                if(ind.getGen(i) == ind.getGen(j)) return true;
-
-        return false;
-    }
-
-    Individual getGuess(Set<Individual> s, FitnessCalculus fc){
-        Iterator iterator = s.iterator();
-        Individual inds[] = s.toArray(new Individual[s.size()]);
-        double max = 100000;
-        Individual ind = new Individual();
-        for(int i=0; i<inds.length; i++){
-            Individual ind2 = inds[i];
-            if(max > ind2.fitnessIndividual(fc)){
-                max = ind2.fitnessIndividual(fc);
-                ind = ind2;
-            }
-        }
-        return ind;
-    }
-
-    Individual getGuessNoRepeated(Set<Individual> inds){
-        for(Individual ind : inds){
-            if(!repeated(ind)) return ind;
-        }
-        Individual ind = new Individual();
-        while(repeated(ind)) ind.initializeIndividual();
-        return ind;
-    }
-
-    public void addSolution(int x, int y, ArrayList<Byte> comb){
+    public void addSolution(int black, int white, ArrayList<Byte> comb){
         Individual ind = new Individual();
         for(int i=0; i<comb.size(); i++) ind.setGen(i,comb.get(i));
-        Solution s = new Solution(x, y, ind);
+        Solution s = new Solution(black, white, ind);
         FC.addSolution(s);
     }
 
+    Individual getRandomFromSet(Set<Individual> s){
+        int i = 0;
+        int counter = 0;
+        Individual indio = new Individual();
+        i = ThreadLocalRandom.current().nextInt(0, s.size());
+        for (Iterator<Individual> it = s.iterator(); it.hasNext();) {
+            Individual ind = it.next();
+            if(i == counter) indio = ind;
+            ++counter;
+        }
+        return indio;
+    }
 
     public Combination play(){
-        Set<Individual> set = new HashSet<>();
+        int height = 1;
+        Set<Individual> E = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism);
-        int counter = 0;
-        Individual bestInd = new Individual();
-        boolean found = false;
-        while(counter<maxGenerations && set.size()<maxSolutions){
-            Population p2 = p.evolvePopulation(FC, elitism, numTournaments, recombinationUmbral, mutationRatio, permutationRatio, inversionRatio);
-            p = p2;
-            set.add(p2.bestIndividual(FC)); //Canviar a la linea comentada si falla.
-            if(p2.bestIndividual(FC).fitnessIndividual(FC) == 0){
-                bestInd = p2.bestIndividual(FC);
-                found = true;
-            }
-            counter++;
+        while(maxGenerations >= height && E.size() < maxSize){
+            p.evolvePopulation(FC,elitism,numTournaments,
+                                recombinationUmbral,mutationRatio,
+                                permutationRatio,inversionRatio);
+            E.add(p.bestIndividual(FC));
+            ++height;
         }
-        if(!found) bestInd = getGuess(set, FC);
-        if(!repeated) bestInd = getGuessNoRepeated(set);
-        FC.incrementTurn();
-        turn++;
-        String s = "";
-        ArrayList<Byte> arrB = new ArrayList<Byte>();
-        for(int i=0; i<bestInd.numGenes(); i++) arrB.add(bestInd.getGen(i));
         Combination c = new Combination();
-        c.setCombination(arrB);
-        return c;
+        Individual i = getRandomFromSet(E);
+        return i.toCombination();
+    }
+
+    public static void main(String[] args) {
+        Set<Individual> s = new HashSet<>();
+        Individual ind = new Individual();
+        Individual ind2 = new Individual();
+        ind2.copy(ind);
+        if(ind.equals(ind2)) System.out.println("Iguales");
+        s.add(ind);
+        s.add(ind2);
+        System.out.println(s.size());
     }
 
 }

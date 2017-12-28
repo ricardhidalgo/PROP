@@ -12,6 +12,7 @@ public class Population {
         for(int i=0; i<populationSize; i++){
             Individual ind = new Individual();
             ind.initializeIndividual();
+            //while(!checkPolulation(ind,i)) ind.initializeIndividual();
             populationMembers[i] = ind;
         }
     }
@@ -52,11 +53,23 @@ public class Population {
         return ind;
     }
 
+    boolean checkSolution (FitnessCalculus FC, Individual ind){
+        for(int i=0; i<FC.getSolutionSize(); i++)
+            if(ind.equals(FC.getSolution(i).getIndividual())) return false;
+        return true;
+    }
+/*
+    boolean checkPolulation (Individual ind, int index){
+        for(int i=0; i<index; i++)
+            if(ind.equals(getIndividual(index))) return false;
+        return true;
+    }*/
+
     public Population evolvePopulation(FitnessCalculus FC, boolean elitist, int numTournaments, double recombinationUmbral, double mutationRatio, double permutationRatio, double inversionRatio){
         Population p = new Population(populationMembers.length, elitist);
         p.copy(this);
         int index = 0;
-        if(elitist) {
+        if(elitist && checkSolution(FC,bestIndividual(FC))) {
             p.setIndividual(0, p.bestIndividual(FC));
             ++index;
         }
@@ -68,6 +81,7 @@ public class Population {
             ind3.permutateIndividual(permutationRatio);
             if(ThreadLocalRandom.current().nextDouble(0,1.0) < inversionRatio) ind3.invertIndividual();
             for(int j=0; j<p.numIndividuals(); j++) if(p.getIndividual(j).equals(ind3)) ind3.initializeIndividual();
+            while(!checkSolution(FC,ind3)) ind3.mutateIndividual(mutationRatio);
             p.setIndividual(i, ind3);
         }
         return p;

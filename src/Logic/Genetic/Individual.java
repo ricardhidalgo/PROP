@@ -1,5 +1,8 @@
 package Logic.Genetic;
 
+import Logic.Combination;
+
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author albert.ortiz
@@ -17,11 +20,20 @@ public class Individual {
     public static void setDefaultGenNum(int value){
         defaultGenNum = value;
     }
+
     public void copy(Individual ind){
-        for(int i=0; i<ind.numGenes(); i++)  genes[i] = ind.getGen(i);
+        for(int i=0; i<ind.numGenes(); i++)  this.genes[i] = ind.getGen(i);
     }
 
     public int numGenes(){ return genes.length; }
+
+    public Combination toCombination(){
+        Combination c = new Combination();
+        ArrayList<Byte> arrB = new ArrayList<Byte>();
+        for(int i=0; i<numGenes(); i++) arrB.add(getGen(i));
+        c.setCombination(arrB);
+        return c;
+    }
 
     public byte getGen(int pos){ return genes[pos]; }
 
@@ -83,16 +95,20 @@ public class Individual {
     }
 
     @Override
-    public boolean equals(Object ob) {
-        Individual that = (Individual) ob;
-        return this.genes.equals(that.genes);
+    public int hashCode() {
+        int res =0;
+        for(int i=0; i<numGenes(); i++) res += getGen(i)*i;
+        return res;
     }
 
     @Override
-    public int hashCode() {
-        return genes.toString().hashCode();
+    public boolean equals(Object ob) {
+        Individual that = (Individual) ob;
+        for(int i=0; i<that.numGenes(); i++){
+            if(this.getGen(i) != that.getGen(i)) return false;
+        }
+        return true;
     }
-
 
 
 }

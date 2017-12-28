@@ -2,7 +2,7 @@ package Drivers;
 /**
  * @author albert.ortiz
  */
-
+/*
 import Logic.Genetic.FitnessCalculus;
 import Logic.Genetic.Individual;
 
@@ -256,3 +256,4 @@ public class DriverIndividual {
         }
     }
 }
+*/

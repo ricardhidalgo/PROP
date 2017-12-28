@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author albert.ortiz
  */
 
-
+/*
 public class DriverPopulation {
 
     private FitnessCalculus fc = new FitnessCalculus();
@@ -194,3 +194,4 @@ public class DriverPopulation {
         }
     }
 }
+*/
