@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class FitnessCalculus {
     private ArrayList<Solution> solutions = new ArrayList<Solution>();
-    double b = 2.0;
-    double a = 1.0;
+    double b = 1;
+    double a = 1;
     private int turn = 1;
 
     public FitnessCalculus(double a, double b){
@@ -24,14 +24,15 @@ public class FitnessCalculus {
         for(Solution s : solutions) {
             int black = 0;
             int white = 0;
-            for (int i = 0; i < ind.numGenes(); i++) {
-                if (ind.getGen(i) == s.getIndividual().getGen(i)) ++black;
-                else {
-                    for (int j = 0; j < ind.numGenes(); j++) {
-                        if (ind.getGen(i) == s.getIndividual().getGen(j)) {
-                            ++white;
-                            break;
-                        }
+            for(int i=0; i<s.getIndividual().numGenes(); i++){
+                if(ind.getGen(i) == s.getIndividual().getGen(i)){
+                    black++;
+                    break;
+                }
+                for(int j=i; j<s.getIndividual().numGenes(); j++){
+                    if(ind.getGen(j)==s.getIndividual().getGen(i)) {
+                        white++;
+                        break;
                     }
                 }
             }
