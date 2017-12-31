@@ -19,7 +19,7 @@ public class Ranking extends MyPair{
      * Constructora vacía.
      */
     public Ranking() {
-        MyPair ID = new MyPair("PRUEBA", 9999999);
+        MyPair ID = new MyPair("NONE", 9999999);
         this.ranking.add(ID);
     }
 
@@ -31,7 +31,7 @@ public class Ranking extends MyPair{
     public Ranking (String nick, int score) {
         this.nickname = nick;
         this.score = score;
-        MyPair ID = new MyPair("PRUEBA", 9999999);
+        MyPair ID = new MyPair("NONE", 9999999);
         this.ranking.add(ID);
     }
 
@@ -93,10 +93,11 @@ public class Ranking extends MyPair{
     public void InsertRanking () {
         MyPair ID = new MyPair(nickname, score);
         boolean found = false;
+        boolean used = false;
 
         if (ranking.size() >= 1) {
              for (int i = 0; i < ranking.size() && !found; i++) {
-                 if (ranking.get(i).getvalue() > ID.getvalue()) {
+                 if (ranking.get(i).getvalue() >= ID.getvalue()) {
                      MyPair aux = new MyPair();
                      for (int j = i; j < ranking.size(); j++) {
                          aux.Modifykey(ranking.get(j).getkey());
@@ -106,11 +107,14 @@ public class Ranking extends MyPair{
                          ID.Modifykey(aux.getkey());
                          ID.Modifyvalue(aux.getvalue());
                      }
-                     if (ID.getvalue() < 9999999 && ranking.size() < 10) ranking.add(ID);
-
-                     found = true;
+                     if (ID.getvalue() < 9999999 && ranking.size() < 10) {
+                         found = true;
+                         used = true;
+                         ranking.add(ID);
+                     }
                  }
              }
+             if (ID.getvalue() < 9999999 && ranking.size() < 10 && !used) ranking.add(ID);
         }
     }
 
