@@ -23,8 +23,6 @@ public class Solution {
 
     @Override
     public int hashCode() {
-        int out = 0;
-        for(int i=0; i<ind.numGenes(); i++) out += ind.getGen(i)*i;
-        return out;
+        return ind.hashCode();
     }
 }

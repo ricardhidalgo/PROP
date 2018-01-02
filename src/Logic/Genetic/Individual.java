@@ -10,11 +10,16 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Individual {
     private static int defaultGenNum = 4;
-    private byte genes[];
+    private Byte genes[];
     private double fitness = 0.0;
 
     public Individual(){
-        genes = new byte[defaultGenNum];
+        genes = new Byte[defaultGenNum];
+    }
+
+    public Individual(ArrayList<Byte> arrb){
+        genes = new Byte[defaultGenNum];
+        for(int i=0; i<defaultGenNum; i++) this.genes[i] = arrb.get(i);
     }
 
     public static void setDefaultGenNum(int value){
@@ -57,41 +62,48 @@ public class Individual {
         for(int i=0; i<genes.length; i++)
             if(ThreadLocalRandom.current().nextDouble(0,1.0) < recombinationUmbral) indu.setGen(i,ind.getGen(i));
         return indu;
-
     }
 
     public void mutateIndividual(double mutationRatio){
-        for(int i=0; i<genes.length; i++)
-            if(ThreadLocalRandom.current().nextDouble(0,1.0) < mutationRatio) genes[i] = (byte)ThreadLocalRandom.current().nextInt(0,8);
-
+        if(ThreadLocalRandom.current().nextDouble(0,1.0) > mutationRatio){
+            int i = ThreadLocalRandom.current().nextInt(0,this.genes.length);
+            genes[i] = (byte)ThreadLocalRandom.current().nextInt(0,8);
+        }
     }
 
     public void permutateIndividual(double permutationRatio){
-        for(int i=0; i<genes.length; i++) {
             if (ThreadLocalRandom.current().nextDouble(0, 1.0) < permutationRatio){
-                byte s = genes[i];
-                int a = i;
-                while(i==a) a = ThreadLocalRandom.current().nextInt(0, genes.length);
-                genes[i] = genes[a];
+                int a;
+                a = ThreadLocalRandom.current().nextInt(0,genes.length);
+                byte s = genes[a];
+                int b = a;
+                while(b==a) a = ThreadLocalRandom.current().nextInt(0, genes.length);
+                genes[b] = genes[a];
                 genes[a] = s;
             }
-        }
     }
 
     public void invertIndividual(){
         int i0 = ThreadLocalRandom.current().nextInt(0,numGenes());
         int i1 = ThreadLocalRandom.current().nextInt(0,numGenes());
+        while(i1 == i0) i1 = ThreadLocalRandom.current().nextInt(0,numGenes());
         if(i1<i0) {
             int aux = i0;
             i0 = i1;
             i1 = aux;
         }
-            for(int i=i0; i<=(i1-i0)/2; i++){
-                byte aux = genes[i];
-                genes[i] = genes[i1-i];
-                genes[i1-i] = aux;
-            }
+        for(int i=0; i<=(i1-i0)/2; i++){
+            byte aux = genes[i0+i];
+            genes[i0+i] = genes[i1-i];
+            genes[i1-i] = aux;
+        }
+    }
 
+    public void printIndividual(){
+        System.out.print("[");
+        for(int i=0; i<genes.length; i++)
+            System.out.print(genes[i]+", ");
+        System.out.println("]");
     }
 
     @Override
@@ -104,9 +116,9 @@ public class Individual {
     @Override
     public boolean equals(Object ob) {
         Individual that = (Individual) ob;
-        for(int i=0; i<that.numGenes(); i++){
+        for(int i=0; i<that.numGenes(); i++)
             if(this.getGen(i) != that.getGen(i)) return false;
-        }
+
         return true;
     }
 

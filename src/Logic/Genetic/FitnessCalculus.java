@@ -1,7 +1,10 @@
 package Logic.Genetic;
 
+import Logic.Combination;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author albert.ortiz
@@ -9,8 +12,8 @@ import java.util.ArrayList;
 
 public class FitnessCalculus {
     private ArrayList<Solution> solutions = new ArrayList<Solution>();
-    double b = 1;
-    double a = 1;
+    double b;
+    double a;
     private int turn = 1;
 
     public FitnessCalculus(double a, double b){
@@ -21,25 +24,23 @@ public class FitnessCalculus {
     public double fitnessIndividual(Individual ind){
         double blackSum = 0.0;
         double whiteSum = 0.0;
+        double result = -1.0;
         for(Solution s : solutions) {
             int black = 0;
             int white = 0;
-            for(int i=0; i<s.getIndividual().numGenes(); i++){
-                if(ind.getGen(i) == s.getIndividual().getGen(i)){
-                    black++;
-                    break;
-                }
-                for(int j=i; j<s.getIndividual().numGenes(); j++){
-                    if(ind.getGen(j)==s.getIndividual().getGen(i)) {
-                        white++;
-                        break;
-                    }
-                }
+            Combination c = s.getIndividual().toCombination();
+            Combination c1 = ind.toCombination();
+            ArrayList<Byte> correctColors;
+            correctColors = c.compareCombinations(c1);
+            for (int i = 0; i < correctColors.size(); ++i) {
+                if (correctColors.get(i) == 1) ++white;
+                else if (correctColors.get(i) == 2) ++black;
             }
             blackSum += Math.abs(black-s.getBlack());
             whiteSum += Math.abs(white-s.getWhite());
+            result += 1.0;
         }
-        return a*blackSum + whiteSum +(turn-1)*b;
+        return blackSum + whiteSum;
 
     }
 

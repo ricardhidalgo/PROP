@@ -13,8 +13,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall ai's performance.
-    private int maxGenerations = 500;
-    private int nIndividualsPopulation =500;
+    private int maxGenerations = 300;
+    private int nIndividualsPopulation =150;
     private boolean elitism = true;  //never change this
     private int numTournaments = 10;
     private double recombinationUmbral = 0.5;
@@ -22,7 +22,7 @@ public class GeneticBase {
     private double permutationRatio = 0.03;
     private boolean repeated = true;
     private double inversionRatio = 0.02;
-    private int maxSize = 200;
+    private int maxSize = 50;
     private int turn = 1;
     //Fitness function parameters "a" is the blackpin weight
     private double a = 2.0;
@@ -66,11 +66,14 @@ public class GeneticBase {
     }
 
     Individual getBestFromSet(Set<Individual> s, FitnessCalculus FC) {
-        int max = 99999999;
+        double max = 99999999;
         Individual best = new Individual();
         for (Iterator<Individual> it = s.iterator(); it.hasNext();) {
             Individual ind = it.next();
-            if(ind.fitnessIndividual(FC)<max) best = ind;
+            if(ind.fitnessIndividual(FC)<max) {
+                best = ind;
+                max = ind.fitnessIndividual(FC);
+            }
         }
         return best;
     }
@@ -78,30 +81,20 @@ public class GeneticBase {
     public Combination play(){
         int height = 1;
         Set<Individual> E = new HashSet<>();
-        Population p = new Population(nIndividualsPopulation, elitism);
+        Population p = new Population(nIndividualsPopulation, elitism, FC);
         while(maxGenerations >= height && E.size() < maxSize){
-            p.evolvePopulation(FC,elitism,numTournaments,
-                                recombinationUmbral,mutationRatio,
-                                permutationRatio,inversionRatio);
-            E.add(p.bestIndividual(FC));
+            p = p.evolvePopulation(FC,elitism,numTournaments,
+                    recombinationUmbral,mutationRatio,
+                    permutationRatio,inversionRatio);
+            ArrayList<Individual> ind = p.bestIndividual(FC);
+            for(int i =0; i<ind.size(); i++) E.add(ind.get(i));
             ++height;
         }
-        Combination c = new Combination();
-        Individual i = getBestFromSet(E,FC);
+        //Individual i = getBestFromSet(E,FC);
+        Individual i = getRandomFromSet(E);
         return i.toCombination();
     }
 
-    public static void main(String[] args) {
-        Set<Individual> s = new HashSet<>();
-        Individual ind = new Individual();
-        ind.initializeIndividual();
-        Individual ind2 = new Individual();
-        ind2.initializeIndividual();
-        if(ind.equals(ind2)) System.out.println("Iguales");
-        s.add(ind);
-        s.add(ind2);
-        System.out.println(s.size());
-    }
 
 }
 

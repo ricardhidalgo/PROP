@@ -12,7 +12,7 @@ public class DriverFitnessCalculus {
 
     public void testGetTurn(int param){
         System.out.println("Testing Get/Set turn:");
-        FitnessCalculus fc = new FitnessCalculus(0.5);
+        FitnessCalculus fc = new FitnessCalculus(0.5, 1);
         for(int i=0; i<param; i++){
             System.out.println("Turn is: " + fc.getTurn());
         }
@@ -21,7 +21,7 @@ public class DriverFitnessCalculus {
     }
 
     public void testFitnessIndividual(){
-        FitnessCalculus fc = new FitnessCalculus();
+        FitnessCalculus fc = new FitnessCalculus(0.5, 1);
         Scanner scan = new Scanner(System.in);
         int solutionN = scan.nextInt();
         for(int i=0; i<solutionN; i++){
@@ -69,15 +69,15 @@ public class DriverFitnessCalculus {
             printIndividual(fc.getSolution(i).getIndividual());
             System.out.println("And it's score: " + fc.getSolution(i).getBlack() + " "+ fc.getSolution(i).getWhite());
         }
-    }*/
-/*
+    }
+
     private void printIndividual(Individual ind){
         for(int i=0; i<ind.numGenes(); i++) System.out.print(ind.getGen(i));
         System.out.print("\n");
     }
 
     public void testGetSolutionSize(int solutionN){
-        FitnessCalculus fc = new FitnessCalculus();
+        FitnessCalculus fc = new FitnessCalculus(0.5, 1);
         Scanner scan = new Scanner(System.in);
         for(int i=0; i<solutionN; i++){
             Individual ind = new Individual();
@@ -132,4 +132,5 @@ public class DriverFitnessCalculus {
 
         }
     }
-}*/
+}
+*/

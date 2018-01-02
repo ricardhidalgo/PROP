@@ -3,16 +3,19 @@ package Logic.Genetic;
  * @author albert.ortiz
  */
 
+import javax.lang.model.util.ElementKindVisitor6;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 public class Population {
     private Individual populationMembers[];
 
-    public Population(int populationSize, boolean elitist){
+    public Population(int populationSize, boolean elitist, FitnessCalculus FC){
         populationMembers = new Individual[populationSize];
         for(int i=0; i<populationSize; i++){
             Individual ind = new Individual();
             ind.initializeIndividual();
-            while(!checkPolulation(ind,i)) ind.initializeIndividual();
+            while(!checkPolulation(ind,i) || !checkSolution(FC, ind)) ind.initializeIndividual();
             populationMembers[i] = ind;
         }
     }
@@ -27,17 +30,13 @@ public class Population {
 
     public void setIndividual(int index, Individual ind){ populationMembers[index] = ind; }
 
-    public Individual bestIndividual(FitnessCalculus FC){
-        double max = 1000000000;
-        Individual ind = new Individual();
+    public ArrayList<Individual> bestIndividual(FitnessCalculus FC){
+        ArrayList<Individual> ind = new ArrayList<Individual>();
         for(Individual i : populationMembers){
-            if(i.fitnessIndividual(FC) < max){
-                max = i.fitnessIndividual(FC);
-                ind = i;
-            }
+            if(i.fitnessIndividual(FC) == 0)
+                ind.add(i);
         }
         return ind;
-
     }
 
     public Individual startTournament(int numTournaments,FitnessCalculus FC){
@@ -66,23 +65,25 @@ public class Population {
     }
 
     public Population evolvePopulation(FitnessCalculus FC, boolean elitist, int numTournaments, double recombinationUmbral, double mutationRatio, double permutationRatio, double inversionRatio){
-        Population p = new Population(populationMembers.length, elitist);
+        Population p = new Population(populationMembers.length, elitist, FC);
         p.copy(this);
         int index = 0;
-        if(elitist && checkSolution(FC,bestIndividual(FC))) {
-            p.setIndividual(0, p.bestIndividual(FC));
+        if(elitist && bestIndividual(FC).size()!=0 && checkSolution(FC,bestIndividual(FC).get(0))) {
+            p.setIndividual(0, p.bestIndividual(FC).get(0));
             ++index;
         }
-        for(int i=index; i<populationMembers.length; i++){
+        Individual best = new Individual();
+        double max = 99999.0;
+        for(int i=index; i < populationMembers.length; i++){
             Individual ind1 = startTournament(numTournaments, FC);
             Individual ind2 = startTournament(numTournaments, FC);
             Individual ind3 = ind1.recombinateIndividual(ind2, recombinationUmbral);
             ind3.mutateIndividual(mutationRatio);
             ind3.permutateIndividual(permutationRatio);
             if(ThreadLocalRandom.current().nextDouble(0,1.0) < inversionRatio) ind3.invertIndividual();
-            for(int j=0; j<p.numIndividuals(); j++) if(p.getIndividual(j).equals(ind3)) ind3.initializeIndividual();
-            while(!checkSolution(FC,ind3) || !checkPolulation(ind3,i)) ind3.mutateIndividual(mutationRatio);
+            while(!checkSolution(FC,ind3) || !checkPolulation(ind3,i)) ind3.initializeIndividual();
             p.setIndividual(i, ind3);
+            if(ind3.fitnessIndividual(FC)< max){best = ind3; max = best.fitnessIndividual(FC);}
         }
         return p;
     }
