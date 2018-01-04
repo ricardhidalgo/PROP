@@ -44,11 +44,12 @@ public class GeneticTester {
             AI_Genetic gb = new AI_Genetic(dif);
             Play play = new Play();
             Combination c = gb.generateFirstCombination();
+            play.processPlay(c, secret);
             int guessCounter = 0;
             while(play.getNumCorrectPositions() != dif.getNumBallsInCombination()) {
-                play.processPlay(c, secret);
                 System.out.println("AI GENERATED: " + c.getComb() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 c = gb.generateNextCombination(play);
+                play.processPlay(c, secret);
                 guessCounter ++;
             }
             System.out.println("AI WON THE GAME IN "+guessCounter+" GUESSES!");

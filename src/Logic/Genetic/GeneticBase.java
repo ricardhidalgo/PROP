@@ -25,8 +25,6 @@ public class GeneticBase {
     private int maxSize = 50;
     private int turn = 1;
     //Fitness function parameters "a" is the blackpin weight
-    private double a = 2.0;
-    private double b = 1.0;
     private FitnessCalculus FC;
 
     public GeneticBase(int maxGenerations,         int nIndividualsPopulation,
@@ -35,7 +33,7 @@ public class GeneticBase {
                        int maxSolutions,           boolean rep){
 
         this.repeated = rep;
-        FC = new FitnessCalculus(a,b);
+        FC = new FitnessCalculus();
         this.maxGenerations = maxGenerations;
         this.nIndividualsPopulation = nIndividualsPopulation;
         this.recombinationUmbral = recombinationUmbral;

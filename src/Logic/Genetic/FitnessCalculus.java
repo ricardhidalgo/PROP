@@ -12,14 +12,7 @@ import java.util.Arrays;
 
 public class FitnessCalculus {
     private ArrayList<Solution> solutions = new ArrayList<Solution>();
-    double b;
-    double a;
     private int turn = 1;
-
-    public FitnessCalculus(double a, double b){
-        this.b = b;
-        this.a = a;
-    }
 
     public double fitnessIndividual(Individual ind){
         double blackSum = 0.0;
