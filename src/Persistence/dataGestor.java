@@ -109,11 +109,11 @@ public class dataGestor {
         String s = "SCORES";
         ArrayList<String> arr = new ArrayList<>();
         arr.add(s);
-        String t = "Yo soy rambo chocolate 0101040";
+        String t = "0101040";
         arr.add(t);
-        t = "Yo soy pitufo chocolate 01010400121";
+        t = "01010400121";
         arr.add(t);
-        t = "Yo soy mambo nenufar 010104032";
+        t = " 010104032";
         arr.add(t);
         String[] a = retrieveScore("001",2);
         for(int i=0; i<a.length; i++) System.out.println(a[i]);
