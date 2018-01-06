@@ -1,10 +1,12 @@
 package Persistence;
-import static java.nio.file.StandardOpenOption.*;
-
-import java.lang.reflect.Array;
-import java.nio.file.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class dataGestor {
 
@@ -38,21 +40,24 @@ public class dataGestor {
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader =
                     new BufferedReader(fileReader);
-            boolean found = false;
             int counter = -1;
             while((line = bufferedReader.readLine()) != null) {
-                if(found) counter++;
-                if(counter == i) out = line.split(" ");
-                if(line.equals("SCORES")) found = true;
+                //We must save the score here
             }
 
             // Always close files.
             bufferedReader.close();
         }
         catch(FileNotFoundException ex) {
+            //If user info doesn't exists, we must initialize it
+            ArrayList<String> a = new ArrayList<>();
+            info.add(0,"SCORES");
+            saveInfo(fileName, info);
+        }
+        catch(IOException ex) {
             System.out.println(
-                    "Unable to open file '" +
-                            fileName + "'");
+                    "Error reading file '"
+                            + fileName + "'");
         }
     }
 
@@ -106,16 +111,9 @@ public class dataGestor {
     }
 
     public static void main(String[] args) {
-        String s = "SCORES";
         ArrayList<String> arr = new ArrayList<>();
-        arr.add(s);
         String t = "0101040";
         arr.add(t);
-        t = "01010400121";
-        arr.add(t);
-        t = "0104032";
-        arr.add(t);
-        String[] a = retrieveScore("001",2);
-        for(int i=0; i<a.length; i++) System.out.println(a[i]);
+        saveScore("001",arr);
     }
 }
