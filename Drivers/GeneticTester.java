@@ -39,17 +39,17 @@ public class GeneticTester {
         while(true){
             System.out.println("Insert the secret combination (numbers 0-7): ");
             Difficulty dif = new Difficulty();
-            dif.setHard(true);
+            dif.setEasy(true);
             Combination secret = gt.readCombination(dif.getNumBallsInCombination());
             AI_Genetic gb = new AI_Genetic(dif);
             Play play = new Play();
-            Combination c = gb.generateFirstCombination();
-            play.processPlay(c, secret);
             int guessCounter = 0;
+            Combination c = gb.generateFirstCombination();
             while(play.getNumCorrectPositions() != dif.getNumBallsInCombination()) {
-                System.out.println("AI GENERATED: " + c.getComb() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                play.processPlay(c, secret);
                 c = gb.generateNextCombination(play);
                 play.processPlay(c, secret);
+                System.out.println("AI GENERATED: " + c.getComb() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 guessCounter ++;
             }
             System.out.println("AI WON THE GAME IN "+guessCounter+" GUESSES!");

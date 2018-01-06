@@ -13,9 +13,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall ai's performance.
-    private int maxGenerations = 300;
+    private int maxGenerations = 400;
     private int nIndividualsPopulation =150;
-    private boolean elitism = true;  //never change this
+    private boolean elitism = false;
     private int numTournaments = 10;
     private double recombinationUmbral = 0.5;
     private double mutationRatio = 0.03;
@@ -80,13 +80,19 @@ public class GeneticBase {
         int height = 1;
         Set<Individual> E = new HashSet<>();
         Population p = new Population(nIndividualsPopulation, elitism, FC);
-        while(maxGenerations >= height && E.size() < maxSize){
+        while((maxGenerations >= height && E.size() < maxSize)){
             p = p.evolvePopulation(FC,elitism,numTournaments,
                     recombinationUmbral,mutationRatio,
                     permutationRatio,inversionRatio);
+            //Add eligible individuals into set E
             ArrayList<Individual> ind = p.bestIndividual(FC);
             for(int i =0; i<ind.size(); i++) E.add(ind.get(i));
             ++height;
+            if(height > maxGenerations && E.size()==0) {
+                p = new Population(nIndividualsPopulation,
+                        elitism, FC);
+                height = 0;
+            }
         }
         //Individual i = getBestFromSet(E,FC);
         Individual i = getRandomFromSet(E);
