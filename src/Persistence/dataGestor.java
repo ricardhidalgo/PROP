@@ -1,4 +1,4 @@
-/*package Persistence;
+package Persistence;
 import static java.nio.file.StandardOpenOption.*;
 
 import java.lang.reflect.Array;
@@ -119,4 +119,3 @@ public class dataGestor {
         for(int i=0; i<a.length; i++) System.out.println(a[i]);
     }
 }
-*/

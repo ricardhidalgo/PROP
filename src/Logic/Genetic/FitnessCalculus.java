@@ -1,55 +1,57 @@
 package Logic.Genetic;
 
-import Logic.Combination;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * @author albert.ortiz
  */
 
 public class FitnessCalculus {
-    private ArrayList<Solution> solutions = new ArrayList<Solution>();
-    private int turn = 1;
+    private HashSet<Solution> solutions = new HashSet<>();
+    private int lastIndex = 0;
+    private int turn = 0;
+
+  public void incrementTurn(){ this.turn++; }
+
+    public int getTurn(){ return turn; }
 
     public double fitnessIndividual(Individual ind){
-        double blackSum = 0.0;
-        double whiteSum = 0.0;
-        double result = -1.0;
+        /**
+         * Genera
+         * @param result resultado de la respuesta anterior.
+         * @return devuelve la combinacion a jugar.
+         */
+        double fitness = 0.0;
         for(Solution s : solutions) {
             int black = 0;
             int white = 0;
-            Combination c = s.getIndividual().toCombination();
-            Combination c1 = ind.toCombination();
-            ArrayList<Byte> correctColors;
-            correctColors = c.compareCombinations(c1);
-            for (int i = 0; i < correctColors.size(); ++i) {
-                if (correctColors.get(i) == 1) ++white;
-                else if (correctColors.get(i) == 2) ++black;
+            for (int i = 0; i < ind.numGenes(); i++) {
+                if (ind.getGen(i) == s.getIndividual().getGen(i)) ++black;
+                else {
+                    for (int j = 0; j < ind.numGenes(); j++) {
+                        if (ind.getGen(i) == s.getIndividual().getGen(j)) {
+                            ++white;
+                            break;
+                        }
+                    }
+                }
             }
-            blackSum += Math.abs(black-s.getBlack());
-            whiteSum += Math.abs(white-s.getWhite());
-            result += 1.0;
+            fitness += Math.abs(black-s.getBlack()) + Math.abs(white-s.getWhite());
         }
-        return blackSum + whiteSum;
+        return fitness;//+2*ind.numGenes()*(turn);
 
     }
-
+/*
     public Solution getSolution(int index){
         return solutions.get(index);
-    }
+    }*/
 
     public void addSolution(Solution s){
         solutions.add(s);
-        ++turn;
     }
 
     public int getSolutionSize(){
         return solutions.size();
     }
-
-    public int getTurn(){ return turn; }
 
 }
