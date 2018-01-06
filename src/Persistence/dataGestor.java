@@ -113,7 +113,7 @@ public class dataGestor {
         arr.add(t);
         t = "01010400121";
         arr.add(t);
-        t = " 010104032";
+        t = "0104032";
         arr.add(t);
         String[] a = retrieveScore("001",2);
         for(int i=0; i<a.length; i++) System.out.println(a[i]);
