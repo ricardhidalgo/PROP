@@ -31,8 +31,8 @@ public class User {
      * @return Nombre de usuario.
      */
     public String getNickname(){
-        return this.nickname;
-    }
+    return this.nickname;
+}
 
     /**
      * Comprueba que la contraseña del parámetro coincida con la correcta.
