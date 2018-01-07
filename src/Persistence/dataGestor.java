@@ -9,6 +9,8 @@ import static java.nio.file.StandardOpenOption.CREATE;
 
 public class dataGestor {
 
+    public
+
     static void saveInfo(String path, ArrayList<String> info){
         Path p = Paths.get(path);
         try (OutputStream out = new BufferedOutputStream(
@@ -155,7 +157,7 @@ public class dataGestor {
         return out;
     }
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         ArrayList<String> arr = new ArrayList<>();
         String t = "232";
         arr.add(t);
