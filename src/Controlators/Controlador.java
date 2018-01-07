@@ -52,9 +52,13 @@ public class Controlador {
         else if (diff == "custom") difficulty.setCustom(numB, rep, tips);
     }
 
-    public void setnumB (int num) { this.numB = num; }
+    public void setnumB (int num) {
+        this.numB = num;
+    }
 
-    public void setrep (boolean repeat) { this.rep = repeat; }
+    public void setrep (boolean repeat) {
+        this.rep = repeat;
+    }
 
     public void setType (String type) {
         breaker = (type == "CodeBreaker");
@@ -89,15 +93,25 @@ public class Controlador {
         return ia.generateSecret();
     }
 
-    public void insertpuntuation (Ranking ranking, String nickname, int score) {
+    public void insert1puntuation (Ranking ranking, String nickname, int score) {
         ranking.modifynick(nickname);
         ranking.modifyscore(score);
         ranking.InsertRanking();
     }
 
-    public void seeranking (Ranking ranking) {
+    public void CreateRanking (Ranking ranking, String usuario, boolean score) {
+        ArrayList<String> puntuacion = cd.allscores(usuario, score);
+        for (int i = 0; i < puntuacion.size(); i++) {
+            insert1puntuation(ranking, usuario, Integer.parseInt(puntuacion.get(i)));
+        }
+    }
 
-        ranking.escribirtxt();
+    public ArrayList<MyPair> seeranking (Ranking ranking) {
+        return ranking.getranking();
+    }
+
+    public void guardarpuntuacion (String name, ArrayList<String> puntuacion, boolean score) {
+        cd.savepuntuation(name, puntuacion, score);
     }
 
 }
