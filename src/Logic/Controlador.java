@@ -2,8 +2,11 @@ package Logic;
 
 import Presentation.Screen;
 import Logic.Difficulty;
+import Logic.Combination;
 
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Controlador {
 
@@ -15,7 +18,14 @@ public class Controlador {
     User usuario;
     boolean breaker;
     AI ia = new AI_Genetic(difficulty);
+    Combination correct;
+    ArrayList<Play> plays;
 
+    /* Contructora vacía */
+
+    public Controlador () {
+
+    }
 
 
 /*
@@ -45,9 +55,17 @@ public class Controlador {
         breaker = (type == "CodeBreaker");
     }
 
+    public void setCorrect (ArrayList<Byte> solution) {
+        correct = new Combination(solution);
+    }
+
+    public void setPlays (ArrayList<Play> play) {
+        plays = play;
+    }
+
     public void Start () {
         if (breaker) game = new Game(usuario, ia, breaker, difficulty);
-        else game = new Game(usuario, ia, breaker, comb, plays, difficulty);
+        else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
 
 }
