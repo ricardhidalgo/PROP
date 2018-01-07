@@ -9,7 +9,10 @@ import static java.nio.file.StandardOpenOption.CREATE;
 
 public class dataGestor {
 
-    static void saveInfo(String path, ArrayList<String> info){
+    public dataGestor(){
+        
+    }
+    private void saveInfo(String path, ArrayList<String> info){
         Path p = Paths.get(path);
         try (OutputStream out = new BufferedOutputStream(
                 Files.newOutputStream(p, CREATE))) {
@@ -26,7 +29,29 @@ public class dataGestor {
         }
     }
 
-    static void save(String username, ArrayList<String> info, boolean score){
+    public void createUser(String username, String password) {
+        String fileName = "./Saved/" + username + ".txt";
+        // This will reference one line at a time
+        String line = null;
+        String[] out = null;
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader =
+                    new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+
+        } catch (FileNotFoundException ex) {
+            //If user info doesn't exists, we must initialize it
+            ArrayList<String> a = new ArrayList<>();
+            a.add(password);
+            saveInfo(fileName, a);
+        }
+    }
+
+    public void save(String username, ArrayList<String> info, boolean score){
         String fileName = "./Saved/"+username+".txt";
         // This will reference one line at a time
         String line = null;
@@ -73,48 +98,7 @@ public class dataGestor {
         }
     }
 
-    static String[] retrieveIndex(String username, int i, boolean score){
-
-        // The name of the file to open.
-        String fileName = "./Saved/"+username+".txt";
-
-        // This will reference one line at a time
-        String line = null;
-        String[] out = null;
-        try {
-            // FileReader reads text files in the default encoding.
-            FileReader fileReader =
-                    new FileReader(fileName);
-
-            // Always wrap FileReader in BufferedReader.
-            BufferedReader bufferedReader =
-                    new BufferedReader(fileReader);
-            boolean found = false;
-            int counter = -1;
-            while((line = bufferedReader.readLine()) != null) {
-                if(found) counter++;
-                if(score) found = true;
-                if(counter == i) out = line.split(" ");
-                if(line.equals("SCORES") && score) found = true;
-            }
-
-            // Always close files.
-            bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
-            System.out.println(
-                    "Unable to open file '" +
-                            fileName + "'");
-        }
-        catch(IOException ex) {
-            System.out.println(
-                    "Error reading file '"
-                            + fileName + "'");
-        }
-        return out;
-    }
-
-    static ArrayList<String> retrieveAll(String username, boolean score) {
+    public void deleteIndex(String username, int i, boolean score){
 
         // The name of the file to open.
         String fileName = "./Saved/"+username+".txt";
@@ -134,8 +118,49 @@ public class dataGestor {
             int counter = -1;
             while((line = bufferedReader.readLine()) != null) {
                 if(line.equals("SCORES") && !score) break;
+                if(counter != i) out.add(line);
                 if(!score) found = true;
+                if(line.equals("SCORES") && score) found = true;
+                if(found){counter++;}
+            }
+
+            // Always close files.
+            bufferedReader.close();
+            saveInfo(username, out);
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" +
+                            fileName + "'");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + fileName + "'");
+        }
+    }
+
+    public ArrayList<String> retrieveAll(String username, boolean score) {
+
+        // The name of the file to open.
+        String fileName = "./Saved/"+username+".txt";
+
+        // This will reference one line at a time
+        String line = null;
+        ArrayList<String> out = new ArrayList<>();
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader =
+                    new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+            boolean found = false;
+            while((line = bufferedReader.readLine()) != null) {
+                if(line.equals("SCORES") && !score) break;
                 if(found) out.add(line);
+                if(!score) found = true;
                 if(line.equals("SCORES") && score) found = true;
             }
 
@@ -155,13 +180,36 @@ public class dataGestor {
         return out;
     }
 
-        public static void main(String[] args) {
-        ArrayList<String> arr = new ArrayList<>();
-        String t = "232";
-        arr.add(t);
-        save("102",arr,false);
-        ArrayList<String> out = retrieveAll("102",false);
-        for(int i=0; i<out.size(); i++) System.out.println(out.get(i));
+    public ArrayList<String> findUser(String username){
+        // The name of the file to open.
+        String fileName = "./Saved/"+username+".txt";
+
+        // This will reference one line at a time
+        String line = null;
+        ArrayList<String> out = new ArrayList<>();
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader =
+                    new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+            out.add(username);
+            out.add(line);
+            // Always close files.
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            out.add("NULL");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + fileName + "'");
+        }
+        return out;
     }
+
 }
 
