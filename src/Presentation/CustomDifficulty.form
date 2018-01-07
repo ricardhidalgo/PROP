@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Presentation.CustomDifficulty">
+  <grid id="27dc6" binding="CustomDifficultyPanel" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="5" left="5" bottom="5" right="5"/>
+    <constraints>
+      <xy x="20" y="20" width="559" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-12501697"/>
+    </properties>
+    <border type="bevel-raised" title="Mastermind" title-justification="2" title-position="3">
+      <font name="DejaVu Sans Mono" size="28" style="3"/>
+      <title-color color="-4737097"/>
+    </border>
+    <children>
+      <component id="41816" class="javax.swing.JLabel" binding="lengthLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4737097"/>
+          <text value="Combination Length"/>
+        </properties>
+      </component>
+      <component id="98255" class="javax.swing.JLabel" binding="turnsLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4737097"/>
+          <text value="Number of turns"/>
+        </properties>
+      </component>
+      <component id="8071b" class="javax.swing.JSpinner" binding="lengthSpinner">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="ca7f0" class="javax.swing.JSpinner" binding="turnSpinner">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="20" height="20"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <hspacer id="afd46">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="30" height="-1"/>
+          </grid>
+        </constraints>
+      </hspacer>
+      <component id="f5815" class="javax.swing.JRadioButton" binding="allowRepeatedRadioButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12501697"/>
+          <foreground color="-4737097"/>
+          <text value="Allow Repeated"/>
+        </properties>
+      </component>
+      <component id="b52bf" class="javax.swing.JRadioButton" binding="noRepeatedRadioButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12501697"/>
+          <foreground color="-4737097"/>
+          <selected value="true"/>
+          <text value="No Repeated"/>
+        </properties>
+      </component>
+      <component id="9445f" class="javax.swing.JButton" binding="backButton">
+        <constraints>
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Back"/>
+        </properties>
+      </component>
+      <component id="9f1c4" class="javax.swing.JButton" binding="continueButton">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <horizontalTextPosition value="11"/>
+          <text value="Continue"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="Repeated">
+      <member id="f5815"/>
+      <member id="b52bf"/>
+    </group>
+  </buttonGroups>
+</form>
