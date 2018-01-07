@@ -1,12 +1,12 @@
-package Logic;
+package Controlators;
 
+import Logic.*;
 import Presentation.Screen;
-import Logic.Difficulty;
-import Logic.Combination;
 
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import Controlators.ControladorDomini;
 
 public class Controlador {
 
@@ -27,14 +27,19 @@ public class Controlador {
 
     }
 
+    ControladorDomini cd;
 
-/*
-    public void iniciar() {
-        Toolkit t = Toolkit.getDefaultToolkit();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Screen miVentanaPrincipal = new Screen(screenSize.width, screenSize.height); // Autoajusta la pantalla
+    public boolean ExistsName(String nick) {
+        return cd.TryName(nick);
     }
-*/
+
+    public void Register (String nick, String pw) {
+        cd.create(nick, pw);
+    }
+
+    public boolean CorrectPSS(String nick, String pw) {
+        return cd.CorrectPW(nick, pw);
+    }
 
     public void setUser (String nick, String pw) {
         usuario = new User(nick, pw);
@@ -75,6 +80,14 @@ public class Controlador {
     /* se tiene que hacer un bucle con todas las puntuaciones del mismo usuario y hacer esta funcion en
     todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
      */
+
+    public Combination generateCombi (AI ia) {
+        return ia.generateSecret();
+    }
+
+    public Combination FirstGues (AI ia) {
+        return ia.generateSecret();
+    }
 
     public void insertpuntuation (Ranking ranking, String nickname, int score) {
         ranking.modifynick(nickname);

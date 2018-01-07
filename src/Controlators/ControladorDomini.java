@@ -1,7 +1,8 @@
-package Logic;
+package Controlators;
 
 import Persistence.dataGestor;
 import java.util.ArrayList;
+import Controlators.Controlador;
 
 public class ControladorDomini {
 
@@ -26,6 +27,10 @@ public class ControladorDomini {
 
     public void savepuntuation(String nickname, ArrayList<String> info, boolean score) {
         dg.save(nickname, info, score);
+    }
+
+    public ArrayList<String> allscores(String nickname, boolean score) {
+        return dg.retrieveAll(nickname, score);
     }
 
 }
