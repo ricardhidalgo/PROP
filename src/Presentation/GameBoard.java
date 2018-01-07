@@ -5,7 +5,6 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 public class GameBoard extends JPanel {
 
@@ -44,19 +43,19 @@ public class GameBoard extends JPanel {
         //setSize(new Dimension(400, 600));
         setLayout(new BorderLayout());
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
         //Set instance variables
         this.pinNumber = pinNumber;
         this.pinColors = pinColors;
         this.pinColorLetters = pinColorLetters;
-        pinSmallDimension = new Dimension((int)(140 / (pinNumber + 2)), (int)(140 / (pinNumber + 2)));
+        pinSmallDimension = new Dimension((int) (140 / (pinNumber + 2)), (int) (140 / (pinNumber + 2)));
 
         //Create the buttons panel
         assembleButtonsPanel();
-        
+
         //Create the guessPanel
         assembleGuessPanel();
-        
+
         //Create the title panel        
         assembleTitlePanel();
 
@@ -66,26 +65,24 @@ public class GameBoard extends JPanel {
         add(buttonsPanel, BorderLayout.EAST);
     }
 
-
-    
     //Panel assembling functions
     //Assemble the buttons panel
     private void assembleButtonsPanel() {
-        
+
         //Create the components
         //Panel
         buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1, 3));
         buttonsPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Button Panel"));
         buttonsPanel.setPreferredSize(new Dimension(150, 500));
-        
+
         //Create the pin panel
         pinPanel = new JPanel();
         pinPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         //pinPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "mastermind.swing.Pin Panel"));
-        pinPanel.setPreferredSize(new Dimension(140, 
-                ((int)(Math.ceil(pinColorLetters.length / 3) + 1) * (pinDimension.width + 5))));
-        
+        pinPanel.setPreferredSize(new Dimension(140,
+                ((int) (Math.ceil(pinColorLetters.length / 3) + 1) * (pinDimension.width + 5))));
+
         //Create the pins
         pins = new Pin[pinColors.length];
         for (int i = 0; i < pins.length; i++) {
@@ -93,20 +90,20 @@ public class GameBoard extends JPanel {
             pins[i].addActionListener(new PinActionListener(pinColorLetters[i]));
             pinPanel.add(pins[i]);
         }
-        
+
         //Current guess panel
         currentGuessPanel = new JPanel();
         currentGuessPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         currentGuessPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Guess"));
         currentGuessPanel.setPreferredSize(new Dimension(140, 60));
-        
+
         //Create the submit button
         submit = new JButton("Submit Guess");
         submit.setPreferredSize(buttonDimension);
         submit.addActionListener((ActionEvent e) -> {
             setGuessStringAvailable(true);
         });
-        
+
         //Create the clear button
         clear = new JButton("Clear Guess");
         clear.setPreferredSize(buttonDimension);
@@ -115,54 +112,54 @@ public class GameBoard extends JPanel {
             setGuessStringAvailable(false);
             displayCurrentGuess();
         });
-        
+
         //Add everything
         buttonsPanel.add(pinPanel);
         buttonsPanel.add(currentGuessPanel);
         buttonsPanel.add(submit);
         buttonsPanel.add(clear);
     }
-    
+
     //Assemble the buttons panel
     private void assembleGuessPanel() {
-        
+
         //Create the components        
         //Panel
         guessPanel = new JPanel();
         guessPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         guessPanel.setPreferredSize(new Dimension(200, 800));
         guessPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Guess Panel"));
-        
+
         guessScrollPane = new JScrollPane(guessPanel);
         guessScrollPane.setBorder(null);
         guessScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         guessScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
-    
+
     //Assemble the title panel
     private void assembleTitlePanel() {
-        
+
         //Create the components
         //Panel
         titlePanel = new JPanel();
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        
+
         //Text
         titleText = new JLabel("Mastermind");
         titleText.setFont(new Font("Arial", Font.BOLD, 32));
-        
+
         //Add everything
         titlePanel.add(titleText);
     }
-    
+
     //Display the guesses result on the screen
     public void displayResult(int correctColor, int correctPlace, int turn) {
-        
+
         //Create a base panel for result
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         resultPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Turn " + turn));
-        
+
         //Create the small pins
         char[] letters = getGuessString().toCharArray();
         JPanel pinPanel = new JPanel();
@@ -173,15 +170,15 @@ public class GameBoard extends JPanel {
                 if (letters[i] == pinColorLetters[j]) {
                     index = j;
                     break;
-                }                
+                }
             }
-            smallPins[i] = new Pin(pinColors[index], pinSmallDimension);            
+            smallPins[i] = new Pin(pinColors[index], pinSmallDimension);
             pinPanel.add(smallPins[i]);
-        }        
-        
+        }
+
         //Create the result label
         JLabel resultText = new JLabel("C: " + correctColor + " P: " + correctPlace);
-        
+
         //Add the new result panel
         resultPanel.add(pinPanel);
         resultPanel.add(resultText);
@@ -189,16 +186,16 @@ public class GameBoard extends JPanel {
         guessPanel.revalidate();
         guessPanel.repaint();
     }
-    
+
     //This will update the display of the current guess
     public void displayCurrentGuess() {
-        
+
         //Deconstruct the string into array
         char[] letters = getGuessString().toCharArray();
-        
+
         //Remove previous guess
         currentGuessPanel.removeAll();
-        
+
         //Create an array of small pins based on the letters in the guess string
         Pin[] smallPins = new Pin[letters.length];
         for (int i = 0; i < smallPins.length; i++) {
@@ -207,37 +204,41 @@ public class GameBoard extends JPanel {
                 if (letters[i] == pinColorLetters[j]) {
                     index = j;
                     break;
-                }                
+                }
             }
-            smallPins[i] = new Pin(pinColors[index], pinSmallDimension);            
+            smallPins[i] = new Pin(pinColors[index], pinSmallDimension);
             currentGuessPanel.add(smallPins[i]);
         }
         currentGuessPanel.repaint();
         currentGuessPanel.revalidate();
     }
-    
+
     //Display a message on the Guess panel
     public void displayMessage(String message) {
-        
+
         JLabel label = new JLabel(message);
         guessPanel.add(label);
     }
-    
+
     //Manage the guessString
     private synchronized void setGuessString(String guessString) {
         this.guessString = guessString;
-    }    
+    }
+
     public synchronized String getGuessString() {
         return guessString;
-    }    
+    }
+
     public synchronized boolean hasGuessStringAvailable() {
-        
+
         return hasGuessString;
-    }    
-    public synchronized void setGuessStringAvailable(boolean availability) {        
+    }
+
+    public synchronized void setGuessStringAvailable(boolean availability) {
         hasGuessString = availability;
-    }   
-    public synchronized void resetGuessString(){
+    }
+
+    public synchronized void resetGuessString() {
         setGuessString("");
         hasGuessString = false;
         displayCurrentGuess();
@@ -247,27 +248,27 @@ public class GameBoard extends JPanel {
     public void start() {
         setVisible(true);
     }
-    
+
     //Stop the game
-    public void stop() {        
+    public void stop() {
         //dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
-    
+
     //The action listener for when a pin is clicked
     private class PinActionListener implements ActionListener {
-        
+
         private char colorLetter;
-        
+
         public PinActionListener(char colorLetter) {
             this.colorLetter = Character.toUpperCase(colorLetter);
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+
             //Check if the string is max size
-            if (getGuessString().length()  < pinNumber) {                
-            
+            if (getGuessString().length() < pinNumber) {
+
                 //Add to the guessString
                 setGuessString(getGuessString() + colorLetter);
 
