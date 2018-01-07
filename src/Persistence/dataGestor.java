@@ -9,12 +9,10 @@ import static java.nio.file.StandardOpenOption.CREATE;
 
 public class dataGestor {
 
-    private void saveInfo(String path, ArrayList<String> info){
-    public dataGestor () {
-
+    public dataGestor(){
+        
     }
-
-    static void saveInfo(String path, ArrayList<String> info){
+    private void saveInfo(String path, ArrayList<String> info){
         Path p = Paths.get(path);
         try (OutputStream out = new BufferedOutputStream(
                 Files.newOutputStream(p, CREATE))) {
