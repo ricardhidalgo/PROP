@@ -1,6 +1,7 @@
 package Logic.Genetic;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * @author albert.ortiz
@@ -8,12 +9,6 @@ import java.util.HashSet;
 
 public class FitnessCalculus {
     private HashSet<Solution> solutions = new HashSet<>();
-    private int lastIndex = 0;
-    private int turn = 0;
-
-  public void incrementTurn(){ this.turn++; }
-
-    public int getTurn(){ return turn; }
 
     public double fitnessIndividual(Individual ind){
         /**
@@ -41,10 +36,16 @@ public class FitnessCalculus {
         return fitness;//+2*ind.numGenes()*(turn);
 
     }
-/*
+
     public Solution getSolution(int index){
-        return solutions.get(index);
-    }*/
+        int counter = 0;
+        Solution sol = new Solution();
+        for(Solution s : solutions){
+            if(counter == index) sol = s;
+            ++counter;
+        }
+        return sol;
+    }
 
     public void addSolution(Solution s){
         solutions.add(s);
