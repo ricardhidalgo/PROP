@@ -9,7 +9,9 @@ import static java.nio.file.StandardOpenOption.CREATE;
 
 public class dataGestor {
 
-    public
+    public dataGestor () {
+
+    }
 
     static void saveInfo(String path, ArrayList<String> info){
         Path p = Paths.get(path);
