@@ -14,6 +14,12 @@ public class Screen extends JFrame implements ActionListener{
     CustomDifficulty customDifficultyC = new CustomDifficulty();
     ChoseRole choseRoleC = new ChoseRole();
 
+    char[] pinColorLetters = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
+    int maxTurns = 10;
+    int pinNumber = 4;
+    Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.YELLOW, new Color(150, 0, 255)};
+    GameBoard board = new GameBoard(pinNumber, pinColorLetters, pinColors);
+
 
     JPanel loginRegisterPanel;
     JPanel mainMenuPanel;
@@ -60,6 +66,7 @@ public class Screen extends JFrame implements ActionListener{
         mainPanel.add(selectDifficultyPanel, "SelectDifficulty");
         mainPanel.add(customDifficultyPanel, "CustomDifficulty");
         mainPanel.add(choseRolePanel, "ChoseRole");
+        mainPanel.add(board, "GameBoard");
 
         layout.show(mainPanel,"LoginRegister");
 
@@ -104,9 +111,9 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == customDifficultyC.getBackButton()) {
                     layout.show(mainPanel, "SelectDifficulty");
                 } else if (source == choseRoleC.getCodeBreakerButton()) {
-
+                    layout.show(mainPanel, "GameBoard");
                 } else if (source == choseRoleC.getCodeMasterButton()) {
-
+                    layout.show(mainPanel, "GameBoard");
                 } else if (source == choseRoleC.getBackButton()) {
                     layout.show(mainPanel, "SelectDifficulty");
                 }

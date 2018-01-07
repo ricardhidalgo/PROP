@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-public class GameBoard extends JFrame {
+public class GameBoard extends JPanel {
 
     //This is the current guess and other related variables
     private String guessString = "";
@@ -40,10 +40,10 @@ public class GameBoard extends JFrame {
     //Create the mastermind gui
     public GameBoard(int pinNumber, char[] pinColorLetters, Color[] pinColors) {
 
-        super("Mastermind Game");
-        setSize(new Dimension(400, 600));
+        //super("Mastermind Game");
+        //setSize(new Dimension(400, 600));
         setLayout(new BorderLayout());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         //Set instance variables
         this.pinNumber = pinNumber;
@@ -65,6 +65,8 @@ public class GameBoard extends JFrame {
         add(guessScrollPane, BorderLayout.CENTER);
         add(buttonsPanel, BorderLayout.EAST);
     }
+
+
     
     //Panel assembling functions
     //Assemble the buttons panel
@@ -248,7 +250,7 @@ public class GameBoard extends JFrame {
     
     //Stop the game
     public void stop() {        
-        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        //dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
     
     //The action listener for when a pin is clicked

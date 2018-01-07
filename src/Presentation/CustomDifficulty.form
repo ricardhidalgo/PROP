@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Presentation.CustomDifficulty">
   <grid id="27dc6" binding="CustomDifficultyPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="559" height="400"/>
+      <xy x="20" y="20" width="774" height="400"/>
     </constraints>
     <properties>
       <background color="-12501697"/>
@@ -12,45 +12,9 @@
       <title-color color="-4737097"/>
     </border>
     <children>
-      <component id="41816" class="javax.swing.JLabel" binding="lengthLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0"/>
-        </constraints>
-        <properties>
-          <foreground color="-4737097"/>
-          <text value="Combination Length"/>
-        </properties>
-      </component>
-      <component id="98255" class="javax.swing.JLabel" binding="turnsLabel">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0"/>
-        </constraints>
-        <properties>
-          <foreground color="-4737097"/>
-          <text value="Number of turns"/>
-        </properties>
-      </component>
-      <component id="8071b" class="javax.swing.JSpinner" binding="lengthSpinner">
-        <constraints>
-          <grid row="0" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="1.0" weighty="1.0" ipadx="20" ipady="20"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="ca7f0" class="javax.swing.JSpinner" binding="turnSpinner">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="20" height="20"/>
-          </grid>
-          <gridbag weightx="1.0" weighty="1.0" ipadx="20" ipady="20"/>
-        </constraints>
-        <properties/>
-      </component>
       <component id="f5815" class="javax.swing.JRadioButton" binding="allowRepeatedRadioButton" default-binding="true">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
@@ -61,7 +25,7 @@
       </component>
       <component id="b52bf" class="javax.swing.JRadioButton" binding="noRepeatedRadioButton" default-binding="true">
         <constraints>
-          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
@@ -73,7 +37,7 @@
       </component>
       <component id="9445f" class="javax.swing.JButton" binding="backButton">
         <constraints>
-          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="5" right="5" weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
@@ -82,12 +46,59 @@
       </component>
       <component id="9f1c4" class="javax.swing.JButton" binding="continueButton">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
           <horizontalTextPosition value="11"/>
           <text value="Continue"/>
+        </properties>
+      </component>
+      <component id="1d2c4" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="0" right="5" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="ca7f0" class="javax.swing.JSpinner" binding="turnSpinner">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="20" height="20"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="1.0" ipadx="20" ipady="20"/>
+        </constraints>
+        <properties>
+          <foreground color="-4737097"/>
+        </properties>
+      </component>
+      <component id="8071b" class="javax.swing.JSpinner" binding="lengthSpinner">
+        <constraints>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0" ipadx="20" ipady="20"/>
+        </constraints>
+        <properties>
+          <foreground color="-4737097"/>
+        </properties>
+      </component>
+      <component id="41816" class="javax.swing.JLabel" binding="lengthLabel">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <foreground color="-4737097"/>
+          <text value="Combination Length"/>
+        </properties>
+      </component>
+      <component id="98255" class="javax.swing.JLabel" binding="turnsLabel">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <foreground color="-4737097"/>
+          <text value="Number of turns"/>
         </properties>
       </component>
     </children>
