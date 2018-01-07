@@ -1,6 +1,7 @@
 package Presentation;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Mastermind {
 
@@ -8,5 +9,15 @@ public class Mastermind {
         Screen screen = new Screen(600, 800);
         screen.pack();
         screen.setVisible(true);
+
+        char[] pinColorLetters = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
+        int maxTurns = 10;
+        int pinNumber = 4;
+
+
+        Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.YELLOW, new Color(150, 0, 255)};
+        GameBoard gui = new GameBoard(pinNumber, pinColorLetters, pinColors);
+        gui.pack();
+        gui.setVisible(false);
     }
 }

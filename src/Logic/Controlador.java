@@ -2,7 +2,7 @@ package Logic;
 
 public class Controlador {
 
-    private void iniciar() {
+    /*private void iniciar() {
         VentanaPrincipal miVentanaPrincipal = new VentanaPrincipal();
         VentanaRegistro miVentanaRegistro = new VentanaRegistro();
         VentanaDificultad miVentanaDificultad = new VentanaDificultad();
@@ -19,7 +19,7 @@ public class Controlador {
             if (dg.validateUser(miVentanaRegistro.nickname))
 
         }
-    }
+    }*/
 
 
 }

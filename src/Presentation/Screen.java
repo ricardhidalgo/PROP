@@ -12,12 +12,15 @@ public class Screen extends JFrame implements ActionListener{
     Instructions instructionsC = new Instructions();
     SelectDifficulty selectDifficultyC = new SelectDifficulty();
     CustomDifficulty customDifficultyC = new CustomDifficulty();
+    ChoseRole choseRoleC = new ChoseRole();
+
 
     JPanel loginRegisterPanel;
     JPanel mainMenuPanel;
     JPanel instructionsPanel;
     JPanel selectDifficultyPanel;
     JPanel customDifficultyPanel;
+    JPanel choseRolePanel;
 
     CardLayout layout = new CardLayout();
 
@@ -32,6 +35,7 @@ public class Screen extends JFrame implements ActionListener{
         instructionsPanel = instructionsC.getInstructionsPanel();
         selectDifficultyPanel = selectDifficultyC.getSelectDifficultyPanel();
         customDifficultyPanel = customDifficultyC.getCustomDifficultyPanel();
+        choseRolePanel = choseRoleC.getChoseRolePanel();
 
 
         mainPanel.setLayout(layout);
@@ -55,6 +59,7 @@ public class Screen extends JFrame implements ActionListener{
         mainPanel.add(instructionsPanel, "Instructions");
         mainPanel.add(selectDifficultyPanel, "SelectDifficulty");
         mainPanel.add(customDifficultyPanel, "CustomDifficulty");
+        mainPanel.add(choseRolePanel, "ChoseRole");
 
         layout.show(mainPanel,"LoginRegister");
 
@@ -81,11 +86,11 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == mainMenuC.getScoresButton()) {
 
                 } else if (source == selectDifficultyC.getEasyButton()) {
-
+                    layout.show(mainPanel, "ChoseRole");
                 } else if (source == selectDifficultyC.getMediumButton()) {
-
+                    layout.show(mainPanel, "ChoseRole");
                 } else if (source == selectDifficultyC.getHardButton()) {
-
+                    layout.show(mainPanel, "ChoseRole");
                 } else if (source == selectDifficultyC.getCustomButton()) {
                     layout.show(mainPanel, "CustomDifficulty");
                 } else if (source == selectDifficultyC.getBackButton()) {
@@ -95,8 +100,14 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == loginRegisterC.getRegisterButton()) {
                     layout.show(mainPanel, "MainMenu");
                 } else if (source == customDifficultyC.getContinueButton()) {
-
+                    layout.show(mainPanel, "ChoseRole");
                 } else if (source == customDifficultyC.getBackButton()) {
+                    layout.show(mainPanel, "SelectDifficulty");
+                } else if (source == choseRoleC.getCodeBreakerButton()) {
+
+                } else if (source == choseRoleC.getCodeMasterButton()) {
+
+                } else if (source == choseRoleC.getBackButton()) {
                     layout.show(mainPanel, "SelectDifficulty");
                 }
 
@@ -122,6 +133,10 @@ public class Screen extends JFrame implements ActionListener{
 
         customDifficultyC.addContinueButtonActionListener(actionListener);
         customDifficultyC.addBackButtonActionListener(actionListener);
+
+        choseRoleC.addCodeBreakerButtonActionListener(actionListener);
+        choseRoleC.addCodeMasterButtonActionListener(actionListener);
+        choseRoleC.addBackButtonActionListener(actionListener);
 
 
 
