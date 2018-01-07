@@ -68,4 +68,10 @@ public class Controlador {
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
 
+    public boolean CorrectCombination (Combination combi) {
+        return game.getSecretCode() == combi;
+    }
+
+
+
 }
