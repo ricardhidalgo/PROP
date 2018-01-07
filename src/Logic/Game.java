@@ -15,60 +15,6 @@ public class Game {
     private Combination secretCode;
     private ArrayList<Play> plays;
     private Difficulty difficulty;
-    private AI ai;
-
-    /**
-     * Constructora vacía.
-     */
-    public Game(){
-
-
-    }
-
-    /**
-     * Constructora con valores predefinidos.
-     * @param user usuario de la partida.
-     * @param ai IA de la partida.
-     * @param isUserBreaker indica si el usuario es CB o CM.
-     * @param difficulty indica el nível de dificultad.
-     */
-    public Game(User user, AI ai, boolean isUserBreaker, Difficulty difficulty) {
-        this.user = user;
-        this.ai = ai;
-        this.isUserBreaker = isUserBreaker;
-        this.difficulty = difficulty;
-        this.plays = new ArrayList<>();
-    }
-
-    /**
-     * Constructora con valores predefinidos.
-     * @param user usuario de la partida.
-     * @param ai IA de la partida.
-     * @param isUserBreaker indica si el usuario es CB o CM.
-     * @param secretCode combinación correcta (respuesta).
-     * @param plays cantidad de rondas jugadas.
-     * @param difficulty nível de dificultad.
-     */
-    public Game(User user, AI ai, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty) {
-        this.user = user;
-        this.isUserBreaker = isUserBreaker;
-        this.secretCode = secretCode;
-        this.plays = plays;
-        this.difficulty = difficulty;
-    }
-
-    /**
-     * Indica cual es la combinación correcta o respuesta
-     * @param comb Combinación correcta.
-     */
-    public void setSecretCode(Combination comb) {
-        if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.err.println("Wrong parameters 1");
-        } else {
-            this.secretCode = comb;
-        }
-    }
-
     /**
      * Realiza una jugada.
      * @param comb combinación correcta.
@@ -131,5 +77,59 @@ public class Game {
      */
     public AI getAi() {
         return ai;
+    }
+
+    private AI ai;
+
+    /**
+     * Constructora vacía.
+     */
+    public Game(){
+
+
+    }
+
+    /**
+     * Constructora con valores predefinidos.
+     * @param user usuario de la partida.
+     * @param ai IA de la partida.
+     * @param isUserBreaker indica si el usuario es CB o CM.
+     * @param difficulty indica el nível de dificultad.
+     */
+    public Game(User user, AI ai, boolean isUserBreaker, Difficulty difficulty) {
+        this.user = user;
+        this.ai = ai;
+        this.isUserBreaker = isUserBreaker;
+        this.difficulty = difficulty;
+        this.plays = new ArrayList<>();
+    }
+
+    /**
+     * Constructora con valores predefinidos.
+     * @param user usuario de la partida.
+     * @param ai IA de la partida.
+     * @param isUserBreaker indica si el usuario es CB o CM.
+     * @param secretCode combinación correcta (respuesta).
+     * @param plays cantidad de rondas jugadas.
+     * @param difficulty nível de dificultad.
+     */
+    public Game(User user, AI ai, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty) {
+        this.user = user;
+        this.isUserBreaker = isUserBreaker;
+        this.secretCode = secretCode;
+        this.plays = plays;
+        this.difficulty = difficulty;
+    }
+
+    /**
+     * Indica cual es la combinación correcta o respuesta
+     * @param comb Combinación correcta.
+     */
+    public void setSecretCode(Combination comb) {
+        if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
+            System.err.println("Wrong parameters 1");
+        } else {
+            this.secretCode = comb;
+        }
     }
 }
