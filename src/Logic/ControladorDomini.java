@@ -1,6 +1,7 @@
 package Logic;
 
 import Persistence.dataGestor;
+import java.util.ArrayList;
 
 public class ControladorDomini {
 
@@ -21,6 +22,10 @@ public class ControladorDomini {
 
     public void create (String nickname, String pw) {
         if (!TryName(nickname)) dg.createUser(nickname, pw);
+    }
+
+    public void savepuntuation(String nickname, ArrayList<String> info, boolean score) {
+        dg.save(nickname, info, score);
     }
 
 }

@@ -72,6 +72,19 @@ public class Controlador {
         return game.getSecretCode() == combi;
     }
 
+    /* se tiene que hacer un bucle con todas las puntuaciones del mismo usuario y hacer esta funcion en
+    todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
+     */
 
+    public void insertpuntuation (Ranking ranking, String nickname, int score) {
+        ranking.modifynick(nickname);
+        ranking.modifyscore(score);
+        ranking.InsertRanking();
+    }
+
+    public void seeranking (Ranking ranking) {
+
+        ranking.escribirtxt();
+    }
 
 }
