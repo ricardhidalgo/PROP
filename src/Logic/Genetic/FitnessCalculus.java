@@ -39,7 +39,7 @@ public class FitnessCalculus {
 
     public Solution getSolution(int index){
         int counter = 0;
-        Solution sol = new Solution();
+        Solution sol = new Solution(0, 0, new Individual());
         for(Solution s : solutions){
             if(counter == index) sol = s;
             ++counter;
