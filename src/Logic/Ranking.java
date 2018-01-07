@@ -118,9 +118,11 @@ public class Ranking extends MyPair{
         }
     }
 
+
     /**
      * Escribe en un documento .txt el ranking de puntuaciones.
      */
+    /*
     public void escribirtxt() {
 
         try {
@@ -146,5 +148,6 @@ public class Ranking extends MyPair{
             System.out.println("Error al escribir el ranking" + errorDeFichero.getMessage());
         }
     }
+    */
 
 }
