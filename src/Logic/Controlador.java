@@ -18,7 +18,7 @@ public class Controlador {
     Combination correct = new Combination();
     Combination later = new Combination();
     ArrayList<Play> plays;
-    ControladorDomini cd;
+    ControladorDomini cd = new ControladorDomini();
     Play jugada = new Play();
     Ranking ranking = new Ranking();
 
