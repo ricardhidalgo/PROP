@@ -104,10 +104,13 @@ public class Screen extends JFrame implements ActionListener{
                     layout.show(mainPanel, "LoadGame");
                 } else if (source == selectDifficultyC.getEasyButton()) {
                     layout.show(mainPanel, "ChoseRole");
+                    cp.setDifficult("easy");
                 } else if (source == selectDifficultyC.getMediumButton()) {
                     layout.show(mainPanel, "ChoseRole");
+                    cp.setDifficult("medium");
                 } else if (source == selectDifficultyC.getHardButton()) {
                     layout.show(mainPanel, "ChoseRole");
+                    cp.setDifficult("hard");
                 } else if (source == selectDifficultyC.getCustomButton()) {
                     layout.show(mainPanel, "CustomDifficulty");
                 } else if (source == selectDifficultyC.getBackButton()) {
@@ -115,17 +118,14 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == loginRegisterC.getLoginButton()) {
                     String user = loginRegisterC.getUsernameLogin().getText();
                     String pass = loginRegisterC.getPasswordLogin().getPassword().toString();
-                    if (cp.exists(user) && cp.checkPW(user, pass)) {
-                        System.out.print("Marica");
+                    if(cp.exists(user) && cp.checkPW(user,pass)) {
                         username = user;
                         layout.show(mainPanel, "MainMenu");
                     }
                 } else if (source == loginRegisterC.getRegisterButton()) {
                     String user = loginRegisterC.getUsernameRegister().getText();
                     String pass = loginRegisterC.getPasswordRegister().getPassword().toString();
-                    if (cp.exists(user)) {
-                        System.out.println("NO");
-                    } else {
+                    if (!cp.exists(user)) {
                         cp.registrar(user, pass);
                         username = user;
                         mainMenuC.getUserLabel().setText(username);
