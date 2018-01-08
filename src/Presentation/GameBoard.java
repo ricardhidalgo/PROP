@@ -79,7 +79,9 @@ public class GameBoard extends JPanel {
         return saveButton;
     }
 
-
+    public JButton getSubmit() {
+        return submit;
+    }
 
     //Panel assembling functions
     //Assemble the buttons panel
@@ -276,16 +278,6 @@ public class GameBoard extends JPanel {
         hasGuessString = false;
         displayCurrentGuess();
     }
-
-    //Start the game
-    /*public void start() {
-        setVisible(true);
-    }
-
-    //Stop the game
-    public void stop() {
-        //dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-    }*/
 
     //The action listener for when a pin is clicked
     private class PinActionListener implements ActionListener {

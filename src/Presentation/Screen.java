@@ -115,7 +115,7 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == loginRegisterC.getLoginButton()) {
                     String user = loginRegisterC.getUsernameLogin().getText();
                     String pass = loginRegisterC.getPasswordLogin().getPassword().toString();
-                    if(cp.exists(user) && cp.checkPW(user,pass)) {
+                    if (cp.exists(user) && cp.checkPW(user, pass)) {
                         System.out.print("Marica");
                         username = user;
                         layout.show(mainPanel, "MainMenu");
