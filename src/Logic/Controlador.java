@@ -127,11 +127,13 @@ public class Controlador {
     }
 
     public void checkAnswer() {
+
         correctColorsPositions(correct, later);
     }
 
     public void setAnswerCB() {
-        correct = generateCombi();
+        ia = new AI_Genetic(difficulty);
+        game.setSecretCode(ia.generateSecret());
     }
 
     public void setAnswerCM(String answer2) {
@@ -151,6 +153,7 @@ public class Controlador {
             sol.add(valuesDefault[i]);
         }
         later = new Combination(sol);
+        checkAnswer();
     }
 
     public String RandomSolution() {
