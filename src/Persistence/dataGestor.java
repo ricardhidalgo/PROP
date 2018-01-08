@@ -5,6 +5,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * @author albert.ortiz
+ */
+
+
 import static java.nio.file.StandardOpenOption.CREATE;
 
 public class dataGestor {
