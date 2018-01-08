@@ -15,11 +15,12 @@ public class ControladorDomini {
         else return false;
     }
 
-    public boolean CorrectPW (String name, String pw) {
+    public boolean CorrectPW(String name, String pw) {
+
         return (TryName(name) && dg.findUser(name).get(1) == pw);
     }
 
-    public void create (String nickname, String pw) {
+    public void create(String nickname, String pw) {
         if (!TryName(nickname)) dg.createUser(nickname, pw);
     }
 
