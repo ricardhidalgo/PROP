@@ -99,11 +99,11 @@ public class ControladorPresentacion {
         cont.convertranking(user);
     }
 
-    public ArrayList<String> loadMatch(String user, int index){
+    public ArrayList<String> loadMatch(String user, int index) {
         return cont.getMatch(user, index);
     }
 
-    public void saveMatch(String username, ArrayList<String> match){
+    public void saveMatch(String username, ArrayList<String> match) {
         cont.saveMatch(username, match);
     }
 }

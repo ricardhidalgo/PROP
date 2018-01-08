@@ -63,7 +63,7 @@ public class Controlador {
         this.rep = repeat;
     }
 
-    public ArrayList<String> getMatch(String user, int index){
+    public ArrayList<String> getMatch(String user, int index) {
         return cd.getMatch(user, index);
     }
 
@@ -136,8 +136,8 @@ public class Controlador {
         correct = generateCombi();
     }
 
-    public void saveMatch(String username, ArrayList<String> in){
-        cd.savepuntuation(username,in,false);
+    public void saveMatch(String username, ArrayList<String> in) {
+        cd.savepuntuation(username, in, false);
     }
 
     public void setAnswerCM(String answer2) {

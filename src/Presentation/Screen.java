@@ -21,8 +21,7 @@ public class Screen extends JFrame implements ActionListener{
     private LoadGame loadGameC = new LoadGame();
 
     private char[] pinColorLetters = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
-    private int maxTurns = 10;
-    private int pinNumber = 4;
+    private int pinNumber = 4; //provisional
     private Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.YELLOW, new Color(150, 0, 255)};
     private GameBoard board = new GameBoard(pinNumber, pinColorLetters, pinColors);
 
@@ -130,6 +129,7 @@ public class Screen extends JFrame implements ActionListener{
                     if (!cp.exists(user)) {
                         cp.registrar(user, pass);
                         username = user;
+                        cp.setUs(username, pass);
                         mainMenuC.getUserLabel().setText(username);
                         layout.show(mainPanel, "MainMenu");
                     }
@@ -139,6 +139,7 @@ public class Screen extends JFrame implements ActionListener{
                     layout.show(mainPanel, "SelectDifficulty");
                 } else if (source == choseRoleC.getCodeBreakerButton()) {
                     cp.breaker(true);
+                    cp.setAnswerCB();
                     cp.begin();
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == choseRoleC.getCodeMasterButton()) {
@@ -149,15 +150,15 @@ public class Screen extends JFrame implements ActionListener{
                     layout.show(mainPanel, "SelectDifficulty");
                 } else if (source == loadGameC.getSaveSlot1Button()) {
 
-                    ArrayList<String> arr = cp.loadMatch(username,0);
+                    ArrayList<String> arr = cp.loadMatch(username, 0);
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getSaveSlot2Button()) {
 
-                    ArrayList<String> arr = cp.loadMatch(username,1);
+                    ArrayList<String> arr = cp.loadMatch(username, 1);
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getSaveSlot3Button()) {
 
-                    ArrayList<String> arr = cp.loadMatch(username,2);
+                    ArrayList<String> arr = cp.loadMatch(username, 2);
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getBackButton()) {
                     layout.show(mainPanel, "MainMenu");
@@ -166,7 +167,6 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == board.getSubmit()) {
                     String play = board.getSubmitGuessString();
                     cp.setGuess(play);
-                    cp.checkAnswer();
                     int col = cp.getCorrectColors();
                     int pos = cp.getCorrectPosition();
                     board.displayResult(col, pos, board.getCurrentTurn() + 1);
