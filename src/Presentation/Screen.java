@@ -10,7 +10,6 @@ public class Screen extends JFrame implements ActionListener{
     private ControladorPresentacion cp = new ControladorPresentacion();
 
     private String username = new String();
-    private String password = new String();
 
     private Login loginRegisterC = new Login();
     private MainMenu mainMenuC = new MainMenu();
@@ -128,6 +127,7 @@ public class Screen extends JFrame implements ActionListener{
                     } else {
                         cp.registrar(user, pass);
                         username = user;
+                        mainMenuC.getUserLabel().setText(username);
                         layout.show(mainPanel, "MainMenu");
                     }
 
@@ -148,6 +148,8 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == loadGameC.getSaveSlot3Button()) {
                     //layout.show(mainPanel, "SelectDifficulty");
                 } else if (source == loadGameC.getBackButton()) {
+                    layout.show(mainPanel, "MainMenu");
+                } else if (source == board.getSaveButton()) {
                     layout.show(mainPanel, "MainMenu");
                 }
 
@@ -182,6 +184,8 @@ public class Screen extends JFrame implements ActionListener{
         loadGameC.addSaveSlot2ButtonActionListener(actionListener);
         loadGameC.addSaveSlot3ButtonActionListener(actionListener);
         loadGameC.addBackButtonActionListener(actionListener);
+
+        board.addSaveButtonActionListener(actionListener);
 
 
 

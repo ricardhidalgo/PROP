@@ -23,6 +23,7 @@ public class GameBoard extends JPanel {
     private JPanel currentGuessPanel;
     private JButton clear;
     private JButton submit;
+    private JButton saveButton;
 
     //Guess panel to show all of the previous guesses
     private JScrollPane guessScrollPane;
@@ -65,6 +66,20 @@ public class GameBoard extends JPanel {
         add(guessScrollPane, BorderLayout.CENTER);
         add(buttonsPanel, BorderLayout.EAST);
     }
+
+    public void addSaveButtonActionListener(ActionListener listener) {
+        saveButton.addActionListener(listener);
+    }
+
+    public void addSubmitButtonActionListener(ActionListener listener) {
+        submit.addActionListener(listener);
+    }
+
+    public JButton getSaveButton() {
+        return saveButton;
+    }
+
+
 
     //Panel assembling functions
     //Assemble the buttons panel
@@ -120,11 +135,15 @@ public class GameBoard extends JPanel {
             displayCurrentGuess();
         });
 
+        saveButton = new JButton(("Save"));
+        saveButton.setPreferredSize(buttonDimension);
+
         //Add everything
         buttonsPanel.add(pinPanel);
         buttonsPanel.add(currentGuessPanel);
         buttonsPanel.add(submit);
         buttonsPanel.add(clear);
+        buttonsPanel.add(saveButton);
     }
 
     //Assemble the buttons panel
@@ -259,14 +278,14 @@ public class GameBoard extends JPanel {
     }
 
     //Start the game
-    public void start() {
+    /*public void start() {
         setVisible(true);
     }
 
     //Stop the game
     public void stop() {
         //dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-    }
+    }*/
 
     //The action listener for when a pin is clicked
     private class PinActionListener implements ActionListener {
