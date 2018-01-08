@@ -123,8 +123,8 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == loginRegisterC.getRegisterButton()) {
                     String user = loginRegisterC.getUsernameRegister().getText();
                     String pass = loginRegisterC.getPasswordRegister().getPassword().toString();
-                    if (cp.exists("user")) {
-
+                    if (cp.exists(user)) {
+                        System.out.println("NO");
                     } else {
                         cp.registrar(user, pass);
                         username = user;

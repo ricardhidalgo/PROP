@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ControladorPresentacion {
 
-    Controlador cont;
+    Controlador cont = new Controlador();
 
     public ControladorPresentacion() {
 
