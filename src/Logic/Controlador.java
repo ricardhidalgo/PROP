@@ -131,7 +131,7 @@ public class Controlador {
         correct = generateCombi();
     }
 
-    public void setAnswerCM (String answer2) {
+    public void setAnswerCM(String answer2) {
         byte[] valuesDefault = answer2.getBytes();
         ArrayList<Byte> sol = new ArrayList<Byte>();
         for (int i = 0; i < valuesDefault.length; i++) {
@@ -177,7 +177,7 @@ public class Controlador {
         return ia.generateNextCombination(jugada);
     }
 
-    public String FirstGuess () {
+    public String FirstGuess() {
         String FG = "";
         Combination comb = FirstGues();
         ArrayList<Byte> combination = comb.getComb();
@@ -197,7 +197,7 @@ public class Controlador {
         return cd.allscores(nickname, score);
     }
 
-    public void CreateRanking (Ranking ranking, String usuario) {
+    public void CreateRanking(Ranking ranking, String usuario) {
         ArrayList<String> puntuacion = cd.allscores(usuario, true);
         for (int i = 0; i < puntuacion.size(); i++) {
             insert1puntuation(ranking, usuario, Integer.parseInt(puntuacion.get(i)));
