@@ -16,9 +16,11 @@ public class Controlador {
     boolean breaker;
     AI ia = new AI_Genetic(difficulty);
     Combination correct;
+    Combination later;
     ArrayList<Play> plays;
     ControladorDomini cd;
     Play jugada = new Play();
+    Ranking ranking;
 
     /* Contructora vacía */
 
@@ -40,6 +42,10 @@ public class Controlador {
 
     public void setUser (String nick, String pw) {
         usuario = new User(nick, pw);
+    }
+
+    public User getUsuario() {
+        return usuario;
     }
 
     public void setDiff (String diff) {
@@ -117,8 +123,68 @@ public class Controlador {
         jugada.modifyPosition(CP);
     }
 
+    public void checkAnswer() {
+        correctColorsPositions(correct, later);
+    }
+
+    public void setAnswerCB() {
+        correct = generateCombi();
+    }
+
+    public void setAnswerCM (String answer2) {
+        byte[] valuesDefault = answer2.getBytes();
+        ArrayList<Byte> sol = new ArrayList<Byte>();
+        for (int i = 0; i < valuesDefault.length; i++) {
+            sol.add(valuesDefault[i]);
+        }
+        setCorrect(sol);
+        correct = getcorrect();
+    }
+
+    public void setGuess(String guess) {
+        byte[] valuesDefault = guess.getBytes();
+        ArrayList<Byte> sol = new ArrayList<Byte>();
+        for (int i = 0; i < valuesDefault.length; i++) {
+            sol.add(valuesDefault[i]);
+        }
+        later = new Combination(sol);
+    }
+
+    public String RandomSolution() {
+        String RS = "";
+        Combination comb = generateCombi();
+        ArrayList<Byte> combination = comb.getComb();
+        for (int i = 0; i < combination.size(); i++)
+            RS += combination.get(i);
+        return RS;
+    }
+
+    public String NextGuess() {
+        Play jugada = new Play();
+        jugada.modifyPosition(getCC());
+        jugada.modifyColor(getCP());
+        String NG = "";
+        Combination comb = GenerateGuess(jugada);
+        later = comb;
+        ArrayList<Byte> combination = comb.getComb();
+        for (int i = 0; i < combination.size(); i++)
+            NG += combination.get(i);
+        return NG;
+    }
+
+
     public Combination GenerateGuess(Play jugada) {
         return ia.generateNextCombination(jugada);
+    }
+
+    public String FirstGuess () {
+        String FG = "";
+        Combination comb = FirstGues();
+        ArrayList<Byte> combination = comb.getComb();
+        later = comb;
+        for (int i = 0; i < combination.size(); i++)
+            FG += combination.get(i);
+        return FG;
     }
 
     public void insert1puntuation (Ranking ranking, String nickname, int score) {
@@ -127,11 +193,20 @@ public class Controlador {
         ranking.InsertRanking();
     }
 
-    public void CreateRanking (Ranking ranking, String usuario, boolean score) {
-        ArrayList<String> puntuacion = cd.allscores(usuario, score);
+    public ArrayList<String> score(String nickname, boolean score) {
+        return cd.allscores(nickname, score);
+    }
+
+    public void CreateRanking (Ranking ranking, String usuario) {
+        ArrayList<String> puntuacion = cd.allscores(usuario, true);
         for (int i = 0; i < puntuacion.size(); i++) {
             insert1puntuation(ranking, usuario, Integer.parseInt(puntuacion.get(i)));
         }
+    }
+
+    public void convertranking(String user) {
+        User usuario = getUsuario();
+        CreateRanking(ranking, user);
     }
 
     public ArrayList<MyPair> seeranking (Ranking ranking) {
