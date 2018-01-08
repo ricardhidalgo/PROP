@@ -54,7 +54,6 @@ public class dataGestor {
     }
 
 
-
     public void createUser(String username, String password) {
         checkDir();
         String fileName = "./Saved/" + username + ".txt";
