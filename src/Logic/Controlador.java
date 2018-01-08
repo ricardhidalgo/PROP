@@ -63,7 +63,9 @@ public class Controlador {
         this.rep = repeat;
     }
 
-
+    public ArrayList<String> getMatch(String user, int index){
+        return cd.getMatch(user, index);
+    }
 
     /* true == CodeBreaker */
     public void setType (boolean breaking) {
@@ -134,6 +136,10 @@ public class Controlador {
     public void setAnswerCB() {
         ia = new AI_Genetic(difficulty);
         game.setSecretCode(ia.generateSecret());
+    }
+
+    public void saveMatch(String username, ArrayList<String> in){
+        cd.savepuntuation(username,in,false);
     }
 
     public void setAnswerCM(String answer2) {
