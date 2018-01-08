@@ -128,7 +128,7 @@ public class MainMenu {
         gbc.insets = new Insets(0, 0, 35, 0);
         MainMenuPanel.add(instructionsButton, gbc);
         loadGameButton = new JButton();
-        loadGameButton.setEnabled(false);
+        loadGameButton.setEnabled(true);
         loadGameButton.setText("Load Game");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
