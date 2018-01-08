@@ -47,6 +47,7 @@ public class dataGestor {
             //If user info doesn't exists, we must initialize it
             ArrayList<String> a = new ArrayList<>();
             a.add(password);
+            a.add("SCORES");
             saveInfo(fileName, a);
         }
     }
@@ -128,7 +129,6 @@ public class dataGestor {
             boolean found = false;
             int counter = -1;
             while((line = bufferedReader.readLine()) != null) {
-                if(line.equals("SCORES") && !score) break;
                 if(counter != i) out.add(line);
                 if(!score) found = true;
                 if(line.equals("SCORES") && score) found = true;
@@ -137,7 +137,7 @@ public class dataGestor {
 
             // Always close files.
             bufferedReader.close();
-            saveInfo(username, out);
+            saveInfo(fileName, out);
         }
         catch(FileNotFoundException ex) {
             System.out.println(
@@ -207,7 +207,7 @@ public class dataGestor {
             BufferedReader bufferedReader =
                     new BufferedReader(fileReader);
             out.add(username);
-            out.add(line);
+            out.add(line = bufferedReader.readLine());
             // Always close files.
             bufferedReader.close();
         }

@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneticBase {
     //Tweaking this parameters we can affect the overall ai's performance.
-    private int maxGenerations = 100;
+    private int maxGenerations = 150;
     private int nIndividualsPopulation =150;
     private boolean elitism = true;
     private int numTournaments = 10;
@@ -89,7 +89,7 @@ public class GeneticBase {
             for(int i =0; i<ind.size(); i++) E.add(ind.get(i));
             ++height;
             if(height > maxGenerations && E.size()==0) {
-                //p = new Population(nIndividualsPopulation,elitism, FC);
+                p = new Population(nIndividualsPopulation,elitism, FC);
                 height = 0;
             }
         }
