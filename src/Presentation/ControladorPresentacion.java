@@ -90,6 +90,7 @@ public class ControladorPresentacion {
 
     public void saveScore(String name, String score, boolean punt) {
 
+        cont.guardarpuntuacion(name, score, punt);
     }
 
     public void convertranking(String user) {
