@@ -3,6 +3,7 @@ package Presentation;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Screen extends JFrame implements ActionListener{
@@ -104,15 +105,16 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == mainMenuC.getLoadGameButton()) {
                     layout.show(mainPanel, "LoadGame");
                 } else if (source == selectDifficultyC.getEasyButton()) {
-                    layout.show(mainPanel, "ChoseRole");
                     cp.setDifficult("easy");
+                    layout.show(mainPanel, "ChoseRole");
                 } else if (source == selectDifficultyC.getMediumButton()) {
-                    layout.show(mainPanel, "ChoseRole");
                     cp.setDifficult("medium");
-                } else if (source == selectDifficultyC.getHardButton()) {
                     layout.show(mainPanel, "ChoseRole");
+                } else if (source == selectDifficultyC.getHardButton()) {
                     cp.setDifficult("hard");
+                    layout.show(mainPanel, "ChoseRole");
                 } else if (source == selectDifficultyC.getCustomButton()) {
+                    cp.setDifficult("custom");
                     layout.show(mainPanel, "CustomDifficulty");
                 } else if (source == selectDifficultyC.getBackButton()) {
                     layout.show(mainPanel, "MainMenu");
@@ -131,23 +133,29 @@ public class Screen extends JFrame implements ActionListener{
                         username = user;
                         layout.show(mainPanel, "MainMenu");
                     }
-
                 } else if (source == customDifficultyC.getContinueButton()) {
                     layout.show(mainPanel, "ChoseRole");
                 } else if (source == customDifficultyC.getBackButton()) {
                     layout.show(mainPanel, "SelectDifficulty");
                 } else if (source == choseRoleC.getCodeBreakerButton()) {
+                    cp.breaker(true);
+                    cp.begin();
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == choseRoleC.getCodeMasterButton()) {
+                    cp.breaker(false);
+                    cp.begin();
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == choseRoleC.getBackButton()) {
                     layout.show(mainPanel, "SelectDifficulty");
                 } else if (source == loadGameC.getSaveSlot1Button()) {
-                    //layout.show(mainPanel, "SelectDifficulty");
+                    ArrayList<String> arr = cp.loadMatch(username,0);
+                    layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getSaveSlot2Button()) {
-                    //layout.show(mainPanel, "SelectDifficulty");
+                    ArrayList<String> arr = cp.loadMatch(username,1);
+                    layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getSaveSlot3Button()) {
-                    //layout.show(mainPanel, "SelectDifficulty");
+                    ArrayList<String> arr = cp.loadMatch(username,2);
+                    layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getBackButton()) {
                     layout.show(mainPanel, "MainMenu");
                 }
