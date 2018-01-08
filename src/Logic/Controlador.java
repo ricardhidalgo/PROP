@@ -87,6 +87,7 @@ public class Controlador {
     }
 
     public void start () {
+        ia = new AI_Genetic(difficulty);
         if (breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
@@ -108,10 +109,12 @@ public class Controlador {
      */
 
     public Combination generateCombi () {
+        ia = new AI_Genetic(difficulty);
         return ia.generateSecret();
     }
 
     public Combination FirstGues () {
+        ia = new AI_Genetic(difficulty);
         return ia.generateFirstCombination();
     }
 
@@ -174,6 +177,7 @@ public class Controlador {
 
 
     public Combination GenerateGuess(Play jugada) {
+        ia = new AI_Genetic(difficulty);
         return ia.generateNextCombination(jugada);
     }
 
