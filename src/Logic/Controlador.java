@@ -7,20 +7,20 @@ import Persistence.ControladorDomini;
 
 public class Controlador {
 
-    Difficulty difficulty;
+    Difficulty difficulty = new Difficulty();
     boolean tips = false;
     int numB;
     boolean rep;
-    Game game;
-    User usuario;
+    Game game = new Game();
+    User usuario = new User();
     boolean breaker;
-    AI ia = new AI_Genetic(difficulty);
-    Combination correct;
-    Combination later;
+    AI ia;
+    Combination correct = new Combination();
+    Combination later = new Combination();
     ArrayList<Play> plays;
     ControladorDomini cd;
     Play jugada = new Play();
-    Ranking ranking;
+    Ranking ranking = new Ranking();
 
     /* Contructora vacía */
 
