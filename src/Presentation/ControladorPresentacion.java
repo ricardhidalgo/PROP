@@ -88,9 +88,10 @@ public class ControladorPresentacion {
         cont.setGuess(guess);
     }
 
-    public void saveScore(String name, String score, boolean punt) {
-
-        cont.guardarpuntuacion(name, score, punt);
+    public void saveScore(String name, int score, boolean punt) {
+        ArrayList<String> info = new ArrayList<String>();
+        info.add(String.valueOf(score));
+        cont.guardarpuntuacion(name, info, punt);
     }
 
     public void convertranking(String user) {
@@ -100,13 +101,3 @@ public class ControladorPresentacion {
 
 
 }
-
-
-/*
-    public ArrayList<MyPair> seeranking (Ranking ranking) {
-        return ranking.getranking();
-    }
-
-    public void guardarpuntuacion (String name, ArrayList<String> puntuacion, boolean score) {
-        cd.savepuntuation(name, puntuacion, score);
-    }*/
