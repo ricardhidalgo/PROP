@@ -2,6 +2,7 @@ package Presentation;
 
 import Logic.Controlador;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ControladorPresentacion {
@@ -96,5 +97,13 @@ public class ControladorPresentacion {
 
     public void convertranking(String user) {
         cont.convertranking(user);
+    }
+
+    public ArrayList<String> loadMatch(String user, int index){
+        return cont.getMatch(user, index);
+    }
+
+    public void saveMatch(String username, ArrayList<String> match){
+        cont.saveMatch(username, match);
     }
 }
