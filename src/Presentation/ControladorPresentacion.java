@@ -65,7 +65,7 @@ public class ControladorPresentacion {
     }
 
     public String NextGuess() {
-        cont.NextGuess();
+        return cont.NextGuess();
     }
 
     public int getCorrectColors() {
