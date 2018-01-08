@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 public class GameBoard extends JPanel {
 
     //This is the current guess and other related variables
+    private Color backgroundColor = new Color(-12501697);
     private String guessString = "";
     private boolean hasGuessString = false;
     private int pinNumber;
@@ -39,10 +40,10 @@ public class GameBoard extends JPanel {
     //Create the mastermind gui
     public GameBoard(int pinNumber, char[] pinColorLetters, Color[] pinColors) {
 
-        //super("Mastermind Game");
-        //setSize(new Dimension(400, 600));
+        setSize(new Dimension(400, 600));
+        setBackground(backgroundColor);
+        setForeground(backgroundColor);
         setLayout(new BorderLayout());
-        //setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //Set instance variables
         this.pinNumber = pinNumber;
@@ -73,8 +74,10 @@ public class GameBoard extends JPanel {
         //Panel
         buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1, 3));
-        buttonsPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Button Panel"));
+        buttonsPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Button Panel", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new Color(-4737097)));
         buttonsPanel.setPreferredSize(new Dimension(150, 500));
+        buttonsPanel.setBackground(backgroundColor);
+        buttonsPanel.setForeground(backgroundColor);
 
         //Create the pin panel
         pinPanel = new JPanel();
@@ -82,6 +85,8 @@ public class GameBoard extends JPanel {
         //pinPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "mastermind.swing.Pin Panel"));
         pinPanel.setPreferredSize(new Dimension(140,
                 ((int) (Math.ceil(pinColorLetters.length / 3) + 1) * (pinDimension.width + 5))));
+        pinPanel.setBackground(backgroundColor);
+        pinPanel.setForeground(backgroundColor);
 
         //Create the pins
         pins = new Pin[pinColors.length];
@@ -94,8 +99,10 @@ public class GameBoard extends JPanel {
         //Current guess panel
         currentGuessPanel = new JPanel();
         currentGuessPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        currentGuessPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Guess"));
+        currentGuessPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Guess", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new Color(-4737097)));
         currentGuessPanel.setPreferredSize(new Dimension(140, 60));
+        currentGuessPanel.setBackground(backgroundColor);
+        currentGuessPanel.setForeground(backgroundColor);
 
         //Create the submit button
         submit = new JButton("Submit Guess");
@@ -128,12 +135,16 @@ public class GameBoard extends JPanel {
         guessPanel = new JPanel();
         guessPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         guessPanel.setPreferredSize(new Dimension(200, 800));
-        guessPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Guess Panel"));
+        guessPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Guess Panel", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new Color(-4737097)));
+        guessPanel.setBackground(backgroundColor);
+
+
 
         guessScrollPane = new JScrollPane(guessPanel);
         guessScrollPane.setBorder(null);
         guessScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         guessScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        guessScrollPane.setBackground(backgroundColor);
     }
 
     //Assemble the title panel
@@ -143,10 +154,13 @@ public class GameBoard extends JPanel {
         //Panel
         titlePanel = new JPanel();
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        titlePanel.setBackground(backgroundColor);
 
         //Text
         titleText = new JLabel("Mastermind");
-        titleText.setFont(new Font("Arial", Font.BOLD, 32));
+        titleText.setFont(new Font("Arial", Font.ITALIC, 28));
+        titleText.setBackground(backgroundColor);
+        titleText.setForeground(new Color(-4737097));
 
         //Add everything
         titlePanel.add(titleText);
