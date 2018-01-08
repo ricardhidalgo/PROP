@@ -1,58 +1,55 @@
 package Logic.Genetic;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import Logic.Combination;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author albert.ortiz
  */
 
 public class FitnessCalculus {
-    private HashSet<Solution> solutions = new HashSet<>();
+    private ArrayList<Solution> solutions = new ArrayList<Solution>();
+    private int turn = 1;
 
     public double fitnessIndividual(Individual ind){
-        /**
-         * Genera
-         * @param result resultado de la respuesta anterior.
-         * @return devuelve la combinacion a jugar.
-         */
-        double fitness = 0.0;
+        double blackSum = 0.0;
+        double whiteSum = 0.0;
+        double result = -1.0;
         for(Solution s : solutions) {
             int black = 0;
             int white = 0;
-            for (int i = 0; i < ind.numGenes(); i++) {
-                if (ind.getGen(i) == s.getIndividual().getGen(i)) ++black;
-                else {
-                    for (int j = 0; j < ind.numGenes(); j++) {
-                        if (ind.getGen(i) == s.getIndividual().getGen(j)) {
-                            ++white;
-                            break;
-                        }
-                    }
-                }
+            Combination c = s.getIndividual().toCombination();
+            Combination c1 = ind.toCombination();
+            ArrayList<Byte> correctColors;
+            correctColors = c.compareCombinations(c1);
+            for (int i = 0; i < correctColors.size(); ++i) {
+                if (correctColors.get(i) == 1) ++white;
+                else if (correctColors.get(i) == 2) ++black;
             }
-            fitness += Math.abs(black-s.getBlack()) + Math.abs(white-s.getWhite());
+            blackSum += Math.abs(black-s.getBlack());
+            whiteSum += Math.abs(white-s.getWhite());
+            result += 1.0;
         }
-        return fitness;//+2*ind.numGenes()*(turn);
+        return blackSum + whiteSum;
 
     }
 
     public Solution getSolution(int index){
-        int counter = 0;
-        Solution sol = new Solution(0, 0, new Individual());
-        for(Solution s : solutions){
-            if(counter == index) sol = s;
-            ++counter;
-        }
-        return sol;
+        return solutions.get(index);
     }
 
     public void addSolution(Solution s){
         solutions.add(s);
+        ++turn;
     }
 
     public int getSolutionSize(){
         return solutions.size();
     }
+
+    public int getTurn(){ return turn; }
 
 }
