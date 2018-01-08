@@ -15,6 +15,7 @@ public class CustomDifficulty {
     private JLabel lengthLabel;
     private JButton backButton;
     private JButton continueButton;
+    private JCheckBox tipsCheckBox;
 
     public JPanel getCustomDifficultyPanel() {
         return CustomDifficultyPanel;
@@ -50,6 +51,25 @@ public class CustomDifficulty {
 
     public void addBackButtonActionListener(ActionListener listener) {
         backButton.addActionListener(listener);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
     }
 
     {
@@ -97,7 +117,7 @@ public class CustomDifficulty {
         backButton.setText("Back");
         gbc = new GridBagConstraints();
         gbc.gridx = 5;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.SOUTHEAST;
         gbc.insets = new Insets(0, 0, 5, 5);
@@ -107,7 +127,7 @@ public class CustomDifficulty {
         continueButton.setText("Continue");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.weighty = 1.0;
         CustomDifficultyPanel.add(continueButton, gbc);
         final JSeparator separator1 = new JSeparator();
@@ -155,29 +175,20 @@ public class CustomDifficulty {
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         CustomDifficultyPanel.add(turnsLabel, gbc);
+        tipsCheckBox = new JCheckBox();
+        tipsCheckBox.setBackground(new Color(-12501697));
+        tipsCheckBox.setText("Tips");
+        tipsCheckBox.setToolTipText("Activate tips for the game");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 4;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        CustomDifficultyPanel.add(tipsCheckBox, gbc);
         ButtonGroup buttonGroup;
         buttonGroup = new ButtonGroup();
         buttonGroup.add(allowRepeatedRadioButton);
         buttonGroup.add(noRepeatedRadioButton);
-    }
-
-    /**
-     * @noinspection ALL
-     */
-    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
-        if (currentFont == null) return null;
-        String resultName;
-        if (fontName == null) {
-            resultName = currentFont.getName();
-        } else {
-            Font testFont = new Font(fontName, Font.PLAIN, 10);
-            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
-                resultName = fontName;
-            } else {
-                resultName = currentFont.getName();
-            }
-        }
-        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
     }
 
     /**
