@@ -56,10 +56,4 @@ public class FiveGuess {
         }
     }
 
-    public void Use5G() {
-        String x = "";
-        CreateSet(0, x);
-        FirstGuess();
-
-    }
 }

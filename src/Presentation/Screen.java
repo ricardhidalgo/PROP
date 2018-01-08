@@ -103,6 +103,7 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == selectDifficultyC.getBackButton()) {
                     layout.show(mainPanel, "MainMenu");
                 } else if (source == loginRegisterC.getLoginButton()) {
+
                     layout.show(mainPanel, "MainMenu");
                 } else if (source == loginRegisterC.getRegisterButton()) {
                     layout.show(mainPanel, "MainMenu");
