@@ -1,12 +1,9 @@
-package Controlators;
+package Logic;
 
 import Logic.*;
-import Presentation.Screen;
 
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import Controlators.ControladorDomini;
+import Persistence.ControladorDomini;
 
 public class Controlador {
 
@@ -21,6 +18,7 @@ public class Controlador {
     Combination correct;
     ArrayList<Play> plays;
     ControladorDomini cd;
+    Play jugada = new Play();
 
     /* Contructora vacía */
 
@@ -59,37 +57,68 @@ public class Controlador {
         this.rep = repeat;
     }
 
-    public void setType (String type) {
-        breaker = (type == "CodeBreaker");
+
+
+    /* true == CodeBreaker */
+    public void setType (boolean breaking) {
+        breaker = breaking;
+    }
+
+    public void setTips (boolean tip) {
+        this.tips = tip;
     }
 
     public void setCorrect (ArrayList<Byte> solution) {
         correct = new Combination(solution);
     }
 
+    public Combination getcorrect() {
+        return correct;
+    }
+
     public void setPlays (ArrayList<Play> play) {
         plays = play;
     }
 
-    public void Start () {
+    public void start () {
         if (breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
 
-    public boolean CorrectCombination (Combination combi) {
-        return game.getSecretCode() == combi;
+    public int getCC() {
+        return jugada.getNumCorrectColors();
+    }
+
+    public int getCP() {
+        return jugada.getNumCorrectPositions();
+    }
+
+    public void correctColorsPositions (Combination comb1, Combination comb2) {
+        jugada.processPlay(comb1, comb2);
     }
 
     /* se tiene que hacer un bucle con todas las puntuaciones del mismo usuario y hacer esta funcion en
     todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
      */
 
-    public Combination generateCombi (AI ia) {
+    public Combination generateCombi () {
         return ia.generateSecret();
     }
 
-    public Combination FirstGues (AI ia) {
-        return ia.generateSecret();
+    public Combination FirstGues () {
+        return ia.generateFirstCombination();
+    }
+
+    public void setNumCC(int CC) {
+        jugada.modifyColor(CC);
+    }
+
+    public void setNumCP (int CP) {
+        jugada.modifyPosition(CP);
+    }
+
+    public Combination GenerateGuess(Play jugada) {
+        return ia.generateNextCombination(jugada);
     }
 
     public void insert1puntuation (Ranking ranking, String nickname, int score) {

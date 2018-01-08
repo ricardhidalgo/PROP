@@ -1,8 +1,6 @@
-package Controlators;
+package Persistence;
 
-import Persistence.dataGestor;
 import java.util.ArrayList;
-import Controlators.Controlador;
 
 public class ControladorDomini {
 

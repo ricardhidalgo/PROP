@@ -177,6 +177,7 @@ public class CustomDifficulty {
         CustomDifficultyPanel.add(turnsLabel, gbc);
         tipsCheckBox = new JCheckBox();
         tipsCheckBox.setBackground(new Color(-12501697));
+        tipsCheckBox.setForeground(new Color(-4737097));
         tipsCheckBox.setText("Tips");
         tipsCheckBox.setToolTipText("Activate tips for the game");
         gbc = new GridBagConstraints();
