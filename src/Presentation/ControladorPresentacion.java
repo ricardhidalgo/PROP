@@ -97,7 +97,4 @@ public class ControladorPresentacion {
     public void convertranking(String user) {
         cont.convertranking(user);
     }
-
-
-
 }
