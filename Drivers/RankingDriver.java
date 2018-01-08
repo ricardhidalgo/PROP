@@ -24,12 +24,6 @@ public class RankingDriver {
                         System.out.println("La dupla " + j + " es " + persona.getranking().get(i).getkey() + " --- " + persona.getranking().get(i).getvalue() + ".");
                     }
                     break;
-
-                case "2":
-                    System.out.println("Abre el .txt con el ranking");
-                    persona.escribirtxt();
-                    break;
-
             }
             input = scanner.next();
         }
