@@ -17,6 +17,25 @@ public class dataGestor {
     public dataGestor(){
 
     }
+
+    private void checkDir() {
+        File theDir = new File("Saved");
+        if (!theDir.exists()) {
+            System.out.println("creating directory: " + theDir.getName());
+            boolean result = false;
+
+            try {
+                theDir.mkdir();
+                result = true;
+            } catch (SecurityException se) {
+                //handle it
+            }
+            if (result) {
+                System.out.println("DIR created");
+            }
+        }
+    }
+
     private void saveInfo(String path, ArrayList<String> info){
         Path p = Paths.get(path);
         try (OutputStream out = new BufferedOutputStream(
@@ -34,7 +53,10 @@ public class dataGestor {
         }
     }
 
+
+
     public void createUser(String username, String password) {
+        checkDir();
         String fileName = "./Saved/" + username + ".txt";
         // This will reference one line at a time
         String line = null;
