@@ -30,6 +30,7 @@ public class Pin extends JPanel {
         setPreferredSize(dimension);
         listenerList = new EventListenerList();
         addMouseListener(new PinMouseAdapter());
+        setBackground(new Color(-12501697));
     }
 
     //Paint the pin on JPanel
