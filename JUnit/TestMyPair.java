@@ -2,10 +2,9 @@ package JUnit;
 
 
 
-import Logic.MyPair;
-import com.sun.org.apache.xpath.internal.operations.Equals;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import Logic.MyPair;
 
 public class TestMyPair {
     @Test
