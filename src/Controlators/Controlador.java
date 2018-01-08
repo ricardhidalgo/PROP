@@ -20,14 +20,13 @@ public class Controlador {
     AI ia = new AI_Genetic(difficulty);
     Combination correct;
     ArrayList<Play> plays;
+    ControladorDomini cd;
 
     /* Contructora vacía */
 
     public Controlador () {
 
     }
-
-    ControladorDomini cd;
 
     public boolean ExistsName(String nick) {
         return cd.TryName(nick);
