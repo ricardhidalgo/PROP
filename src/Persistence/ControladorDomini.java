@@ -11,7 +11,7 @@ public class ControladorDomini {
     }
 
     public boolean TryName(String name) {
-        if (dg.findUser(name) != null) return true;
+        if (dg.findUser(name).get(0) != "NULL") return true;
         else return false;
     }
 

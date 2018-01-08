@@ -87,12 +87,12 @@ public class ControladorPresentacion {
     public void setGuess(String guess) {
         cont.setGuess(guess);
     }
-/*
+
     public void saveScore(String name, String score, boolean punt) {
 
         cont.guardarpuntuacion(name, score, punt);
     }
-*/
+
     public void convertranking(String user) {
         cont.convertranking(user);
     }
