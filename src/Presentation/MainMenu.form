@@ -46,7 +46,7 @@
           <gridbag top="30" left="0" bottom="35" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <enabled value="false"/>
+          <enabled value="true"/>
           <text value="Load Game"/>
         </properties>
       </component>
