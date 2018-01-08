@@ -7,6 +7,8 @@ import javax.swing.*;
 
 public class Screen extends JFrame implements ActionListener{
 
+    private ControladorPresentacion cp = new ControladorPresentacion();
+
     private String username = new String();
     private String password = new String();
 
@@ -121,7 +123,14 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == loginRegisterC.getRegisterButton()) {
                     String user = loginRegisterC.getUsernameRegister().getText();
                     String pass = loginRegisterC.getPasswordRegister().getPassword().toString();
-                    layout.show(mainPanel, "MainMenu");
+                    if (cp.exists("user")) {
+
+                    } else {
+                        cp.registrar(user, pass);
+                        username = user;
+                        layout.show(mainPanel, "MainMenu");
+                    }
+
                 } else if (source == customDifficultyC.getContinueButton()) {
                     layout.show(mainPanel, "ChoseRole");
                 } else if (source == customDifficultyC.getBackButton()) {

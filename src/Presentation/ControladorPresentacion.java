@@ -1,14 +1,15 @@
 package Presentation;
 
-import Logic.*;
 
 import java.util.ArrayList;
 
+import Logic.Controlador;
+
 public class ControladorPresentacion {
 
-    Controlador cont;
-    Combination answer = new Combination();
-    Combination later = new Combination();
+    Controlador cont = new Controlador();
+    //Combination answer = new Combination();
+    //Combination later = new Combination();
 
     public ControladorPresentacion() {
 
@@ -50,7 +51,7 @@ public class ControladorPresentacion {
         cont.setType(type);
     }
 
-    public void setAnswer (String answer2) {
+    /*public void setAnswer (String answer2) {
         byte[] valuesDefault = answer2.getBytes();
         ArrayList<Byte> sol = new ArrayList<Byte>();
         for (int i = 0; i < valuesDefault.length; i++) {
@@ -89,7 +90,7 @@ public class ControladorPresentacion {
         for (int i = 0; i < combination.size(); i++)
             NG += combination.get(i);
         return NG;
-    }
+    }*/
 
     public int getCorrectColors() {
         return cont.getCC();
@@ -99,7 +100,7 @@ public class ControladorPresentacion {
         return cont.getCP();
     }
 
-    public String RandomSolution () {
+    /*public String RandomSolution () {
         String RS = "";
         Combination comb = cont.generateCombi();
         ArrayList<Byte> combination = comb.getComb();
@@ -108,7 +109,7 @@ public class ControladorPresentacion {
         return RS;
     }
 
-    public void s () {}
+    public void s () {}*/
 
 
 }
