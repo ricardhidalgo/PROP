@@ -12,6 +12,7 @@ public class Individual {
     private static int defaultGenNum = 4;
     private Byte genes[];
     private double fitness = 0.0;
+    int ballNumber = 6;
 
     public Individual(){
         genes = new Byte[defaultGenNum];
@@ -46,7 +47,7 @@ public class Individual {
 
     public void initializeIndividual(){
         for(int i=0; i<genes.length; i++)
-            genes[i] = (byte) ThreadLocalRandom.current().nextInt(0, 5);
+            genes[i]= (byte)ThreadLocalRandom.current().nextInt(0, ballNumber);
 
     }
 
@@ -67,7 +68,7 @@ public class Individual {
     public void mutateIndividual(double mutationRatio){
         if(ThreadLocalRandom.current().nextDouble(0,1.0) > mutationRatio){
             int i = ThreadLocalRandom.current().nextInt(0,this.genes.length);
-            genes[i] = (byte) ThreadLocalRandom.current().nextInt(0, 5);
+            genes[i] = (byte)ThreadLocalRandom.current().nextInt(0,ballNumber);
         }
     }
 
