@@ -90,7 +90,7 @@ public class Controlador {
 
     public void start () {
         ia = new AI_Genetic(difficulty);
-        if (breaker) game = new Game(usuario, ia, breaker, difficulty);
+        if (!breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
 
@@ -129,11 +129,13 @@ public class Controlador {
     }
 
     public void checkAnswer() {
+
         correctColorsPositions(correct, later);
     }
 
     public void setAnswerCB() {
-        correct = generateCombi();
+        ia = new AI_Genetic(difficulty);
+        correct = ia.generateSecret();
     }
 
     public void saveMatch(String username, ArrayList<String> in) {
@@ -141,22 +143,31 @@ public class Controlador {
     }
 
     public void setAnswerCM(String answer2) {
-        byte[] valuesDefault = answer2.getBytes();
         ArrayList<Byte> sol = new ArrayList<Byte>();
-        for (int i = 0; i < valuesDefault.length; i++) {
-            sol.add(valuesDefault[i]);
+        for (int i = 0; i < answer2.length(); i++) {
+            if (answer2.charAt(i) == 'R') sol.add((byte)0);
+            else if (answer2.charAt(i) == 'Y') sol.add((byte)1);
+            else if (answer2.charAt(i) == 'G') sol.add((byte)2);
+            else if (answer2.charAt(i) == 'B') sol.add((byte)3);
+            else if (answer2.charAt(i) == 'O') sol.add((byte)4);
+            else if (answer2.charAt(i) == 'P') sol.add((byte)5);
         }
         setCorrect(sol);
         correct = getcorrect();
     }
 
     public void setGuess(String guess) {
-        byte[] valuesDefault = guess.getBytes();
         ArrayList<Byte> sol = new ArrayList<Byte>();
-        for (int i = 0; i < valuesDefault.length; i++) {
-            sol.add(valuesDefault[i]);
+        for (int i = 0; i < guess.length(); i++) {
+            if (guess.charAt(i) == 'R') sol.add((byte)0);
+            else if (guess.charAt(i) == 'Y') sol.add((byte)1);
+            else if (guess.charAt(i) == 'G') sol.add((byte)2);
+            else if (guess.charAt(i) == 'B') sol.add((byte)3);
+            else if (guess.charAt(i) == 'O') sol.add((byte)4);
+            else if (guess.charAt(i) == 'P') sol.add((byte)5);
         }
         later = new Combination(sol);
+        checkAnswer();
     }
 
     public String RandomSolution() {
