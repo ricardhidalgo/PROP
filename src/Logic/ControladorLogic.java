@@ -1,38 +1,51 @@
 package Logic;
 
-import Logic.*;
+import Persistence.ControladorPersistencia;
 
 import java.util.ArrayList;
-import Persistence.ControladorDomini;
 
-public class Controlador {
+public class ControladorLogic {
 
-    Difficulty difficulty = new Difficulty();
+    Difficulty difficulty;
     boolean tips = false;
     int numB;
     boolean rep;
-    Game game = new Game();
-    User usuario = new User();
+    Game game;
+    User usuario;
     boolean breaker;
     AI ia;
     Combination correct = new Combination();
     Combination later = new Combination();
     ArrayList<Play> plays;
-    ControladorDomini cd = new ControladorDomini();
+    ControladorPersistencia cd = new ControladorPersistencia();
     Play jugada = new Play();
     Ranking ranking = new Ranking();
 
-    /* Contructora vacía */
 
-    public Controlador () {
+    /**
+     * Constructora por defecto
+     */
+    public ControladorLogic() {
 
     }
 
+    /**
+     * Combrueba que el nombre de usuario dado existe en el registro de usuarios
+     *
+     * @param nick Nombre de usuario
+     * @return True si existe, false en caso contrario
+     */
     public boolean ExistsName(String nick) {
         return cd.TryName(nick);
     }
 
-    public void Register (String nick, String pw) {
+    /**
+     * Da de alta un nuevo usuario en el registro de usuarios.
+     *
+     * @param nick Nombre del usuario.
+     * @param pw   Contraseña de acceso del usuario.
+     */
+    public void Register(String nick, String pw) {
         cd.create(nick, pw);
     }
 
@@ -40,7 +53,7 @@ public class Controlador {
         return cd.CorrectPW(nick, pw);
     }
 
-    public void setUser (String nick, String pw) {
+    public void setUser(String nick, String pw) {
         usuario = new User(nick, pw);
     }
 
@@ -48,18 +61,19 @@ public class Controlador {
         return usuario;
     }
 
-    public void setDiff (String diff) {
+    public void setDiff(String diff) {
+        difficulty = new Difficulty();
         if (diff == "easy") difficulty.setEasy(tips);
         else if (diff == "medium") difficulty.setMedium(tips);
         else if (diff == "hard") difficulty.setHard(tips);
         else if (diff == "custom") difficulty.setCustom(numB, rep, tips);
     }
 
-    public void setnumB (int num) {
+    public void setnumB(int num) {
         this.numB = num;
     }
 
-    public void setrep (boolean repeat) {
+    public void setrep(boolean repeat) {
         this.rep = repeat;
     }
 
@@ -68,27 +82,27 @@ public class Controlador {
     }
 
     /* true == CodeBreaker */
-    public void setType (boolean breaking) {
+    public void setType(boolean breaking) {
         breaker = breaking;
     }
 
-    public void setTips (boolean tip) {
+    public void setTips(boolean tip) {
         this.tips = tip;
     }
 
-    public void setCorrect (ArrayList<Byte> solution) {
+    public void setCorrect(ArrayList<Byte> solution) {
         correct = new Combination(solution);
     }
 
-    public Combination getcorrect() {
+    public Combination getCorrect() {
         return correct;
     }
 
-    public void setPlays (ArrayList<Play> play) {
+    public void setPlays(ArrayList<Play> play) {
         plays = play;
     }
 
-    public void start () {
+    public void start() {
         ia = new AI_Genetic(difficulty);
         if (!breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
@@ -102,7 +116,7 @@ public class Controlador {
         return jugada.getNumCorrectPositions();
     }
 
-    public void correctColorsPositions (Combination comb1, Combination comb2) {
+    public void correctColorsPositions(Combination comb1, Combination comb2) {
         jugada.processPlay(comb1, comb2);
     }
 
@@ -110,12 +124,12 @@ public class Controlador {
     todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
      */
 
-    public Combination generateCombi () {
+    public Combination generateCombi() {
         ia = new AI_Genetic(difficulty);
         return ia.generateSecret();
     }
 
-    public Combination FirstGues () {
+    public Combination FirstGues() {
         ia = new AI_Genetic(difficulty);
         return ia.generateFirstCombination();
     }
@@ -124,7 +138,7 @@ public class Controlador {
         jugada.modifyColor(CC);
     }
 
-    public void setNumCP (int CP) {
+    public void setNumCP(int CP) {
         jugada.modifyPosition(CP);
     }
 
@@ -153,7 +167,7 @@ public class Controlador {
             else if (answer2.charAt(i) == 'P') sol.add((byte) 5);
         }
         setCorrect(sol);
-        correct = getcorrect();
+        correct = getCorrect();
     }
 
     public void setGuess(String guess) {
@@ -208,7 +222,7 @@ public class Controlador {
         return FG;
     }
 
-    public void insert1puntuation (Ranking ranking, String nickname, int score) {
+    public void insert1puntuation(Ranking ranking, String nickname, int score) {
         ranking.modifynick(nickname);
         ranking.modifyscore(score);
         ranking.InsertRanking();
@@ -230,11 +244,11 @@ public class Controlador {
         CreateRanking(ranking, user);
     }
 
-    public ArrayList<MyPair> seeranking (Ranking ranking) {
+    public ArrayList<MyPair> seeranking(Ranking ranking) {
         return ranking.getranking();
     }
 
-    public void guardarpuntuacion (String name, ArrayList<String> puntuacion, boolean score) {
+    public void guardarpuntuacion(String name, ArrayList<String> puntuacion, boolean score) {
         cd.savepuntuation(name, puntuacion, score);
     }
 

@@ -15,7 +15,6 @@ public class CustomDifficulty {
     private JLabel lengthLabel;
     private JButton backButton;
     private JButton continueButton;
-    private JCheckBox tipsCheckBox;
 
     public JPanel getCustomDifficultyPanel() {
         return CustomDifficultyPanel;

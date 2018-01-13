@@ -47,7 +47,7 @@ public class Individual {
 
     public void initializeIndividual(){
         for(int i=0; i<genes.length; i++)
-            genes[i]= (byte)ThreadLocalRandom.current().nextInt(0, ballNumber);
+            genes[i] = (byte) ThreadLocalRandom.current().nextInt(0, ballNumber);
 
     }
 
@@ -68,7 +68,7 @@ public class Individual {
     public void mutateIndividual(double mutationRatio){
         if(ThreadLocalRandom.current().nextDouble(0,1.0) > mutationRatio){
             int i = ThreadLocalRandom.current().nextInt(0,this.genes.length);
-            genes[i] = (byte)ThreadLocalRandom.current().nextInt(0,ballNumber);
+            genes[i] = (byte) ThreadLocalRandom.current().nextInt(0, ballNumber);
         }
     }
 

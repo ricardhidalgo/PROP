@@ -60,7 +60,7 @@ public class DriverDifficulty {
 
 
                     case 8:
-                        System.out.println(diff.getDificultyCode());
+                        System.out.println(diff.getDifficultyCode());
                         break;
 
                     case 9:

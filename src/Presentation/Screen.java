@@ -118,16 +118,16 @@ public class Screen extends JFrame implements ActionListener{
                     layout.show(mainPanel, "MainMenu");
                 } else if (source == loginRegisterC.getLoginButton()) {
                     String user = loginRegisterC.getUsernameLogin().getText();
-                    String pass = loginRegisterC.getPasswordLogin().getPassword().toString();
+                    String pass = String.valueOf(loginRegisterC.getPasswordLogin().getPassword());
                     if (cp.exists(user) && cp.checkPW(user, pass)) {
                         username = user;
                         layout.show(mainPanel, "MainMenu");
                     }
                 } else if (source == loginRegisterC.getRegisterButton()) {
                     String user = loginRegisterC.getUsernameRegister().getText();
-                    String pass = loginRegisterC.getPasswordRegister().getPassword().toString();
+                    String pass = String.valueOf(loginRegisterC.getPasswordRegister().getPassword());
                     if (!cp.exists(user)) {
-                        cp.registrar(user, pass);
+                        cp.registerUser(user, pass);
                         username = user;
                         cp.setUs(username, pass);
                         mainMenuC.getUserLabel().setText(username);
@@ -157,7 +157,6 @@ public class Screen extends JFrame implements ActionListener{
                     ArrayList<String> arr = cp.loadMatch(username, 1);
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getSaveSlot3Button()) {
-
                     ArrayList<String> arr = cp.loadMatch(username, 2);
                     layout.show(mainPanel, "GameBoard");
                 } else if (source == loadGameC.getBackButton()) {

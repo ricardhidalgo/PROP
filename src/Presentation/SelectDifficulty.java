@@ -12,6 +12,7 @@ public class SelectDifficulty {
     private JButton customButton;
     private JButton backButton;
     private JPanel SelectDifficultyPanel;
+    private JCheckBox activateTipsCheckBox;
 
     public JPanel getSelectDifficultyPanel() {
         return SelectDifficultyPanel;
@@ -35,6 +36,10 @@ public class SelectDifficulty {
 
     public JButton getBackButton() {
         return backButton;
+    }
+
+    public JCheckBox getActivateTipsCheckBox() {
+        return activateTipsCheckBox;
     }
 
     public void addEasyButtonActionListener(ActionListener listener) {

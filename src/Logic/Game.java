@@ -15,6 +15,7 @@ public class Game {
     private Combination secretCode;
     private ArrayList<Play> plays;
     private Difficulty difficulty;
+
     /**
      * Realiza una jugada.
      * @param comb combinación correcta.
@@ -90,22 +91,22 @@ public class Game {
     }
 
     /**
-     * Constructora con valores predefinidos.
+     * Constructora con valores predefinidos. Pensada para crear una nueva partida
      * @param user usuario de la partida.
      * @param ai IA de la partida.
      * @param isUserBreaker indica si el usuario es CB o CM.
      * @param difficulty indica el nível de dificultad.
+     * @param plays Conjunto de jugadas que se han realizado
      */
     public Game(User user, AI ai, boolean isUserBreaker, Difficulty difficulty) {
         this.user = user;
         this.ai = ai;
         this.isUserBreaker = isUserBreaker;
         this.difficulty = difficulty;
-        this.plays = new ArrayList<>();
     }
 
     /**
-     * Constructora con valores predefinidos.
+     * Constructora con valores predefinidos. Pensada para cargar una partida
      * @param user usuario de la partida.
      * @param ai IA de la partida.
      * @param isUserBreaker indica si el usuario es CB o CM.
@@ -115,6 +116,7 @@ public class Game {
      */
     public Game(User user, AI ai, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty) {
         this.user = user;
+        this.ai = ai;
         this.isUserBreaker = isUserBreaker;
         this.secretCode = secretCode;
         this.plays = plays;

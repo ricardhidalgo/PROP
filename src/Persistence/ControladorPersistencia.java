@@ -2,11 +2,11 @@ package Persistence;
 
 import java.util.ArrayList;
 
-public class ControladorDomini {
+public class ControladorPersistencia {
 
     dataGestor dg = new dataGestor();
 
-    public ControladorDomini() {
+    public ControladorPersistencia() {
 
     }
 

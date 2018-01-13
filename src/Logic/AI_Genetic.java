@@ -38,7 +38,7 @@ public class AI_Genetic implements AI{
         if(dif.isCanRepeat()) {
             ArrayList<Byte> comb = new ArrayList<>();
             for (int i = 0; i < dif.getNumBallsInCombination(); ++i) {
-                comb.add((byte)random.nextInt(6));
+                comb.add((byte) random.nextInt(6));
             }
             combination.setCombination(comb);
 
@@ -46,7 +46,7 @@ public class AI_Genetic implements AI{
 
             Set<Byte> hcomb = new HashSet<>();
             while(hcomb.size() < dif.getNumBallsInCombination()) {
-                hcomb.add((byte)random.nextInt(6));
+                hcomb.add((byte) random.nextInt(6));
             }
             ArrayList<Byte> comb2 = new ArrayList<Byte>(hcomb);
             combination.setCombination(comb2);
@@ -62,7 +62,7 @@ public class AI_Genetic implements AI{
          * Genera una combinacion inicial preestablecida.
          * @return devuelve la combinacion inicial.
          */
-        int i = dif.getDificultyCode();
+        int i = dif.getDifficultyCode();
         ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)5, (byte)1, (byte)2, (byte)3)));
       //  ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
         ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));

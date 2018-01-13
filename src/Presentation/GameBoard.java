@@ -154,12 +154,12 @@ public class GameBoard extends JPanel {
 
     private void assembleGuessPanel() {
 
-
         guessPanel = new JPanel();
         guessPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         guessPanel.setPreferredSize(new Dimension(200, 800));
         guessPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Guess Panel", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new Color(-4737097)));
         guessPanel.setBackground(backgroundColor);
+        guessPanel.setForeground(new Color(-4737097));
 
 
         guessScrollPane = new JScrollPane(guessPanel);
@@ -167,6 +167,7 @@ public class GameBoard extends JPanel {
         guessScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         guessScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         guessScrollPane.setBackground(backgroundColor);
+        guessScrollPane.setForeground(new Color(-4737097));
     }
 
 
@@ -176,6 +177,7 @@ public class GameBoard extends JPanel {
         titlePanel = new JPanel();
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setBackground(backgroundColor);
+        titlePanel.setForeground(new Color(-4737097));
 
         titleText = new JLabel("Mastermind");
         titleText.setFont(new Font("Arial", Font.ITALIC, 28));
@@ -191,7 +193,7 @@ public class GameBoard extends JPanel {
 
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        resultPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Turn " + turn));
+        resultPanel.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Turn " + turn, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new Color(-4737097)));
         resultPanel.setBackground(backgroundColor);
         resultPanel.setForeground(new Color(-4737097));
 
@@ -209,10 +211,14 @@ public class GameBoard extends JPanel {
             }
             smallPins[i] = new Pin(pinColors[index], pinSmallDimension);
             pinPanel.add(smallPins[i]);
+            pinPanel.setBackground(backgroundColor);
+            pinPanel.setForeground(new Color(-4737097));
         }
 
 
         JLabel resultText = new JLabel("C: " + correctColor + " P: " + correctPlace);
+        resultText.setBackground(backgroundColor);
+        resultText.setForeground(new Color(-4737097));
 
         resetGuessString();
 
@@ -221,17 +227,15 @@ public class GameBoard extends JPanel {
         guessPanel.add(resultPanel);
         guessPanel.revalidate();
         guessPanel.repaint();
+
     }
 
 
     public void displayCurrentGuess() {
 
-
         char[] letters = getGuessString().toCharArray();
 
-
         currentGuessPanel.removeAll();
-
 
         Pin[] smallPins = new Pin[letters.length];
         for (int i = 0; i < smallPins.length; i++) {

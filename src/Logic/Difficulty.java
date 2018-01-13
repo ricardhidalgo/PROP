@@ -8,14 +8,14 @@ public class Difficulty {
 
     private int numBallsInCombination;
     private boolean canRepeat;
-    private int dificultyCode;
+    private int difficultyCode;
     private boolean hasTips;
 
     /**
      * Constructora vacía.
      */
     public Difficulty() {
-        this.dificultyCode = 0;
+        this.difficultyCode = 0;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Difficulty {
     public Difficulty(int numBalls, boolean repeat, int code, boolean tips) {
         this.numBallsInCombination = numBalls;
         this.canRepeat = repeat;
-        this.dificultyCode = code;
+        this.difficultyCode = code;
         this.hasTips = tips;
     }
 
@@ -40,7 +40,7 @@ public class Difficulty {
     public void setEasy(boolean tips) {
         this.numBallsInCombination = 4;
         this.canRepeat = false;
-        this.dificultyCode = 1;
+        this.difficultyCode = 1;
         this.hasTips = tips;
 
     }
@@ -52,7 +52,7 @@ public class Difficulty {
     public void setMedium(boolean tips) {
         this.numBallsInCombination = 6;
         this.canRepeat = false;
-        this.dificultyCode = 2;
+        this.difficultyCode = 2;
         this.hasTips = tips;
 
     }
@@ -64,7 +64,7 @@ public class Difficulty {
     public void setHard(boolean tips) {
         this.numBallsInCombination = 8;
         this.canRepeat = true;
-        this.dificultyCode = 3;
+        this.difficultyCode = 3;
         this.hasTips = tips;
 
     }
@@ -78,11 +78,10 @@ public class Difficulty {
     public void setCustom(int numBalls, boolean canRep, boolean tips) {
         this.numBallsInCombination = numBalls;
         this.canRepeat = canRep;
-        this.dificultyCode = 4;
+        this.difficultyCode = 4;
         this.hasTips = tips;
 
     }
-
 
     /**
      * Retorna el numero de bolas total de la combinación.
@@ -104,8 +103,8 @@ public class Difficulty {
      * Retorna el nível de dificultad.
      * @return retorna un int con el nivel de dificultad (1..4).
      */
-    public int getDificultyCode() {
-        return dificultyCode;
+    public int getDifficultyCode() {
+        return difficultyCode;
     }
 
     /**
