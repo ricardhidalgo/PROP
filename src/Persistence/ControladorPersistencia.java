@@ -21,18 +21,18 @@ public class ControladorPersistencia {
         return partida;
     }
 
-    public boolean TryName(String name) {
+    public boolean tryName(String name) {
         if (dg.findUser(name).get(0) != "NULL") return true;
         else return false;
     }
 
-    public boolean CorrectPW(String name, String pw) {
+    public boolean correctPW(String name, String pw) {
 
-        return (TryName(name) && dg.findUser(name).get(1) == pw);
+        return (tryName(name) && dg.findUser(name).get(1) == pw);
     }
 
     public void create(String nickname, String pw) {
-        if (!TryName(nickname)) dg.createUser(nickname, pw);
+        if (!tryName(nickname)) dg.createUser(nickname, pw);
     }
 
     public void savepuntuation(String nickname, ArrayList<String> info, boolean score) {

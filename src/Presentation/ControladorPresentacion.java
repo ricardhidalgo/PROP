@@ -20,9 +20,11 @@ public class ControladorPresentacion {
      *
      * @param name Nombre que debe comprobarse.
      * @return True si el nombre se encuentra entre el registro de usuarios. False en caso contrario.
+     * @deprecated Ya incluida
      */
+    @Deprecated
     public boolean exists(String name) {
-        return cont.ExistsName(name);
+        return cont.existsName(name);
     }
 
     /**
@@ -30,46 +32,58 @@ public class ControladorPresentacion {
      *
      * @param nick Nombre del usuario.
      * @param pw   Contraseña de acceso del usuario.
+     * @return True si se ha podido realizar el registro. False en caso contrario (Usuario ya existe).
      */
-    public void registerUser(String nick, String pw) {
-        cont.Register(nick, pw);
+    public boolean registerUser(String nick, String pw) {
+        return cont.register(nick, pw);
     }
 
     /**
-     * Comprueba si el usuario y la contraseña concuerdan en el registro.
+     * Comprueba si el usuario y la contraseña concuerdan en el registro de usuario.
      * @param nick Nombre de usuario.
-     * @param pw Contrasenya del usuario
+     * @param pw Contraseña del usuario.
      * @return True si concuerdan. False en caso contrario.
+     * @deprecated
      */
+    @Deprecated
     public boolean checkPW(String nick, String pw) {
-        return cont.CorrectPSS(nick, pw);
+        return cont.checkPassword(nick, pw);
     }
 
-    public void setUs (String nick, String pw) {
-        cont.setUser(nick, pw);
+    /**
+     * Intenta iniciar sesión con el usuario y la contraseña dadas.
+     *
+     * @param nick Nombre de usuario
+     * @param pw   Contraseña
+     * @return True si la operación se ha realizado exitosamente. False en caso contrario (Usuario o contraseña incorrecto).
+     */
+    public boolean loginUser(String nick, String pw) {
+
+        return cont.loginUser(nick, pw);
     }
 
     /**
      * Establece el codigo de dificultad de la partida.
+     *
      * @param diff Dificultad de la partida. Possibles entradas: "easy", "medium", "hard", "custom"
      */
-    public void setDifficult (String diff) {
+    public void setDifficult(String diff) {
         cont.setDiff(diff);
     }
 
-    public void setnumB (int num) {
+    public void setnumB(int num) {
         cont.setnumB(num);
     }
 
-    public void setrepeat (boolean repeat) {
+    public void setrepeat(boolean repeat) {
         cont.setrep(repeat);
     }
 
-    public void setTps (boolean tips) {
+    public void setTps(boolean tips) {
         cont.setTips(tips);
     }
 
-    public void breaker (boolean type) {
+    public void breaker(boolean type) {
         cont.setType(type);
     }
 
@@ -77,11 +91,11 @@ public class ControladorPresentacion {
         cont.start();
     }
 
-    public void setAnswerCM (String answer2) {
+    public void setAnswerCM(String answer2) {
         cont.setAnswerCM(answer2);
     }
 
-    public String FirstGuess () {
+    public String FirstGuess() {
         return cont.FirstGuess();
     }
 
@@ -119,9 +133,9 @@ public class ControladorPresentacion {
         cont.guardarpuntuacion(name, info, punt);
     }
 
-    public void convertranking(String user) {
+    /*public void convertranking(String user) {
         cont.convertranking(user);
-    }
+    }*/
 
     public ArrayList<String> loadMatch(String user, int index) {
         return cont.getMatch(user, index);

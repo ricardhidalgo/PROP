@@ -29,37 +29,64 @@ public class ControladorLogic {
 
     }
 
+
     /**
-     * Combrueba que el nombre de usuario dado existe en el registro de usuarios
+     * Combrueba que el nombre de usuario dado existe en el registro de usuarios.
      *
-     * @param nick Nombre de usuario
-     * @return True si existe, false en caso contrario
+     * @param nick Nombre de usuario.
+     * @return True si existe, false en caso contrario.
+     * @deprecated
      */
-    public boolean ExistsName(String nick) {
-        return cd.TryName(nick);
+    @Deprecated
+    public boolean existsName(String nick) {
+        return cd.tryName(nick);
     }
 
     /**
-     * Da de alta un nuevo usuario en el registro de usuarios.
+     * Da de alta un nuevo usuario en el registro de usuarios e inicia sesión con el.
      *
      * @param nick Nombre del usuario.
      * @param pw   Contraseña de acceso del usuario.
+     * @return True si la operación se ha relizado con éxito. False en caso contrario (Usuario ya existe).
      */
-    public void Register(String nick, String pw) {
-        cd.create(nick, pw);
+    public boolean register(String nick, String pw) {
+        if (cd.tryName(nick)) {
+            return false;
+        } else {
+            cd.create(nick, pw);
+            usuario = new User(nick, pw);
+            return true;
+        }
     }
 
-    public boolean CorrectPSS(String nick, String pw) {
-        return cd.CorrectPW(nick, pw);
+    /**
+     * Comprueba si el usuario y la contraseña concuerdan en el registro de usuario.
+     *
+     * @param nick Nombre de usuario.
+     * @param pw   Contraseña del usuario.
+     * @return True si concuerdan. False en caso contrario.
+     * @deprecated
+     */
+    @Deprecated
+    public boolean checkPassword(String nick, String pw) {
+        return cd.correctPW(nick, pw);
     }
 
-    public void setUser(String nick, String pw) {
-        usuario = new User(nick, pw);
+    /**
+     * Intenta iniciar sesión con el nombre de usuario y la contraseña dados.
+     *
+     * @param nick Nombre de usuario
+     * @param pw   Contraseña
+     * @return True si se ha podido iniciar sesión con éxito. False en caso contrario (Usuario o contraseña incorrecto).
+     */
+    public boolean loginUser(String nick, String pw) {
+        if (cd.tryName(nick) && cd.correctPW(nick, pw)) {
+            usuario = new User(nick, pw);
+            return true;
+        } else return false;
+
     }
 
-    public User getUsuario() {
-        return usuario;
-    }
 
     public void setDiff(String diff) {
         difficulty = new Difficulty();
@@ -232,17 +259,16 @@ public class ControladorLogic {
         return cd.allscores(nickname, score);
     }
 
-    public void CreateRanking(Ranking ranking, String usuario) {
+    /*public void CreateRanking(Ranking ranking, String usuario) {
         ArrayList<String> puntuacion = cd.allscores(usuario, true);
         for (int i = 0; i < puntuacion.size(); i++) {
             insert1puntuation(ranking, usuario, Integer.parseInt(puntuacion.get(i)));
         }
-    }
+    }*/
 
-    public void convertranking(String user) {
-        User usuario = getUsuario();
-        CreateRanking(ranking, user);
-    }
+    /*public void convertranking() {
+        CreateRanking(ranking, usuario);
+    }*/
 
     public ArrayList<MyPair> seeranking(Ranking ranking) {
         return ranking.getranking();

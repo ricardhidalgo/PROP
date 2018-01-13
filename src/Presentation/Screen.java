@@ -119,18 +119,17 @@ public class Screen extends JFrame implements ActionListener{
                 } else if (source == loginRegisterC.getLoginButton()) {
                     String user = loginRegisterC.getUsernameLogin().getText();
                     String pass = String.valueOf(loginRegisterC.getPasswordLogin().getPassword());
-                    if (cp.exists(user) && cp.checkPW(user, pass)) {
+                    if (cp.loginUser(user, pass)) {
                         username = user;
+                        mainMenuC.getUserLabel().setText("Welcome, " + username + "!");
                         layout.show(mainPanel, "MainMenu");
                     }
                 } else if (source == loginRegisterC.getRegisterButton()) {
                     String user = loginRegisterC.getUsernameRegister().getText();
                     String pass = String.valueOf(loginRegisterC.getPasswordRegister().getPassword());
-                    if (!cp.exists(user)) {
-                        cp.registerUser(user, pass);
+                    if (cp.registerUser(user, pass)) {
                         username = user;
-                        cp.setUs(username, pass);
-                        mainMenuC.getUserLabel().setText(username);
+                        mainMenuC.getUserLabel().setText("Welcome, " + username + "!");
                         layout.show(mainPanel, "MainMenu");
                     }
                 } else if (source == customDifficultyC.getContinueButton()) {
