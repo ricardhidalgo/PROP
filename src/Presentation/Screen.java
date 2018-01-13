@@ -84,7 +84,7 @@ public class Screen extends JFrame implements ActionListener{
 
     private void setListeners(){
 
-        ActionListener actionListener = new ActionListener() {
+        ActionListener actionListener = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
@@ -132,7 +132,7 @@ public class Screen extends JFrame implements ActionListener{
                         mainMenuC.getUserLabel().setText("Welcome, " + username + "!");
                         layout.show(mainPanel, "MainMenu");
                     }
-                } else if (source == customDifficultyC.getContinueButton()) {
+               } else if (source == customDifficultyC.getContinueButton()) {
                     layout.show(mainPanel, "ChoseRole");
                 } else if (source == customDifficultyC.getBackButton()) {
                     layout.show(mainPanel, "SelectDifficulty");
