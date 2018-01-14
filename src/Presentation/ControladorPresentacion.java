@@ -72,7 +72,7 @@ public class ControladorPresentacion {
         cont.setDiff(diff, tips);
     }
 
-    public boolean isEnd(int pos){
+    public boolean isEnd(int pos) {
         return pos == cont.getNumB();
     }
 
@@ -135,11 +135,11 @@ public class ControladorPresentacion {
         cont.guardarpuntuacion(usr, info, true);
     }
 
-    public void generateRanking(){
+    public void generateRanking() {
         cont.generateRanking();
     }
 
-    public ArrayList<MyPair> getRanking(){
+    public ArrayList<MyPair> getRanking() {
         return cont.getRanking();
     }
 

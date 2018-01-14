@@ -165,7 +165,7 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == selectDifficultyC.getMediumButton()) {
-            cp.setDifficult("medium");
+            cp.setDifficult("medium", selectDifficultyC.getActivateTipsCheckBox().isSelected());
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == selectDifficultyC.getHardButton()) {
@@ -260,7 +260,7 @@ public class Screen extends JFrame implements ActionListener{
             int col = cp.getCorrectColors();
             int pos = cp.getCorrectPosition();
             board.displayResult(col, pos, board.getCurrentTurn() + 1);
-            if(cp.isEnd(pos)){
+            if (cp.isEnd(pos)) {
                 cp.saveScore(username);
                 layout.show(mainPanel, "MainMenu");
             }

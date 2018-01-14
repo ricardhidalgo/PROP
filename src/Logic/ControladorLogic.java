@@ -173,7 +173,7 @@ public class ControladorLogic {
         correctColorsPositions(correct, later);
     }
 
-    public int getNumB(){
+    public int getNumB() {
         return difficulty.getNumBallsInCombination();
     }
 
@@ -272,15 +272,15 @@ public class ControladorLogic {
         cd.savepuntuation(name, puntuacion, score);
     }
 
-    public int getScore(){
+    public int getScore() {
         return game.getScore();
     }
 
-    public Game loadMatch(ArrayList<String> info){
+    public Game loadMatch(ArrayList<String> info) {
         User us = new User();
         Combination secret = new Combination(info.get(0));
         Difficulty dif = new Difficulty();
-        switch(info.get(1)){
+        switch (info.get(1)) {
             case "Easy":
                 dif.setEasy(true);
                 break;
@@ -292,21 +292,21 @@ public class ControladorLogic {
                 break;
         }
         ArrayList<Combination> guesses = new ArrayList<>();
-        for(int i=2; i<info.size(); i++) guesses.add(new Combination(info.get(i)));
+        for (int i = 2; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
         Game g = new Game(usuario, secret, dif, guesses);
         return g;
     }
 
-    public ArrayList<MyPair> getRanking(){
+    public ArrayList<MyPair> getRanking() {
         return ranking.getRanking();
     }
 
-    public void generateRanking(){
+    public void generateRanking() {
         ArrayList<String> users = cd.getUsers();
         ArrayList<MyPair> rank = new ArrayList<>();
-        for(int i=0; i<users.size(); i++){
-            ArrayList<String> score = cd.allscores(users.get(i),true);
-            for(int j=0; j<score.size(); j++){
+        for (int i = 0; i < users.size(); i++) {
+            ArrayList<String> score = cd.allscores(users.get(i), true);
+            for (int j = 0; j < score.size(); j++) {
                 MyPair p = new MyPair(users.get(i), Integer.parseInt(score.get(j)));
                 System.out.println(score.get(j));
                 rank.add(p);
@@ -315,7 +315,7 @@ public class ControladorLogic {
         ranking = new Ranking(rank);
     }
 
-    public void saveMatch(){
+    public void saveMatch() {
         cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
     }
 

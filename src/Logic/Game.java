@@ -32,7 +32,7 @@ public class Game {
             plays.add(np);
         }
         guesses++;
-        score = (100000*difficulty.getNumBallsInCombination())/guesses;
+        score = (100000 * difficulty.getNumBallsInCombination()) / guesses;
         System.out.println(score);
         return np;
     }
@@ -47,6 +47,7 @@ public class Game {
 
     /**
      * Retorna la puntuacion obtenida.
+     *
      * @return retorna la puntuacion de la partida.
      */
     public int getScore() {
@@ -136,7 +137,8 @@ public class Game {
 
     /**
      * Constructora con valores predefinidos. Pensada para cargar una partida
-     * @param user usuario de la partida.
+     *
+     * @param user       usuario de la partida.
      * @param secretCode combinación correcta (respuesta).
      * @param difficulty nível de dificultad.
      */
@@ -163,20 +165,24 @@ public class Game {
 
     /**
      * Funcion usada para generar un game a partir de unos guesses y un secretCode
+     *
      * @param plays jugadas guardadas
      */
-    public void initializeGame(ArrayList<Combination> plays){ for(int i=0; i<plays.size(); i++) this.makePlay(plays.get(i)); }
+    public void initializeGame(ArrayList<Combination> plays) {
+        for (int i = 0; i < plays.size(); i++) this.makePlay(plays.get(i));
+    }
 
 
     /**
      * Funcion usada para obtener una partida
+     *
      * @return devuelve ArrayList con todos los elementos de la partida
      */
-    public ArrayList<String> retrieveMatch(){
+    public ArrayList<String> retrieveMatch() {
         //order: Code, Difficulty, guesses
         ArrayList<String> out = new ArrayList<>();
         out.add(secretCode.toString());
-        switch(difficulty.getDifficultyCode()){
+        switch (difficulty.getDifficultyCode()) {
             case 0:
                 out.add("Easy");
                 break;
@@ -189,8 +195,8 @@ public class Game {
             case 3:
                 break;
         }
-       // for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
-        for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
+        // for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
+        for (int i = 0; i < plays.size(); i++) out.add(plays.get(i).getCombination().toString());
         return out;
     }
 }
