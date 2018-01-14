@@ -1,13 +1,19 @@
 package Persistence;
 
 import java.util.ArrayList;
-
+/**
+ * @author albert.ortiz
+ */
 public class ControladorPersistencia {
 
     dataGestor dg = new dataGestor();
 
     public ControladorPersistencia() {
 
+    }
+
+    public ArrayList<String> getUsers(){
+        return dg.getUsers();
     }
 
     public ArrayList<String> getMatch(String user, int i) {
@@ -27,8 +33,7 @@ public class ControladorPersistencia {
     }
 
     public boolean correctPW(String name, String pw) {
-
-        return (tryName(name) && dg.findUser(name).get(1) == pw);
+        return (tryName(name) && dg.findUser(name).get(1).equals(pw));
     }
 
     public void create(String nickname, String pw) {

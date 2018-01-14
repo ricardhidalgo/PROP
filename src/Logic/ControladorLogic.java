@@ -18,7 +18,7 @@ public class ControladorLogic {
     ArrayList<Play> plays;
     ControladorPersistencia cd;
     Play jugada = new Play();
-    Ranking ranking = new Ranking();
+    Ranking ranking;
 
 
     /**
@@ -130,6 +130,7 @@ public class ControladorLogic {
 
     public void start() {
         ia = new AI_Genetic(difficulty);
+        plays = new ArrayList<>();
         if (!breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
@@ -169,17 +170,16 @@ public class ControladorLogic {
     }
 
     public void checkAnswer() {
-
         correctColorsPositions(correct, later);
+    }
+
+    public int getNumB(){
+        return difficulty.getNumBallsInCombination();
     }
 
     public void setAnswerCB() {
         ia = new AI_Genetic(difficulty);
         correct = ia.generateSecret();
-    }
-
-    public void saveMatch(String username, ArrayList<String> in) {
-        cd.savepuntuation(username, in, false);
     }
 
     public void setAnswerCM(String answer2) {
@@ -207,6 +207,7 @@ public class ControladorLogic {
             else if (guess.charAt(i) == 'P') sol.add((byte) 5);
         }
         later = new Combination(sol);
+        game.makePlay(new Combination(sol));
         checkAnswer();
     }
 
@@ -248,12 +249,6 @@ public class ControladorLogic {
         return FG;
     }
 
-    public void insert1puntuation(Ranking ranking, String nickname, int score) {
-        ranking.modifynick(nickname);
-        ranking.modifyscore(score);
-        ranking.InsertRanking();
-    }
-
     public ArrayList<String> score(String nickname, boolean score) {
         return cd.allscores(nickname, score);
     }
@@ -270,11 +265,58 @@ public class ControladorLogic {
     }*/
 
     public ArrayList<MyPair> seeranking(Ranking ranking) {
-        return ranking.getranking();
+        return ranking.getRanking();
     }
 
     public void guardarpuntuacion(String name, ArrayList<String> puntuacion, boolean score) {
         cd.savepuntuation(name, puntuacion, score);
+    }
+
+    public int getScore(){
+        return game.getScore();
+    }
+
+    public Game loadMatch(ArrayList<String> info){
+        User us = new User();
+        Combination secret = new Combination(info.get(0));
+        Difficulty dif = new Difficulty();
+        switch(info.get(1)){
+            case "Easy":
+                dif.setEasy(true);
+                break;
+            case "Medium":
+                dif.setMedium(true);
+                break;
+            case "Hard":
+                dif.setHard(true);
+                break;
+        }
+        ArrayList<Combination> guesses = new ArrayList<>();
+        for(int i=2; i<info.size(); i++) guesses.add(new Combination(info.get(i)));
+        Game g = new Game(usuario, secret, dif, guesses);
+        return g;
+    }
+
+    public ArrayList<MyPair> getRanking(){
+        return ranking.getRanking();
+    }
+
+    public void generateRanking(){
+        ArrayList<String> users = cd.getUsers();
+        ArrayList<MyPair> rank = new ArrayList<>();
+        for(int i=0; i<users.size(); i++){
+            ArrayList<String> score = cd.allscores(users.get(i),true);
+            for(int j=0; j<score.size(); j++){
+                MyPair p = new MyPair(users.get(i), Integer.parseInt(score.get(j)));
+                System.out.println(score.get(j));
+                rank.add(p);
+            }
+        }
+        ranking = new Ranking(rank);
+    }
+
+    public void saveMatch(){
+        cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
     }
 
 }

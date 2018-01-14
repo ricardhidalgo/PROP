@@ -1,6 +1,7 @@
 package Presentation;
 
 import Logic.ControladorLogic;
+import Logic.MyPair;
 
 import java.util.ArrayList;
 
@@ -71,6 +72,10 @@ public class ControladorPresentacion {
         cont.setDiff(diff, tips);
     }
 
+    public boolean isEnd(int pos){
+        return pos == cont.getNumB();
+    }
+
     public void setnumB(int num) {
         cont.setnumB(num);
     }
@@ -123,10 +128,19 @@ public class ControladorPresentacion {
         cont.setGuess(guess);
     }
 
-    public void saveScore(String name, int score, boolean punt) {
+    public void saveScore(String usr) {
+        int a = cont.getScore();
         ArrayList<String> info = new ArrayList<String>();
-        info.add(String.valueOf(score));
-        cont.guardarpuntuacion(name, info, punt);
+        info.add(String.valueOf(a));
+        cont.guardarpuntuacion(usr, info, true);
+    }
+
+    public void generateRanking(){
+        cont.generateRanking();
+    }
+
+    public ArrayList<MyPair> getRanking(){
+        return cont.getRanking();
     }
 
     /*public void convertranking(String user) {
@@ -137,7 +151,7 @@ public class ControladorPresentacion {
         return cont.getMatch(user, index);
     }
 
-    public void saveMatch(String username, ArrayList<String> match) {
-        cont.saveMatch(username, match);
+    public void saveMatch() {
+        cont.saveMatch();
     }
 }
