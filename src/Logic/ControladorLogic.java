@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class ControladorLogic {
 
     Difficulty difficulty;
-    boolean tips = false;
     int numB;
     boolean rep;
     Game game;
@@ -17,7 +16,7 @@ public class ControladorLogic {
     Combination correct = new Combination();
     Combination later = new Combination();
     ArrayList<Play> plays;
-    ControladorPersistencia cd = new ControladorPersistencia();
+    ControladorPersistencia cd;
     Play jugada = new Play();
     Ranking ranking = new Ranking();
 
@@ -26,7 +25,7 @@ public class ControladorLogic {
      * Constructora por defecto
      */
     public ControladorLogic() {
-
+        cd = new ControladorPersistencia();
     }
 
 
@@ -35,7 +34,7 @@ public class ControladorLogic {
      *
      * @param nick Nombre de usuario.
      * @return True si existe, false en caso contrario.
-     * @deprecated
+     * @deprecated Ya incluida en register y loginUser.
      */
     @Deprecated
     public boolean existsName(String nick) {
@@ -65,7 +64,7 @@ public class ControladorLogic {
      * @param nick Nombre de usuario.
      * @param pw   Contraseña del usuario.
      * @return True si concuerdan. False en caso contrario.
-     * @deprecated
+     * @deprecated Ya incluida por defecto en loginUser.
      */
     @Deprecated
     public boolean checkPassword(String nick, String pw) {
@@ -88,7 +87,10 @@ public class ControladorLogic {
     }
 
 
-    public void setDiff(String diff) {
+    /**
+     * @param diff
+     */
+    public void setDiff(String diff, boolean tips) {
         difficulty = new Difficulty();
         if (diff == "easy") difficulty.setEasy(tips);
         else if (diff == "medium") difficulty.setMedium(tips);
@@ -113,9 +115,6 @@ public class ControladorLogic {
         breaker = breaking;
     }
 
-    public void setTips(boolean tip) {
-        this.tips = tip;
-    }
 
     public void setCorrect(ArrayList<Byte> solution) {
         correct = new Combination(solution);

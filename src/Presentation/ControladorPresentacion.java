@@ -67,8 +67,8 @@ public class ControladorPresentacion {
      *
      * @param diff Dificultad de la partida. Possibles entradas: "easy", "medium", "hard", "custom"
      */
-    public void setDifficult(String diff) {
-        cont.setDiff(diff);
+    public void setDifficult(String diff, boolean tips) {
+        cont.setDiff(diff, tips);
     }
 
     public void setnumB(int num) {
@@ -77,10 +77,6 @@ public class ControladorPresentacion {
 
     public void setrepeat(boolean repeat) {
         cont.setrep(repeat);
-    }
-
-    public void setTps(boolean tips) {
-        cont.setTips(tips);
     }
 
     public void breaker(boolean type) {
