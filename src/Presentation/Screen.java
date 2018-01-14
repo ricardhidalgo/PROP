@@ -22,7 +22,7 @@ public class Screen extends JFrame implements ActionListener{
 
     private char[] pinColorLetters = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
     private int pinNumber = 4; //provisional
-    private Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.YELLOW, new Color(150, 0, 255)};
+    private Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.PINK, new Color(150, 0, 255)};
     private GameBoard board = new GameBoard(pinNumber, pinColorLetters, pinColors);
 
     /*private JPanel loginRegisterPanel;
@@ -165,7 +165,7 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == selectDifficultyC.getMediumButton()) {
-            cp.setDifficult("medium");
+            //cp.setDifficult("medium");
             cp.loadMatch(username, 0);
             layout.show(mainPanel, "GameBoard");
             //layout.show(mainPanel, "ChoseRole");
@@ -232,7 +232,7 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == loadGameC.getSaveSlot1Button()) {
 
-            ArrayList<String> arr = cp.loadMatch(username, 0);
+            cp.loadMatch(username, 0);
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot2Button()) {
