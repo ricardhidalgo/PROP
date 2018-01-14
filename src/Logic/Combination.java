@@ -38,8 +38,10 @@ public class Combination {
      */
     public Combination(String comb) {
         this.comb = new ArrayList<>();
-        byte[] a = comb.getBytes();
-        for (int i = 0; i < a.length; i++) this.comb.add(a[i]);
+        byte[] b = comb.getBytes();
+        for (int i = 0; i < comb.length(); i++){
+            this.comb.add((byte)(b[i]-'0'));
+        }
     }
 
     /**
