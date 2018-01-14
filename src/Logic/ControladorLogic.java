@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class ControladorLogic {
 
     Difficulty difficulty;
-    boolean tips = false;
     int numB;
     boolean rep;
     Game game;
@@ -17,7 +16,7 @@ public class ControladorLogic {
     Combination correct = new Combination();
     Combination later = new Combination();
     ArrayList<Play> plays;
-    ControladorPersistencia cd = new ControladorPersistencia();
+    ControladorPersistencia cd;
     Play jugada = new Play();
     Ranking ranking;
 
@@ -26,7 +25,7 @@ public class ControladorLogic {
      * Constructora por defecto
      */
     public ControladorLogic() {
-
+        cd = new ControladorPersistencia();
     }
 
 
@@ -35,7 +34,7 @@ public class ControladorLogic {
      *
      * @param nick Nombre de usuario.
      * @return True si existe, false en caso contrario.
-     * @deprecated
+     * @deprecated Ya incluida en register y loginUser.
      */
     @Deprecated
     public boolean existsName(String nick) {
@@ -65,7 +64,7 @@ public class ControladorLogic {
      * @param nick Nombre de usuario.
      * @param pw   Contraseña del usuario.
      * @return True si concuerdan. False en caso contrario.
-     * @deprecated
+     * @deprecated Ya incluida por defecto en loginUser.
      */
     @Deprecated
     public boolean checkPassword(String nick, String pw) {
@@ -88,7 +87,10 @@ public class ControladorLogic {
     }
 
 
-    public void setDiff(String diff) {
+    /**
+     * @param diff
+     */
+    public void setDiff(String diff, boolean tips) {
         difficulty = new Difficulty();
         if (diff == "easy") difficulty.setEasy(tips);
         else if (diff == "medium") difficulty.setMedium(tips);
@@ -113,9 +115,6 @@ public class ControladorLogic {
         breaker = breaking;
     }
 
-    public void setTips(boolean tip) {
-        this.tips = tip;
-    }
 
     public void setCorrect(ArrayList<Byte> solution) {
         correct = new Combination(solution);
@@ -174,7 +173,7 @@ public class ControladorLogic {
         correctColorsPositions(correct, later);
     }
 
-    public int getNumB(){
+    public int getNumB() {
         return difficulty.getNumBallsInCombination();
     }
 
@@ -273,11 +272,11 @@ public class ControladorLogic {
         cd.savepuntuation(name, puntuacion, score);
     }
 
-    public int getScore(){
+    public int getScore() {
         return game.getScore();
     }
 
-    public Game loadMatch(ArrayList<String> info){
+    public Game loadMatch(ArrayList<String> info) {
         User us = new User();
         for(int i=0; i<info.size(); i++) System.out.println(info.get(i));
         Combination secret = new Combination(info.get(0));
@@ -285,28 +284,28 @@ public class ControladorLogic {
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
         boolean tips = false;
-        if(info.get(2) == "true") b = true;
-        if(info.get(3) == "true") tips = true;
+        if (info.get(2) == "true") b = true;
+        if (info.get(3) == "true") tips = true;
         ArrayList<Combination> guesses = new ArrayList<>();
-        for(int i=3; i<info.size(); i++) guesses.add(new Combination(info.get(i)));
+        for (int i = 3; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
         dif.setCustom(numB, b, tips);
         Game g = new Game(usuario, secret, dif, guesses);
         return g;
     }
 
-    public ArrayList<String> getRanking(){
+    public ArrayList<String> getRanking() {
         ArrayList<String> rank = new ArrayList<>();
-        ArrayList<MyPair> arrP= ranking.getRanking();
-        for(int i =0; i< arrP.size(); i++)rank.add(arrP.get(i).getkey()+":    "+arrP.get(i).getvalue());
+        ArrayList<MyPair> arrP = ranking.getRanking();
+        for (int i = 0; i < arrP.size(); i++) rank.add(arrP.get(i).getkey() + ":    " + arrP.get(i).getvalue());
         return rank;
     }
 
-    public void generateRanking(){
+    public void generateRanking() {
         ArrayList<String> users = cd.getUsers();
         ArrayList<MyPair> rank = new ArrayList<>();
-        for(int i=0; i<users.size(); i++){
-            ArrayList<String> score = cd.allscores(users.get(i),true);
-            for(int j=0; j<score.size(); j++){
+        for (int i = 0; i < users.size(); i++) {
+            ArrayList<String> score = cd.allscores(users.get(i), true);
+            for (int j = 0; j < score.size(); j++) {
                 MyPair p = new MyPair(users.get(i), Integer.parseInt(score.get(j)));
                 System.out.println(score.get(j));
                 rank.add(p);
@@ -315,7 +314,7 @@ public class ControladorLogic {
         ranking = new Ranking(rank);
     }
 
-    public void saveMatch(){
+    public void saveMatch() {
         cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
     }
 

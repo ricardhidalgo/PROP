@@ -1,6 +1,7 @@
 package Presentation;
 
 import Logic.ControladorLogic;
+import Logic.MyPair;
 
 import java.util.ArrayList;
 
@@ -67,11 +68,11 @@ public class ControladorPresentacion {
      *
      * @param diff Dificultad de la partida. Possibles entradas: "easy", "medium", "hard", "custom"
      */
-    public void setDifficult(String diff) {
-        cont.setDiff(diff);
+    public void setDifficult(String diff, boolean tips) {
+        cont.setDiff(diff, tips);
     }
 
-    public boolean isEnd(int pos){
+    public boolean isEnd(int pos) {
         return pos == cont.getNumB();
     }
 
@@ -81,10 +82,6 @@ public class ControladorPresentacion {
 
     public void setrepeat(boolean repeat) {
         cont.setrep(repeat);
-    }
-
-    public void setTps(boolean tips) {
-        cont.setTips(tips);
     }
 
     public void breaker(boolean type) {
@@ -138,11 +135,11 @@ public class ControladorPresentacion {
         cont.guardarpuntuacion(usr, info, true);
     }
 
-    public void generateRanking(){
+    public void generateRanking() {
         cont.generateRanking();
     }
 
-    public ArrayList<String> getRanking(){
+    public ArrayList<String> getRanking() {
         return cont.getRanking();
     }
 

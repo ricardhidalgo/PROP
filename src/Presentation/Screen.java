@@ -10,51 +10,50 @@ public class Screen extends JFrame implements ActionListener{
 
     private ControladorPresentacion cp = new ControladorPresentacion();
 
-    private String username = new String();
+    private String username;
 
-    private Login loginRegisterC = new Login();
-    private MainMenu mainMenuC = new MainMenu();
-    private Instructions instructionsC = new Instructions();
-    private SelectDifficulty selectDifficultyC = new SelectDifficulty();
-    private CustomDifficulty customDifficultyC = new CustomDifficulty();
-    private ChoseRole choseRoleC = new ChoseRole();
-    private LoadGame loadGameC = new LoadGame();
+    private Login loginRegisterC;
+    private MainMenu mainMenuC;
+    private Instructions instructionsC;
+    private SelectDifficulty selectDifficultyC;
+    private CustomDifficulty customDifficultyC;
+    private ChoseRole choseRoleC;
+    private LoadGame loadGameC;
 
     private char[] pinColorLetters = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
     private int pinNumber = 4; //provisional
     private Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.YELLOW, new Color(150, 0, 255)};
     private GameBoard board = new GameBoard(pinNumber, pinColorLetters, pinColors);
 
-
-    private JPanel loginRegisterPanel;
+    /*private JPanel loginRegisterPanel;
     private JPanel mainMenuPanel;
     private JPanel instructionsPanel;
     private JPanel selectDifficultyPanel;
     private JPanel customDifficultyPanel;
     private JPanel choseRolePanel;
-    private JPanel loadGamePanel;
+    private JPanel loadGamePanel;*/
 
-    private CardLayout layout = new CardLayout();
+    private CardLayout layout;
 
-    private JPanel mainPanel = new JPanel();
+    private JPanel mainPanel;
 
     public Screen(int width, int height) {
 
+        initializePanelClasses();
+
         setListeners();
 
-        loginRegisterPanel = loginRegisterC.getLoginRegisterPanel();
+        /*loginRegisterPanel = loginRegisterC.getLoginRegisterPanel();
         mainMenuPanel = mainMenuC.getMainMenuPanel();
         instructionsPanel = instructionsC.getInstructionsPanel();
         selectDifficultyPanel = selectDifficultyC.getSelectDifficultyPanel();
         customDifficultyPanel = customDifficultyC.getCustomDifficultyPanel();
         choseRolePanel = choseRoleC.getChoseRolePanel();
-        loadGamePanel = loadGameC.getLoadGamePanel();
-
+        loadGamePanel = loadGameC.getLoadGamePanel();*/
 
         mainPanel.setLayout(layout);
         layout.addLayoutComponent(mainPanel, "Screen");
         addPanels();
-
 
         setSize(width, height);
         //setResizable(false);
@@ -67,13 +66,13 @@ public class Screen extends JFrame implements ActionListener{
 
     private void addPanels() {
 
-        mainPanel.add(loginRegisterPanel, "LoginRegister");
-        mainPanel.add(mainMenuPanel, "MainMenu");
-        mainPanel.add(instructionsPanel, "Instructions");
-        mainPanel.add(selectDifficultyPanel, "SelectDifficulty");
-        mainPanel.add(customDifficultyPanel, "CustomDifficulty");
-        mainPanel.add(choseRolePanel, "ChoseRole");
-        mainPanel.add(loadGamePanel, "LoadGame");
+        mainPanel.add(loginRegisterC.getLoginRegisterPanel(), "LoginRegister");
+        mainPanel.add(mainMenuC.getMainMenuPanel(), "MainMenu");
+        mainPanel.add(instructionsC.getInstructionsPanel(), "Instructions");
+        mainPanel.add(selectDifficultyC.getSelectDifficultyPanel(), "SelectDifficulty");
+        mainPanel.add(customDifficultyC.getCustomDifficultyPanel(), "CustomDifficulty");
+        mainPanel.add(choseRoleC.getChoseRolePanel(), "ChoseRole");
+        mainPanel.add(loadGameC.getLoadGamePanel(), "LoadGame");
         mainPanel.add(board, "GameBoard");
 
         layout.show(mainPanel,"LoginRegister");
@@ -82,8 +81,22 @@ public class Screen extends JFrame implements ActionListener{
 
     }
 
-    private void setListeners(){
+    private void initializePanelClasses() {
 
+        loginRegisterC = new Login();
+        mainMenuC = new MainMenu();
+        instructionsC = new Instructions();
+        selectDifficultyC = new SelectDifficulty();
+        customDifficultyC = new CustomDifficulty();
+        choseRoleC = new ChoseRole();
+        loadGameC = new LoadGame();
+
+        layout = new CardLayout();
+
+        mainPanel = new JPanel();
+    }
+
+    private void setListeners(){
 
         loginRegisterC.addLoginButtonActionListener(this);
         loginRegisterC.addRegisterButtonActionListener(this);
@@ -125,47 +138,67 @@ public class Screen extends JFrame implements ActionListener{
         Object source = event.getSource();
 
         if (source == mainMenuC.getInstructionsButton()) {
+
             layout.show(mainPanel, "Instructions");
+
         } else if (source == instructionsC.getMainMenuButton()) {
+
             layout.show(mainPanel, "MainMenu");
+
         } else if (source == mainMenuC.getQuitButton()) {
+
             System.exit(0);
+
         } else if (source == mainMenuC.getNewGameButton()) {
+
             layout.show(mainPanel, "SelectDifficulty");
+
         } else if (source == mainMenuC.getScoresButton()) {
 
         } else if (source == mainMenuC.getLoadGameButton()) {
+
             layout.show(mainPanel, "LoadGame");
+
         } else if (source == selectDifficultyC.getEasyButton()) {
-            cp.setDifficult("easy");
+
+            cp.setDifficult("easy", selectDifficultyC.getActivateTipsCheckBox().isSelected());
             layout.show(mainPanel, "ChoseRole");
+
         } else if (source == selectDifficultyC.getMediumButton()) {
             cp.setDifficult("medium");
             cp.loadMatch(username, 0);
             layout.show(mainPanel, "GameBoard");
             //layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getHardButton()) {
-            cp.setDifficult("hard");
+
+            cp.setDifficult("hard", selectDifficultyC.getActivateTipsCheckBox().isSelected());
             layout.show(mainPanel, "ChoseRole");
+
         } else if (source == selectDifficultyC.getCustomButton()) {
-            cp.setDifficult("custom");
+
+            cp.setDifficult("custom", selectDifficultyC.getActivateTipsCheckBox().isSelected());
             layout.show(mainPanel, "CustomDifficulty");
+
         } else if (source == selectDifficultyC.getBackButton()) {
+
             layout.show(mainPanel, "MainMenu");
-        } else if (source == loginRegisterC.getLoginButton()) {
+
+        } else if (source == loginRegisterC.getLoginButton()) { //Login
 
             String user = loginRegisterC.getUsernameLogin().getText();
             String pass = String.valueOf(loginRegisterC.getPasswordLogin().getPassword());
+
             if (cp.loginUser(user, pass)) {
                 username = user;
                 mainMenuC.getUserLabel().setText("Welcome, " + username + "!");
                 layout.show(mainPanel, "MainMenu");
             }
 
-        } else if (source == loginRegisterC.getRegisterButton()) {
+        } else if (source == loginRegisterC.getRegisterButton()) { //Register
 
             String user = loginRegisterC.getUsernameRegister().getText();
             String pass = String.valueOf(loginRegisterC.getPasswordRegister().getPassword());
+
             if (cp.registerUser(user, pass)) {
                 username = user;
                 mainMenuC.getUserLabel().setText("Welcome, " + username + "!");
@@ -173,41 +206,60 @@ public class Screen extends JFrame implements ActionListener{
             }
 
         } else if (source == customDifficultyC.getContinueButton()) {
+
             layout.show(mainPanel, "ChoseRole");
+
         } else if (source == customDifficultyC.getBackButton()) {
+
             layout.show(mainPanel, "SelectDifficulty");
+
         } else if (source == choseRoleC.getCodeBreakerButton()) {
+
             cp.breaker(true);
             cp.setAnswerCB();
             cp.begin();
             layout.show(mainPanel, "GameBoard");
+
         } else if (source == choseRoleC.getCodeMasterButton()) {
+
             cp.breaker(false);
             cp.begin();
             layout.show(mainPanel, "GameBoard");
+
         } else if (source == choseRoleC.getBackButton()) {
+
             layout.show(mainPanel, "SelectDifficulty");
+
         } else if (source == loadGameC.getSaveSlot1Button()) {
-            cp.loadMatch(username, 0);
+
+            ArrayList<String> arr = cp.loadMatch(username, 0);
             layout.show(mainPanel, "GameBoard");
+
         } else if (source == loadGameC.getSaveSlot2Button()) {
             cp.loadMatch(username, 1);
             layout.show(mainPanel, "GameBoard");
+
         } else if (source == loadGameC.getSaveSlot3Button()) {
             cp.loadMatch(username, 2);
             layout.show(mainPanel, "GameBoard");
+
         } else if (source == loadGameC.getBackButton()) {
+
             layout.show(mainPanel, "MainMenu");
+
         } else if (source == board.getSaveButton()) {
+
             cp.saveMatch();
             layout.show(mainPanel, "MainMenu");
+
         } else if (source == board.getSubmit()) {
+
             String play = board.getSubmitGuessString();
             cp.setGuess(play);
             int col = cp.getCorrectColors();
             int pos = cp.getCorrectPosition();
             board.displayResult(col, pos, board.getCurrentTurn() + 1);
-            if(cp.isEnd(pos)){
+            if (cp.isEnd(pos)) {
                 cp.saveScore(username);
                 layout.show(mainPanel, "MainMenu");
             }

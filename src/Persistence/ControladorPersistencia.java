@@ -1,6 +1,7 @@
 package Persistence;
 
 import java.util.ArrayList;
+
 /**
  * @author albert.ortiz
  */
@@ -12,7 +13,7 @@ public class ControladorPersistencia {
 
     }
 
-    public ArrayList<String> getUsers(){
+    public ArrayList<String> getUsers() {
         return dg.getUsers();
     }
 

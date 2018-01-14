@@ -39,7 +39,7 @@ public class Combination {
     public Combination(String comb) {
         this.comb = new ArrayList<>();
         byte[] a = comb.getBytes();
-        for(int i=0; i<a.length; i++) this.comb.add(a[i]);
+        for (int i = 0; i < a.length; i++) this.comb.add(a[i]);
     }
 
     /**
@@ -113,9 +113,9 @@ public class Combination {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String out = "";
-        for(int i=0; i<comb.size(); i++) out += comb.get(i).byteValue();
+        for (int i = 0; i < comb.size(); i++) out += comb.get(i).byteValue();
         return out;
     }
 
