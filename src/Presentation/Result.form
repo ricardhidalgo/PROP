@@ -12,12 +12,6 @@
     <border type="bevel-raised" title="Mastermind" title-justification="2" title-position="3">
       <font name="DejaVu Sans Mono" size="28" style="3"/>
     </border>
-    <children>
-      <vspacer id="f5fc5">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-    </children>
+    <children/>
   </grid>
 </form>

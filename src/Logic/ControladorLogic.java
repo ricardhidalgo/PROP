@@ -115,7 +115,6 @@ public class ControladorLogic {
         breaker = breaking;
     }
 
-
     public void setCorrect(ArrayList<Byte> solution) {
         correct = new Combination(solution);
     }

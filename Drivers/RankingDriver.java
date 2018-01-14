@@ -10,7 +10,7 @@ public class RankingDriver {
         System.out.println("Escribe end para acabar");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
-        Ranking persona = new Ranking();
+        /*Ranking persona = new Ranking();
         while (!input.equals("end")) {
             switch (input) {
 
@@ -26,6 +26,6 @@ public class RankingDriver {
                     break;
             }
             input = scanner.next();
-        }
+        }*/
     }
 }
