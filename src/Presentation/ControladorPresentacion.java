@@ -1,7 +1,6 @@
 package Presentation;
 
 import Logic.ControladorLogic;
-import Logic.MyPair;
 
 import java.util.ArrayList;
 
@@ -143,7 +142,7 @@ public class ControladorPresentacion {
         cont.generateRanking();
     }
 
-    public ArrayList<MyPair> getRanking(){
+    public ArrayList<String> getRanking(){
         return cont.getRanking();
     }
 

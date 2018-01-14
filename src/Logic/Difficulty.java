@@ -32,7 +32,6 @@ public class Difficulty {
         this.hasTips = tips;
     }
 
-
     /**
      * Dificultad fácil.
      * @param tips si se han pedido pistas o no.

@@ -293,8 +293,11 @@ public class ControladorLogic {
         return g;
     }
 
-    public ArrayList<MyPair> getRanking(){
-        return ranking.getRanking();
+    public ArrayList<String> getRanking(){
+        ArrayList<String> rank = new ArrayList<>();
+        ArrayList<MyPair> arrP= ranking.getRanking();
+        for(int i =0; i< arrP.size(); i++)rank.add(arrP.get(i).getkey()+":    "+arrP.get(i).getvalue());
+        return rank;
     }
 
     public void generateRanking(){
