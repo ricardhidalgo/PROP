@@ -22,7 +22,7 @@ public class ControladorPersistencia {
         ArrayList<String> partida = new ArrayList<>();
         String[] out;
         if (arr.size() > i) {
-            out = arr.get(i).split("");
+            out = arr.get(i).split(" ");
             for (int j = 0; j < out.length; j++) partida.add(out[j]);
         } else partida.add("-1");
         return partida;

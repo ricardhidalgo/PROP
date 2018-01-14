@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Screen extends JFrame implements ActionListener{
 
@@ -23,7 +22,7 @@ public class Screen extends JFrame implements ActionListener{
 
     private char[] pinColorLetters = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
     private int pinNumber = 4; //provisional
-    private Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.YELLOW, new Color(150, 0, 255)};
+    private Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.PINK, new Color(150, 0, 255)};
     private GameBoard board = new GameBoard(pinNumber, pinColorLetters, pinColors);
 
     /*private JPanel loginRegisterPanel;
@@ -166,9 +165,10 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == selectDifficultyC.getMediumButton()) {
-            cp.setDifficult("medium", selectDifficultyC.getActivateTipsCheckBox().isSelected());
-            layout.show(mainPanel, "ChoseRole");
-
+            //cp.setDifficult("medium");
+            cp.loadMatch(username, 1);
+            layout.show(mainPanel, "GameBoard");
+            //layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getHardButton()) {
 
             cp.setDifficult("hard", selectDifficultyC.getActivateTipsCheckBox().isSelected());
@@ -232,17 +232,15 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == loadGameC.getSaveSlot1Button()) {
 
-            ArrayList<String> arr = cp.loadMatch(username, 0);
+            cp.loadMatch(username, 0);
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot2Button()) {
-
-            ArrayList<String> arr = cp.loadMatch(username, 1);
+            cp.loadMatch(username, 1);
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot3Button()) {
-
-            ArrayList<String> arr = cp.loadMatch(username, 2);
+            cp.loadMatch(username, 2);
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getBackButton()) {

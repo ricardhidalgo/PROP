@@ -276,9 +276,10 @@ public class ControladorLogic {
         return game.getScore();
     }
 
-    public Game loadMatch(ArrayList<String> info) {
+    public void loadMatch(ArrayList<String> info) {
         User us = new User();
-        Combination secret = new Combination(info.get(0));
+        for(int i=0; i<info.size(); i++) System.out.println(info.get(i));
+        Combination secret = new Combination(info.get(0).toString());
         Difficulty dif = new Difficulty();
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
@@ -286,10 +287,10 @@ public class ControladorLogic {
         if (info.get(2) == "true") b = true;
         if (info.get(3) == "true") tips = true;
         ArrayList<Combination> guesses = new ArrayList<>();
-        for (int i = 3; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
+        for (int i = 4; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
         dif.setCustom(numB, b, tips);
         Game g = new Game(usuario, secret, dif, guesses);
-        return g;
+        game = g;
     }
 
     public ArrayList<String> getRanking() {
@@ -306,7 +307,6 @@ public class ControladorLogic {
             ArrayList<String> score = cd.allscores(users.get(i), true);
             for (int j = 0; j < score.size(); j++) {
                 MyPair p = new MyPair(users.get(i), Integer.parseInt(score.get(j)));
-                System.out.println(score.get(j));
                 rank.add(p);
             }
         }
