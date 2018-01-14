@@ -277,8 +277,9 @@ public class ControladorLogic {
 
     public void loadMatch(ArrayList<String> info) {
         User us = new User();
-        for(int i=0; i<info.size(); i++) System.out.println(info.get(i));
-        Combination secret = new Combination(info.get(0).toString());
+        Combination secret = new Combination(info.get(0));
+        correct = secret;
+        System.out.println(secret.toString());
         Difficulty dif = new Difficulty();
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
@@ -288,6 +289,7 @@ public class ControladorLogic {
         ArrayList<Combination> guesses = new ArrayList<>();
         for (int i = 4; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
         dif.setCustom(numB, b, tips);
+        difficulty = dif;
         Game g = new Game(usuario, secret, dif, guesses);
         game = g;
     }

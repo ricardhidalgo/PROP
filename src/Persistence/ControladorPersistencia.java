@@ -21,7 +21,7 @@ public class ControladorPersistencia {
         ArrayList<String> arr = dg.retrieveAll(user, false);
         ArrayList<String> partida = new ArrayList<>();
         String[] out;
-        if (arr.size() > i) {
+        if (arr.size() >= i) {
             out = arr.get(i).split(" ");
             for (int j = 0; j < out.length; j++) partida.add(out[j]);
         } else partida.add("-1");
