@@ -119,4 +119,10 @@ public class Combination {
         return out;
     }
 
+    public String toString2(){
+        String out = "";
+        for (int i = 0; i < comb.size(); i++) out += comb.get(i).byteValue();
+        return out;
+    }
+
 }

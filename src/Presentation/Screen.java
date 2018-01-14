@@ -166,7 +166,7 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == selectDifficultyC.getMediumButton()) {
             //cp.setDifficult("medium");
-            cp.loadMatch(username, 0);
+            cp.loadMatch(username, 1);
             layout.show(mainPanel, "GameBoard");
             //layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getHardButton()) {
