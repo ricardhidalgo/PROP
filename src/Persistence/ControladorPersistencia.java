@@ -12,6 +12,10 @@ public class ControladorPersistencia {
 
     }
 
+    public ArrayList<String> getUsers(){
+        return dg.getUsers();
+    }
+
     public ArrayList<String> getMatch(String user, int i) {
         ArrayList<String> arr = dg.retrieveAll(user, false);
         ArrayList<String> partida = new ArrayList<>();

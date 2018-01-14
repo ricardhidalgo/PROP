@@ -1,6 +1,7 @@
 package Presentation;
 
 import Logic.ControladorLogic;
+import Logic.MyPair;
 
 import java.util.ArrayList;
 
@@ -136,6 +137,14 @@ public class ControladorPresentacion {
         ArrayList<String> info = new ArrayList<String>();
         info.add(String.valueOf(a));
         cont.guardarpuntuacion(usr, info, true);
+    }
+
+    public void generateRanking(){
+        cont.generateRanking();
+    }
+
+    public ArrayList<MyPair> getRanking(){
+        return cont.getRanking();
     }
 
     /*public void convertranking(String user) {

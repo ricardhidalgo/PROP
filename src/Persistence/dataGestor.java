@@ -180,6 +180,17 @@ public class dataGestor {
         }
     }
 
+    public ArrayList<String> getUsers(){
+        File folder = new File("./Saved/");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String> out = new ArrayList<>();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            String s = listOfFiles[i].getName();
+            out.add(s.substring(0,s.length()-4));
+        }
+        return out;
+
+    }
 
     public ArrayList<String> retrieveAll(String username, boolean score) {
 

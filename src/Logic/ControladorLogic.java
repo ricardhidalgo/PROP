@@ -19,7 +19,7 @@ public class ControladorLogic {
     ArrayList<Play> plays;
     ControladorPersistencia cd = new ControladorPersistencia();
     Play jugada = new Play();
-    Ranking ranking = new Ranking();
+    Ranking ranking;
 
 
     /**
@@ -266,7 +266,7 @@ public class ControladorLogic {
     }*/
 
     public ArrayList<MyPair> seeranking(Ranking ranking) {
-        return ranking.getranking();
+        return ranking.getRanking();
     }
 
     public void guardarpuntuacion(String name, ArrayList<String> puntuacion, boolean score) {
@@ -296,6 +296,24 @@ public class ControladorLogic {
         for(int i=2; i<info.size(); i++) guesses.add(new Combination(info.get(i)));
         Game g = new Game(usuario, secret, dif, guesses);
         return g;
+    }
+
+    public ArrayList<MyPair> getRanking(){
+        return ranking.getRanking();
+    }
+
+    public void generateRanking(){
+        ArrayList<String> users = cd.getUsers();
+        ArrayList<MyPair> rank = new ArrayList<>();
+        for(int i=0; i<users.size(); i++){
+            ArrayList<String> score = cd.allscores(users.get(i),true);
+            for(int j=0; j<score.size(); j++){
+                MyPair p = new MyPair(users.get(i), Integer.parseInt(score.get(j)));
+                System.out.println(score.get(j));
+                rank.add(p);
+            }
+        }
+        ranking = new Ranking(rank);
     }
 
     public void saveMatch(){
