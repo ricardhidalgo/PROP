@@ -16,8 +16,8 @@ public class Game {
     private Combination secretCode;
     private ArrayList<Play> plays;
     private Difficulty difficulty;
-    private int score = 14;
-
+    private int guesses = 0;
+    private int score = 0;
     /**
      * Realiza una jugada.
      * @param comb combinación correcta.
@@ -31,6 +31,9 @@ public class Game {
             np.processPlay(comb, secretCode);
             plays.add(np);
         }
+        guesses++;
+        score = (100000*difficulty.getNumBallsInCombination())/guesses;
+        System.out.println(score);
         return np;
     }
 
@@ -41,6 +44,15 @@ public class Game {
     public User getUser() {
         return user;
     }
+
+    /**
+     * Retorna la puntuacion obtenida.
+     * @return retorna la puntuacion de la partida.
+     */
+    public int getScore() {
+        return score;
+    }
+
 
     /**
      * Indica que rol tiene el usuario.

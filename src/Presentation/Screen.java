@@ -207,6 +207,7 @@ public class Screen extends JFrame implements ActionListener{
             int col = cp.getCorrectColors();
             int pos = cp.getCorrectPosition();
             board.displayResult(col, pos, board.getCurrentTurn() + 1);
+            if(cp.isEnd(pos)) layout.show(mainPanel, "MainMenu");
         }
 
     }

@@ -71,6 +71,10 @@ public class ControladorPresentacion {
         cont.setDiff(diff);
     }
 
+    public boolean isEnd(int pos){
+        return pos == cont.getNumB();
+    }
+
     public void setnumB(int num) {
         cont.setnumB(num);
     }

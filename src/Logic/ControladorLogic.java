@@ -171,8 +171,11 @@ public class ControladorLogic {
     }
 
     public void checkAnswer() {
-
         correctColorsPositions(correct, later);
+    }
+
+    public int getNumB(){
+        return difficulty.getNumBallsInCombination();
     }
 
     public void setAnswerCB() {
