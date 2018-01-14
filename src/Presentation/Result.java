@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Result {
 
-    private JPanel panel1;
+    private JPanel ResultPanel;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
