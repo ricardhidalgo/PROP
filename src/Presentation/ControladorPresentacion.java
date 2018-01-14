@@ -139,7 +139,7 @@ public class ControladorPresentacion {
         cont.generateRanking();
     }
 
-    public ArrayList<MyPair> getRanking() {
+    public ArrayList<String> getRanking(){
         return cont.getRanking();
     }
 
