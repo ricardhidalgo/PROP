@@ -37,6 +37,7 @@ public class Combination {
      * @param comb La combinación con la que se quiere inicializar el objeto
      */
     public Combination(String comb) {
+        this.comb = new ArrayList<>();
         byte[] a = comb.getBytes();
         for(int i=0; i<a.length; i++) this.comb.add(a[i]);
     }

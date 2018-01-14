@@ -150,8 +150,8 @@ public class ControladorPresentacion {
         cont.convertranking(user);
     }*/
 
-    public ArrayList<String> loadMatch(String user, int index) {
-        return cont.getMatch(user, index);
+    public void loadMatch(String user, int index) {
+        cont.loadMatch(cont.getMatch(user, index));
     }
 
     public void saveMatch() {

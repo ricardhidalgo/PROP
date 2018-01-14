@@ -26,7 +26,12 @@ public class Game {
     public Play makePlay(Combination comb) {
         Play np = new Play();
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.err.printf("Wrong parameters 2");
+            System.err.println("Wrong parameters 2");
+            System.err.println(comb.getComb().size());
+            System.err.println(difficulty.getNumBallsInCombination());
+            System.err.println(comb.hasRepeat());
+            System.err.println(difficulty.isCanRepeat());
+            System.err.println(comb.toString());
         } else {
             np.processPlay(comb, secretCode);
             plays.add(np);
@@ -126,12 +131,12 @@ public class Game {
      * @param difficulty nível de dificultad.
      */
     public Game(User user, Combination secretCode, Difficulty difficulty, ArrayList<Combination> guesses) {
+        plays = new ArrayList<>();
         this.user = user;
         this.isUserBreaker = true;
         this.secretCode = secretCode;
         this.difficulty = difficulty;
         this.initializeGame(guesses);
-        plays = new ArrayList<>();
     }
 
     /**

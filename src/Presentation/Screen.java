@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Screen extends JFrame implements ActionListener{
 
@@ -142,7 +141,9 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getMediumButton()) {
             cp.setDifficult("medium");
-            layout.show(mainPanel, "ChoseRole");
+            cp.loadMatch(username, 0);
+            layout.show(mainPanel, "GameBoard");
+            //layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getHardButton()) {
             cp.setDifficult("hard");
             layout.show(mainPanel, "ChoseRole");
@@ -187,15 +188,13 @@ public class Screen extends JFrame implements ActionListener{
         } else if (source == choseRoleC.getBackButton()) {
             layout.show(mainPanel, "SelectDifficulty");
         } else if (source == loadGameC.getSaveSlot1Button()) {
-
-            ArrayList<String> arr = cp.loadMatch(username, 0);
+            cp.loadMatch(username, 0);
             layout.show(mainPanel, "GameBoard");
         } else if (source == loadGameC.getSaveSlot2Button()) {
-
-            ArrayList<String> arr = cp.loadMatch(username, 1);
+            cp.loadMatch(username, 1);
             layout.show(mainPanel, "GameBoard");
         } else if (source == loadGameC.getSaveSlot3Button()) {
-            ArrayList<String> arr = cp.loadMatch(username, 2);
+            cp.loadMatch(username, 2);
             layout.show(mainPanel, "GameBoard");
         } else if (source == loadGameC.getBackButton()) {
             layout.show(mainPanel, "MainMenu");
