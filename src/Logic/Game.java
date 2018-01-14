@@ -176,20 +176,10 @@ public class Game {
         //order: Code, Difficulty, guesses
         ArrayList<String> out = new ArrayList<>();
         out.add(secretCode.toString());
-        switch(difficulty.getDifficultyCode()){
-            case 0:
-                out.add("Easy");
-                break;
-            case 1:
-                out.add("Medium");
-                break;
-            case 2:
-                out.add("Hard");
-                break;
-            case 3:
-                break;
-        }
-       // for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
+        out.add(difficulty.getNumBallsInCombination().toString());
+        out.add(String.valueOf(difficulty.isCanRepeat()));
+        out.add(String.valueOf(difficulty.isHasTips()));
+        // for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
         for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
         return out;
     }
