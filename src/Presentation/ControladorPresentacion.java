@@ -131,10 +131,11 @@ public class ControladorPresentacion {
         cont.setGuess(guess);
     }
 
-    public void saveScore(String name, int score, boolean punt) {
+    public void saveScore(String usr) {
+        int a = cont.getScore();
         ArrayList<String> info = new ArrayList<String>();
-        info.add(String.valueOf(score));
-        cont.guardarpuntuacion(name, info, punt);
+        info.add(String.valueOf(a));
+        cont.guardarpuntuacion(usr, info, true);
     }
 
     /*public void convertranking(String user) {

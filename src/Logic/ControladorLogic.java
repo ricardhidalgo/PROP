@@ -250,12 +250,6 @@ public class ControladorLogic {
         return FG;
     }
 
-    public void insert1puntuation(Ranking ranking, String nickname, int score) {
-        ranking.modifynick(nickname);
-        ranking.modifyscore(score);
-        ranking.InsertRanking();
-    }
-
     public ArrayList<String> score(String nickname, boolean score) {
         return cd.allscores(nickname, score);
     }
@@ -277,6 +271,10 @@ public class ControladorLogic {
 
     public void guardarpuntuacion(String name, ArrayList<String> puntuacion, boolean score) {
         cd.savepuntuation(name, puntuacion, score);
+    }
+
+    public int getScore(){
+        return game.getScore();
     }
 
     public Game loadMatch(ArrayList<String> info){
