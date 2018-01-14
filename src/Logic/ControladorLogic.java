@@ -283,19 +283,19 @@ public class ControladorLogic {
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
         boolean tips = false;
-        if(info.get(2) == "true") b = true;
-        if(info.get(3) == "true") tips = true;
+        if (info.get(2) == "true") b = true;
+        if (info.get(3) == "true") tips = true;
         ArrayList<Combination> guesses = new ArrayList<>();
-        for(int i=3; i<info.size(); i++) guesses.add(new Combination(info.get(i)));
+        for (int i = 3; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
         dif.setCustom(numB, b, tips);
         Game g = new Game(usuario, secret, dif, guesses);
         return g;
     }
 
-    public ArrayList<String> getRanking(){
+    public ArrayList<String> getRanking() {
         ArrayList<String> rank = new ArrayList<>();
-        ArrayList<MyPair> arrP= ranking.getRanking();
-        for(int i =0; i< arrP.size(); i++)rank.add(arrP.get(i).getkey()+":    "+arrP.get(i).getvalue());
+        ArrayList<MyPair> arrP = ranking.getRanking();
+        for (int i = 0; i < arrP.size(); i++) rank.add(arrP.get(i).getkey() + ":    " + arrP.get(i).getvalue());
         return rank;
     }
 

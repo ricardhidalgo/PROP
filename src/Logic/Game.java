@@ -186,7 +186,7 @@ public class Game {
         out.add(String.valueOf(difficulty.isCanRepeat()));
         out.add(String.valueOf(difficulty.isHasTips()));
         // for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
-        for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
+        for (int i = 0; i < plays.size(); i++) out.add(plays.get(i).getCombination().toString());
         return out;
     }
 }
