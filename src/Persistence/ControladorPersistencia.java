@@ -27,8 +27,7 @@ public class ControladorPersistencia {
     }
 
     public boolean correctPW(String name, String pw) {
-
-        return (tryName(name) && dg.findUser(name).get(1) == pw);
+        return (tryName(name) && dg.findUser(name).get(1).equals(pw));
     }
 
     public void create(String nickname, String pw) {
