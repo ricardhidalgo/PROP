@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 /**
  * @author ricard.hidalgo
+ * @author albert.ortiz
  */
 
 
@@ -15,6 +16,7 @@ public class Game {
     private Combination secretCode;
     private ArrayList<Play> plays;
     private Difficulty difficulty;
+    private int score = 14;
 
     /**
      * Realiza una jugada.
@@ -96,31 +98,43 @@ public class Game {
      * @param ai IA de la partida.
      * @param isUserBreaker indica si el usuario es CB o CM.
      * @param difficulty indica el nível de dificultad.
-     * @param plays Conjunto de jugadas que se han realizado
      */
     public Game(User user, AI ai, boolean isUserBreaker, Difficulty difficulty) {
         this.user = user;
         this.ai = ai;
         this.isUserBreaker = isUserBreaker;
         this.difficulty = difficulty;
+        plays = new ArrayList<>();
     }
 
     /**
      * Constructora con valores predefinidos. Pensada para cargar una partida
      * @param user usuario de la partida.
-     * @param ai IA de la partida.
-     * @param isUserBreaker indica si el usuario es CB o CM.
      * @param secretCode combinación correcta (respuesta).
-     * @param plays cantidad de rondas jugadas.
      * @param difficulty nível de dificultad.
      */
-    public Game(User user, AI ai, boolean isUserBreaker, Combination secretCode, ArrayList<Play> plays, Difficulty difficulty) {
+    public Game(User user, Combination secretCode, Difficulty difficulty, ArrayList<Combination> guesses) {
         this.user = user;
-        this.ai = ai;
-        this.isUserBreaker = isUserBreaker;
+        this.isUserBreaker = true;
         this.secretCode = secretCode;
-        this.plays = plays;
         this.difficulty = difficulty;
+        this.initializeGame(guesses);
+        plays = new ArrayList<>();
+    }
+
+    /**
+     * Constructora con valores predefinidos. Pensada para cargar una partida
+     * @param user usuario de la partida.
+     * @param secretCode combinación correcta (respuesta).
+     * @param difficulty nível de dificultad.
+     */
+    public Game(User user, AI ia, boolean breaker, Combination secretCode, ArrayList<Play> p, Difficulty difficulty) {
+        this.user = user;
+        this.ai = ia;
+        this.isUserBreaker = true;
+        this.secretCode = secretCode;
+        this.difficulty = difficulty;
+        this.plays = p;
     }
 
     /**
@@ -133,5 +147,38 @@ public class Game {
         } else {
             this.secretCode = comb;
         }
+    }
+
+    /**
+     * Funcion usada para generar un game a partir de unos guesses y un secretCode
+     * @param plays jugadas guardadas
+     */
+    public void initializeGame(ArrayList<Combination> plays){ for(int i=0; i<plays.size(); i++) this.makePlay(plays.get(i)); }
+
+
+    /**
+     * Funcion usada para obtener una partida
+     * @return devuelve ArrayList con todos los elementos de la partida
+     */
+    public ArrayList<String> retrieveMatch(){
+        //order: Code, Difficulty, guesses
+        ArrayList<String> out = new ArrayList<>();
+        out.add(secretCode.toString());
+        switch(difficulty.getDifficultyCode()){
+            case 0:
+                out.add("Easy");
+                break;
+            case 1:
+                out.add("Medium");
+                break;
+            case 2:
+                out.add("Hard");
+                break;
+            case 3:
+                break;
+        }
+       // for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
+        for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
+        return out;
     }
 }

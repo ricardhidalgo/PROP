@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 
 import static java.nio.file.StandardOpenOption.CREATE;
-
+/**
+ * @author albert.ortiz
+ */
 public class dataGestor {
 
     public dataGestor(){
@@ -136,6 +138,7 @@ public class dataGestor {
         }
     }
 
+
     public void deleteIndex(String username, int i, boolean score){
 
         // The name of the file to open.
@@ -176,6 +179,7 @@ public class dataGestor {
                             + fileName + "'");
         }
     }
+
 
     public ArrayList<String> retrieveAll(String username, boolean score) {
 

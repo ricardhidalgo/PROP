@@ -1,7 +1,6 @@
 package Logic;
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * @author pol.gil
@@ -117,37 +116,5 @@ public class Ranking extends MyPair{
              if (ID.getvalue() < 9999999 && ranking.size() < 10 && !used) ranking.add(ID);
         }
     }
-
-
-    /**
-     * Escribe en un documento .txt el ranking de puntuaciones.
-     */
-    /*
-    public void escribirtxt() {
-
-        try {
-
-            File archivo = new File("ranking.txt");
-            if (!archivo.exists()) {
-                if (!archivo.createNewFile()) {
-                    System.out.println("Error");
-                }
-            }
-            archivo.delete();
-            archivo = new File("ranking.txt");
-
-            BufferedWriter bw;
-            bw = new BufferedWriter(new FileWriter(archivo, true));
-            for (int i = 0; i < ranking.size(); i++) {
-                bw.write(ranking.get(i).getkey() + " - " + ranking.get(i).getvalue() + "\n");
-            }
-            bw.close();
-        }
-
-        catch (IOException errorDeFichero) {
-            System.out.println("Error al escribir el ranking" + errorDeFichero.getMessage());
-        }
-    }
-    */
 
 }

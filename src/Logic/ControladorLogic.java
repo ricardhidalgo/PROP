@@ -131,6 +131,7 @@ public class ControladorLogic {
 
     public void start() {
         ia = new AI_Genetic(difficulty);
+        plays = new ArrayList<>();
         if (!breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
@@ -179,10 +180,6 @@ public class ControladorLogic {
         correct = ia.generateSecret();
     }
 
-    public void saveMatch(String username, ArrayList<String> in) {
-        cd.savepuntuation(username, in, false);
-    }
-
     public void setAnswerCM(String answer2) {
         ArrayList<Byte> sol = new ArrayList<Byte>();
         for (int i = 0; i < answer2.length(); i++) {
@@ -208,6 +205,7 @@ public class ControladorLogic {
             else if (guess.charAt(i) == 'P') sol.add((byte) 5);
         }
         later = new Combination(sol);
+        game.makePlay(new Combination(sol));
         checkAnswer();
     }
 
@@ -276,6 +274,31 @@ public class ControladorLogic {
 
     public void guardarpuntuacion(String name, ArrayList<String> puntuacion, boolean score) {
         cd.savepuntuation(name, puntuacion, score);
+    }
+
+    public Game loadMatch(ArrayList<String> info){
+        User us = new User();
+        Combination secret = new Combination(info.get(0));
+        Difficulty dif = new Difficulty();
+        switch(info.get(1)){
+            case "Easy":
+                dif.setEasy(true);
+                break;
+            case "Medium":
+                dif.setMedium(true);
+                break;
+            case "Hard":
+                dif.setHard(true);
+                break;
+        }
+        ArrayList<Combination> guesses = new ArrayList<>();
+        for(int i=2; i<info.size(); i++) guesses.add(new Combination(info.get(i)));
+        Game g = new Game(usuario, secret, dif, guesses);
+        return g;
+    }
+
+    public void saveMatch(){
+        cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
     }
 
 }

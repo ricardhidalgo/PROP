@@ -141,7 +141,7 @@ public class ControladorPresentacion {
         return cont.getMatch(user, index);
     }
 
-    public void saveMatch(String username, ArrayList<String> match) {
-        cont.saveMatch(username, match);
+    public void saveMatch() {
+        cont.saveMatch();
     }
 }

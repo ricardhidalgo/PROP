@@ -1,7 +1,9 @@
 package Persistence;
 
 import java.util.ArrayList;
-
+/**
+ * @author albert.ortiz
+ */
 public class ControladorPersistencia {
 
     dataGestor dg = new dataGestor();

@@ -199,6 +199,7 @@ public class Screen extends JFrame implements ActionListener{
         } else if (source == loadGameC.getBackButton()) {
             layout.show(mainPanel, "MainMenu");
         } else if (source == board.getSaveButton()) {
+            cp.saveMatch();
             layout.show(mainPanel, "MainMenu");
         } else if (source == board.getSubmit()) {
             String play = board.getSubmitGuessString();
@@ -206,7 +207,6 @@ public class Screen extends JFrame implements ActionListener{
             int col = cp.getCorrectColors();
             int pos = cp.getCorrectPosition();
             board.displayResult(col, pos, board.getCurrentTurn() + 1);
-
         }
 
     }
