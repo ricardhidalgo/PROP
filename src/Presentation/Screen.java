@@ -1,6 +1,5 @@
 package Presentation;
 
-import Logic.MyPair;
 
 import javax.swing.*;
 import java.awt.*;
@@ -142,9 +141,6 @@ public class Screen extends JFrame implements ActionListener{
             cp.setDifficult("easy");
             layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getMediumButton()) {
-            cp.generateRanking();
-            ArrayList<MyPair> ranking = cp.getRanking();
-            System.out.println(ranking.get(0).getkey());
             cp.setDifficult("medium");
             layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getHardButton()) {
