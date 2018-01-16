@@ -206,7 +206,12 @@ public class ControladorLogic {
             else if (guess.charAt(i) == 'P') sol.add((byte) 5);
         }
         later = new Combination(sol);
-        game.makePlay(new Combination(sol));
+        try {
+            game.makePlay(new Combination(sol));
+        }
+        catch (ExcepcioGame g){
+           //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
         checkAnswer();
     }
 
