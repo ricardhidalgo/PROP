@@ -165,8 +165,7 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == selectDifficultyC.getMediumButton()) {
-            //cp.setDifficult("medium");
-            cp.loadMatch(username, 0);
+            cp.setDifficult("medium", selectDifficultyC.getActivateTipsCheckBox().isSelected());
             layout.show(mainPanel, "GameBoard");
             //layout.show(mainPanel, "ChoseRole");
         } else if (source == selectDifficultyC.getHardButton()) {
@@ -232,15 +231,15 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == loadGameC.getSaveSlot1Button()) {
 
-            cp.loadMatch(username, 0);
+            if(cp.loadMatch(username, 0))
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot2Button()) {
-            cp.loadMatch(username, 1);
+            if(cp.loadMatch(username, 1))
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot3Button()) {
-            cp.loadMatch(username, 2);
+            if(cp.loadMatch(username, 2))
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getBackButton()) {

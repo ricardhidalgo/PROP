@@ -1,7 +1,6 @@
 package Presentation;
 
 import Logic.ControladorLogic;
-import Logic.MyPair;
 
 import java.util.ArrayList;
 
@@ -147,8 +146,8 @@ public class ControladorPresentacion {
         cont.convertranking(user);
     }*/
 
-    public void loadMatch(String user, int index) {
-        cont.loadMatch(cont.getMatch(user, index));
+    public boolean loadMatch(String user, int index) {
+        return cont.loadMatch(cont.getMatch(user, index));
     }
 
     public void saveMatch() {

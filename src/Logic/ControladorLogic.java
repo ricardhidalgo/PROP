@@ -280,11 +280,11 @@ public class ControladorLogic {
         return game.getScore();
     }
 
-    public void loadMatch(ArrayList<String> info) {
+    public boolean loadMatch(ArrayList<String> info) {
+        if(info.size()==1) return false;
         User us = new User();
         Combination secret = new Combination(info.get(0));
         correct = secret;
-        System.out.println(secret.toString());
         Difficulty dif = new Difficulty();
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
@@ -297,6 +297,7 @@ public class ControladorLogic {
         difficulty = dif;
         Game g = new Game(usuario, secret, dif, guesses);
         game = g;
+        return true;
     }
 
     public ArrayList<String> getRanking() {
