@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class ControladorLogic {
 
     Difficulty difficulty;
-    boolean tips = false;
     int numB;
     boolean rep;
     Game game;
@@ -17,16 +16,16 @@ public class ControladorLogic {
     Combination correct = new Combination();
     Combination later = new Combination();
     ArrayList<Play> plays;
-    ControladorPersistencia cd = new ControladorPersistencia();
+    ControladorPersistencia cd;
     Play jugada = new Play();
-    Ranking ranking = new Ranking();
+    Ranking ranking;
 
 
     /**
      * Constructora por defecto
      */
     public ControladorLogic() {
-
+        cd = new ControladorPersistencia();
     }
 
 
@@ -35,7 +34,7 @@ public class ControladorLogic {
      *
      * @param nick Nombre de usuario.
      * @return True si existe, false en caso contrario.
-     * @deprecated
+     * @deprecated Ya incluida en register y loginUser.
      */
     @Deprecated
     public boolean existsName(String nick) {
@@ -65,7 +64,7 @@ public class ControladorLogic {
      * @param nick Nombre de usuario.
      * @param pw   Contraseña del usuario.
      * @return True si concuerdan. False en caso contrario.
-     * @deprecated
+     * @deprecated Ya incluida por defecto en loginUser.
      */
     @Deprecated
     public boolean checkPassword(String nick, String pw) {
@@ -88,7 +87,10 @@ public class ControladorLogic {
     }
 
 
-    public void setDiff(String diff) {
+    /**
+     * @param diff
+     */
+    public void setDiff(String diff, boolean tips) {
         difficulty = new Difficulty();
         if (diff == "easy") difficulty.setEasy(tips);
         else if (diff == "medium") difficulty.setMedium(tips);
@@ -113,10 +115,6 @@ public class ControladorLogic {
         breaker = breaking;
     }
 
-    public void setTips(boolean tip) {
-        this.tips = tip;
-    }
-
     public void setCorrect(ArrayList<Byte> solution) {
         correct = new Combination(solution);
     }
@@ -131,6 +129,7 @@ public class ControladorLogic {
 
     public void start() {
         ia = new AI_Genetic(difficulty);
+        plays = new ArrayList<>();
         if (!breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
@@ -170,17 +169,16 @@ public class ControladorLogic {
     }
 
     public void checkAnswer() {
-
         correctColorsPositions(correct, later);
+    }
+
+    public int getNumB() {
+        return difficulty.getNumBallsInCombination();
     }
 
     public void setAnswerCB() {
         ia = new AI_Genetic(difficulty);
         correct = ia.generateSecret();
-    }
-
-    public void saveMatch(String username, ArrayList<String> in) {
-        cd.savepuntuation(username, in, false);
     }
 
     public void setAnswerCM(String answer2) {
@@ -208,6 +206,7 @@ public class ControladorLogic {
             else if (guess.charAt(i) == 'P') sol.add((byte) 5);
         }
         later = new Combination(sol);
+        game.makePlay(new Combination(sol));
         checkAnswer();
     }
 
@@ -249,12 +248,6 @@ public class ControladorLogic {
         return FG;
     }
 
-    public void insert1puntuation(Ranking ranking, String nickname, int score) {
-        ranking.modifynick(nickname);
-        ranking.modifyscore(score);
-        ranking.InsertRanking();
-    }
-
     public ArrayList<String> score(String nickname, boolean score) {
         return cd.allscores(nickname, score);
     }
@@ -271,11 +264,58 @@ public class ControladorLogic {
     }*/
 
     public ArrayList<MyPair> seeranking(Ranking ranking) {
-        return ranking.getranking();
+        return ranking.getRanking();
     }
 
     public void guardarpuntuacion(String name, ArrayList<String> puntuacion, boolean score) {
         cd.savepuntuation(name, puntuacion, score);
+    }
+
+    public int getScore() {
+        return game.getScore();
+    }
+
+    public void loadMatch(ArrayList<String> info) {
+        User us = new User();
+        Combination secret = new Combination(info.get(0));
+        correct = secret;
+        System.out.println(secret.toString());
+        Difficulty dif = new Difficulty();
+        int numB = Integer.parseInt(info.get(1));
+        boolean b = false;
+        boolean tips = false;
+        if (info.get(2) == "true") b = true;
+        if (info.get(3) == "true") tips = true;
+        ArrayList<Combination> guesses = new ArrayList<>();
+        for (int i = 4; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
+        dif.setCustom(numB, b, tips);
+        difficulty = dif;
+        Game g = new Game(usuario, secret, dif, guesses);
+        game = g;
+    }
+
+    public ArrayList<String> getRanking() {
+        ArrayList<String> rank = new ArrayList<>();
+        ArrayList<MyPair> arrP = ranking.getRanking();
+        for (int i = 0; i < arrP.size(); i++) rank.add(arrP.get(i).getkey() + ":    " + arrP.get(i).getvalue());
+        return rank;
+    }
+
+    public void generateRanking() {
+        ArrayList<String> users = cd.getUsers();
+        ArrayList<MyPair> rank = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++) {
+            ArrayList<String> score = cd.allscores(users.get(i), true);
+            for (int j = 0; j < score.size(); j++) {
+                MyPair p = new MyPair(users.get(i), Integer.parseInt(score.get(j)));
+                rank.add(p);
+            }
+        }
+        ranking = new Ranking(rank);
+    }
+
+    public void saveMatch() {
+        cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
     }
 
 }

@@ -2,6 +2,9 @@ package Persistence;
 
 import java.util.ArrayList;
 
+/**
+ * @author albert.ortiz
+ */
 public class ControladorPersistencia {
 
     dataGestor dg = new dataGestor();
@@ -10,12 +13,16 @@ public class ControladorPersistencia {
 
     }
 
+    public ArrayList<String> getUsers() {
+        return dg.getUsers();
+    }
+
     public ArrayList<String> getMatch(String user, int i) {
         ArrayList<String> arr = dg.retrieveAll(user, false);
         ArrayList<String> partida = new ArrayList<>();
         String[] out;
-        if (arr.size() > i) {
-            out = arr.get(i).split("");
+        if (arr.size() >= i) {
+            out = arr.get(i).split(" ");
             for (int j = 0; j < out.length; j++) partida.add(out[j]);
         } else partida.add("-1");
         return partida;
@@ -27,8 +34,7 @@ public class ControladorPersistencia {
     }
 
     public boolean correctPW(String name, String pw) {
-
-        return (tryName(name) && dg.findUser(name).get(1) == pw);
+        return (tryName(name) && dg.findUser(name).get(1).equals(pw));
     }
 
     public void create(String nickname, String pw) {

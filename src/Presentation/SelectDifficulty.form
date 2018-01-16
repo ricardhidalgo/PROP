@@ -16,7 +16,7 @@
       <component id="6c3be" class="javax.swing.JButton" binding="easyButton" default-binding="true">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.1" weighty="0.0"/>
+          <gridbag weightx="0.2" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Easy"/>
@@ -25,7 +25,7 @@
       <component id="3db34" class="javax.swing.JButton" binding="mediumButton" default-binding="true">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag weightx="0.2" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Medium"/>
@@ -34,7 +34,7 @@
       <component id="6712a" class="javax.swing.JButton" binding="hardButton" default-binding="true">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag weightx="0.2" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Hard"/>
@@ -43,7 +43,7 @@
       <component id="eeb71" class="javax.swing.JButton" binding="customButton" default-binding="true">
         <constraints>
           <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag weightx="0.2" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Custom"/>
@@ -51,12 +51,13 @@
       </component>
       <component id="daeee" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="0" bottom="0" right="80" weightx="0.0" weighty="0.1"/>
+          <grid row="0" column="0" row-span="11" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="80" bottom="0" right="0" weightx="0.1" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-12501697"/>
           <enabled value="false"/>
+          <foreground color="-12501697"/>
         </properties>
       </component>
       <component id="86d7e" class="javax.swing.JSeparator">
@@ -64,7 +65,11 @@
           <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="80" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-12501697"/>
+          <enabled value="false"/>
+          <foreground color="-12501697"/>
+        </properties>
       </component>
       <component id="c7eab" class="javax.swing.JSeparator">
         <constraints>
@@ -148,6 +153,17 @@
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="35" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-12501697"/>
+          <enabled value="false"/>
+          <foreground color="-12501697"/>
+        </properties>
+      </component>
+      <component id="44dcd" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="0" column="2" row-span="9" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="0" right="80" weightx="0.1" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-12501697"/>

@@ -32,6 +32,19 @@ public class Combination {
     }
 
     /**
+     * Constructora con combinación preestablecida en string.
+     *
+     * @param comb La combinación con la que se quiere inicializar el objeto
+     */
+    public Combination(String comb) {
+        this.comb = new ArrayList<>();
+        byte[] b = comb.getBytes();
+        for (int i = 0; i < comb.length(); i++){
+            this.comb.add((byte)(b[i]-'0'));
+        }
+    }
+
+    /**
      * Retorna la combinación
      *
      * @return Combinación de colores en forma de ArrayList de Bytes.
@@ -99,6 +112,19 @@ public class Combination {
     public boolean hasRepeat() {
         Set<Byte> hcomb = new HashSet<Byte>(this.comb);
         return comb.size() > hcomb.size();
+    }
+
+    @Override
+    public String toString() {
+        String out = "";
+        for (int i = 0; i < comb.size(); i++) out += comb.get(i).byteValue();
+        return out;
+    }
+
+    public String toString2(){
+        String out = "";
+        for (int i = 0; i < comb.size(); i++) out += comb.get(i).byteValue();
+        return out;
     }
 
 }

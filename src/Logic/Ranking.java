@@ -1,10 +1,10 @@
 package Logic;
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
- * @author pol.gil
+ * @author albert.ortiz
  */
 
 public class Ranking extends MyPair{
@@ -14,25 +14,26 @@ public class Ranking extends MyPair{
     private int score;
     private ArrayList<MyPair> ranking = new ArrayList<MyPair>();
 
-
-    /**
-     * Constructora vacía.
-     */
-    public Ranking() {
-        MyPair ID = new MyPair("NONE", 9999999);
-        this.ranking.add(ID);
-    }
-
     /**
      * Constructora preestablecida.
-     * @param nick el nick que querremos poner en el ranking.
-     * @param score la puntuación que corresponde a la partida de dicho nick.
+     * @param rank todas las puntuaciones del sistema
      */
-    public Ranking (String nick, int score) {
-        this.nickname = nick;
-        this.score = score;
-        MyPair ID = new MyPair("NONE", 9999999);
-        this.ranking.add(ID);
+    public Ranking(ArrayList<MyPair> rank) {
+        rank.sort(new rankComparator());
+        while (rank.size() > 10) {
+            int i = rank.size() - 1;
+            rank.remove(i);
+        }
+        this.ranking = rank;
+    }
+
+    public void reload(ArrayList<MyPair> rank) {
+        Ranking r = new Ranking(rank);
+        this.ranking = r.getRanking();
+    }
+
+    public ArrayList<MyPair> getRanking() {
+        return ranking;
     }
 
     /**
@@ -44,33 +45,6 @@ public class Ranking extends MyPair{
     }
 
     /**
-     * retorna el score del usuario.
-     * @return score del usuario.
-     */
-    public int getscore() {
-        return score;
-    }
-
-    /**
-     * cambia el atributo nickname por la variable nick.
-     * @param nick nuevo nickname del usuario.
-     */
-    public void modifynick(String nick) {
-        nickname = nick;
-    }
-
-    /**
-     * cambia el atributo score por la variable score.
-     * @param score nuevo score del usuario.
-     */
-    public void modifyscore(int score) {
-        this.score = score;
-    }
-
-    public void modifyranking(ArrayList<MyPair> rank) { this.ranking = rank; }
-
-
-    /**
      * Retorna el tamañano del arraylist ranking.
      * @return retorna el total de duplas nick-score que hay inscritas.
      */
@@ -79,75 +53,26 @@ public class Ranking extends MyPair{
     }
 
     /**
-     * Retorna el array con el ranking.
-     * @return retorna el ranking.
+     * Devuelve el usuario en la posicion index.
+     * @return devuelve el nickname.
      */
-    public ArrayList<MyPair> getranking() {
-        return ranking;
+    public String getUser(int index) {
+        return ranking.get(index).getkey();
     }
 
     /**
-     * Inserta una combinación nick-score en el caso que el score de esta partida sea mayor a alguno
-     * de los puestos anteriormente.
+     * Devuelve el score en la posicion index.
+     * @return devuelve el score
      */
-    public void InsertRanking () {
-        MyPair ID = new MyPair(nickname, score);
-        boolean found = false;
-        boolean used = false;
-
-        if (ranking.size() >= 1) {
-             for (int i = 0; i < ranking.size() && !found; i++) {
-                 if (ranking.get(i).getvalue() >= ID.getvalue()) {
-                     MyPair aux = new MyPair();
-                     for (int j = i; j < ranking.size(); j++) {
-                         aux.Modifykey(ranking.get(j).getkey());
-                         aux.Modifyvalue(ranking.get(j).getvalue());
-                         ranking.get(j).Modifykey(ID.getkey());
-                         ranking.get(j).Modifyvalue(ID.getvalue());
-                         ID.Modifykey(aux.getkey());
-                         ID.Modifyvalue(aux.getvalue());
-                     }
-                     if (ID.getvalue() < 9999999 && ranking.size() < 10) {
-                         found = true;
-                         used = true;
-                         ranking.add(ID);
-                     }
-                 }
-             }
-             if (ID.getvalue() < 9999999 && ranking.size() < 10 && !used) ranking.add(ID);
-        }
+    public int getScore(int index) {
+        return ranking.get(index).getvalue();
     }
 
+}
 
-    /**
-     * Escribe en un documento .txt el ranking de puntuaciones.
-     */
-    /*
-    public void escribirtxt() {
-
-        try {
-
-            File archivo = new File("ranking.txt");
-            if (!archivo.exists()) {
-                if (!archivo.createNewFile()) {
-                    System.out.println("Error");
-                }
-            }
-            archivo.delete();
-            archivo = new File("ranking.txt");
-
-            BufferedWriter bw;
-            bw = new BufferedWriter(new FileWriter(archivo, true));
-            for (int i = 0; i < ranking.size(); i++) {
-                bw.write(ranking.get(i).getkey() + " - " + ranking.get(i).getvalue() + "\n");
-            }
-            bw.close();
-        }
-
-        catch (IOException errorDeFichero) {
-            System.out.println("Error al escribir el ranking" + errorDeFichero.getMessage());
-        }
+class rankComparator implements Comparator<MyPair> {
+    @Override
+    public int compare(MyPair a, MyPair b) {
+        return a.getvalue() > b.getvalue() ? -1 : a.getvalue() == b.getvalue() ? 0 : 1;
     }
-    */
-
 }

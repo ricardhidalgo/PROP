@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Presentation.Instructions">
   <grid id="27dc6" binding="InstructionsPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="515" height="400"/>
+      <xy x="20" y="20" width="515" height="421"/>
     </constraints>
     <properties>
       <background color="-12501697"/>
@@ -32,7 +32,7 @@
           <background color="-12501697"/>
           <editable value="false"/>
           <foreground color="-4737097"/>
-          <text value="Aqui van les instruccions"/>
+          <text value="Welcome to mastermind!&#10;&#10;- First, choose a difficulty:&#10;&#9;· Easy: a code of 4 positions, without repetitions. Only for reckless cowboys! Go play another game.&#10;&#9;· Medium: a code of 6 positions, with repetitions. Nothing to say.&#10;&#9;· Hard: a code of 8 positions, with repetitions. Ask your doctor before trying it!&#10;&#10;- Second... choose your role!&#10;&#9;· Code breaker: find the secret code in the least number of tries!&#10;&#9;&#9;After each try, you will receive two values: C and P.&#10;&#9;&#9;P as number of colors in your combination that exactly matches the ones in the secret!&#10;&#9;&#9;C as number of colors in your combination that exists in the secret, but in another location!&#10;&#9;· Code master: make an impossible combination and let the AI do the rest!&#10;&#10;- Third, get your score! Your score will get bigger depending on the difficulty and the number of guesses. The least number of guesses, the bigger your score will be! "/>
         </properties>
       </component>
     </children>

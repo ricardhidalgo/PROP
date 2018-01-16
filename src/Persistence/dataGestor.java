@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 import static java.nio.file.StandardOpenOption.CREATE;
 
+/**
+ * @author albert.ortiz
+ */
 public class dataGestor {
 
     public dataGestor(){
@@ -48,7 +51,7 @@ public class dataGestor {
             }
             data = info.get(info.size()-1).getBytes();
             out.write(data, 0, data.length);
-            } catch (IOException x) {
+        } catch (IOException x) {
             System.err.println(x);
         }
     }
@@ -115,8 +118,7 @@ public class dataGestor {
 
             // Always close files.
             bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             //If user info doesn't exists, we must initialize it
             ArrayList<String> a = new ArrayList<>();
             if(score) {
@@ -128,13 +130,13 @@ public class dataGestor {
                 a.add("SCORES");
                 saveInfo(fileName, a);
             }
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println(
                     "Error reading file '"
                             + fileName + "'");
         }
     }
+
 
     public void deleteIndex(String username, int i, boolean score){
 
@@ -164,17 +166,27 @@ public class dataGestor {
             // Always close files.
             bufferedReader.close();
             saveInfo(fileName, out);
-        }
-        catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file '" +
                             fileName + "'");
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println(
                     "Error reading file '"
                             + fileName + "'");
         }
+    }
+
+    public ArrayList<String> getUsers() {
+        File folder = new File("./Saved/");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String> out = new ArrayList<>();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            String s = listOfFiles[i].getName();
+            out.add(s.substring(0, s.length() - 4));
+        }
+        return out;
+
     }
 
     public ArrayList<String> retrieveAll(String username, boolean score) {
@@ -203,13 +215,11 @@ public class dataGestor {
 
             // Always close files.
             bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file '" +
                             fileName + "'");
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println(
                     "Error reading file '"
                             + fileName + "'");
@@ -236,11 +246,9 @@ public class dataGestor {
             out.add(line = bufferedReader.readLine());
             // Always close files.
             bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             out.add("NULL");
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println(
                     "Error reading file '"
                             + fileName + "'");
