@@ -20,6 +20,7 @@
         </constraints>
         <properties>
           <background color="-12501697"/>
+          <enabled value="true"/>
           <foreground color="-4737097"/>
           <text value="Label"/>
         </properties>

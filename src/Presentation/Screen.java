@@ -27,6 +27,12 @@ public class Screen extends JFrame implements ActionListener{
 
     private JPanel mainPanel;
 
+    /**
+     * Constructora del JFrame principal del programa
+     *
+     * @param width  Ancho del JFrame
+     * @param height Alto del JFrame
+     */
     public Screen(int width, int height) {
 
         initializePanelClasses();
@@ -47,6 +53,9 @@ public class Screen extends JFrame implements ActionListener{
         requestFocus();
     }
 
+    /**
+     * Añade los diferentes JPanels al CardLayout para formar el sistema de menus.
+     */
     private void addPanels() {
 
         mainPanel.add(loginRegisterC.getLoginRegisterPanel(), "LoginRegister");
@@ -64,6 +73,9 @@ public class Screen extends JFrame implements ActionListener{
 
     }
 
+    /**
+     * Inicializa las clases que definen los diferentes JPanels de los menus, así como el layout
+     */
     private void initializePanelClasses() {
 
         loginRegisterC = new Login();
@@ -80,6 +92,9 @@ public class Screen extends JFrame implements ActionListener{
         mainPanel = new JPanel();
     }
 
+    /**
+     * Configura todos los ActionListeners de los diferentes JPanels
+     */
     private void setListeners(){
 
         loginRegisterC.addLoginButtonActionListener(this);
@@ -115,6 +130,10 @@ public class Screen extends JFrame implements ActionListener{
 
     }
 
+    /**
+     * Define la respuesta a cualquier evento generado en funcion de su fuente
+     * @param event Objeto tipo ActionEvent generado por el ActionListener.
+     */
     public void actionPerformed(ActionEvent event) {
 
         Object source = event.getSource();
@@ -255,8 +274,9 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == board.getSaveButton()) {
 
-            cp.saveMatch();
+            if (board.getSubmitButton().isEnabled()) cp.saveMatch();
             layout.show(mainPanel, "MainMenu");
+            board.getSaveButton().setText("Save");
 
         } else if (source == board.getExitButton()) {
 
@@ -285,6 +305,7 @@ public class Screen extends JFrame implements ActionListener{
                     board.getSubmitButton().setText("Generate Next Guess");
                 } else {
                     board.getSubmitButton().setEnabled(false);
+                    board.displayMessage("The AI has found the secret code! Game over!");
                 }
 
             } else if (board.getSubmitButton().getText() == "Generate Next Guess") {
@@ -298,6 +319,7 @@ public class Screen extends JFrame implements ActionListener{
                 board.displayResult(col, pos, board.getCurrentTurn());
                 if (cp.isEnd(pos)) {
                     board.getSubmitButton().setEnabled(false);
+                    board.displayMessage("The AI has found the secret code! Game over!");
                 }
 
             } else {
@@ -310,8 +332,8 @@ public class Screen extends JFrame implements ActionListener{
                 if (cp.isEnd(pos)) {
                     cp.saveScore(username);
                     board.getSubmitButton().setEnabled(false);
-                    board.displayMessage("Congratulations! You won!  -> Final score: ");
-                    //layout.show(mainPanel, "MainMenu");
+                    board.displayMessage("Congratulations! You won!  -> Final score: " + cp.getGameScore());
+                    board.getSaveButton().setText("Exit");
                 }
             }
         }

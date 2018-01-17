@@ -11,7 +11,6 @@ public class ControladorLogic {
     private User user;
     private boolean breaker;
     private AI ia;
-    private ArrayList<Play> plays;
     private ControladorPersistencia cd;
     private Ranking ranking;
 
@@ -83,6 +82,7 @@ public class ControladorLogic {
 
     /**
      * Crea un nuevo objeto Difficulty y le assigna un valor de dificultad.
+     *
      * @param diff Dificultad asignada.
      * @param tips Determina si se han pedido pistas.
      */
@@ -108,7 +108,7 @@ public class ControladorLogic {
     /**
      * Devuelve la partida del usuario user con indice index
      *
-     * @param user       usuario de la partida.
+     * @param user  Usuario de la partida.
      * @param index indice de la partida
      * @return la partida, -1 si no la encuentra.
      */
@@ -116,7 +116,13 @@ public class ControladorLogic {
         return cd.getMatch(user, index);
     }
 
-    public boolean existsMatch(String user, int index){
+    /**
+     * Comprueba si la partida existe en el sistema.
+     *
+     * @param user  El usuario sobre el que queremos consultar la partida.
+     * @param index El índice del espacio de guardado que deseamos consultar.
+     */
+    public boolean existsMatch(String user, int index) {
         return !cd.getMatch(user, index).get(0).equals("-1");
     }
 
@@ -129,11 +135,6 @@ public class ControladorLogic {
         breaker = breaking;
     }
 
-
-    /*public void setPlays(ArrayList<Play> play) {
-        plays = play;
-    }*/
-
     /**
      * Inicializa la IA con los parámetros de dificultad establecidos e inicializa la partida con la constructora para partidas nuevas.
      */
@@ -144,6 +145,7 @@ public class ControladorLogic {
 
     /**
      * Retorna el número de colores correctos en posicion incorrecta de la última jugada.
+     *
      * @return Número de colores correctos en posicion incorrecta de la última jugada.
      */
     public int getCC() {
@@ -152,18 +154,23 @@ public class ControladorLogic {
 
     /**
      * Retorna el número de colores correctos en posicion correcta de la última jugada.
+     *
      * @return Número de colores correctos en posicion correcta de la última jugada.
      */
     public int getCP() {
         return game.getLastPlay().getNumCorrectPositions();
     }
 
-    /* se tiene que hacer un bucle con todas las puntuaciones del mismo user y hacer esta funcion en
-    todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
-     */
 
+    /**
+     * La IA genera la combinación secreta de la partida.
+     *
+     * @return La combinación generada.
+     * @deprecated
+     */
+    @Deprecated
     public Combination generateIASecret() {
-        //ia = new AI_Genetic(difficulty);
+
         return ia.generateSecret();
     }
 
@@ -219,7 +226,7 @@ public class ControladorLogic {
      * @param guess Combinación introducida por el user.
      */
     public void setGuess(String guess) {
-        ArrayList<Byte> sol = new ArrayList<Byte>();
+        ArrayList<Byte> sol = new ArrayList<>();
         for (int i = 0; i < guess.length(); i++) {
             if (guess.charAt(i) == 'R') sol.add((byte) 0);
             else if (guess.charAt(i) == 'Y') sol.add((byte) 1);
@@ -228,18 +235,17 @@ public class ControladorLogic {
             else if (guess.charAt(i) == 'O') sol.add((byte) 4);
             else if (guess.charAt(i) == 'P') sol.add((byte) 5);
         }
-        //try {
         game.makePlay(new Combination(sol));
-        //}
-        //catch (ExcepcioGame g){
-        //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //}
+
     }
+
     /**
      * Genera una solucion aleatoria.
      *
      * @return la combinacion solucion
+     * @deprecated No se usa
      */
+    @Deprecated
     public String RandomSolution() {
         String RS = "";
         Combination comb = generateIASecret();
@@ -250,16 +256,20 @@ public class ControladorLogic {
     }
 
     /**
-     * Genera la primera combinacion predefinida de la IA
+     * Genera la primera combinación de la IA.
      *
-     * @return la combinacion generada.
+     * @return La combinación generada.
      */
-
     public String firstGuess() {
-        //ia = new AI_Genetic(difficulty);
+
         return arrayCombToString(ia.generateFirstCombination().getComb());
     }
 
+    /**
+     * Genera la siguiente combinación de la IA
+     *
+     * @return La combinación generada.
+     */
     public String nextGuess() {
 
         return arrayCombToString(ia.generateNextCombination(game.getLastPlay()).getComb());
@@ -269,20 +279,10 @@ public class ControladorLogic {
         return cd.allscores(nickname, score);
     }
 
-    /*public void CreateRanking(Ranking ranking, String user) {
-        ArrayList<String> puntuacion = cd.allscores(user, true);
-        for (int i = 0; i < puntuacion.size(); i++) {
-            insert1puntuation(ranking, user, Integer.parseInt(puntuacion.get(i)));
-        }
-    }*/
-
-    /*public void convertranking() {
-        CreateRanking(ranking, user);
-    }*/
     /**
      * Guarda el score
      *
-     * @param name nombre del usuario
+     * @param name        nombre del usuario
      * @param punctuation puntuacion
      */
     public void saveScore(String name, ArrayList<String> punctuation) {
@@ -294,10 +294,10 @@ public class ControladorLogic {
      *
      * @return Puntuacion de la partida actual
      */
-
     public int getGameScore() {
         return game.getScore();
     }
+
     /**
      * Genera una partida a partida a partir de unos parametros guardados
      *
@@ -324,6 +324,7 @@ public class ControladorLogic {
         game = g;
         return true;
     }
+
     /**
      * Obtiene el ranking y lo devuelve en formato comprensible para capas superiores.
      *
@@ -338,7 +339,6 @@ public class ControladorLogic {
 
     /**
      * Genera el ranking
-     *
      */
     public void generateRanking() {
         ArrayList<String> users = cd.getUsers();
@@ -352,14 +352,20 @@ public class ControladorLogic {
         }
         ranking = new Ranking(rank);
     }
+
     /**
      * Guarda en el sistema la partida actual.
-     *
      */
     public void saveMatch() {
         cd.savepuntuation(user.getNickname(), game.retrieveMatch(), false);
     }
 
+    /**
+     * Conversor de formato ArrayList<Byte> a String.
+     *
+     * @param comb Combinacion en Array.
+     * @return Combinacion en String.
+     */
     private String arrayCombToString(ArrayList<Byte> comb) {
         String combS = new String();
         for (int i = 0; i < comb.size(); i++) {

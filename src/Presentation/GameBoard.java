@@ -329,6 +329,8 @@ public class GameBoard extends JPanel {
     public void displayMessage(String message) {
 
         JLabel label = new JLabel(message);
+        label.setBackground(backgroundColor);
+        label.setForeground(new Color(-4737097));
         guessPanel.add(label);
     }
 
