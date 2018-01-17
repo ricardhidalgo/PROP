@@ -109,6 +109,10 @@ public class ControladorLogic {
         return cd.getMatch(user, index);
     }
 
+    public boolean existsMatch(String user, int index){
+        return cd.getMatch(user, index).get(0) != "-1";
+    }
+
     /**
      * Especifica el rol del jugador en la partida
      *
