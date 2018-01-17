@@ -55,7 +55,6 @@ public class Screen extends JFrame implements ActionListener{
         mainPanel.add(customDifficultyC.getCustomDifficultyPanel(), "CustomDifficulty");
         mainPanel.add(choseRoleC.getChoseRolePanel(), "ChoseRole");
         mainPanel.add(loadGameC.getLoadGamePanel(), "LoadGame");
-        //mainPanel.add(board, "GameBoard");
 
         layout.show(mainPanel,"LoginRegister");
 
@@ -189,7 +188,7 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == customDifficultyC.getContinueButton()) {
 
-            //cp.configureCustom(customDifficultyC.ge);
+            cp.configureCustom((Integer) customDifficultyC.getLengthSpinner().getValue(), customDifficultyC.getAllowRepeatedRadioButton().isSelected());
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == customDifficultyC.getBackButton()) {

@@ -11,7 +11,6 @@ public class CustomDifficulty {
     private JSpinner turnSpinner;
     private JRadioButton allowRepeatedRadioButton;
     private JRadioButton noRepeatedRadioButton;
-    private JLabel turnsLabel;
     private JLabel lengthLabel;
     private JButton backButton;
     private JButton continueButton;
