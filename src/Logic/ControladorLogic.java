@@ -88,10 +88,10 @@ public class ControladorLogic {
      */
     public void setDiff(String diff, boolean tips) {
         difficulty = new Difficulty();
-        if (diff == "easy") difficulty.setEasy(tips);
-        else if (diff == "medium") difficulty.setMedium(tips);
-        else if (diff == "hard") difficulty.setHard(tips);
-        else if (diff == "custom") difficulty.setCustom(tips);
+        if (diff.equals("easy")) difficulty.setEasy(tips);
+        else if (diff.equals("medium")) difficulty.setMedium(tips);
+        else if (diff.equals("hard")) difficulty.setHard(tips);
+        else if (diff.equals("custom")) difficulty.setCustom(tips);
     }
 
 
@@ -117,7 +117,7 @@ public class ControladorLogic {
     }
 
     public boolean existsMatch(String user, int index){
-        return cd.getMatch(user, index).get(0) != "-1";
+        return !cd.getMatch(user, index).get(0).equals("-1");
     }
 
     /**
@@ -313,8 +313,8 @@ public class ControladorLogic {
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
         boolean tips = false;
-        if (info.get(2) == "true") b = true;
-        if (info.get(3) == "true") tips = true;
+        if (info.get(2).equals("true")) b = true;
+        if (info.get(3).equals("true")) tips = true;
         ArrayList<Combination> guesses = new ArrayList<>();
         for (int i = 4; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
         dif.setCustom(tips);
