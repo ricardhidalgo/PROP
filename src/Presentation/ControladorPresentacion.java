@@ -184,4 +184,16 @@ public class ControladorPresentacion {
     public void saveMatch() {
         contLogic.saveMatch();
     }
+
+    /**
+     * Checks if the match exists in the system.
+     *
+     * @param user The user we want to look.
+     * @param index The index of the match we want to check
+
+     */
+
+    public boolean existsMatch(String user, int index){
+        return contLogic.existsMatch(user, index);
+    }
 }
