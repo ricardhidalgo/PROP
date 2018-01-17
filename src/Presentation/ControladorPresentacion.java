@@ -129,10 +129,6 @@ public class ControladorPresentacion {
         return contLogic.firstGuess();
     }
 
-    /*public void checkAnswer() {
-        contLogic.checkAnswer();
-    }*/
-
     public String nextGuess() {
         return contLogic.nextGuess();
     }

@@ -19,6 +19,7 @@ public class Screen extends JFrame implements ActionListener{
     private CustomDifficulty customDifficultyC;
     private ChoseRole choseRoleC;
     private LoadGame loadGameC;
+    private Scoreboard scoreboardC;
 
     private GameBoard board;
 
@@ -55,6 +56,7 @@ public class Screen extends JFrame implements ActionListener{
         mainPanel.add(customDifficultyC.getCustomDifficultyPanel(), "CustomDifficulty");
         mainPanel.add(choseRoleC.getChoseRolePanel(), "ChoseRole");
         mainPanel.add(loadGameC.getLoadGamePanel(), "LoadGame");
+        mainPanel.add(scoreboardC.getScoreboardPanel(), "Scores");
 
         layout.show(mainPanel,"LoginRegister");
 
@@ -71,6 +73,7 @@ public class Screen extends JFrame implements ActionListener{
         customDifficultyC = new CustomDifficulty();
         choseRoleC = new ChoseRole();
         loadGameC = new LoadGame();
+        scoreboardC = new Scoreboard();
 
         layout = new CardLayout();
 
@@ -108,6 +111,7 @@ public class Screen extends JFrame implements ActionListener{
         loadGameC.addSaveSlot3ButtonActionListener(this);
         loadGameC.addBackButtonActionListener(this);
 
+        scoreboardC.addBackButtonActionListener(this);
 
     }
 
@@ -133,11 +137,19 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == mainMenuC.getScoresButton()) {
 
+            cp.
+                    layout.show(mainPanel, "Scores");
+
+        } else if (source == scoreboardC.getBackButton()) {
+
+            layout.show(mainPanel, "MainMenu");
+
         } else if (source == mainMenuC.getLoadGameButton()) {
 
-            for (int j = 0; j < 2; ++j) {
-                //if()
-            }
+            if (cp.existsMatch(username, 0)) loadGameC.getSaveSlot1Button().setEnabled(true);
+            if (cp.existsMatch(username, 1)) loadGameC.getSaveSlot2Button().setEnabled(true);
+            if (cp.existsMatch(username, 2)) loadGameC.getSaveSlot3Button().setEnabled(true);
+
             layout.show(mainPanel, "LoadGame");
 
         } else if (source == selectDifficultyC.getEasyButton()) {

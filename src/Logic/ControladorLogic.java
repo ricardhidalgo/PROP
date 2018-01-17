@@ -8,7 +8,7 @@ public class ControladorLogic {
 
     private Difficulty difficulty;
     private Game game;
-    private User usuario;
+    private User user;
     private boolean breaker;
     private AI ia;
     private ArrayList<Play> plays;
@@ -25,9 +25,9 @@ public class ControladorLogic {
 
 
     /**
-     * Combrueba que el nombre de usuario dado existe en el registro de usuarios.
+     * Combrueba que el nombre de user dado existe en el registro de usuarios.
      *
-     * @param nick Nombre de usuario.
+     * @param nick Nombre de user.
      * @return True si existe, false en caso contrario.
      * @deprecated Ya incluida en register y loginUser.
      */
@@ -37,10 +37,10 @@ public class ControladorLogic {
     }
 
     /**
-     * Da de alta un nuevo usuario en el registro de usuarios e inicia sesión con el.
+     * Da de alta un nuevo user en el registro de usuarios e inicia sesión con el.
      *
-     * @param nick Nombre del usuario.
-     * @param pw   Contraseña de acceso del usuario.
+     * @param nick Nombre del user.
+     * @param pw   Contraseña de acceso del user.
      * @return True si la operación se ha relizado con éxito. False en caso contrario (Usuario ya existe).
      */
     public boolean register(String nick, String pw) {
@@ -48,16 +48,16 @@ public class ControladorLogic {
             return false;
         } else {
             cd.create(nick, pw);
-            usuario = new User(nick, pw);
+            user = new User(nick, pw);
             return true;
         }
     }
 
     /**
-     * Comprueba si el usuario y la contraseña concuerdan en el registro de usuario.
+     * Comprueba si el user y la contraseña concuerdan en el registro de user.
      *
-     * @param nick Nombre de usuario.
-     * @param pw   Contraseña del usuario.
+     * @param nick Nombre de user.
+     * @param pw   Contraseña del user.
      * @return True si concuerdan. False en caso contrario.
      * @deprecated Ya incluida por defecto en loginUser.
      */
@@ -67,15 +67,15 @@ public class ControladorLogic {
     }
 
     /**
-     * Intenta iniciar sesión con el nombre de usuario y la contraseña dados.
+     * Intenta iniciar sesión con el nombre de user y la contraseña dados.
      *
-     * @param nick Nombre de usuario
+     * @param nick Nombre de user
      * @param pw   Contraseña
      * @return True si se ha podido iniciar sesión con éxito. False en caso contrario (Usuario o contraseña incorrecto).
      */
     public boolean loginUser(String nick, String pw) {
         if (cd.tryName(nick) && cd.correctPW(nick, pw)) {
-            usuario = new User(nick, pw);
+            user = new User(nick, pw);
             return true;
         } else return false;
 
@@ -132,7 +132,7 @@ public class ControladorLogic {
      */
     public void startNewGame() {
         ia = new AI_Genetic(difficulty);
-        game = new Game(usuario, ia, breaker, difficulty);
+        game = new Game(user, ia, breaker, difficulty);
     }
 
     /**
@@ -151,7 +151,7 @@ public class ControladorLogic {
         return game.getLastPlay().getNumCorrectPositions();
     }
 
-    /* se tiene que hacer un bucle con todas las puntuaciones del mismo usuario y hacer esta funcion en
+    /* se tiene que hacer un bucle con todas las puntuaciones del mismo user y hacer esta funcion en
     todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
      */
 
@@ -187,9 +187,9 @@ public class ControladorLogic {
     }
 
     /**
-     * Recoge y almacena el codigo secreto establecido por el usuario.
+     * Recoge y almacena el codigo secreto establecido por el user.
      *
-     * @param answer2 Codigo secreto del usuario.
+     * @param answer2 Codigo secreto del user.
      */
     public void setAnswerCM(String answer2) {
 
@@ -207,9 +207,9 @@ public class ControladorLogic {
     }
 
     /**
-     * Genera una nueva jugada con la combinación introducida por el usuario.
+     * Genera una nueva jugada con la combinación introducida por el user.
      *
-     * @param guess Combinación introducida por el usuario.
+     * @param guess Combinación introducida por el user.
      */
     public void setGuess(String guess) {
         ArrayList<Byte> sol = new ArrayList<Byte>();
@@ -252,15 +252,15 @@ public class ControladorLogic {
         return cd.allscores(nickname, score);
     }
 
-    /*public void CreateRanking(Ranking ranking, String usuario) {
-        ArrayList<String> puntuacion = cd.allscores(usuario, true);
+    /*public void CreateRanking(Ranking ranking, String user) {
+        ArrayList<String> puntuacion = cd.allscores(user, true);
         for (int i = 0; i < puntuacion.size(); i++) {
-            insert1puntuation(ranking, usuario, Integer.parseInt(puntuacion.get(i)));
+            insert1puntuation(ranking, user, Integer.parseInt(puntuacion.get(i)));
         }
     }*/
 
     /*public void convertranking() {
-        CreateRanking(ranking, usuario);
+        CreateRanking(ranking, user);
     }*/
 
     public void saveScore(String name, ArrayList<String> punctuation, boolean score) {
@@ -287,7 +287,7 @@ public class ControladorLogic {
         dif.setCustom(tips);
         dif.configureCustom(numB, b);
         difficulty = dif;
-        Game g = new Game(usuario, secret, dif, guesses);
+        Game g = new Game(user, secret, dif, guesses);
         game = g;
         return true;
     }
@@ -313,7 +313,7 @@ public class ControladorLogic {
     }
 
     public void saveMatch() {
-        cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
+        cd.savepuntuation(user.getNickname(), game.retrieveMatch(), false);
     }
 
     private String arrayCombToString(ArrayList<Byte> comb) {
