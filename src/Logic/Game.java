@@ -25,15 +25,10 @@ public class Game {
      * @param comb combinación correcta.
      * @return returna una jugada.
      */
-    public Play makePlay(Combination comb) {
+    public Play makePlay(Combination comb)throws ExcepcioGame {
         Play np = new Play();
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.err.println("Wrong parameters 2");
-            System.err.println(comb.getComb().size());
-            System.err.println(difficulty.getNumBallsInCombination());
-            System.err.println(comb.hasRepeat());
-            System.err.println(difficulty.isCanRepeat());
-            System.err.println(comb.toString());
+            throw new ExcepcioGame("Bad parameters");
         } else {
             np.processPlay(comb, secretCode);
             plays.add(np);
@@ -173,9 +168,9 @@ public class Game {
      *
      * @param comb Combinación correcta.
      */
-    public void setSecretCode(Combination comb) {
+    public void setSecretCode(Combination comb) throws ExcepcioGame {
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.err.println("Wrong parameters 1");
+            throw new ExcepcioGame("Bad parameters");
         } else {
             this.secretCode = comb;
         }
@@ -187,7 +182,12 @@ public class Game {
      * @param plays jugadas guardadas
      */
     public void initializeGame(ArrayList<Combination> plays) {
-        for (int i = 0; i < plays.size(); i++) this.makePlay(plays.get(i));
+        try {
+            for (int i = 0; i < plays.size(); i++) this.makePlay(plays.get(i));
+        }
+        catch (ExcepcioGame g){
+            //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
     }
 
 
@@ -206,5 +206,12 @@ public class Game {
         // for(int i=0; i<plays.size(); i++) out.add(plays.get(i).getCombination().toString());
         for (int i = 0; i < plays.size(); i++) out.add(plays.get(i).getCombination().toString());
         return out;
+    }
+}
+
+class ExcepcioGame extends Exception{
+
+    ExcepcioGame(String str){
+        super(str);
     }
 }

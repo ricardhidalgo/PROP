@@ -166,8 +166,9 @@ public class ControladorPresentacion {
         contLogic.convertranking(user);
     }*/
 
-    public void loadMatch(String user, int index) {
-        contLogic.loadMatch(contLogic.getMatch(user, index));
+    public boolean loadMatch(String user, int index) {
+        return contLogic.loadMatch(contLogic.getMatch(user, index));
+
     }
 
     public void saveMatch() {

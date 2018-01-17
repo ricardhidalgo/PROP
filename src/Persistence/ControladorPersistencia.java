@@ -21,8 +21,9 @@ public class ControladorPersistencia {
         ArrayList<String> arr = dg.retrieveAll(user, false);
         ArrayList<String> partida = new ArrayList<>();
         String[] out;
-        if (arr.size() >= i) {
+        if (arr.size()-1 >= i && !arr.isEmpty()) {
             out = arr.get(i).split(" ");
+            dg.deleteIndex(user, i);
             for (int j = 0; j < out.length; j++) partida.add(out[j]);
         } else partida.add("-1");
         return partida;
