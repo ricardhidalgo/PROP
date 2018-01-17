@@ -103,7 +103,12 @@ public class ControladorPresentacion {
         return contLogic.isCanRepeat();
     }
 
-
+    /**
+     * Comprueba el estado de la partida, si es finalizado.
+     *
+     * @param pos       numero de posiciones correctas.
+     * @return pos == numBolasCombinacion
+     */
     public boolean isEnd(int pos) {
         return pos == contLogic.getCombinationSize();
     }
@@ -153,18 +158,26 @@ public class ControladorPresentacion {
         contLogic.setGuess(guess);
     }
 
+    /**
+     * Guarda una nueva puntuacion para el usuario usr.
+     *
+     * @param usr   usuario de la partida..
+     */
     public void saveScore(String usr) {
         int a = contLogic.getGameScore();
         ArrayList<String> info = new ArrayList<String>();
         info.add(String.valueOf(a));
-        contLogic.saveScore(usr, info, true);
+        contLogic.saveScore(usr, info);
     }
 
-    public void generateRanking() {
-        contLogic.generateRanking();
-    }
+    /**
+     * Genera y obtiene el ranking general del sistema con las 10 mejores puntuaciones.
+     *
+     *@return ArrayList de tamano maximo 10 con las mejores puntuaciones y sus usuarios
+     */
 
     public ArrayList<String> getRanking() {
+        contLogic.generateRanking();
         return contLogic.getRanking();
     }
 
@@ -172,10 +185,23 @@ public class ControladorPresentacion {
         contLogic.convertranking(user);
     }*/
 
+    /**
+     * Carga la partida index del usuario user
+     *
+     * @param user usuario conectado
+     * @param index indice de la partida a buscar.
+     * @return True si encontrada, False si no
+     */
+
     public boolean loadMatch(String user, int index) {
         return contLogic.loadMatch(contLogic.getMatch(user, index));
 
     }
+
+    /**
+     * Guarda una nueva partida en el sistema
+     *
+     */
 
     public void saveMatch() {
         contLogic.saveMatch();

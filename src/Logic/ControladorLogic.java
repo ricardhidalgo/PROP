@@ -88,10 +88,10 @@ public class ControladorLogic {
      */
     public void setDiff(String diff, boolean tips) {
         difficulty = new Difficulty();
-        if (diff == "easy") difficulty.setEasy(tips);
-        else if (diff == "medium") difficulty.setMedium(tips);
-        else if (diff == "hard") difficulty.setHard(tips);
-        else if (diff == "custom") difficulty.setCustom(tips);
+        if (diff.equals("easy")) difficulty.setEasy(tips);
+        else if (diff.equals("medium")) difficulty.setMedium(tips);
+        else if (diff.equals("hard")) difficulty.setHard(tips);
+        else if (diff.equals("custom")) difficulty.setCustom(tips);
     }
 
 
@@ -105,12 +105,19 @@ public class ControladorLogic {
         difficulty.configureCustom(numB, rep);
     }
 
+    /**
+     * Devuelve la partida del usuario user con indice index
+     *
+     * @param user       usuario de la partida.
+     * @param index indice de la partida
+     * @return la partida, -1 si no la encuentra.
+     */
     public ArrayList<String> getMatch(String user, int index) {
         return cd.getMatch(user, index);
     }
 
     public boolean existsMatch(String user, int index){
-        return cd.getMatch(user, index).get(0) != "-1";
+        return !cd.getMatch(user, index).get(0).equals("-1");
     }
 
     /**
@@ -228,7 +235,11 @@ public class ControladorLogic {
         //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //}
     }
-
+    /**
+     * Genera una solucion aleatoria.
+     *
+     * @return la combinacion solucion
+     */
     public String RandomSolution() {
         String RS = "";
         Combination comb = generateIASecret();
@@ -237,6 +248,12 @@ public class ControladorLogic {
             RS += combination.get(i);
         return RS;
     }
+
+    /**
+     * Genera la primera combinacion predefinida de la IA
+     *
+     * @return la combinacion generada.
+     */
 
     public String firstGuess() {
         //ia = new AI_Genetic(difficulty);
@@ -262,15 +279,31 @@ public class ControladorLogic {
     /*public void convertranking() {
         CreateRanking(ranking, user);
     }*/
-
-    public void saveScore(String name, ArrayList<String> punctuation, boolean score) {
-        cd.savepuntuation(name, punctuation, score);
+    /**
+     * Guarda el score
+     *
+     * @param name nombre del usuario
+     * @param punctuation puntuacion
+     */
+    public void saveScore(String name, ArrayList<String> punctuation) {
+        cd.savepuntuation(name, punctuation, true);
     }
+
+    /**
+     * Devuelve la puntuacion de la partida actual.
+     *
+     * @return Puntuacion de la partida actual
+     */
 
     public int getGameScore() {
         return game.getScore();
     }
-
+    /**
+     * Genera una partida a partida a partir de unos parametros guardados
+     *
+     * @param info informacion de la partida
+     * @return True si se ha cargado con exito, False en el caso contrario
+     */
     public boolean loadMatch(ArrayList<String> info) {
         if (info.size() == 1) return false;
         User us = new User();
@@ -280,8 +313,8 @@ public class ControladorLogic {
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
         boolean tips = false;
-        if (info.get(2) == "true") b = true;
-        if (info.get(3) == "true") tips = true;
+        if (info.get(2).equals("true")) b = true;
+        if (info.get(3).equals("true")) tips = true;
         ArrayList<Combination> guesses = new ArrayList<>();
         for (int i = 4; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
         dif.setCustom(tips);
@@ -291,7 +324,11 @@ public class ControladorLogic {
         game = g;
         return true;
     }
-
+    /**
+     * Obtiene el ranking y lo devuelve en formato comprensible para capas superiores.
+     *
+     * @return ArrayList con el ranking.
+     */
     public ArrayList<String> getRanking() {
         ArrayList<String> rank = new ArrayList<>();
         ArrayList<MyPair> arrP = ranking.getRanking();
@@ -299,6 +336,10 @@ public class ControladorLogic {
         return rank;
     }
 
+    /**
+     * Genera el ranking
+     *
+     */
     public void generateRanking() {
         ArrayList<String> users = cd.getUsers();
         ArrayList<MyPair> rank = new ArrayList<>();
@@ -311,7 +352,10 @@ public class ControladorLogic {
         }
         ranking = new Ranking(rank);
     }
-
+    /**
+     * Guarda en el sistema la partida actual.
+     *
+     */
     public void saveMatch() {
         cd.savepuntuation(user.getNickname(), game.retrieveMatch(), false);
     }
