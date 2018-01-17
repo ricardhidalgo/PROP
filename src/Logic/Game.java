@@ -16,34 +16,31 @@ public class Game {
     private Combination secretCode;
     private ArrayList<Play> plays;
     private Difficulty difficulty;
-    private int guesses = 0;
-    private int score = 0;
+    private int guesses;
+    private int score;
+
     /**
      * Realiza una jugada.
+     *
      * @param comb combinación correcta.
      * @return returna una jugada.
      */
-    public Play makePlay(Combination comb) {
+    public Play makePlay(Combination comb)/*throws ExcepcioGame*/ {
         Play np = new Play();
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.err.println("Wrong parameters 2");
-            System.err.println(comb.getComb().size());
-            System.err.println(difficulty.getNumBallsInCombination());
-            System.err.println(comb.hasRepeat());
-            System.err.println(difficulty.isCanRepeat());
-            System.err.println(comb.toString());
+            //throw new ExcepcioGame("Bad parameters");
         } else {
             np.processPlay(comb, secretCode);
             plays.add(np);
         }
         guesses++;
         score = (100000 * difficulty.getNumBallsInCombination()) / guesses;
-        System.out.println(score);
         return np;
     }
 
     /**
      * Retorna el usuario que está jugando.
+     *
      * @return retorna el usuario que juega.
      */
     public User getUser() {
@@ -62,6 +59,7 @@ public class Game {
 
     /**
      * Indica que rol tiene el usuario.
+     *
      * @return retorna true si el usuario es CB false si es CM.
      */
     public boolean isUserBreaker() {
@@ -70,6 +68,7 @@ public class Game {
 
     /**
      * Retorna la combinación correcta.
+     *
      * @return retorna la respuesta correcta.
      */
     public Combination getSecretCode() {
@@ -78,14 +77,20 @@ public class Game {
 
     /**
      * Retorna una array con las jugadas.
+     *
      * @return retorna las jugadas.
      */
     public ArrayList<Play> getPlays() {
         return plays;
     }
 
+    public Play getLastPlay() {
+        return plays.get(guesses - 1);
+    }
+
     /**
      * Retorna la dificultad establecida.
+     *
      * @return retorna el nível de dificultad.
      */
     public Difficulty getDifficulty() {
@@ -94,6 +99,7 @@ public class Game {
 
     /**
      * Retorna la IA que esta jugando a la partida
+     *
      * @return Referencia a la IA
      */
     public AI getAi() {
@@ -105,17 +111,17 @@ public class Game {
     /**
      * Constructora vacía.
      */
-    public Game(){
-
+    public Game() {
 
     }
 
     /**
      * Constructora con valores predefinidos. Pensada para crear una nueva partida
-     * @param user usuario de la partida.
-     * @param ai IA de la partida.
+     *
+     * @param user          usuario de la partida.
+     * @param ai            IA de la partida.
      * @param isUserBreaker indica si el usuario es CB o CM.
-     * @param difficulty indica el nível de dificultad.
+     * @param difficulty    indica el nível de dificultad.
      */
     public Game(User user, AI ai, boolean isUserBreaker, Difficulty difficulty) {
         this.user = user;
@@ -123,11 +129,14 @@ public class Game {
         this.isUserBreaker = isUserBreaker;
         this.difficulty = difficulty;
         plays = new ArrayList<>();
+        guesses = 0;
+        score = 0;
     }
 
     /**
      * Constructora con valores predefinidos. Pensada para cargar una partida
-     * @param user usuario de la partida.
+     *
+     * @param user       usuario de la partida.
      * @param secretCode combinación correcta (respuesta).
      * @param difficulty nível de dificultad.
      */
@@ -138,6 +147,7 @@ public class Game {
         this.secretCode = secretCode;
         this.difficulty = difficulty;
         this.initializeGame(guesses);
+        score = 0;
     }
 
     /**
@@ -158,11 +168,12 @@ public class Game {
 
     /**
      * Indica cual es la combinación correcta o respuesta
+     *
      * @param comb Combinación correcta.
      */
-    public void setSecretCode(Combination comb) {
+    public void setSecretCode(Combination comb) /*throws ExcepcioGame*/ {
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            System.err.println("Wrong parameters 1");
+            //throw new ExcepcioGame("Bad parameters");
         } else {
             this.secretCode = comb;
         }
@@ -174,7 +185,12 @@ public class Game {
      * @param plays jugadas guardadas
      */
     public void initializeGame(ArrayList<Combination> plays) {
+        //try {
         for (int i = 0; i < plays.size(); i++) this.makePlay(plays.get(i));
+        //}
+        //catch (ExcepcioGame g){
+        //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //}
     }
 
 
@@ -195,3 +211,10 @@ public class Game {
         return out;
     }
 }
+
+/*class ExcepcioGame extends Exception{
+
+    ExcepcioGame(String str){
+        super(str);
+    }
+}*/

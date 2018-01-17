@@ -20,18 +20,7 @@ public class Screen extends JFrame implements ActionListener{
     private ChoseRole choseRoleC;
     private LoadGame loadGameC;
 
-    private char[] pinColorLetters = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
-    private int pinNumber = 4; //provisional
-    private Color[] pinColors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.PINK, new Color(150, 0, 255)};
-    private GameBoard board = new GameBoard(pinNumber, pinColorLetters, pinColors);
-
-    /*private JPanel loginRegisterPanel;
-    private JPanel mainMenuPanel;
-    private JPanel instructionsPanel;
-    private JPanel selectDifficultyPanel;
-    private JPanel customDifficultyPanel;
-    private JPanel choseRolePanel;
-    private JPanel loadGamePanel;*/
+    private GameBoard board;
 
     private CardLayout layout;
 
@@ -43,24 +32,17 @@ public class Screen extends JFrame implements ActionListener{
 
         setListeners();
 
-        /*loginRegisterPanel = loginRegisterC.getLoginRegisterPanel();
-        mainMenuPanel = mainMenuC.getMainMenuPanel();
-        instructionsPanel = instructionsC.getInstructionsPanel();
-        selectDifficultyPanel = selectDifficultyC.getSelectDifficultyPanel();
-        customDifficultyPanel = customDifficultyC.getCustomDifficultyPanel();
-        choseRolePanel = choseRoleC.getChoseRolePanel();
-        loadGamePanel = loadGameC.getLoadGamePanel();*/
-
         mainPanel.setLayout(layout);
         layout.addLayoutComponent(mainPanel, "Screen");
         addPanels();
 
-        setSize(width, height);
+        setMinimumSize(new Dimension(width, height));
+        setMaximumSize(new Dimension(width, height));
         //setResizable(false);
         //setLocationRelativeTo(null);
-        setVisible(true);
         setTitle("MASTERMIND");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
         requestFocus();
     }
 
@@ -73,7 +55,7 @@ public class Screen extends JFrame implements ActionListener{
         mainPanel.add(customDifficultyC.getCustomDifficultyPanel(), "CustomDifficulty");
         mainPanel.add(choseRoleC.getChoseRolePanel(), "ChoseRole");
         mainPanel.add(loadGameC.getLoadGamePanel(), "LoadGame");
-        mainPanel.add(board, "GameBoard");
+        //mainPanel.add(board, "GameBoard");
 
         layout.show(mainPanel,"LoginRegister");
 
@@ -127,9 +109,6 @@ public class Screen extends JFrame implements ActionListener{
         loadGameC.addSaveSlot3ButtonActionListener(this);
         loadGameC.addBackButtonActionListener(this);
 
-        board.addSaveButtonActionListener(this);
-        board.addSubmitButtonActionListener(this);
-
 
     }
 
@@ -157,6 +136,9 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == mainMenuC.getLoadGameButton()) {
 
+            for (int j = 0; j < 2; ++j) {
+                //if()
+            }
             layout.show(mainPanel, "LoadGame");
 
         } else if (source == selectDifficultyC.getEasyButton()) {
@@ -165,10 +147,10 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == selectDifficultyC.getMediumButton()) {
-            //cp.setDifficult("medium");
-            cp.loadMatch(username, 0);
-            layout.show(mainPanel, "GameBoard");
-            //layout.show(mainPanel, "ChoseRole");
+
+            cp.setDifficult("medium", selectDifficultyC.getActivateTipsCheckBox().isSelected());
+            layout.show(mainPanel, "ChoseRole");
+
         } else if (source == selectDifficultyC.getHardButton()) {
 
             cp.setDifficult("hard", selectDifficultyC.getActivateTipsCheckBox().isSelected());
@@ -207,6 +189,7 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == customDifficultyC.getContinueButton()) {
 
+            //cp.configureCustom(customDifficultyC.ge);
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == customDifficultyC.getBackButton()) {
@@ -216,14 +199,25 @@ public class Screen extends JFrame implements ActionListener{
         } else if (source == choseRoleC.getCodeBreakerButton()) {
 
             cp.breaker(true);
+            cp.startNewGame();
             cp.setAnswerCB();
-            cp.begin();
+
+
+            board = new GameBoard(cp.getCombinationSize(), cp.isCanRepeat(), true, cp.PINCOLORLETTERS, cp.PINCOLORS);
+            board.addSaveButtonActionListener(this);
+            board.addSubmitButtonActionListener(this);
+            mainPanel.add(board, "GameBoard");
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == choseRoleC.getCodeMasterButton()) {
 
             cp.breaker(false);
-            cp.begin();
+            cp.startNewGame();
+
+            board = new GameBoard(cp.getCombinationSize(), cp.isCanRepeat(), false, cp.PINCOLORLETTERS, cp.PINCOLORS);
+            board.addExitButtonActionListener(this);
+            board.addSubmitButtonActionListener(this);
+            mainPanel.add(board, "GameBoard");
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == choseRoleC.getBackButton()) {
@@ -236,6 +230,7 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot2Button()) {
+
             cp.loadMatch(username, 1);
             layout.show(mainPanel, "GameBoard");
 
@@ -252,16 +247,59 @@ public class Screen extends JFrame implements ActionListener{
             cp.saveMatch();
             layout.show(mainPanel, "MainMenu");
 
-        } else if (source == board.getSubmit()) {
+        } else if (source == board.getExitButton()) {
 
-            String play = board.getSubmitGuessString();
-            cp.setGuess(play);
-            int col = cp.getCorrectColors();
-            int pos = cp.getCorrectPosition();
-            board.displayResult(col, pos, board.getCurrentTurn() + 1);
-            if (cp.isEnd(pos)) {
-                cp.saveScore(username);
-                layout.show(mainPanel, "MainMenu");
+            layout.show(mainPanel, "MainMenu");
+
+        } else if (source == board.getSubmitButton()) {
+
+            if (board.getSubmitButton().getText() == "Submit Secret Code") {
+
+                cp.setAnswerCM(board.getSubmitGuessString());
+                board.setSecretCodeOnPanel();
+                board.getClearButton().setEnabled(false);
+                board.getCurrentGuessPanel().setEnabled(false);
+                board.getSubmitButton().setText("Generate First Guess");
+
+            } else if (board.getSubmitButton().getText() == "Generate First Guess") {
+
+                String play = cp.firstGuess();
+                cp.setGuess(play);
+                board.setSubmitGuessString(play);
+                int col = cp.getCorrectColors();
+                int pos = cp.getCorrectPosition();
+                board.increaseTurn();
+                board.displayResult(col, pos, board.getCurrentTurn());
+                if (!cp.isEnd(pos)) {
+                    board.getSubmitButton().setText("Generate Next Guess");
+                } else {
+                    board.getSubmitButton().setEnabled(false);
+                }
+
+            } else if (board.getSubmitButton().getText() == "Generate Next Guess") {
+
+                String play = cp.nextGuess();
+                cp.setGuess(play);
+                board.setSubmitGuessString(play);
+                int col = cp.getCorrectColors();
+                int pos = cp.getCorrectPosition();
+                board.increaseTurn();
+                board.displayResult(col, pos, board.getCurrentTurn());
+                if (cp.isEnd(pos)) {
+                    board.getSubmitButton().setEnabled(false);
+                }
+
+            } else {
+                String play = board.getSubmitGuessString();
+                cp.setGuess(play);
+                int col = cp.getCorrectColors();
+                int pos = cp.getCorrectPosition();
+                board.increaseTurn();
+                board.displayResult(col, pos, board.getCurrentTurn());
+                if (cp.isEnd(pos)) {
+                    cp.saveScore(username);
+                    layout.show(mainPanel, "MainMenu");
+                }
             }
         }
 

@@ -12,7 +12,6 @@ import java.util.Set;
 
 public class Combination {
 
-    //private Byte id;
     private ArrayList<Byte> comb;
 
     /**
@@ -114,14 +113,9 @@ public class Combination {
         return comb.size() > hcomb.size();
     }
 
+
     @Override
     public String toString() {
-        String out = "";
-        for (int i = 0; i < comb.size(); i++) out += comb.get(i).byteValue();
-        return out;
-    }
-
-    public String toString2(){
         String out = "";
         for (int i = 0; i < comb.size(); i++) out += comb.get(i).byteValue();
         return out;

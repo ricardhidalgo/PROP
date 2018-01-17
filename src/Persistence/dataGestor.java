@@ -1,16 +1,14 @@
 package Persistence;
+
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
+
+import static java.nio.file.StandardOpenOption.CREATE;
 
 /**
  * @author albert.ortiz
  */
-
-
-import static java.nio.file.StandardOpenOption.CREATE;
 
 /**
  * @author albert.ortiz
@@ -24,18 +22,15 @@ public class dataGestor {
     private void checkDir() {
         File theDir = new File("Saved");
         if (!theDir.exists()) {
-            System.out.println("creating directory: " + theDir.getName());
             boolean result = false;
 
             try {
                 theDir.mkdir();
                 result = true;
             } catch (SecurityException se) {
-                //handle it
+                //tractar
             }
-            if (result) {
-                System.out.println("DIR created");
-            }
+
         }
     }
 
@@ -73,7 +68,7 @@ public class dataGestor {
                     new BufferedReader(fileReader);
 
         } catch (FileNotFoundException ex) {
-            //If user info doesn't exists, we must initialize it
+            //If user info doesn't exists, we must startNewGame it
             ArrayList<String> a = new ArrayList<>();
             a.add(password);
             a.add("SCORES");
@@ -119,7 +114,7 @@ public class dataGestor {
             // Always close files.
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            //If user info doesn't exists, we must initialize it
+            //If user info doesn't exists, we must startNewGame it
             ArrayList<String> a = new ArrayList<>();
             if(score) {
                 a.add("SCORES");
@@ -137,8 +132,20 @@ public class dataGestor {
         }
     }
 
+    public void deleteFile(String path) {
+        try {
+            Files.delete(Paths.get(path));
+        } catch (NoSuchFileException x) {
+            System.err.format("%s: no such" + " file or directory%n", path);
+        } catch (DirectoryNotEmptyException x) {
+            System.err.format("%s not empty%n", path);
+        } catch (IOException x) {
+            // File permission problems are caught here.
+            System.err.println(x);
+        }
+    }
 
-    public void deleteIndex(String username, int i, boolean score){
+    public void deleteIndex(String username, int i) {
 
         // The name of the file to open.
         String fileName = "./Saved/"+username+".txt";
@@ -158,13 +165,12 @@ public class dataGestor {
             int counter = -1;
             while((line = bufferedReader.readLine()) != null) {
                 if(counter != i) out.add(line);
-                if(!score) found = true;
-                if(line.equals("SCORES") && score) found = true;
-                if(found){counter++;}
+                counter++;
             }
 
             // Always close files.
             bufferedReader.close();
+            deleteFile(fileName);
             saveInfo(fileName, out);
         } catch (FileNotFoundException ex) {
             System.out.println(

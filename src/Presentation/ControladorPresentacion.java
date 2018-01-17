@@ -1,19 +1,22 @@
 package Presentation;
 
 import Logic.ControladorLogic;
-import Logic.MyPair;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ControladorPresentacion {
 
-    ControladorLogic cont;
+    public static final char[] PINCOLORLETTERS = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};
+    public static final Color[] PINCOLORS = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.PINK, new Color(150, 0, 255)};
+
+    private ControladorLogic contLogic;
 
     /**
      * Constructora por defecto.
      */
     public ControladorPresentacion() {
-        cont = new ControladorLogic();
+        contLogic = new ControladorLogic();
     }
 
     /**
@@ -25,7 +28,7 @@ public class ControladorPresentacion {
      */
     @Deprecated
     public boolean exists(String name) {
-        return cont.existsName(name);
+        return contLogic.existsName(name);
     }
 
     /**
@@ -36,7 +39,7 @@ public class ControladorPresentacion {
      * @return True si se ha podido realizar el registro. False en caso contrario (Usuario ya existe).
      */
     public boolean registerUser(String nick, String pw) {
-        return cont.register(nick, pw);
+        return contLogic.register(nick, pw);
     }
 
     /**
@@ -48,7 +51,7 @@ public class ControladorPresentacion {
      */
     @Deprecated
     public boolean checkPW(String nick, String pw) {
-        return cont.checkPassword(nick, pw);
+        return contLogic.checkPassword(nick, pw);
     }
 
     /**
@@ -60,7 +63,7 @@ public class ControladorPresentacion {
      */
     public boolean loginUser(String nick, String pw) {
 
-        return cont.loginUser(nick, pw);
+        return contLogic.loginUser(nick, pw);
     }
 
     /**
@@ -69,89 +72,116 @@ public class ControladorPresentacion {
      * @param diff Dificultad de la partida. Possibles entradas: "easy", "medium", "hard", "custom"
      */
     public void setDifficult(String diff, boolean tips) {
-        cont.setDiff(diff, tips);
+        contLogic.setDiff(diff, tips);
     }
+
+    /**
+     * Configura la dificultad custom con los parámetros restantes.
+     *
+     * @param numB Número de bolas en una combinación.
+     * @param rep  Especifica si se permiten repetidos.
+     */
+    public void configureCustom(int numB, boolean rep) {
+        contLogic.configureCustom(numB, rep);
+    }
+
+    /**
+     * Getter del tamaño de las combinaciones.
+     *
+     * @return Tamaño de las combinaciones de la dificultad establecida.
+     */
+    public int getCombinationSize() {
+        return contLogic.getCombinationSize();
+    }
+
+    /**
+     * Getter de si se permiten repeticiones en las combinaciones.
+     *
+     * @return True si se permiten repeticiones. False en caso contrario.
+     */
+    public boolean isCanRepeat() {
+        return contLogic.isCanRepeat();
+    }
+
 
     public boolean isEnd(int pos) {
-        return pos == cont.getNumB();
+        return pos == contLogic.getCombinationSize();
     }
 
-    public void setnumB(int num) {
-        cont.setnumB(num);
+    /**
+     * Especifica el rol del jugador en la partida.
+     *
+     * @param breaking True si el jugador es CodeBreaker. False si es CodeMaster.
+     */
+    public void breaker(boolean breaking) {
+        contLogic.setType(breaking);
     }
 
-    public void setrepeat(boolean repeat) {
-        cont.setrep(repeat);
-    }
-
-    public void breaker(boolean type) {
-        cont.setType(type);
-    }
-
-    public void begin() {
-        cont.start();
+    public void startNewGame() {
+        contLogic.startNewGame();
     }
 
     public void setAnswerCM(String answer2) {
-        cont.setAnswerCM(answer2);
+        contLogic.setAnswerCM(answer2);
     }
 
-    public String FirstGuess() {
-        return cont.FirstGuess();
+    public String firstGuess() {
+        return contLogic.firstGuess();
     }
 
-    public void checkAnswer() {
-        cont.checkAnswer();
-    }
+    /*public void checkAnswer() {
+        contLogic.checkAnswer();
+    }*/
 
-    public String NextGuess() {
-        return cont.NextGuess();
+    public String nextGuess() {
+        return contLogic.nextGuess();
     }
 
     public int getCorrectColors() {
-        return cont.getCC();
+        return contLogic.getCC();
     }
 
     public int getCorrectPosition() {
-        return cont.getCP();
+        return contLogic.getCP();
     }
 
     public String RandomSolution() {
-        return cont.RandomSolution();
+        return contLogic.RandomSolution();
     }
 
     public void setAnswerCB() {
-        cont.setAnswerCB();
+        contLogic.setAnswerCB();
     }
 
     public void setGuess(String guess) {
-        cont.setGuess(guess);
+        contLogic.setGuess(guess);
     }
 
     public void saveScore(String usr) {
-        int a = cont.getScore();
+        int a = contLogic.getGameScore();
         ArrayList<String> info = new ArrayList<String>();
         info.add(String.valueOf(a));
-        cont.guardarpuntuacion(usr, info, true);
+        contLogic.saveScore(usr, info, true);
     }
 
     public void generateRanking() {
-        cont.generateRanking();
+        contLogic.generateRanking();
     }
 
     public ArrayList<String> getRanking() {
-        return cont.getRanking();
+        return contLogic.getRanking();
     }
 
     /*public void convertranking(String user) {
-        cont.convertranking(user);
+        contLogic.convertranking(user);
     }*/
 
-    public void loadMatch(String user, int index) {
-        cont.loadMatch(cont.getMatch(user, index));
+    public boolean loadMatch(String user, int index) {
+        return contLogic.loadMatch(contLogic.getMatch(user, index));
+
     }
 
     public void saveMatch() {
-        cont.saveMatch();
+        contLogic.saveMatch();
     }
 }
