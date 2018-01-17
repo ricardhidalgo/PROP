@@ -1,7 +1,9 @@
-package Presentation;
+//package Presentation;
 
 import javax.swing.*;
 import java.awt.*;
+
+import Presentation.Screen;
 
 public class Mastermind {
 

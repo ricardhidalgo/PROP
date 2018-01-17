@@ -182,13 +182,11 @@ public class ControladorPresentacion {
     }
 
     /**
-     * Checks if the match exists in the system.
+     * Comprueba si la partida existe en el sistema.
      *
-     * @param user The user we want to look.
+     * @param user El usuario sobre el que queremos consultar la partida.
      * @param index The index of the match we want to check
-
      */
-
     public boolean existsMatch(String user, int index){
         return contLogic.existsMatch(user, index);
     }

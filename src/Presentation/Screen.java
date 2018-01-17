@@ -137,8 +137,8 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == mainMenuC.getScoresButton()) {
 
-            cp.
-                    layout.show(mainPanel, "Scores");
+            //cp.g
+            layout.show(mainPanel, "Scores");
 
         } else if (source == scoreboardC.getBackButton()) {
 
@@ -309,7 +309,9 @@ public class Screen extends JFrame implements ActionListener{
                 board.displayResult(col, pos, board.getCurrentTurn());
                 if (cp.isEnd(pos)) {
                     cp.saveScore(username);
-                    layout.show(mainPanel, "MainMenu");
+                    board.getSubmitButton().setEnabled(false);
+                    board.displayMessage("Congratulations! You won!  -> Final score: ");
+                    //layout.show(mainPanel, "MainMenu");
                 }
             }
         }
