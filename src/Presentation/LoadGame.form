@@ -15,7 +15,7 @@
     <children>
       <component id="d87c3" class="javax.swing.JButton" binding="saveSlot1Button" default-binding="true">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.2" weighty="0.0"/>
         </constraints>
         <properties>
@@ -98,7 +98,7 @@
       <component id="7b38c" class="javax.swing.JSeparator">
         <constraints>
           <grid row="0" column="2" row-span="7" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="0" bottom="0" right="80" weightx="0.1" weighty="0.0"/>
+          <gridbag top="5" left="0" bottom="0" right="5" weightx="0.1" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-12501697"/>
@@ -108,8 +108,19 @@
       </component>
       <component id="6aa54" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="0" column="0" row-span="8" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="80" bottom="0" right="0" weightx="0.1" weighty="0.0"/>
+          <grid row="0" column="0" row-span="7" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="5" left="5" bottom="5" right="0" weightx="0.1" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-12501697"/>
+          <enabled value="false"/>
+          <foreground color="-12501697"/>
+        </properties>
+      </component>
+      <component id="2cae7" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="5" bottom="5" right="0" weightx="0.0" weighty="0.0" ipadx="60" ipady="5"/>
         </constraints>
         <properties>
           <background color="-12501697"/>

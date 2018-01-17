@@ -6,19 +6,17 @@ import java.util.ArrayList;
 
 public class ControladorLogic {
 
-    Difficulty difficulty;
-    int numB;
-    boolean rep;
-    Game game;
-    User usuario;
-    boolean breaker;
-    AI ia;
-    Combination correct = new Combination();
-    Combination later = new Combination();
-    ArrayList<Play> plays;
-    ControladorPersistencia cd;
-    Play jugada = new Play();
-    Ranking ranking;
+    private Difficulty difficulty;
+    private Game game;
+    private User usuario;
+    private boolean breaker;
+    private AI ia;
+    private Combination correct = new Combination();
+    private Combination later = new Combination();
+    private ArrayList<Play> plays;
+    private ControladorPersistencia cd;
+    private Play jugada = new Play();
+    private Ranking ranking;
 
 
     /**
@@ -86,58 +84,70 @@ public class ControladorLogic {
 
     }
 
-
     /**
-     * @param diff
+     * Crea un nuevo objeto Difficulty y le assigna un valor de dificultad.
+     * @param diff Dificultad asignada.
+     * @param tips Determina si se han pedido pistas.
      */
     public void setDiff(String diff, boolean tips) {
         difficulty = new Difficulty();
         if (diff == "easy") difficulty.setEasy(tips);
         else if (diff == "medium") difficulty.setMedium(tips);
         else if (diff == "hard") difficulty.setHard(tips);
-        else if (diff == "custom") difficulty.setCustom(numB, rep, tips);
+        else if (diff == "custom") difficulty.setCustom(tips);
     }
 
-    public void setnumB(int num) {
-        this.numB = num;
-    }
 
-    public void setrep(boolean repeat) {
-        this.rep = repeat;
+    /**
+     * Configura la dificultad custom con los parámetros restantes.
+     *
+     * @param numB Número de bolas en una combinación.
+     * @param rep  Especifica si se permiten repetidos.
+     */
+    public void configureCustom(int numB, boolean rep) {
+        difficulty.configureCustom(numB, rep);
     }
 
     public ArrayList<String> getMatch(String user, int index) {
         return cd.getMatch(user, index);
     }
 
-    /* true == CodeBreaker */
+    /**
+     * Especifica el rol del jugador en la partida
+     *
+     * @param breaking True si el jugador es CodeBreaker. False si es CodeMaster.
+     */
     public void setType(boolean breaking) {
         breaker = breaking;
     }
 
-    public void setCorrect(ArrayList<Byte> solution) {
-        correct = new Combination(solution);
-    }
 
-    public Combination getCorrect() {
-        return correct;
-    }
-
-    public void setPlays(ArrayList<Play> play) {
+    /*public void setPlays(ArrayList<Play> play) {
         plays = play;
-    }
+    }*/
 
-    public void start() {
+    /**
+     * Inicializa la IA con los parámetros de dificultad establecidos e inicializa el ArrayList de jugadas con un ArrayList vacio
+     */
+    public void initialize() {
         ia = new AI_Genetic(difficulty);
         plays = new ArrayList<>();
         if (!breaker) game = new Game(usuario, ia, breaker, difficulty);
         else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
     }
 
+    /**
+     * Retorna el número de colores correctos en posicion incorrecta de la última jugada.
+     * @return Número de colores correctos en posicion incorrecta de la última jugada.
+     */
     public int getCC() {
         return jugada.getNumCorrectColors();
     }
 
+    /**
+     * Retorna el número de colores correctos en posicion correcta de la última jugada.
+     * @return Número de colores correctos en posicion correcta de la última jugada.
+     */
     public int getCP() {
         return jugada.getNumCorrectPositions();
     }
@@ -150,39 +160,54 @@ public class ControladorLogic {
     todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
      */
 
-    public Combination generateCombi() {
+    public Combination generateIASecret() {
         ia = new AI_Genetic(difficulty);
         return ia.generateSecret();
     }
 
-    public Combination FirstGues() {
+    public Combination firstGuess() {
         ia = new AI_Genetic(difficulty);
         return ia.generateFirstCombination();
-    }
-
-    public void setNumCC(int CC) {
-        jugada.modifyColor(CC);
-    }
-
-    public void setNumCP(int CP) {
-        jugada.modifyPosition(CP);
     }
 
     public void checkAnswer() {
         correctColorsPositions(correct, later);
     }
 
-    public int getNumB() {
+    /**
+     * Getter del tamaño de las combinaciones.
+     *
+     * @return Tamaño de las combinaciones de la dificultad establecida.
+     */
+    public int getCombinationSize() {
         return difficulty.getNumBallsInCombination();
     }
 
+    /**
+     * Getter de si se permiten repeticiones en las combinaciones.
+     *
+     * @return True si se permiten repeticiones. False en caso contrario.
+     */
+    public boolean isCanRepeat() {
+        return difficulty.isCanRepeat();
+    }
+
+    /**
+     * Provoca que la IA genere una combinación secreta que siga los parametros de dificultad establecidos.
+     */
     public void setAnswerCB() {
         ia = new AI_Genetic(difficulty);
         correct = ia.generateSecret();
     }
 
+    /**
+     * Recoge y almacena el codigo secreto establecido por el usuario.
+     *
+     * @param answer2 Codigo secreto del usuario.
+     */
     public void setAnswerCM(String answer2) {
-        ArrayList<Byte> sol = new ArrayList<Byte>();
+
+        ArrayList<Byte> sol = new ArrayList<>();
         for (int i = 0; i < answer2.length(); i++) {
             if (answer2.charAt(i) == 'R') sol.add((byte) 0);
             else if (answer2.charAt(i) == 'Y') sol.add((byte) 1);
@@ -191,10 +216,14 @@ public class ControladorLogic {
             else if (answer2.charAt(i) == 'O') sol.add((byte) 4);
             else if (answer2.charAt(i) == 'P') sol.add((byte) 5);
         }
-        setCorrect(sol);
-        correct = getCorrect();
+        correct = new Combination(sol);
     }
 
+    /**
+     * Genera una nueva jugada con la combinación introducida por el usuario.
+     *
+     * @param guess Combinación introducida por el usuario.
+     */
     public void setGuess(String guess) {
         ArrayList<Byte> sol = new ArrayList<Byte>();
         for (int i = 0; i < guess.length(); i++) {
@@ -212,7 +241,7 @@ public class ControladorLogic {
 
     public String RandomSolution() {
         String RS = "";
-        Combination comb = generateCombi();
+        Combination comb = generateIASecret();
         ArrayList<Byte> combination = comb.getComb();
         for (int i = 0; i < combination.size(); i++)
             RS += combination.get(i);
@@ -224,7 +253,7 @@ public class ControladorLogic {
         jugada.modifyPosition(getCC());
         jugada.modifyColor(getCP());
         String NG = "";
-        Combination comb = GenerateGuess(jugada);
+        Combination comb = ia.generateNextCombination(jugada);
         later = comb;
         ArrayList<Byte> combination = comb.getComb();
         for (int i = 0; i < combination.size(); i++)
@@ -232,15 +261,9 @@ public class ControladorLogic {
         return NG;
     }
 
-
-    public Combination GenerateGuess(Play jugada) {
-        ia = new AI_Genetic(difficulty);
-        return ia.generateNextCombination(jugada);
-    }
-
     public String FirstGuess() {
         String FG = "";
-        Combination comb = FirstGues();
+        Combination comb = firstGuess();
         ArrayList<Byte> combination = comb.getComb();
         later = comb;
         for (int i = 0; i < combination.size(); i++)
@@ -263,15 +286,11 @@ public class ControladorLogic {
         CreateRanking(ranking, usuario);
     }*/
 
-    public ArrayList<MyPair> seeranking(Ranking ranking) {
-        return ranking.getRanking();
+    public void saveScore(String name, ArrayList<String> punctuation, boolean score) {
+        cd.savepuntuation(name, punctuation, score);
     }
 
-    public void guardarpuntuacion(String name, ArrayList<String> puntuacion, boolean score) {
-        cd.savepuntuation(name, puntuacion, score);
-    }
-
-    public int getScore() {
+    public int getGameScore() {
         return game.getScore();
     }
 
@@ -288,7 +307,8 @@ public class ControladorLogic {
         if (info.get(3) == "true") tips = true;
         ArrayList<Combination> guesses = new ArrayList<>();
         for (int i = 4; i < info.size(); i++) guesses.add(new Combination(info.get(i)));
-        dif.setCustom(numB, b, tips);
+        dif.setCustom(tips);
+        dif.configureCustom(numB, b);
         difficulty = dif;
         Game g = new Game(usuario, secret, dif, guesses);
         game = g;

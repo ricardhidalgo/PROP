@@ -16,10 +16,12 @@ public class Game {
     private Combination secretCode;
     private ArrayList<Play> plays;
     private Difficulty difficulty;
-    private int guesses = 0;
-    private int score = 0;
+    private int guesses;
+    private int score;
+
     /**
      * Realiza una jugada.
+     *
      * @param comb combinación correcta.
      * @return returna una jugada.
      */
@@ -44,6 +46,7 @@ public class Game {
 
     /**
      * Retorna el usuario que está jugando.
+     *
      * @return retorna el usuario que juega.
      */
     public User getUser() {
@@ -62,6 +65,7 @@ public class Game {
 
     /**
      * Indica que rol tiene el usuario.
+     *
      * @return retorna true si el usuario es CB false si es CM.
      */
     public boolean isUserBreaker() {
@@ -70,6 +74,7 @@ public class Game {
 
     /**
      * Retorna la combinación correcta.
+     *
      * @return retorna la respuesta correcta.
      */
     public Combination getSecretCode() {
@@ -78,6 +83,7 @@ public class Game {
 
     /**
      * Retorna una array con las jugadas.
+     *
      * @return retorna las jugadas.
      */
     public ArrayList<Play> getPlays() {
@@ -86,6 +92,7 @@ public class Game {
 
     /**
      * Retorna la dificultad establecida.
+     *
      * @return retorna el nível de dificultad.
      */
     public Difficulty getDifficulty() {
@@ -94,6 +101,7 @@ public class Game {
 
     /**
      * Retorna la IA que esta jugando a la partida
+     *
      * @return Referencia a la IA
      */
     public AI getAi() {
@@ -105,17 +113,17 @@ public class Game {
     /**
      * Constructora vacía.
      */
-    public Game(){
-
+    public Game() {
 
     }
 
     /**
      * Constructora con valores predefinidos. Pensada para crear una nueva partida
-     * @param user usuario de la partida.
-     * @param ai IA de la partida.
+     *
+     * @param user          usuario de la partida.
+     * @param ai            IA de la partida.
      * @param isUserBreaker indica si el usuario es CB o CM.
-     * @param difficulty indica el nível de dificultad.
+     * @param difficulty    indica el nível de dificultad.
      */
     public Game(User user, AI ai, boolean isUserBreaker, Difficulty difficulty) {
         this.user = user;
@@ -123,11 +131,14 @@ public class Game {
         this.isUserBreaker = isUserBreaker;
         this.difficulty = difficulty;
         plays = new ArrayList<>();
+        guesses = 0;
+        score = 0;
     }
 
     /**
      * Constructora con valores predefinidos. Pensada para cargar una partida
-     * @param user usuario de la partida.
+     *
+     * @param user       usuario de la partida.
      * @param secretCode combinación correcta (respuesta).
      * @param difficulty nível de dificultad.
      */
@@ -138,6 +149,7 @@ public class Game {
         this.secretCode = secretCode;
         this.difficulty = difficulty;
         this.initializeGame(guesses);
+        score = 0;
     }
 
     /**
@@ -158,6 +170,7 @@ public class Game {
 
     /**
      * Indica cual es la combinación correcta o respuesta
+     *
      * @param comb Combinación correcta.
      */
     public void setSecretCode(Combination comb) {

@@ -97,7 +97,7 @@
       <component id="c495" class="javax.swing.JSeparator">
         <constraints>
           <grid row="0" column="3" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.2"/>
+          <gridbag weightx="0.1" weighty="0.2"/>
         </constraints>
         <properties>
           <background color="-12501697"/>
@@ -108,7 +108,7 @@
       <component id="1d2c4" class="javax.swing.JSeparator">
         <constraints>
           <grid row="0" column="0" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag weightx="0.1" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-12501697"/>

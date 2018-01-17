@@ -45,10 +45,12 @@ public class DriverDifficulty {
                         diff.setHard(sc.nextBoolean());
                         break;
                     case 5:
+                        System.out.println("Indique si quiere habilitar los tips (true/false): ");
                         System.out.println("Indique número de bolas por combinación: ");
                         System.out.println("Indique si esta permitido repetir colores en las combinaciones(true/false): ");
-                        System.out.println("Indique si quiere habilitar los tips (true/false): ");
-                        diff.setCustom(sc.nextInt(), sc.nextBoolean(), sc.nextBoolean());
+                        diff.setCustom(sc.nextBoolean());
+                        diff.configureCustom(sc.nextInt(), sc.nextBoolean());
+
                         break;
                     case 6:
                         System.out.println(diff.getNumBallsInCombination());

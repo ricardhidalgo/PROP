@@ -20,10 +20,11 @@ public class Difficulty {
 
     /**
      * Constructora con valores preestablecidos
+     *
      * @param numBalls numero de bolas
-     * @param repeat si hay repetidas
-     * @param code codigo de dificultad
-     * @param tips si hay pistas
+     * @param repeat   si hay repetidas
+     * @param code     codigo de dificultad
+     * @param tips     si hay pistas
      */
     public Difficulty(int numBalls, boolean repeat, int code, boolean tips) {
         this.numBallsInCombination = numBalls;
@@ -34,6 +35,7 @@ public class Difficulty {
 
     /**
      * Dificultad fácil.
+     *
      * @param tips si se han pedido pistas o no.
      */
     public void setEasy(boolean tips) {
@@ -46,6 +48,7 @@ public class Difficulty {
 
     /**
      * Dificultad media.
+     *
      * @param tips si se han pedido pistas o no.
      */
     public void setMedium(boolean tips) {
@@ -58,6 +61,7 @@ public class Difficulty {
 
     /**
      * Dificultad alta.
+     *
      * @param tips si se han pedido pistas o no.
      */
     public void setHard(boolean tips) {
@@ -70,20 +74,30 @@ public class Difficulty {
 
     /**
      * Dificultad personalizada.
-     * @param numBalls número de bolas que hay en la combinación.
-     * @param canRep indica si hay colores repetidos o no en la combinación.
+     *
      * @param tips si se han pedido pistas o no.
      */
-    public void setCustom(int numBalls, boolean canRep, boolean tips) {
-        this.numBallsInCombination = numBalls;
-        this.canRepeat = canRep;
+    public void setCustom(boolean tips) {
+
         this.difficultyCode = 4;
         this.hasTips = tips;
 
     }
 
     /**
+     * Configura la dificultad personalizada.
+     *
+     * @param numBalls número de bolas que hay en la combinación.
+     * @param canRep   indica si hay colores repetidos o no en la combinación.
+     */
+    public void configureCustom(int numBalls, boolean canRep) {
+        this.numBallsInCombination = numBalls;
+        this.canRepeat = canRep;
+    }
+
+    /**
      * Retorna el numero de bolas total de la combinación.
+     *
      * @return retorna el número total de bolas en la combinación.
      */
     public Integer getNumBallsInCombination() {
@@ -92,6 +106,7 @@ public class Difficulty {
 
     /**
      * Retorna si el color de la bola se puede.
+     *
      * @return retorna si el color se puede repetir en la combinación.
      */
     public boolean isCanRepeat() {
@@ -100,6 +115,7 @@ public class Difficulty {
 
     /**
      * Retorna el nível de dificultad.
+     *
      * @return retorna un int con el nivel de dificultad (1..4).
      */
     public int getDifficultyCode() {
@@ -108,6 +124,7 @@ public class Difficulty {
 
     /**
      * Retorna si se han pedido pistas o no.
+     *
      * @return retornará un boleano true si se han pedido pistas, false en caso contrario.
      */
     public boolean isHasTips() {
