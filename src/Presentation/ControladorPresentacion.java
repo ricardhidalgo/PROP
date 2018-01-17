@@ -164,11 +164,8 @@ public class ControladorPresentacion {
         contLogic.saveScore(usr, info, true);
     }
 
-    public void generateRanking() {
-        contLogic.generateRanking();
-    }
-
     public ArrayList<String> getRanking() {
+        contLogic.generateRanking();
         return contLogic.getRanking();
     }
 

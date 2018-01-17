@@ -79,6 +79,7 @@ public class Screen extends JFrame implements ActionListener{
 
     private void setListeners(){
 
+        System.out.print(this==null);
         loginRegisterC.addLoginButtonActionListener(this);
         loginRegisterC.addRegisterButtonActionListener(this);
 
