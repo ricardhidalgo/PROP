@@ -25,17 +25,16 @@ public class Game {
      * @param comb combinación correcta.
      * @return returna una jugada.
      */
-    public Play makePlay(Combination comb)throws ExcepcioGame {
+    public Play makePlay(Combination comb)/*throws ExcepcioGame*/ {
         Play np = new Play();
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            throw new ExcepcioGame("Bad parameters");
+            //throw new ExcepcioGame("Bad parameters");
         } else {
             np.processPlay(comb, secretCode);
             plays.add(np);
         }
         guesses++;
         score = (100000 * difficulty.getNumBallsInCombination()) / guesses;
-        System.out.println(score);
         return np;
     }
 
@@ -83,6 +82,10 @@ public class Game {
      */
     public ArrayList<Play> getPlays() {
         return plays;
+    }
+
+    public Play getLastPlay() {
+        return plays.get(guesses - 1);
     }
 
     /**
@@ -168,9 +171,9 @@ public class Game {
      *
      * @param comb Combinación correcta.
      */
-    public void setSecretCode(Combination comb) throws ExcepcioGame {
+    public void setSecretCode(Combination comb) /*throws ExcepcioGame*/ {
         if (comb.getComb().size() != difficulty.getNumBallsInCombination() || (comb.hasRepeat() && !difficulty.isCanRepeat())) {
-            throw new ExcepcioGame("Bad parameters");
+            //throw new ExcepcioGame("Bad parameters");
         } else {
             this.secretCode = comb;
         }
@@ -182,12 +185,12 @@ public class Game {
      * @param plays jugadas guardadas
      */
     public void initializeGame(ArrayList<Combination> plays) {
-        try {
-            for (int i = 0; i < plays.size(); i++) this.makePlay(plays.get(i));
-        }
-        catch (ExcepcioGame g){
-            //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        }
+        //try {
+        for (int i = 0; i < plays.size(); i++) this.makePlay(plays.get(i));
+        //}
+        //catch (ExcepcioGame g){
+        //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //}
     }
 
 
@@ -209,9 +212,9 @@ public class Game {
     }
 }
 
-class ExcepcioGame extends Exception{
+/*class ExcepcioGame extends Exception{
 
     ExcepcioGame(String str){
         super(str);
     }
-}
+}*/

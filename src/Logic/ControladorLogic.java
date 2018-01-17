@@ -11,11 +11,8 @@ public class ControladorLogic {
     private User usuario;
     private boolean breaker;
     private AI ia;
-    private Combination correct = new Combination();
-    private Combination later = new Combination();
     private ArrayList<Play> plays;
     private ControladorPersistencia cd;
-    private Play jugada = new Play();
     private Ranking ranking;
 
 
@@ -127,13 +124,11 @@ public class ControladorLogic {
     }*/
 
     /**
-     * Inicializa la IA con los parámetros de dificultad establecidos e inicializa el ArrayList de jugadas con un ArrayList vacio
+     * Inicializa la IA con los parámetros de dificultad establecidos e inicializa la partida con la constructora para partidas nuevas.
      */
-    public void initialize() {
+    public void startNewGame() {
         ia = new AI_Genetic(difficulty);
-        plays = new ArrayList<>();
-        if (!breaker) game = new Game(usuario, ia, breaker, difficulty);
-        else game = new Game(usuario, ia, breaker, correct, plays, difficulty);
+        game = new Game(usuario, ia, breaker, difficulty);
     }
 
     /**
@@ -141,7 +136,7 @@ public class ControladorLogic {
      * @return Número de colores correctos en posicion incorrecta de la última jugada.
      */
     public int getCC() {
-        return jugada.getNumCorrectColors();
+        return game.getLastPlay().getNumCorrectColors();
     }
 
     /**
@@ -149,11 +144,7 @@ public class ControladorLogic {
      * @return Número de colores correctos en posicion correcta de la última jugada.
      */
     public int getCP() {
-        return jugada.getNumCorrectPositions();
-    }
-
-    public void correctColorsPositions(Combination comb1, Combination comb2) {
-        jugada.processPlay(comb1, comb2);
+        return game.getLastPlay().getNumCorrectPositions();
     }
 
     /* se tiene que hacer un bucle con todas las puntuaciones del mismo usuario y hacer esta funcion en
@@ -161,17 +152,8 @@ public class ControladorLogic {
      */
 
     public Combination generateIASecret() {
-        ia = new AI_Genetic(difficulty);
+        //ia = new AI_Genetic(difficulty);
         return ia.generateSecret();
-    }
-
-    public Combination firstGuess() {
-        ia = new AI_Genetic(difficulty);
-        return ia.generateFirstCombination();
-    }
-
-    public void checkAnswer() {
-        correctColorsPositions(correct, later);
     }
 
     /**
@@ -196,8 +178,8 @@ public class ControladorLogic {
      * Provoca que la IA genere una combinación secreta que siga los parametros de dificultad establecidos.
      */
     public void setAnswerCB() {
-        ia = new AI_Genetic(difficulty);
-        correct = ia.generateSecret();
+
+        game.setSecretCode(ia.generateSecret());
     }
 
     /**
@@ -216,7 +198,8 @@ public class ControladorLogic {
             else if (answer2.charAt(i) == 'O') sol.add((byte) 4);
             else if (answer2.charAt(i) == 'P') sol.add((byte) 5);
         }
-        correct = new Combination(sol);
+        Combination combS = new Combination(sol);
+        game.setSecretCode(combS);
     }
 
     /**
@@ -234,14 +217,12 @@ public class ControladorLogic {
             else if (guess.charAt(i) == 'O') sol.add((byte) 4);
             else if (guess.charAt(i) == 'P') sol.add((byte) 5);
         }
-        later = new Combination(sol);
-        try {
-            game.makePlay(new Combination(sol));
-        }
-        catch (ExcepcioGame g){
-           //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        }
-        checkAnswer();
+        //try {
+        game.makePlay(new Combination(sol));
+        //}
+        //catch (ExcepcioGame g){
+        //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //}
     }
 
     public String RandomSolution() {
@@ -253,27 +234,14 @@ public class ControladorLogic {
         return RS;
     }
 
-    public String NextGuess() {
-        Play jugada = new Play();
-        jugada.modifyPosition(getCC());
-        jugada.modifyColor(getCP());
-        String NG = "";
-        Combination comb = ia.generateNextCombination(jugada);
-        later = comb;
-        ArrayList<Byte> combination = comb.getComb();
-        for (int i = 0; i < combination.size(); i++)
-            NG += combination.get(i);
-        return NG;
+    public String firstGuess() {
+        //ia = new AI_Genetic(difficulty);
+        return arrayCombToString(ia.generateFirstCombination().getComb());
     }
 
-    public String FirstGuess() {
-        String FG = "";
-        Combination comb = firstGuess();
-        ArrayList<Byte> combination = comb.getComb();
-        later = comb;
-        for (int i = 0; i < combination.size(); i++)
-            FG += combination.get(i);
-        return FG;
+    public String nextGuess() {
+
+        return arrayCombToString(ia.generateNextCombination(game.getLastPlay()).getComb());
     }
 
     public ArrayList<String> score(String nickname, boolean score) {
@@ -300,10 +268,10 @@ public class ControladorLogic {
     }
 
     public boolean loadMatch(ArrayList<String> info) {
-        if(info.size()==1) return false;
+        if (info.size() == 1) return false;
         User us = new User();
         Combination secret = new Combination(info.get(0));
-        correct = secret;
+        //correct = secret;
         Difficulty dif = new Difficulty();
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
@@ -344,4 +312,16 @@ public class ControladorLogic {
         cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
     }
 
+    private String arrayCombToString(ArrayList<Byte> comb) {
+        String combS = new String();
+        for (int i = 0; i < comb.size(); i++) {
+            if (comb.get(i) == 0) combS = (combS + "R");
+            else if (comb.get(i) == 1) combS = (combS + "Y");
+            else if (comb.get(i) == 2) combS = (combS + "G");
+            else if (comb.get(i) == 3) combS = (combS + "B");
+            else if (comb.get(i) == 4) combS = (combS + "O");
+            else if (comb.get(i) == 5) combS = (combS + "P");
+        }
+        return combS;
+    }
 }

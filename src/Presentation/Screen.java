@@ -189,6 +189,7 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == customDifficultyC.getContinueButton()) {
 
+            //cp.configureCustom(customDifficultyC.ge);
             layout.show(mainPanel, "ChoseRole");
 
         } else if (source == customDifficultyC.getBackButton()) {
@@ -198,8 +199,9 @@ public class Screen extends JFrame implements ActionListener{
         } else if (source == choseRoleC.getCodeBreakerButton()) {
 
             cp.breaker(true);
+            cp.startNewGame();
             cp.setAnswerCB();
-            cp.begin();
+
 
             board = new GameBoard(cp.getCombinationSize(), cp.isCanRepeat(), true, cp.PINCOLORLETTERS, cp.PINCOLORS);
             board.addSaveButtonActionListener(this);
@@ -210,7 +212,7 @@ public class Screen extends JFrame implements ActionListener{
         } else if (source == choseRoleC.getCodeMasterButton()) {
 
             cp.breaker(false);
-            cp.begin();
+            cp.startNewGame();
 
             board = new GameBoard(cp.getCombinationSize(), cp.isCanRepeat(), false, cp.PINCOLORLETTERS, cp.PINCOLORS);
             board.addExitButtonActionListener(this);
@@ -245,14 +247,47 @@ public class Screen extends JFrame implements ActionListener{
             cp.saveMatch();
             layout.show(mainPanel, "MainMenu");
 
+        } else if (source == board.getExitButton()) {
+
+            layout.show(mainPanel, "MainMenu");
+
         } else if (source == board.getSubmitButton()) {
 
             if (board.getSubmitButton().getText() == "Submit Secret Code") {
+
+                cp.setAnswerCM(board.getSubmitGuessString());
                 board.setSecretCodeOnPanel();
                 board.getClearButton().setEnabled(false);
-                board.getSaveButton().setEnabled(false);
+                board.getCurrentGuessPanel().setEnabled(false);
                 board.getSubmitButton().setText("Generate First Guess");
+
             } else if (board.getSubmitButton().getText() == "Generate First Guess") {
+
+                String play = cp.firstGuess();
+                cp.setGuess(play);
+                board.setSubmitGuessString(play);
+                int col = cp.getCorrectColors();
+                int pos = cp.getCorrectPosition();
+                board.increaseTurn();
+                board.displayResult(col, pos, board.getCurrentTurn());
+                if (!cp.isEnd(pos)) {
+                    board.getSubmitButton().setText("Generate Next Guess");
+                } else {
+                    board.getSubmitButton().setEnabled(false);
+                }
+
+            } else if (board.getSubmitButton().getText() == "Generate Next Guess") {
+
+                String play = cp.nextGuess();
+                cp.setGuess(play);
+                board.setSubmitGuessString(play);
+                int col = cp.getCorrectColors();
+                int pos = cp.getCorrectPosition();
+                board.increaseTurn();
+                board.displayResult(col, pos, board.getCurrentTurn());
+                if (cp.isEnd(pos)) {
+                    board.getSubmitButton().setEnabled(false);
+                }
 
             } else {
                 String play = board.getSubmitGuessString();

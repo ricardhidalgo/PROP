@@ -40,7 +40,7 @@ public class GameBoard extends JPanel {
     private JLabel titleText;
 
 
-    private final Dimension buttonDimension = new Dimension(130, 30);
+    private final Dimension buttonDimension = new Dimension(160, 30);
     private final Dimension pinDimension = new Dimension(40, 40);
     private final Dimension pinSmallDimension;
 
@@ -72,6 +72,10 @@ public class GameBoard extends JPanel {
         add(buttonsPanel, BorderLayout.EAST);
     }
 
+    public JPanel getCurrentGuessPanel() {
+        return currentGuessPanel;
+    }
+
     public void addSaveButtonActionListener(ActionListener listener) {
         saveButton.addActionListener(listener);
     }
@@ -81,7 +85,7 @@ public class GameBoard extends JPanel {
     }
 
     public void addExitButtonActionListener(ActionListener listener) {
-        saveButton.addActionListener(listener);
+        exitButton.addActionListener(listener);
     }
     public JButton getSaveButton() {
         return saveButton;
@@ -93,6 +97,10 @@ public class GameBoard extends JPanel {
 
     public void increaseTurn() {
         ++currentTurn;
+    }
+
+    public void setSubmitGuessString(String submitGuessString) {
+        this.submitGuessString = submitGuessString;
     }
 
     public JButton getExitButton() {
@@ -242,6 +250,9 @@ public class GameBoard extends JPanel {
             smallPins[i] = new Pin(pinColors[index], pinSmallDimension);
             secretCodePanel.add(smallPins[i]);
         }
+
+        resetGuessString();
+
         secretCodePanel.repaint();
         secretCodePanel.revalidate();
 
@@ -251,6 +262,7 @@ public class GameBoard extends JPanel {
 
     public void displayResult(int correctColor, int correctPlace, int turn) {
 
+        setGuessString(submitGuessString);
 
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -290,7 +302,6 @@ public class GameBoard extends JPanel {
         guessPanel.repaint();
 
     }
-
 
     public void displayCurrentGuess() {
 

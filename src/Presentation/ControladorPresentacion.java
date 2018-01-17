@@ -76,6 +76,16 @@ public class ControladorPresentacion {
     }
 
     /**
+     * Configura la dificultad custom con los parámetros restantes.
+     *
+     * @param numB Número de bolas en una combinación.
+     * @param rep  Especifica si se permiten repetidos.
+     */
+    public void configureCustom(int numB, boolean rep) {
+        contLogic.configureCustom(numB, rep);
+    }
+
+    /**
      * Getter del tamaño de las combinaciones.
      *
      * @return Tamaño de las combinaciones de la dificultad establecida.
@@ -107,24 +117,24 @@ public class ControladorPresentacion {
         contLogic.setType(breaking);
     }
 
-    public void begin() {
-        contLogic.initialize();
+    public void startNewGame() {
+        contLogic.startNewGame();
     }
 
     public void setAnswerCM(String answer2) {
         contLogic.setAnswerCM(answer2);
     }
 
-    public String FirstGuess() {
-        return contLogic.FirstGuess();
+    public String firstGuess() {
+        return contLogic.firstGuess();
     }
 
-    public void checkAnswer() {
+    /*public void checkAnswer() {
         contLogic.checkAnswer();
-    }
+    }*/
 
-    public String NextGuess() {
-        return contLogic.NextGuess();
+    public String nextGuess() {
+        return contLogic.nextGuess();
     }
 
     public int getCorrectColors() {

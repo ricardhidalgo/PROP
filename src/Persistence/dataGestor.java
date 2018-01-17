@@ -68,7 +68,7 @@ public class dataGestor {
                     new BufferedReader(fileReader);
 
         } catch (FileNotFoundException ex) {
-            //If user info doesn't exists, we must initialize it
+            //If user info doesn't exists, we must startNewGame it
             ArrayList<String> a = new ArrayList<>();
             a.add(password);
             a.add("SCORES");
@@ -114,7 +114,7 @@ public class dataGestor {
             // Always close files.
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            //If user info doesn't exists, we must initialize it
+            //If user info doesn't exists, we must startNewGame it
             ArrayList<String> a = new ArrayList<>();
             if(score) {
                 a.add("SCORES");
@@ -132,7 +132,7 @@ public class dataGestor {
         }
     }
 
-    public void deleteFile(String path){
+    public void deleteFile(String path) {
         try {
             Files.delete(Paths.get(path));
         } catch (NoSuchFileException x) {
@@ -145,7 +145,7 @@ public class dataGestor {
         }
     }
 
-    public void deleteIndex(String username, int i){
+    public void deleteIndex(String username, int i) {
 
         // The name of the file to open.
         String fileName = "./Saved/"+username+".txt";

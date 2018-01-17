@@ -26,12 +26,13 @@ public class AI_Genetic implements AI{
         this.dif = difficulty;
     }
 
-    public Combination generateSecret(){
-        /**
-         * Genera una combinacion aleatoria.
-         * @param dif nivel de dificultad.
-         * @return devuelve Combinacion aleatoria.
-         */
+    /**
+     * Genera una combinacion aleatoria.
+     *
+     * @return devuelve Combinacion aleatoria.
+     */
+    public Combination generateSecret() {
+
         Random random = new Random();
         Combination combination = new Combination();
 
@@ -54,17 +55,19 @@ public class AI_Genetic implements AI{
 
         }
         return combination;
-            //RICARD
+        //RICARD
     }
 
+    /**
+     * Genera una combinacion inicial preestablecida.
+     *
+     * @return devuelve la combinacion inicial.
+     */
     public Combination generateFirstCombination() {
-        /**
-         * Genera una combinacion inicial preestablecida.
-         * @return devuelve la combinacion inicial.
-         */
+
         int i = dif.getDifficultyCode();
         ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)5, (byte)1, (byte)2, (byte)3)));
-      //  ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
+        //  ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
         ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));
         ArrayList<Byte> sol3 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
         Combination comb = new Combination();
@@ -74,20 +77,26 @@ public class AI_Genetic implements AI{
             case 3: comb.setCombination(sol3);break;
             default: comb.setCombination(sol1);
         }
-            //ALBERT
+        //ALBERT
         return comb;
     }
 
-    public Combination generateNextCombination(Play result){
-        /**
-         * Genera una combinacion basada en las respuestas anteriores y sus respectivos resultados.
-         * @param result resultado de la respuesta anterior.
-         * @return devuelve la combinacion a jugar.
-         */
+    /**
+     * Genera una combinacion basada en las respuestas anteriores y sus respectivos resultados.
+     *
+     * @param result resultado de la respuesta anterior.
+     * @return devuelve la combinacion a jugar.
+     */
+    public Combination generateNextCombination(Play result) {
+
+        System.out.println("Play result:");
+        System.out.println(result.getCombination());
         int x = result.getNumCorrectPositions();
         int y = result.getNumCorrectColors();
         genBase.addSolution(x, y, result.getCombination().getComb());
         Combination c =  genBase.play();
+        System.out.println("Next guess:");
+        System.out.println(c);
         return c;
         //ALBERT
     }
