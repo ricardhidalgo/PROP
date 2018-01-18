@@ -7,6 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class Screen extends JFrame implements ActionListener{
 
     private ControladorPresentacion cp = new ControladorPresentacion();

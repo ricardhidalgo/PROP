@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class Pin extends JPanel {
 
     private Color color;
@@ -16,7 +20,6 @@ public class Pin extends JPanel {
     private int diameter;
     private EventListenerList listenerList;
 
-    //Constructors
     public Pin(Color color, Dimension dimension) {
         this(color, '#', dimension);
     }
@@ -33,7 +36,6 @@ public class Pin extends JPanel {
         setBackground(new Color(-12501697));
     }
 
-    //Paint the pin on JPanel
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -55,7 +57,6 @@ public class Pin extends JPanel {
         return colorLetter;
     }
 
-    //Add the ActionListener to respond to click events
     public void addActionListener(ActionListener listener) {
         listenerList.add(ActionListener.class, listener);
     }
@@ -64,13 +65,10 @@ public class Pin extends JPanel {
         listenerList.remove(ActionListener.class, listener);
     }
 
-    //Fires the actions when the mastermind.swing.Pin is clicked
     private void fireActionEvent(ActionEvent e) {
 
-        //Create a list of the listeners
         Object[] listeners = listenerList.getListenerList();
 
-        //Sends the event to all relevant objects
         for (int i = 0; i < listeners.length; i += 2) {
             if (listeners[i] == ActionListener.class) {
                 ((ActionListener) listeners[i + 1]).actionPerformed(e);
@@ -84,7 +82,6 @@ public class Pin extends JPanel {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            //Fire the action listener
             fireActionEvent(new ActionEvent(this, ActionEvent.ACTION_FIRST, ""));
         }
     }

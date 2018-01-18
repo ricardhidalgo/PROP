@@ -5,6 +5,10 @@ import Logic.ControladorLogic;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class ControladorPresentacion {
 
     public static final char[] PINCOLORLETTERS = new char[]{'R', 'G', 'B', 'O', 'Y', 'P'};

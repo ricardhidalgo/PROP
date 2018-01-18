@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 import static java.nio.file.StandardOpenOption.CREATE;
 
-/**
- * @author albert.ortiz
- */
 
 /**
  * @author albert.ortiz

@@ -4,6 +4,13 @@ import Persistence.ControladorPersistencia;
 
 import java.util.ArrayList;
 
+/**
+ * @author ricard.hidalgo
+ * @author albert.ortiz
+ * @author pol.gil
+ */
+
+
 public class ControladorLogic {
 
     private Difficulty difficulty;

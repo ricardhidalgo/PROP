@@ -3,6 +3,10 @@ package Presentation;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class Scoreboard {
 
     private JPanel ScoreboardPanel;
