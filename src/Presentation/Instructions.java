@@ -5,6 +5,10 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class Instructions extends JPanel {
     private JPanel InstructionsPanel;
     private JButton mainMenuButton;

@@ -5,6 +5,10 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class CustomDifficulty {
     private JPanel CustomDifficultyPanel;
     private JSpinner lengthSpinner;

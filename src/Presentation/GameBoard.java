@@ -6,6 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class GameBoard extends JPanel {
 
 
@@ -87,6 +91,7 @@ public class GameBoard extends JPanel {
     public void addExitButtonActionListener(ActionListener listener) {
         exitButton.addActionListener(listener);
     }
+
     public JButton getSaveButton() {
         return saveButton;
     }

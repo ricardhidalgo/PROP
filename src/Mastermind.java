@@ -5,6 +5,10 @@ import java.awt.*;
 
 import Presentation.Screen;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class Mastermind {
 
     public static void main(String args[]) {

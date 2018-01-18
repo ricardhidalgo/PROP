@@ -101,14 +101,10 @@ public class AI_Genetic implements AI{
      */
     public Combination generateNextCombination(Play result) {
 
-        System.out.println("Play result:");
-        System.out.println(result.getCombination());
         int x = result.getNumCorrectPositions();
         int y = result.getNumCorrectColors();
         genBase.addSolution(x, y, result.getCombination().getComb());
         Combination c =  genBase.play();
-        System.out.println("Next guess:");
-        System.out.println(c);
         return c;
         //ALBERT
     }

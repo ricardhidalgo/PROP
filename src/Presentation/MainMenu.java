@@ -6,6 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author ricard.hidalgo
+ */
+
 public class MainMenu {
     private JButton loadGameButton;
     private JButton newGameButton;
