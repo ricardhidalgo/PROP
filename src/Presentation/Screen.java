@@ -228,8 +228,10 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == customDifficultyC.getContinueButton()) {
 
-            cp.configureCustom((Integer) customDifficultyC.getLengthSpinner().getValue(), customDifficultyC.getAllowRepeatedRadioButton().isSelected());
-            layout.show(mainPanel, "ChoseRole");
+            if ((Integer) customDifficultyC.getLengthSpinner().getValue() > 3 && (Integer) customDifficultyC.getLengthSpinner().getValue() < 13) {
+                cp.configureCustom((Integer) customDifficultyC.getLengthSpinner().getValue(), customDifficultyC.getAllowRepeatedRadioButton().isSelected());
+                layout.show(mainPanel, "ChoseRole");
+            } else JOptionPane.showMessageDialog(this, "Combination Length value must be between 4 and 12");
 
         } else if (source == customDifficultyC.getBackButton()) {
 
@@ -325,7 +327,7 @@ public class Screen extends JFrame implements ActionListener{
                     board.getSubmitButton().setText("Generate Next Guess");
                 } else {
                     board.getSubmitButton().setEnabled(false);
-                    board.displayMessage("The AI has found the secret code! Game over!");
+                    JOptionPane.showMessageDialog(this, "The AI has found the secret code! Game over!");
                 }
 
             } else if (board.getSubmitButton().getText() == "Generate Next Guess") {
@@ -339,7 +341,7 @@ public class Screen extends JFrame implements ActionListener{
                 board.displayResult(col, pos, board.getCurrentTurn());
                 if (cp.isEnd(pos)) {
                     board.getSubmitButton().setEnabled(false);
-                    board.displayMessage("The AI has found the secret code! Game over!");
+                    JOptionPane.showMessageDialog(this, "The AI has found the secret code! Game over!");
                 }
 
             } else {
@@ -352,7 +354,9 @@ public class Screen extends JFrame implements ActionListener{
                 if (cp.isEnd(pos)) {
                     cp.saveScore(username);
                     board.getSubmitButton().setEnabled(false);
-                    board.displayMessage("Congratulations! You won!  -> Final score: " + cp.getGameScore());
+                    board.getClearButton().setEnabled(false);
+                    board.getCurrentGuessPanel().setEnabled(false);
+                    JOptionPane.showMessageDialog(this, "Congratulations! You won!  -> Final score: " + cp.getGameScore());
                     board.getSaveButton().setText("Exit");
                 }
             }
