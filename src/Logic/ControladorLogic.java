@@ -8,10 +8,9 @@ public class ControladorLogic {
 
     private Difficulty difficulty;
     private Game game;
-    private User usuario;
+    private User user;
     private boolean breaker;
     private AI ia;
-    private ArrayList<Play> plays;
     private ControladorPersistencia cd;
     private Ranking ranking;
 
@@ -25,9 +24,9 @@ public class ControladorLogic {
 
 
     /**
-     * Combrueba que el nombre de usuario dado existe en el registro de usuarios.
+     * Combrueba que el nombre de user dado existe en el registro de usuarios.
      *
-     * @param nick Nombre de usuario.
+     * @param nick Nombre de user.
      * @return True si existe, false en caso contrario.
      * @deprecated Ya incluida en register y loginUser.
      */
@@ -37,10 +36,10 @@ public class ControladorLogic {
     }
 
     /**
-     * Da de alta un nuevo usuario en el registro de usuarios e inicia sesión con el.
+     * Da de alta un nuevo user en el registro de usuarios e inicia sesión con el.
      *
-     * @param nick Nombre del usuario.
-     * @param pw   Contraseña de acceso del usuario.
+     * @param nick Nombre del user.
+     * @param pw   Contraseña de acceso del user.
      * @return True si la operación se ha relizado con éxito. False en caso contrario (Usuario ya existe).
      */
     public boolean register(String nick, String pw) {
@@ -48,16 +47,16 @@ public class ControladorLogic {
             return false;
         } else {
             cd.create(nick, pw);
-            usuario = new User(nick, pw);
+            user = new User(nick, pw);
             return true;
         }
     }
 
     /**
-     * Comprueba si el usuario y la contraseña concuerdan en el registro de usuario.
+     * Comprueba si el user y la contraseña concuerdan en el registro de user.
      *
-     * @param nick Nombre de usuario.
-     * @param pw   Contraseña del usuario.
+     * @param nick Nombre de user.
+     * @param pw   Contraseña del user.
      * @return True si concuerdan. False en caso contrario.
      * @deprecated Ya incluida por defecto en loginUser.
      */
@@ -67,15 +66,15 @@ public class ControladorLogic {
     }
 
     /**
-     * Intenta iniciar sesión con el nombre de usuario y la contraseña dados.
+     * Intenta iniciar sesión con el nombre de user y la contraseña dados.
      *
-     * @param nick Nombre de usuario
+     * @param nick Nombre de user
      * @param pw   Contraseña
      * @return True si se ha podido iniciar sesión con éxito. False en caso contrario (Usuario o contraseña incorrecto).
      */
     public boolean loginUser(String nick, String pw) {
         if (cd.tryName(nick) && cd.correctPW(nick, pw)) {
-            usuario = new User(nick, pw);
+            user = new User(nick, pw);
             return true;
         } else return false;
 
@@ -83,6 +82,7 @@ public class ControladorLogic {
 
     /**
      * Crea un nuevo objeto Difficulty y le assigna un valor de dificultad.
+     *
      * @param diff Dificultad asignada.
      * @param tips Determina si se han pedido pistas.
      */
@@ -108,7 +108,7 @@ public class ControladorLogic {
     /**
      * Devuelve la partida del usuario user con indice index
      *
-     * @param user       usuario de la partida.
+     * @param user  Usuario de la partida.
      * @param index indice de la partida
      * @return la partida, -1 si no la encuentra.
      */
@@ -116,7 +116,13 @@ public class ControladorLogic {
         return cd.getMatch(user, index);
     }
 
-    public boolean existsMatch(String user, int index){
+    /**
+     * Comprueba si la partida existe en el sistema.
+     *
+     * @param user  El usuario sobre el que queremos consultar la partida.
+     * @param index El índice del espacio de guardado que deseamos consultar.
+     */
+    public boolean existsMatch(String user, int index) {
         return !cd.getMatch(user, index).get(0).equals("-1");
     }
 
@@ -129,21 +135,17 @@ public class ControladorLogic {
         breaker = breaking;
     }
 
-
-    /*public void setPlays(ArrayList<Play> play) {
-        plays = play;
-    }*/
-
     /**
      * Inicializa la IA con los parámetros de dificultad establecidos e inicializa la partida con la constructora para partidas nuevas.
      */
     public void startNewGame() {
         ia = new AI_Genetic(difficulty);
-        game = new Game(usuario, ia, breaker, difficulty);
+        game = new Game(user, ia, breaker, difficulty);
     }
 
     /**
      * Retorna el número de colores correctos en posicion incorrecta de la última jugada.
+     *
      * @return Número de colores correctos en posicion incorrecta de la última jugada.
      */
     public int getCC() {
@@ -152,18 +154,23 @@ public class ControladorLogic {
 
     /**
      * Retorna el número de colores correctos en posicion correcta de la última jugada.
+     *
      * @return Número de colores correctos en posicion correcta de la última jugada.
      */
     public int getCP() {
         return game.getLastPlay().getNumCorrectPositions();
     }
 
-    /* se tiene que hacer un bucle con todas las puntuaciones del mismo usuario y hacer esta funcion en
-    todas, de esta forma al final unicamente quedaran las 10 mejores almacenadas.
-     */
 
+    /**
+     * La IA genera la combinación secreta de la partida.
+     *
+     * @return La combinación generada.
+     * @deprecated
+     */
+    @Deprecated
     public Combination generateIASecret() {
-        //ia = new AI_Genetic(difficulty);
+
         return ia.generateSecret();
     }
 
@@ -194,9 +201,9 @@ public class ControladorLogic {
     }
 
     /**
-     * Recoge y almacena el codigo secreto establecido por el usuario.
+     * Recoge y almacena el codigo secreto establecido por el user.
      *
-     * @param answer2 Codigo secreto del usuario.
+     * @param answer2 Codigo secreto del user.
      */
     public void setAnswerCM(String answer2) {
 
@@ -214,12 +221,12 @@ public class ControladorLogic {
     }
 
     /**
-     * Genera una nueva jugada con la combinación introducida por el usuario.
+     * Genera una nueva jugada con la combinación introducida por el user.
      *
-     * @param guess Combinación introducida por el usuario.
+     * @param guess Combinación introducida por el user.
      */
     public void setGuess(String guess) {
-        ArrayList<Byte> sol = new ArrayList<Byte>();
+        ArrayList<Byte> sol = new ArrayList<>();
         for (int i = 0; i < guess.length(); i++) {
             if (guess.charAt(i) == 'R') sol.add((byte) 0);
             else if (guess.charAt(i) == 'Y') sol.add((byte) 1);
@@ -228,18 +235,17 @@ public class ControladorLogic {
             else if (guess.charAt(i) == 'O') sol.add((byte) 4);
             else if (guess.charAt(i) == 'P') sol.add((byte) 5);
         }
-        //try {
         game.makePlay(new Combination(sol));
-        //}
-        //catch (ExcepcioGame g){
-        //                                                   AQUI RICARD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //}
+
     }
+
     /**
      * Genera una solucion aleatoria.
      *
      * @return la combinacion solucion
+     * @deprecated No se usa
      */
+    @Deprecated
     public String RandomSolution() {
         String RS = "";
         Combination comb = generateIASecret();
@@ -250,16 +256,20 @@ public class ControladorLogic {
     }
 
     /**
-     * Genera la primera combinacion predefinida de la IA
+     * Genera la primera combinación de la IA.
      *
-     * @return la combinacion generada.
+     * @return La combinación generada.
      */
-
     public String firstGuess() {
-        //ia = new AI_Genetic(difficulty);
+
         return arrayCombToString(ia.generateFirstCombination().getComb());
     }
 
+    /**
+     * Genera la siguiente combinación de la IA
+     *
+     * @return La combinación generada.
+     */
     public String nextGuess() {
 
         return arrayCombToString(ia.generateNextCombination(game.getLastPlay()).getComb());
@@ -269,20 +279,10 @@ public class ControladorLogic {
         return cd.allscores(nickname, score);
     }
 
-    /*public void CreateRanking(Ranking ranking, String usuario) {
-        ArrayList<String> puntuacion = cd.allscores(usuario, true);
-        for (int i = 0; i < puntuacion.size(); i++) {
-            insert1puntuation(ranking, usuario, Integer.parseInt(puntuacion.get(i)));
-        }
-    }*/
-
-    /*public void convertranking() {
-        CreateRanking(ranking, usuario);
-    }*/
     /**
      * Guarda el score
      *
-     * @param name nombre del usuario
+     * @param name        nombre del usuario
      * @param punctuation puntuacion
      */
     public void saveScore(String name, ArrayList<String> punctuation) {
@@ -294,10 +294,10 @@ public class ControladorLogic {
      *
      * @return Puntuacion de la partida actual
      */
-
     public int getGameScore() {
         return game.getScore();
     }
+
     /**
      * Genera una partida a partida a partir de unos parametros guardados
      *
@@ -308,7 +308,6 @@ public class ControladorLogic {
         for(int i=0; i<info.size(); i++) System.out.println(info.get(i));
         User us = new User();
         Combination secret = new Combination(info.get(0));
-        //correct = secret;
         Difficulty dif = new Difficulty();
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
@@ -320,9 +319,10 @@ public class ControladorLogic {
         dif.setCustom(tips);
         dif.configureCustom(numB, b);
         difficulty = dif;
-        Game g = new Game(usuario, secret, dif, guesses);
+        Game g = new Game(user, secret, dif, guesses);
         game = g;
     }
+
     /**
      * Obtiene el ranking y lo devuelve en formato comprensible para capas superiores.
      *
@@ -337,7 +337,6 @@ public class ControladorLogic {
 
     /**
      * Genera el ranking
-     *
      */
     public void generateRanking() {
         ArrayList<String> users = cd.getUsers();
@@ -351,14 +350,20 @@ public class ControladorLogic {
         }
         ranking = new Ranking(rank);
     }
+
     /**
      * Guarda en el sistema la partida actual.
-     *
      */
     public void saveMatch() {
-        cd.savepuntuation(usuario.getNickname(), game.retrieveMatch(), false);
+        cd.savepuntuation(user.getNickname(), game.retrieveMatch(), false);
     }
 
+    /**
+     * Conversor de formato ArrayList<Byte> a String.
+     *
+     * @param comb Combinacion en Array.
+     * @return Combinacion en String.
+     */
     private String arrayCombToString(ArrayList<Byte> comb) {
         String combS = new String();
         for (int i = 0; i < comb.size(); i++) {

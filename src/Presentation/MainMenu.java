@@ -64,10 +64,6 @@ public class MainMenu {
         return instructionsButton;
     }
 
-    public MainMenu() {
-
-    }
-
 }
 
 

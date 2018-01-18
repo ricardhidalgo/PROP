@@ -41,7 +41,6 @@ public class Login {
         registerButton.addActionListener(listener);
     }
 
-
     public JTextField getUsernameLogin() {
         return usernameLogin;
     }

@@ -122,42 +122,82 @@ public class ControladorPresentacion {
         contLogic.setType(breaking);
     }
 
+    /**
+     * Inicializa la IA con los parámetros de dificultad establecidos e inicializa la partida con la constructora para partidas nuevas.
+     */
     public void startNewGame() {
         contLogic.startNewGame();
     }
 
+    /**
+     * Recoge y almacena el codigo secreto establecido por el user.
+     *
+     * @param answer2 Codigo secreto del user.
+     */
     public void setAnswerCM(String answer2) {
         contLogic.setAnswerCM(answer2);
     }
 
-    public String firstGuess() {
-        return contLogic.firstGuess();
-    }
-
-    /*public void checkAnswer() {
-        contLogic.checkAnswer();
-    }*/
-
-    public String nextGuess() {
-        return contLogic.nextGuess();
-    }
-
-    public int getCorrectColors() {
-        return contLogic.getCC();
-    }
-
-    public int getCorrectPosition() {
-        return contLogic.getCP();
-    }
-
-    public String RandomSolution() {
-        return contLogic.RandomSolution();
-    }
-
+    /**
+     * Provoca que la IA genere una combinación secreta que siga los parametros de dificultad establecidos.
+     */
     public void setAnswerCB() {
         contLogic.setAnswerCB();
     }
 
+    /**
+     * Genera la primera combinación de la IA.
+     *
+     * @return La combinación generada.
+     */
+    public String firstGuess() {
+        return contLogic.firstGuess();
+    }
+
+    /**
+     * Genera la siguiente combinación de la IA
+     *
+     * @return La combinación generada.
+     */
+    public String nextGuess() {
+        return contLogic.nextGuess();
+    }
+
+    /**
+     * Retorna el número de colores correctos en posicion incorrecta de la última jugada.
+     *
+     * @return Número de colores correctos en posicion incorrecta de la última jugada.
+     */
+    public int getCorrectColors() {
+        return contLogic.getCC();
+    }
+
+    /**
+     * Retorna el número de colores correctos en posicion correcta de la última jugada.
+     *
+     * @return Número de colores correctos en posicion correcta de la última jugada.
+     */
+    public int getCorrectPosition() {
+        return contLogic.getCP();
+    }
+
+    /**
+     * Genera una solucion aleatoria.
+     *
+     * @return la combinacion solucion
+     * @deprecated No se usa.
+     */
+    @Deprecated
+    public String RandomSolution() {
+        return contLogic.RandomSolution();
+    }
+
+
+    /**
+     * Genera la siguiente jugada con la combinación dada.
+     *
+     * @param guess Combinación de la jugada.
+     */
     public void setGuess(String guess) {
         contLogic.setGuess(guess);
     }
@@ -174,6 +214,10 @@ public class ControladorPresentacion {
         contLogic.saveScore(usr, info);
     }
 
+    public int getGameScore() {
+        return contLogic.getGameScore();
+    }
+
     /**
      * Genera y obtiene el ranking general del sistema con las 10 mejores puntuaciones.
      *
@@ -184,10 +228,6 @@ public class ControladorPresentacion {
         contLogic.generateRanking();
         return contLogic.getRanking();
     }
-
-    /*public void convertranking(String user) {
-        contLogic.convertranking(user);
-    }*/
 
     /**
      * Carga la partida index del usuario user
@@ -211,13 +251,11 @@ public class ControladorPresentacion {
     }
 
     /**
-     * Checks if the match exists in the system.
+     * Comprueba si la partida existe en el sistema.
      *
-     * @param user The user we want to look.
-     * @param index The index of the match we want to check
-
+     * @param user El usuario sobre el que queremos consultar la partida.
+     * @param index El índice del espacio de guardado que deseamos consultar.
      */
-
     public boolean existsMatch(String user, int index){
         return contLogic.existsMatch(user, index);
     }

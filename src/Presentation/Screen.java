@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Screen extends JFrame implements ActionListener{
 
@@ -19,6 +20,7 @@ public class Screen extends JFrame implements ActionListener{
     private CustomDifficulty customDifficultyC;
     private ChoseRole choseRoleC;
     private LoadGame loadGameC;
+    private Scoreboard scoreboardC;
 
     private GameBoard board;
 
@@ -26,6 +28,12 @@ public class Screen extends JFrame implements ActionListener{
 
     private JPanel mainPanel;
 
+    /**
+     * Constructora del JFrame principal del programa
+     *
+     * @param width  Ancho del JFrame
+     * @param height Alto del JFrame
+     */
     public Screen(int width, int height) {
 
         initializePanelClasses();
@@ -46,6 +54,9 @@ public class Screen extends JFrame implements ActionListener{
         requestFocus();
     }
 
+    /**
+     * Añade los diferentes JPanels al CardLayout para formar el sistema de menus.
+     */
     private void addPanels() {
 
         mainPanel.add(loginRegisterC.getLoginRegisterPanel(), "LoginRegister");
@@ -55,6 +66,7 @@ public class Screen extends JFrame implements ActionListener{
         mainPanel.add(customDifficultyC.getCustomDifficultyPanel(), "CustomDifficulty");
         mainPanel.add(choseRoleC.getChoseRolePanel(), "ChoseRole");
         mainPanel.add(loadGameC.getLoadGamePanel(), "LoadGame");
+        mainPanel.add(scoreboardC.getScoreboardPanel(), "Scores");
 
         layout.show(mainPanel,"LoginRegister");
 
@@ -62,6 +74,9 @@ public class Screen extends JFrame implements ActionListener{
 
     }
 
+    /**
+     * Inicializa las clases que definen los diferentes JPanels de los menus, así como el layout
+     */
     private void initializePanelClasses() {
 
         loginRegisterC = new Login();
@@ -71,12 +86,16 @@ public class Screen extends JFrame implements ActionListener{
         customDifficultyC = new CustomDifficulty();
         choseRoleC = new ChoseRole();
         loadGameC = new LoadGame();
+        scoreboardC = new Scoreboard();
 
         layout = new CardLayout();
 
         mainPanel = new JPanel();
     }
 
+    /**
+     * Configura todos los ActionListeners de los diferentes JPanels
+     */
     private void setListeners(){
 
         loginRegisterC.addLoginButtonActionListener(this);
@@ -108,9 +127,14 @@ public class Screen extends JFrame implements ActionListener{
         loadGameC.addSaveSlot3ButtonActionListener(this);
         loadGameC.addBackButtonActionListener(this);
 
+        scoreboardC.addBackButtonActionListener(this);
 
     }
 
+    /**
+     * Define la respuesta a cualquier evento generado en funcion de su fuente
+     * @param event Objeto tipo ActionEvent generado por el ActionListener.
+     */
     public void actionPerformed(ActionEvent event) {
 
         Object source = event.getSource();
@@ -133,11 +157,23 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == mainMenuC.getScoresButton()) {
 
+
+            ArrayList<String> scoresAr = cp.getRanking();
+            for (int j = 0; j < scoresAr.size(); ++j) {
+                scoreboardC.getScoreTable().setValueAt(scoresAr.get(j), j, 1);
+            }
+            layout.show(mainPanel, "Scores");
+
+        } else if (source == scoreboardC.getBackButton()) {
+
+            layout.show(mainPanel, "MainMenu");
+
         } else if (source == mainMenuC.getLoadGameButton()) {
 
-            for (int j = 0; j < 2; ++j) {
-                //if()
-            }
+            if (cp.existsMatch(username, 0)) loadGameC.getSaveSlot1Button().setEnabled(true);
+            if (cp.existsMatch(username, 1)) loadGameC.getSaveSlot2Button().setEnabled(true);
+            if (cp.existsMatch(username, 2)) loadGameC.getSaveSlot3Button().setEnabled(true);
+
             layout.show(mainPanel, "LoadGame");
 
         } else if (source == selectDifficultyC.getEasyButton()) {
@@ -254,8 +290,9 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == board.getSaveButton()) {
 
-            cp.saveMatch();
+            if (board.getSubmitButton().isEnabled()) cp.saveMatch();
             layout.show(mainPanel, "MainMenu");
+            board.getSaveButton().setText("Save");
 
         } else if (source == board.getExitButton()) {
 
@@ -284,6 +321,7 @@ public class Screen extends JFrame implements ActionListener{
                     board.getSubmitButton().setText("Generate Next Guess");
                 } else {
                     board.getSubmitButton().setEnabled(false);
+                    board.displayMessage("The AI has found the secret code! Game over!");
                 }
 
             } else if (board.getSubmitButton().getText() == "Generate Next Guess") {
@@ -297,6 +335,7 @@ public class Screen extends JFrame implements ActionListener{
                 board.displayResult(col, pos, board.getCurrentTurn());
                 if (cp.isEnd(pos)) {
                     board.getSubmitButton().setEnabled(false);
+                    board.displayMessage("The AI has found the secret code! Game over!");
                 }
 
             } else {
@@ -308,7 +347,9 @@ public class Screen extends JFrame implements ActionListener{
                 board.displayResult(col, pos, board.getCurrentTurn());
                 if (cp.isEnd(pos)) {
                     cp.saveScore(username);
-                    layout.show(mainPanel, "MainMenu");
+                    board.getSubmitButton().setEnabled(false);
+                    board.displayMessage("Congratulations! You won!  -> Final score: " + cp.getGameScore());
+                    board.getSaveButton().setText("Exit");
                 }
             }
         }
