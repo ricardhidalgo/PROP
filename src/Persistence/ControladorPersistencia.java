@@ -19,7 +19,6 @@ public class ControladorPersistencia {
 
     public ArrayList<String> getMatch(String user, int i) {
         ArrayList<String> arr = dg.retrieveAll(user, false);
-        System.out.println(arr.size());
         ArrayList<String> partida = new ArrayList<>();
         String[] out;
         if (arr.size() - 1 >= i && !arr.isEmpty()) {

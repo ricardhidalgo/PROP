@@ -158,9 +158,9 @@ public class dataGestor {
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader =
                     new BufferedReader(fileReader);
-            boolean found = false;
             int counter = -1;
             while((line = bufferedReader.readLine()) != null) {
+                System.out.println(counter + line);
                 if(counter != i) out.add(line);
                 counter++;
             }
