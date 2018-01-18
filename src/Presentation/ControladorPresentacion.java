@@ -197,9 +197,8 @@ public class ControladorPresentacion {
      * @return True si encontrada, False si no
      */
 
-    public boolean loadMatch(String user, int index) {
-        return contLogic.loadMatch(contLogic.getMatch(user, index));
-
+    public void loadMatch(String user, int index) {
+        contLogic.loadMatch(contLogic.getMatch(user, index));
     }
 
     /**

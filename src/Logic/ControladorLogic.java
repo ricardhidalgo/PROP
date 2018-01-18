@@ -304,8 +304,8 @@ public class ControladorLogic {
      * @param info informacion de la partida
      * @return True si se ha cargado con exito, False en el caso contrario
      */
-    public boolean loadMatch(ArrayList<String> info) {
-        if (info.size() == 1) return false;
+    public void loadMatch(ArrayList<String> info) {
+        for(int i=0; i<info.size(); i++) System.out.println(info.get(i));
         User us = new User();
         Combination secret = new Combination(info.get(0));
         //correct = secret;
@@ -322,7 +322,6 @@ public class ControladorLogic {
         difficulty = dif;
         Game g = new Game(usuario, secret, dif, guesses);
         game = g;
-        return true;
     }
     /**
      * Obtiene el ranking y lo devuelve en formato comprensible para capas superiores.

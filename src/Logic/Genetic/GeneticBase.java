@@ -79,7 +79,7 @@ public class GeneticBase {
     public Combination play(){
         int height = 1;
         Set<Individual> E = new HashSet<>();
-        Population p = new Population(nIndividualsPopulation, elitism, FC);
+        Population p = new Population(nIndividualsPopulation, elitism, FC, repeated);
         while((maxGenerations >= height && E.size() < maxSize)){
             p = p.evolvePopulation(FC,elitism,numTournaments,
                     recombinationUmbral,mutationRatio,
@@ -89,7 +89,7 @@ public class GeneticBase {
             for(int i =0; i<ind.size(); i++) E.add(ind.get(i));
             ++height;
             if(height > maxGenerations && E.size()==0) {
-                p = new Population(nIndividualsPopulation,elitism, FC);
+                p = new Population(nIndividualsPopulation,elitism, FC, repeated);
                 height = 0;
             }
         }
