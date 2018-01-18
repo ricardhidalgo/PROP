@@ -21,6 +21,7 @@ public class AI_Genetic implements AI{
     public AI_Genetic(Difficulty difficulty){
         //Podem modificar els parametres del genetic en funcio de la dificultat.(Bastant recomanable per millorar eficiencia)
         genBase = new GeneticBase(200, 150, 0.5, 0.03, 0.03, 0.02, 60, difficulty.isCanRepeat());
+        System.out.println(difficulty.isCanRepeat());
         Individual.setDefaultGenNum(difficulty.getNumBallsInCombination());
         //ALBERT
         this.dif = difficulty;

@@ -262,17 +262,28 @@ public class Screen extends JFrame implements ActionListener{
             layout.show(mainPanel, "SelectDifficulty");
 
         } else if (source == loadGameC.getSaveSlot1Button()) {
-
             cp.loadMatch(username, 0);
+            board = new GameBoard(cp.getCombinationSize(), cp.isCanRepeat(), true, cp.PINCOLORLETTERS, cp.PINCOLORS);
+            board.addSaveButtonActionListener(this);
+            board.addSubmitButtonActionListener(this);
+            mainPanel.add(board, "GameBoard");
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot2Button()) {
 
             cp.loadMatch(username, 1);
+            board = new GameBoard(cp.getCombinationSize(), cp.isCanRepeat(), true, cp.PINCOLORLETTERS, cp.PINCOLORS);
+            board.addSaveButtonActionListener(this);
+            board.addSubmitButtonActionListener(this);
+            mainPanel.add(board, "GameBoard");
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getSaveSlot3Button()) {
             cp.loadMatch(username, 2);
+            board = new GameBoard(cp.getCombinationSize(), cp.isCanRepeat(), true, cp.PINCOLORLETTERS, cp.PINCOLORS);
+            board.addSaveButtonActionListener(this);
+            board.addSubmitButtonActionListener(this);
+            mainPanel.add(board, "GameBoard");
             layout.show(mainPanel, "GameBoard");
 
         } else if (source == loadGameC.getBackButton()) {

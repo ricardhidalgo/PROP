@@ -3,21 +3,29 @@ package Logic.Genetic;
  * @author albert.ortiz
  */
 
-import javax.lang.model.util.ElementKindVisitor6;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 public class Population {
     private Individual populationMembers[];
+    private boolean repeated = false;
 
-    public Population(int populationSize, boolean elitist, FitnessCalculus FC){
+    public Population(int populationSize, boolean elitist, FitnessCalculus FC, boolean repeated){
         populationMembers = new Individual[populationSize];
+        this.repeated = repeated;
         for(int i=0; i<populationSize; i++){
             Individual ind = new Individual();
             ind.initializeIndividual();
-            while(!checkPolulation(ind,i) || !checkSolution(FC, ind)) ind.initializeIndividual();
+            while(!checkPolulation(ind,i) || !checkSolution(FC, ind) || !checkDifferent(ind)) ind.initializeIndividual();
             populationMembers[i] = ind;
         }
+    }
+
+    boolean checkDifferent(Individual ind){
+        if (repeated) return true;
+        for(int i=0; i<ind.numGenes(); i++)
+            for(int j=i+1; j<ind.numGenes(); j++)
+                if(ind.getGen(i) == ind.getGen(j)) return false;
+        return true;
     }
 
     public void copy(Population pop){
@@ -65,7 +73,7 @@ public class Population {
     }
 
     public Population evolvePopulation(FitnessCalculus FC, boolean elitist, int numTournaments, double recombinationUmbral, double mutationRatio, double permutationRatio, double inversionRatio){
-        Population p = new Population(populationMembers.length, elitist, FC);
+        Population p = new Population(populationMembers.length, elitist, FC, repeated);
         p.copy(this);
         int index = 0;
         if(elitist && bestIndividual(FC).size()!=0 && checkSolution(FC,bestIndividual(FC).get(0))) {
@@ -81,7 +89,7 @@ public class Population {
             ind3.mutateIndividual(mutationRatio);
             ind3.permutateIndividual(permutationRatio);
             if(ThreadLocalRandom.current().nextDouble(0,1.0) < inversionRatio) ind3.invertIndividual();
-            while(!checkSolution(FC,ind3) || !checkPolulation(ind3,i)) ind3.initializeIndividual();
+            while(!checkSolution(FC,ind3) || !checkPolulation(ind3,i) || !checkDifferent(ind3)) ind3.initializeIndividual();
             p.setIndividual(i, ind3);
             if(ind3.fitnessIndividual(FC)< max){best = ind3; max = best.fitnessIndividual(FC);}
         }
