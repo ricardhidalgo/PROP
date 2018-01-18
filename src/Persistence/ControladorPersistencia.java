@@ -19,11 +19,24 @@ public class ControladorPersistencia {
 
     public ArrayList<String> getMatch(String user, int i) {
         ArrayList<String> arr = dg.retrieveAll(user, false);
+        System.out.println(arr.size());
         ArrayList<String> partida = new ArrayList<>();
         String[] out;
         if (arr.size() - 1 >= i && !arr.isEmpty()) {
             out = arr.get(i).split(" ");
             dg.deleteIndex(user, i);
+            for (int j = 0; j < out.length; j++) partida.add(out[j]);
+        } else partida.add("-1");
+        return partida;
+    }
+
+    public ArrayList<String> checkMatch(String user, int i) {
+        ArrayList<String> arr = dg.retrieveAll(user, false);
+        System.out.println(arr.size());
+        ArrayList<String> partida = new ArrayList<>();
+        String[] out;
+        if (arr.size() - 1 >= i && !arr.isEmpty()) {
+            out = arr.get(i).split(" ");
             for (int j = 0; j < out.length; j++) partida.add(out[j]);
         } else partida.add("-1");
         return partida;

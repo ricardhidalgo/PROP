@@ -123,7 +123,7 @@ public class ControladorLogic {
      * @param index El índice del espacio de guardado que deseamos consultar.
      */
     public boolean existsMatch(String user, int index) {
-        return !cd.getMatch(user, index).get(0).equals("-1");
+        return !cd.checkMatch(user, index).get(0).equals("-1");
     }
 
     /**

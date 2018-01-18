@@ -213,6 +213,7 @@ public class dataGestor {
                     new BufferedReader(fileReader);
             boolean found = false;
             while((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
                 if(line.equals("SCORES") && !score) break;
                 if(found) out.add(line);
                 if(!score) found = true;
