@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Screen extends JFrame implements ActionListener{
 
@@ -156,7 +157,13 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == mainMenuC.getScoresButton()) {
 
-            //cp.g
+            //scoreboardC.getScoreTable().getColumn(0).setHeaderValue("Position");
+            //scoreboardC.getScoreTable().getColumn(1).setHeaderValue("Name and Score");
+            ArrayList<String> scoresAr = cp.getRanking();
+            for (int j = 0; j < scoresAr.size(); ++j) {
+                scoreboardC.getScoreTable().setValueAt(scoresAr.get(j), j, 1);
+                System.out.println(scoresAr.get(j));
+            }
             layout.show(mainPanel, "Scores");
 
         } else if (source == scoreboardC.getBackButton()) {
