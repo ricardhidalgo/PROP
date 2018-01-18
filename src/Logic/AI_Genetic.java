@@ -21,7 +21,6 @@ public class AI_Genetic implements AI{
     public AI_Genetic(Difficulty difficulty){
         //Podem modificar els parametres del genetic en funcio de la dificultat.(Bastant recomanable per millorar eficiencia)
         genBase = new GeneticBase(200, 150, 0.5, 0.03, 0.03, 0.02, 60, difficulty.isCanRepeat());
-        System.out.println(difficulty.isCanRepeat());
         Individual.setDefaultGenNum(difficulty.getNumBallsInCombination());
         //ALBERT
         this.dif = difficulty;
@@ -59,6 +58,18 @@ public class AI_Genetic implements AI{
         //RICARD
     }
 
+    public ArrayList<Byte> generateRandom(){
+        ArrayList<Byte> sol = new ArrayList<>();
+        for(byte i=0; i<dif.getNumBallsInCombination(); i++){
+            byte x = i;
+            if (x >= 6) x = 1;
+            sol.add(x);
+
+        }
+        return sol;
+    }
+
+
     /**
      * Genera una combinacion inicial preestablecida.
      *
@@ -69,14 +80,14 @@ public class AI_Genetic implements AI{
         int i = dif.getDifficultyCode();
         ArrayList<Byte> sol1 = new ArrayList<Byte>((Arrays.asList((byte)5, (byte)1, (byte)2, (byte)3)));
         //  ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 3,(byte) 4)));
-        ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)1,(byte) 2,(byte) 2,(byte) 3,(byte) 4)));
+        ArrayList<Byte> sol2 = new ArrayList<Byte>((Arrays.asList((byte)1, (byte)2,(byte) 3,(byte) 4,(byte) 5,(byte) 0)));
         ArrayList<Byte> sol3 = new ArrayList<Byte>(Arrays.asList((byte)1,(byte) 1, (byte)2,(byte) 2, (byte)3,(byte) 3,(byte) 4,(byte) 5));
         Combination comb = new Combination();
         switch(i) {
             case 1: comb.setCombination(sol1);break;
             case 2: comb.setCombination(sol2);break;
             case 3: comb.setCombination(sol3);break;
-            default: comb.setCombination(sol1);
+            default: comb.setCombination(generateRandom());
         }
         //ALBERT
         return comb;
