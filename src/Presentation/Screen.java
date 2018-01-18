@@ -157,12 +157,10 @@ public class Screen extends JFrame implements ActionListener{
 
         } else if (source == mainMenuC.getScoresButton()) {
 
-            //scoreboardC.getScoreTable().getColumn(0).setHeaderValue("Position");
-            //scoreboardC.getScoreTable().getColumn(1).setHeaderValue("Name and Score");
+
             ArrayList<String> scoresAr = cp.getRanking();
             for (int j = 0; j < scoresAr.size(); ++j) {
                 scoreboardC.getScoreTable().setValueAt(scoresAr.get(j), j, 1);
-                System.out.println(scoresAr.get(j));
             }
             layout.show(mainPanel, "Scores");
 

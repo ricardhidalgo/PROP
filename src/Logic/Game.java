@@ -84,6 +84,11 @@ public class Game {
         return plays;
     }
 
+    /**
+     * Retorna la última jugada realizada.
+     *
+     * @return
+     */
     public Play getLastPlay() {
         return plays.get(guesses - 1);
     }

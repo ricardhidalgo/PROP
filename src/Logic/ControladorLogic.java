@@ -308,7 +308,6 @@ public class ControladorLogic {
         for(int i=0; i<info.size(); i++) System.out.println(info.get(i));
         User us = new User();
         Combination secret = new Combination(info.get(0));
-        //correct = secret;
         Difficulty dif = new Difficulty();
         int numB = Integer.parseInt(info.get(1));
         boolean b = false;
